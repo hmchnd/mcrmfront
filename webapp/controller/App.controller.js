@@ -1,0 +1,49 @@
+sap.ui.define([
+  "./BaseController",
+  "sap/f/LayoutType",
+  "../model/Project",
+], (BaseController,LayoutType,Project) => {
+  "use strict";
+
+  return BaseController.extend("framsys.com.framsysfrontend.controller.App", {
+      onInit() {
+        if (sap?.ushell?.Container?.getRenderer("fiori2")) {
+          sap?.ushell?.Container?.getRenderer("fiori2")?.setHeaderVisibility(false, true);
+        }
+        this.getRouter().attachRouteMatched(this.onRouteChange.bind(this));
+      },
+      onSideNavButtonPress: function (oEvent) {
+      
+        var oToolPage = this.byId("toolpage");
+        var bSideExpanded = oToolPage.getSideExpanded();
+       // this._setToggleButtonTooltip(bSideExpanded);
+        oToolPage.setSideExpanded(!oToolPage.getSideExpanded());
+      },
+      onSelect: function (oEvent) {
+        var oSelectedItem = oEvent.getParameter("item");
+        var oExpanded = oSelectedItem.getExpanded();
+        if (oExpanded === false) {
+          // var oNavigationList = oEvent.getSource();
+          // var oItems = oNavigationList.getItems();
+          // for (var i = 0; i < oItems.length; i++) {
+          //   oItems[i].collapse();
+          // }
+          oSelectedItem.expand();
+        }
+        this.getRouter().navTo(oSelectedItem.getKey())
+      },
+      onRouteChange: function (oEvent) {
+        this.AppState = this.getOwnerComponent().getState("App");
+        this.getModel("sideContentModel").setProperty(
+          "/selectedKey",
+          oEvent.getParameter("name")
+        );
+      },
+      onAddNewItem:function(){
+        var sLayout = LayoutType.TwoColumnsBeginExpanded;
+        this.getModel("projectLayoutView").setProperty("/layout", sLayout);
+        this.getModel("projectLayoutView").refresh(true);
+        this.AppState.data.oSelectedProject = new Project();
+      }
+  });
+});

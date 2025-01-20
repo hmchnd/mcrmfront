@@ -1,0 +1,132 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Dialog
+        id="_IDGenDialog3"
+        title="Add New Activity "
+    >
+        <content>
+            <f:Form
+                id="_IDGenForm"
+                editable="true"
+            >
+                <f:title>
+                    <core:Title id="_IDGenTitle12" />
+                </f:title>
+                <f:layout>
+                    <f:ResponsiveGridLayout
+                        id="_IDGenResponsiveGridLayout1"
+                        labelSpanXL="3"
+                        labelSpanL="3"
+                        labelSpanM="3"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="4"
+                        emptySpanL="4"
+                        emptySpanM="4"
+                        emptySpanS="0"
+                        columnsXL="1"
+                        columnsL="1"
+                        columnsM="1"
+                        singleContainerFullSize="false"
+                    />
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer id="_IDGenFormContainer1">
+                        <f:formElements>
+                            <f:FormElement
+                                id="_IDGenFormElement5"
+                                label="Title"
+                            >
+                                <f:fields>
+                                    <Input
+                                        id="_IDGenInput5"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+ 
+                            <f:FormElement
+                                id="_IDGenFormElement6"
+                                label="Sub Title"
+                            >
+                                <f:fields>
+                                    <Input
+                                        id="_IDGenInput6"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+ 
+                            <f:FormElement
+                                id="_IDGenFormElement7"
+                                label="Task"
+                            >
+                                <f:fields>
+                                    <Input
+                                        id="_IDGenDatePicker"
+                                        value="Strategic Planning"
+                                        editable="false"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement
+                                id="_IDGenFormElement8"
+                                label="Owner"
+                            >
+                                <f:fields>
+                                    <Input
+                                        id="_IDGenDatePicker1"
+                                        value=""
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+ 
+                            <f:FormElement
+                                id="_IDGenFormElement9"
+                                label="Start Date"
+                            >
+                                <f:fields>
+                                    <DatePicker
+                                        id="_IDGenDatePicker2"
+                                        value=""
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+
+                            <f:FormElement
+                               
+                                label="End Date"
+                            >
+                                <f:fields>
+                                    <DatePicker
+                                       
+                                        value=""
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                          
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+        </content>
+        <beginButton>
+            <Button
+                id="_IDGenButton2"
+                type="Accept"
+                text="Save"
+                press="onCreateNewTask"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                id="_IDGenButton3"
+                type="Reject"
+                text="Cancel"
+                press="onCancel"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

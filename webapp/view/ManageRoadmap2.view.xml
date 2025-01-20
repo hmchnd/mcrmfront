@@ -1,0 +1,622 @@
+<mvc:View
+    controllerName="framsys.com.framsysfrontend.controller.ManageRoadmap2"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:unified="sap.ui.unified"
+    xmlns:uxap="sap.uxap"
+    xmlns:custom="sap.ui.core.CustomData"
+    displayBlock="true"
+    height="100%"
+>
+    <Page
+        id="page"
+        title="SAP Activate for RISE with SAP S/4 HANA Cloud Project Roadmap"
+    >
+        <content>
+            <IconTabBar
+                id="idIconTabBarFiori1"
+                class="sapUiResponsiveContentPadding"
+            >
+                <items>
+                    <IconTabFilter text="Project Management">
+                        <VBox
+                id="_IDGenVBox"
+                class="sapUiSmallMargin"
+            >
+                <PlanningCalendar
+                    id="PC1"
+                    startDate="{path: '/startDate'}"
+                    rows="{path: '/Phases'}"
+                    appointmentsVisualization="Filled"
+                    appointmentSelect="onPress"
+                    viewKey="Month"
+                    appointmentHeight="Large"
+                >
+                    <toolbarContent>
+                        <Title
+                            text="Project Management"
+                            titleStyle="H4"
+                        />
+                        <Label text="Logged in as" />
+                        <Select
+                            id="userRole"
+                            change="handleRoleChange"
+                            selectedKey="admin"
+                            width="230px"
+                        >
+                            <items>
+                                <core:Item
+                                    key="admin"
+                                    text="Admin"
+                                />
+                                <core:Item
+                                    key="manager"
+                                    text="Manager"
+                                />
+                                <core:Item
+                                    key="donna"
+                                    text="Donna Moore"
+                                />
+                            </items>
+                        </Select>
+                    </toolbarContent>
+                    <rows>
+                        <PlanningCalendarRow
+                            id="_IDGenPlanningCalendarRow"
+                            title="{Title}"
+                            enableAppointmentsDragAndDrop="{path:'Title', formatter:'.canModifyAppointments'}"
+                            enableAppointmentsResize="{path:'Title', formatter:'.canModifyAppointments'}"
+                            enableAppointmentsCreate="{path:'Title', formatter:'.canModifyAppointments'}"
+                            appointmentDrop="handleAppointmentDrop"
+                            appointmentDragEnter="handleAppointmentDragEnter"
+                            appointmentResize="handleAppointmentResize"
+                            appointmentCreate="handleAppointmentCreate"
+                            appointments="{path : 'Tasks', templateShareable: false}"
+                        >
+                            <appointments>
+                                <unified:CalendarAppointment
+                                    id="_IDGenCalendarAppointment"
+                                    startDate="{start}"
+                                    endDate="{end}"
+                                    icon="{pic}"
+                                    type="{type}"
+                                    tentative="{tentative}"
+                                >
+                                    <unified:customContent>
+                                        <VBox>
+                                            <Text text="{Title}" />
+ 
+                                            <ProgressIndicator
+                                                percentValue="80"
+                                                displayValue="80%"
+                                                state="Success"
+                                            />
+                                        </VBox>
+                                    </unified:customContent>
+                                </unified:CalendarAppointment>
+                            </appointments>
+                        </PlanningCalendarRow>
+                    </rows>
+                </PlanningCalendar>
+            </VBox>
+                    </IconTabFilter>
+                
+                    <IconTabFilter
+                        text="Techinal Architecture and Infrastructure"
+                    >
+                        <VBox
+                            id="_IDGenVBox2"
+                            class="sapUiSmallMargin"
+                        >
+                            <PlanningCalendar
+                                id="PC2"
+                                startDate="{path: '/startDate'}"
+                                rows="{path: '/Phases'}"
+                                appointmentsVisualization="Filled"
+                                appointmentSelect="onPress"
+                                viewKey="Month"
+                                appointmentHeight="Large"
+                            >
+                                <toolbarContent>
+                                  <Title
+                            text="Techinal Architecture and Infrastructure"
+                            titleStyle="H4"
+                        
+                        />
+                        
+                                    <!-- <Title
+                            text="Title"
+                            titleStyle="H4"
+                        />
+                        <Label text="Logged in as" />
+                        <Select
+                            id="userRole"
+                            change="handleRoleChange"
+                            selectedKey="admin"
+                            width="230px"
+                        >
+                            <items>
+                                <core:Item
+                                    key="admin"
+                                    text="Admin"
+                                />
+                                <core:Item
+                                    key="manager"
+                                    text="Manager"
+                                />
+                                <core:Item
+                                    key="donna"
+                                    text="Donna Moore"
+                                />
+                            </items>
+                        </Select> -->
+                                </toolbarContent>
+                                
+                                <rows>
+                                    <PlanningCalendarRow
+                                        id="_IDGenPlanningCalendarRow2"
+                                        title="{Title}"
+                                        enableAppointmentsDragAndDrop="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        enableAppointmentsResize="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        enableAppointmentsCreate="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        appointmentDrop="handleAppointmentDrop"
+                                        appointmentDragEnter="handleAppointmentDragEnter"
+                                        appointmentResize="handleAppointmentResize"
+                                        appointmentCreate="handleAppointmentCreate"
+                                        appointments="{path : 'Tasks', templateShareable: false}"
+                                    >
+                                        <appointments>
+                                            <unified:CalendarAppointment
+                                                id="_IDGenCalendarAppointment2"
+                                                startDate="{start}"
+                                                endDate="{end}"
+                                                icon="{pic}"
+                                                type="{type}"
+                                                tentative="{tentative}"
+                                            >
+                                                <unified:customContent>
+                                                    <VBox>
+                                                        <Text text="{Title}" />
+
+                                                        <ProgressIndicator
+                                                            percentValue="80"
+                                                            displayValue="80%"
+                                                            state="Success"
+                                                        />
+                                                    </VBox>
+                                                </unified:customContent>
+                                            </unified:CalendarAppointment>
+                                        </appointments>
+                                    </PlanningCalendarRow>
+                                </rows>
+                            </PlanningCalendar>
+                        </VBox>
+                    </IconTabFilter>
+               
+                    <IconTabFilter text="Application Design and Configuration">
+                        <VBox
+                            id="_IDGenVBox3"
+                            class="sapUiSmallMargin"
+                        >
+                            <PlanningCalendar
+                                id="PC3"
+                                startDate="{path: '/startDate'}"
+                                rows="{path: '/Phases'}"
+                                appointmentsVisualization="Filled"
+                                appointmentSelect="onPress"
+                                viewKey="Month"
+                                appointmentHeight="Large"
+                            >
+                                <toolbarContent>
+                                  <Title
+                            text="Application Design and Configuration"
+                            titleStyle="H4"
+                        />
+                                    <!-- <Title
+                            text="Title"
+                            titleStyle="H4"
+                        />
+                        <Label text="Logged in as" />
+                        <Select
+                            id="userRole"
+                            change="handleRoleChange"
+                            selectedKey="admin"
+                            width="230px"
+                        >
+                            <items>
+                                <core:Item
+                                    key="admin"
+                                    text="Admin"
+                                />
+                                <core:Item
+                                    key="manager"
+                                    text="Manager"
+                                />
+                                <core:Item
+                                    key="donna"
+                                    text="Donna Moore"
+                                />
+                            </items>
+                        </Select> -->
+                                </toolbarContent>
+                                <rows>
+                                    <PlanningCalendarRow
+                                        id="_IDGenPlanningCalendarRow3"
+                                        title="{Title}"
+                                        enableAppointmentsDragAndDrop="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        enableAppointmentsResize="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        enableAppointmentsCreate="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        appointmentDrop="handleAppointmentDrop"
+                                        appointmentDragEnter="handleAppointmentDragEnter"
+                                        appointmentResize="handleAppointmentResize"
+                                        appointmentCreate="handleAppointmentCreate"
+                                        appointments="{path : 'Tasks', templateShareable: false}"
+                                    >
+                                        <appointments>
+                                            <unified:CalendarAppointment
+                                                id="_IDGenCalendarAppointment3"
+                                                startDate="{start}"
+                                                endDate="{end}"
+                                                icon="{pic}"
+                                                type="{type}"
+                                                tentative="{tentative}"
+                                            >
+                                                <unified:customContent>
+                                                    <VBox>
+                                                        <Text text="{Title}" />
+
+                                                        <ProgressIndicator
+                                                            percentValue="80"
+                                                            displayValue="80%"
+                                                            state="Success"
+                                                        />
+                                                    </VBox>
+                                                </unified:customContent>
+                                            </unified:CalendarAppointment>
+                                        </appointments>
+                                    </PlanningCalendarRow>
+                                </rows>
+                            </PlanningCalendar>
+                        </VBox>
+                    </IconTabFilter>
+                
+                    <IconTabFilter text="Integration">
+                        <VBox
+                            id="_IDGenVBox4"
+                            class="sapUiSmallMargin"
+                        >
+                            <PlanningCalendar
+                                id="PC4"
+                                startDate="{path: '/startDate'}"
+                                rows="{path: '/Phases'}"
+                                appointmentsVisualization="Filled"
+                                appointmentSelect="onPress"
+                                viewKey="Month"
+                                appointmentHeight="Large"
+                            >
+                                <toolbarContent>
+                                  <Title
+                            text="Integration"
+                            titleStyle="H4"
+                        />
+                                    <!-- <Title
+                            text="Title"
+                            titleStyle="H4"
+                        />
+                        <Label text="Logged in as" />
+                        <Select
+                            id="userRole"
+                            change="handleRoleChange"
+                            selectedKey="admin"
+                            width="230px"
+                        >
+                            <items>
+                                <core:Item
+                                    key="admin"
+                                    text="Admin"
+                                />
+                                <core:Item
+                                    key="manager"
+                                    text="Manager"
+                                />
+                                <core:Item
+                                    key="donna"
+                                    text="Donna Moore"
+                                />
+                            </items>
+                        </Select> -->
+                                </toolbarContent>
+                                <rows>
+                                    <PlanningCalendarRow
+                                        id="_IDGenPlanningCalendarRow4"
+                                        title="{Title}"
+                                        enableAppointmentsDragAndDrop="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        enableAppointmentsResize="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        enableAppointmentsCreate="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        appointmentDrop="handleAppointmentDrop"
+                                        appointmentDragEnter="handleAppointmentDragEnter"
+                                        appointmentResize="handleAppointmentResize"
+                                        appointmentCreate="handleAppointmentCreate"
+                                        appointments="{path : 'Tasks', templateShareable: false}"
+                                    >
+                                        <appointments>
+                                            <unified:CalendarAppointment
+                                                id="_IDGenCalendarAppointment4"
+                                                startDate="{start}"
+                                                endDate="{end}"
+                                                icon="{pic}"
+                                                type="{type}"
+                                                tentative="{tentative}"
+                                            >
+                                                <unified:customContent>
+                                                    <VBox>
+                                                        <Text text="{Title}" />
+
+                                                        <ProgressIndicator
+                                                            percentValue="80"
+                                                            displayValue="80%"
+                                                            state="Success"
+                                                        />
+                                                    </VBox>
+                                                </unified:customContent>
+                                            </unified:CalendarAppointment>
+                                        </appointments>
+                                    </PlanningCalendarRow>
+                                </rows>
+                            </PlanningCalendar>
+                        </VBox>
+                    </IconTabFilter>
+              
+                    <IconTabFilter text="Testing">
+                        <VBox
+                            id="_IDGenVBox5"
+                            class="sapUiSmallMargin"
+                        >
+                            <PlanningCalendar
+                                id="PC5"
+                                startDate="{path: '/startDate'}"
+                                rows="{path: '/Phases'}"
+                                appointmentsVisualization="Filled"
+                                appointmentSelect="onPress"
+                                viewKey="Month"
+                                appointmentHeight="Large"
+                            >
+                                <toolbarContent>
+                                  <Title
+                            text="Testing"
+                            titleStyle="H4"
+                        />
+                                    <!-- <Title
+                            text="Title"
+                            titleStyle="H4"
+                        />
+                        <Label text="Logged in as" />
+                        <Select
+                            id="userRole"
+                            change="handleRoleChange"
+                            selectedKey="admin"
+                            width="230px"
+                        >
+                            <items>
+                                <core:Item
+                                    key="admin"
+                                    text="Admin"
+                                />
+                                <core:Item
+                                    key="manager"
+                                    text="Manager"
+                                />
+                                <core:Item
+                                    key="donna"
+                                    text="Donna Moore"
+                                />
+                            </items>
+                        </Select> -->
+                                </toolbarContent>
+                                <rows>
+                                    <PlanningCalendarRow
+                                        id="_IDGenPlanningCalendarRow5"
+                                        title="{Title}"
+                                        enableAppointmentsDragAndDrop="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        enableAppointmentsResize="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        enableAppointmentsCreate="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        appointmentDrop="handleAppointmentDrop"
+                                        appointmentDragEnter="handleAppointmentDragEnter"
+                                        appointmentResize="handleAppointmentResize"
+                                        appointmentCreate="handleAppointmentCreate"
+                                        appointments="{path : 'Tasks', templateShareable: false}"
+                                    >
+                                        <appointments>
+                                            <unified:CalendarAppointment
+                                                id="_IDGenCalendarAppointment5"
+                                                startDate="{start}"
+                                                endDate="{end}"
+                                                icon="{pic}"
+                                                type="{type}"
+                                                tentative="{tentative}"
+                                            >
+                                                <unified:customContent>
+                                                    <VBox>
+                                                        <Text text="{Title}" />
+
+                                                        <ProgressIndicator
+                                                            percentValue="80"
+                                                            displayValue="80%"
+                                                            state="Success"
+                                                        />
+                                                    </VBox>
+                                                </unified:customContent>
+                                            </unified:CalendarAppointment>
+                                        </appointments>
+                                    </PlanningCalendarRow>
+                                </rows>
+                            </PlanningCalendar>
+                        </VBox>
+                    </IconTabFilter>
+                
+                    <IconTabFilter text="Data Management">
+                        <VBox
+                            id="_IDGenVBox7"
+                            class="sapUiSmallMargin"
+                        >
+                            <PlanningCalendar
+                                id="PC6"
+                                startDate="{path: '/startDate'}"
+                                rows="{path: '/Phases'}"
+                                appointmentsVisualization="Filled"
+                                appointmentSelect="onPress"
+                                viewKey="Month"
+                                appointmentHeight="Large"
+                            >
+                                <toolbarContent>
+                                  <Title
+                            text="Data Management"
+                            titleStyle="H4"
+                        />
+                                    <!-- <Title
+                            text="Title"
+                            titleStyle="H4"
+                        />
+                        <Label text="Logged in as" />
+                        <Select
+                            id="userRole"
+                            change="handleRoleChange"
+                            selectedKey="admin"
+                            width="230px"
+                        >
+                            <items>
+                                <core:Item
+                                    key="admin"
+                                    text="Admin"
+                                />
+                                <core:Item
+                                    key="manager"
+                                    text="Manager"
+                                />
+                                <core:Item
+                                    key="donna"
+                                    text="Donna Moore"
+                                />
+                            </items>
+                        </Select> -->
+                                </toolbarContent>
+                                <rows>
+                                    <PlanningCalendarRow
+                                        id="_IDGenPlanningCalendarRow6"
+                                        title="{Title}"
+                                        enableAppointmentsDragAndDrop="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        enableAppointmentsResize="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        enableAppointmentsCreate="{path:'Title', formatter:'.canModifyAppointments'}"
+                                        appointmentDrop="handleAppointmentDrop"
+                                        appointmentDragEnter="handleAppointmentDragEnter"
+                                        appointmentResize="handleAppointmentResize"
+                                        appointmentCreate="handleAppointmentCreate"
+                                        appointments="{path : 'Tasks', templateShareable: false}"
+                                    >
+                                        <appointments>
+                                            <unified:CalendarAppointment
+                                                id="_IDGenCalendarAppointment6"
+                                                startDate="{start}"
+                                                endDate="{end}"
+                                                icon="{pic}"
+                                                type="{type}"
+                                                tentative="{tentative}"
+                                            >
+                                                <unified:customContent>
+                                                    <VBox>
+                                                        <Text text="{Title}" />
+
+                                                        <ProgressIndicator
+                                                            percentValue="80"
+                                                            displayValue="80%"
+                                                            state="Success"
+                                                        />
+                                                    </VBox>
+                                                </unified:customContent>
+                                            </unified:CalendarAppointment>
+                                        </appointments>
+                                    </PlanningCalendarRow>
+                                </rows>
+                            </PlanningCalendar>
+                        </VBox>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+            <!-- <HBox
+                id="_IDGenHBox1"
+                renderType="Bare"
+                width="100%"
+            >
+                <VBox
+                    id="_IDGenVBox5"
+                    class="sapUiTinyMargin"
+                    width="14.28%"
+                >
+                    <Title
+                        id="_IDGenTitle6"
+                        text="DISCOVER"
+                        class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                    />
+                </VBox>
+                <VBox
+                    id="_IDGenVBox7"
+                    class="sapUiTinyMargin"
+                    width="14.28%"
+                >
+                    <Title
+                        id="_IDGenTitle7"
+                        text="PREPARE"
+                        class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                    />
+                </VBox>
+                <VBox
+                    id="_IDGenVBox8"
+                    class="sapUiTinyMargin"
+                    width="14.28%"
+                >
+                    <Title
+                        id="_IDGenTitle8"
+                        text="EXPLORE"
+                        class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                    />
+                </VBox>
+                <VBox
+                    id="_IDGenVBox9"
+                    class="sapUiTinyMargin"
+                    width="14.28%"
+                >
+                    <Title
+                        id="_IDGenTitle9"
+                        text="REALISE"
+                        class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                    />
+                </VBox>
+                <VBox
+                    id="_IDGenVBox10"
+                    class="sapUiTinyMargin"
+                    width="14.28%"
+                >
+                    <Title
+                        id="_IDGenTitle10"
+                        text="DEPLOY"
+                        class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                    />
+                </VBox>
+                <VBox
+                    id="_IDGenVBox11"
+                    class="sapUiTinyMargin"
+                    width="14.28%"
+                >
+                    <Title
+                        id="_IDGenTitle11"
+                        text="RUN"
+                        class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                    />
+                </VBox>
+            </HBox> -->
+
+            <!-- Project Management Section -->
+        </content>
+    </Page>
+</mvc:View>

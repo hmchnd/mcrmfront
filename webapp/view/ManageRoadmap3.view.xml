@@ -1,0 +1,2011 @@
+<mvc:View
+    xmlns:layout="sap.ui.layout"
+    controllerName="framsys.com.framsysfrontend.controller.ManageRoadmap3"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.f"
+
+>
+    <Page title="SAP Activate for RISE with SAP S/4 HANA Cloud Project Roadmap">
+        <content>
+           
+                <l:VerticalLayout
+                    class="sapUiContentPadding equalColumns"
+                    width="100%"
+                >
+                    <Panel
+                        id="_IDGenPanel1"
+                        expandable="true"
+                        headerText="Project Management"
+                        enableScrolling="false"
+                        
+                    >
+                        <headerToolbar>
+                            <Toolbar>
+                                <ToolbarSpacer />
+                                <Title text="Project Management" />
+                                <ToolbarSpacer />
+                            </Toolbar>
+                        </headerToolbar>
+                       <FlexBox class="columns"   >
+                        
+                        <VBox
+                            id="_IDGenVBox13"
+                            width="auto"
+                            class="sapUiTinyMargin"
+                        >
+                            <Title
+                                text="Discover"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+
+                            <Button
+                                id="_IDGenButton4"
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid2"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid2' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        id="_IDGenGridContainerSettings"
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    id="_IDGenGenericTile"
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent id="_IDGenTileContent">
+                                        <content>
+                                            <VBox id="_IDGenVBox14">
+                                                <Text
+                                                    id="_IDGenText"
+                                                    text="Task Progress"
+                                                />
+                                                <ProgressIndicator
+                                                    id="_IDGenProgressIndicator"
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    id="_IDGenText1"
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                            <Title
+                                text="Prepare"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid3"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid3' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                            <Title
+                                text="Explore"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid4"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid4' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                            <Title
+                                text="Realise"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid5"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid5' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                            <Title
+                                text="Deploy"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid6"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid6' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                            <Title
+                                text="Run"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid7"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid7' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                    </FlexBox>
+                    </Panel>
+                    <Panel expandable="true">
+                     <headerToolbar>
+                            <Toolbar>
+                                <ToolbarSpacer />
+                                <Title text="Technical Architecture and Infrastructure" />
+                                <ToolbarSpacer />
+                            </Toolbar>
+                        </headerToolbar>
+                        <FlexBox class="columns">
+                        
+
+                        <VBox
+                            width="auto"
+                            class="sapUiTinyMargin"
+                        >
+                         <Title
+                                text="Discover"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid8"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid8' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Prepare"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid9"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid9' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Explore"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid10"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid10' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Realise"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid11"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid11' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Deploy"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid12"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid12' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Run"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid13"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid13' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                    </FlexBox>
+                    </Panel>
+                     <Panel expandable="true" >
+                     <headerToolbar>
+                            <Toolbar>
+                                <ToolbarSpacer />
+                                <Title text="Application Design and Configuration" />
+                                <ToolbarSpacer />
+                            </Toolbar>
+                        </headerToolbar>
+                        <FlexBox class="columns">
+                       
+
+                        <VBox
+                            width="auto"
+                            class="sapUiTinyMargin"
+                        >
+                         <Title
+                                text="Discover"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid14"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid14' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Prepare"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid15"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid15' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Explore"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid16"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid16' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Realise"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid17"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid17' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Deploy"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid18"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid18' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Run"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid19"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid19' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                    </FlexBox>
+                    </Panel>
+                     <Panel expandable="true">
+                     <headerToolbar>
+                            <Toolbar>
+                                <ToolbarSpacer />
+                                <Title text="Integration" />
+                                <ToolbarSpacer />
+                            </Toolbar>
+                        </headerToolbar>
+                        <FlexBox class="columns">
+                       
+
+                        <VBox
+                            width="auto"
+                            class="sapUiTinyMargin"
+                        >
+                         <Title
+                                text="Discover"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid20"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid20' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Prepare"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid21"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid21' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Explore"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid22"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid22' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Realise"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid23"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid23' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Deploy"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid24"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid24' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Run"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid25"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid25' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                    </FlexBox>
+                    </Panel>
+                     <Panel expandable="true" >
+                     <headerToolbar>
+                            <Toolbar>
+                                <ToolbarSpacer />
+                                <Title text="Testing" />
+                                <ToolbarSpacer />
+                            </Toolbar>
+                        </headerToolbar>
+                         <FlexBox class="columns">
+                       
+
+                        <VBox
+                            width="auto"
+                            class="sapUiTinyMargin"
+                        >
+                         <Title
+                                text="Discover"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid26"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid26' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Prepare"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid27"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid27' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Explore"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid28"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid28' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Realise"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid29"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid29' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Deploy"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid30"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid30' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Run"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid31"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid31' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                    </FlexBox>
+                    </Panel>
+                     <Panel expandable="true" >
+                     <headerToolbar>
+                            <Toolbar>
+                                <ToolbarSpacer />
+                                <Title text="Data Management" />
+                                <ToolbarSpacer />
+                            </Toolbar>
+                        </headerToolbar>
+                         <FlexBox class="columns">
+                        <!-- <VBox
+                            class="sapUiSmallMargin"
+                            width="auto"
+                        >
+                            <Title
+                                text="Data Management"
+                                level="H1"
+                                class="sapUiLargeMarginTop"
+                                width="22rem"
+                            />
+                        </VBox> -->
+
+                        <VBox
+                            width="auto"
+                            class="sapUiTinyMargin"
+                        >
+                         <Title
+                                text="Discover"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid32"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid32' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Prepare"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid33"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid33' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Explore"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid34"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid34' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Realise"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid35"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid35' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Deploy"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid36"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid36' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                        <VBox
+                            class="sapUiTinyMargin"
+                            width="auto"
+                        >
+                         <Title
+                                text="Run"
+                                level="H1"
+                                class="sapUiSmallMarginBottom"
+                            />
+                            <Button
+                                text="Add Task"
+                                icon="sap-icon://add"
+                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                press="onAddNewTask"
+                            />
+                            <f:GridContainer
+                                id="grid37"
+                                width="100%"
+                                snapToRow="true"
+                                items="{ path: '/grid37' }"
+                            >
+                                <f:layout>
+                                    <f:GridContainerSettings
+                                        rowSize="10px"
+                                        columnSize="200px"
+                                        gap="20px"
+                                    />
+                                </f:layout>
+                                <GenericTile
+                                    header="{title}"
+                                    subheader="{description}"
+                                    press="onCardPress"
+                                    backgroundImage="{bgColor}"
+                                >
+                                    <TileContent>
+                                        <content>
+                                            <VBox>
+                                                <Text text="Task Progress" />
+                                                <ProgressIndicator
+                                                    percentValue="{percentageValue}"
+                                                    displayValue="{percentageValue}%"
+                                                    state="Success"
+                                                />
+                                                <Text
+                                                    text="Deadline: {deadline}"
+                                                />
+                                            </VBox>
+                                        </content>
+                                    </TileContent>
+                                </GenericTile>
+                            </f:GridContainer>
+                        </VBox>
+                    </FlexBox>
+                    </Panel>
+                </l:VerticalLayout>
+            <!-- </ScrollContainer> -->
+        </content>
+    </Page>
+</mvc:View>

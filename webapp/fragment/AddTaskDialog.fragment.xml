@@ -1,0 +1,94 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Dialog
+        id="taskDialog"
+        title="Add Task"
+        afterClose="onAfterClose"
+    >
+        <content>
+            <VBox
+                id="id1VBox3333"
+                fitContainer="true"
+                class="sapUiTinyMargin"
+            >
+                <!-- Label -->
+                <Label
+                    id="idLabel1"
+                    text="Task Name"
+                    class="sapUiTinyMarginTopBottom"
+                />
+
+                <Input
+                    id="idinput1"
+                    value=""
+                />
+
+                <Label
+                    id="idLabel2"
+                    text="Task Description"
+                    class="sapUiTinyMarginTopBottom"
+                />
+
+                <Input
+                    id="idinput2"
+                    value=""
+                />
+
+                <Label
+                    id="idLabel3"
+                    text="Project"
+                    class="sapUiTinyMarginTopBottom"
+                />
+
+                <Input
+                    id="idinput3"
+                    value="Cloud Transformation S4 HANA Project"
+					editable="false"
+                />
+
+				 <Label
+                 
+                    text="Phase"
+                    class="sapUiTinyMarginTopBottom"
+                />
+
+                <Input
+                  
+                    value="Discover"
+					editable="false"
+                />
+
+				 <Label
+                   
+                    text="Area"
+                    class="sapUiTinyMarginTopBottom"
+                />
+
+                <Input
+                   
+                    value="Project Management"
+					editable="false"
+                />
+            </VBox>
+        </content>
+        <footer>
+            <OverflowToolbar id="_IDGenOverflowToolbar1">
+                <ToolbarSpacer id="_IDGenToolbarSpacer2" />
+                <Button
+                    id="idOK1Button"
+                    text="Create Task"
+					type="Accept"
+                    press="onCreateNewTask"
+                />
+                <Button
+                    id="idCancel123"
+					type="Reject"
+                    text="Cancel Task"
+                    press="onCancelTask"
+                />
+            </OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>

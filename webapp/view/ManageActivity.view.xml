@@ -1,0 +1,178 @@
+<mvc:View
+    controllerName="framsys.com.framsysfrontend.controller.ManageActivity"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:card="sap.f.cards"
+    xmlns:l="sap.ui.layout"
+>
+    <Page title="Projects / Manage Activity">
+        <Bar class="customBar">
+            <!-- Left Section (Empty for now) -->
+            <contentLeft />
+
+            <!-- Middle Section: Title -->
+            <contentMiddle>
+                <VBox>
+                    <Title
+                        text="SAP Activate for RISE with SAP S/4 HANA Cloud Project / Strategic Planning Task Activities"
+                        class="sapUiTinyMargin"
+                    />
+                </VBox>
+            </contentMiddle>
+
+            <!-- Right Section: Button -->
+            <contentRight>
+                <Button
+                    text="Create New Activity"
+                    press="onAddActivity"
+                    type="Emphasized"
+                />
+            </contentRight>
+        </Bar>
+
+        <l:VerticalLayout
+            class="sapUiContentPadding equalColumns"
+            width="100%"
+        >
+            <FlexBox class="columns">
+                <!-- New Segment -->
+                <VBox class="sapUiSmallMargin">
+              <ObjectStatus text="NEW"  state="Error" />
+                    <f:GridContainer
+                        id="grid1"
+                        width="100%"
+                        snapToRow="true"
+                        items="{ path: '/grid1' }"
+                    >
+                        <f:layout>
+                            <f:GridContainerSettings
+                                rowSize="10px"
+                                columnSize="400px"
+                                gap="20px"
+                                class="sapUiSmallMargin"
+                            />
+                        </f:layout>
+
+                        <!-- <layoutData>
+                            <FlexItemData
+                                growFactor="1"
+                                baseSize="0"
+                                backgroundDesign="Solid"
+                                styleClass="sapUiTinyMargin"
+                            />
+                        </layoutData> -->
+                        
+                        <f:Card class="sapUiTinyMargin"  press="onCardPress" semanticRole="ListItem">
+                            <f:header>
+                                <card:Header
+                                    title="Activity: {title}"
+                                    subtitle="{subtitle}"
+                                    iconSrc="{iconSrc}"
+                                />
+                            </f:header>
+                            <f:content>
+                                <VBox class="sapUiTinyMargin">
+                                    <Text text="Task: {task}" />
+                                    <Text text="Owner: {owner}" />
+                                    <Text text="Deadline: {deadline}" />
+                                    <ProgressIndicator percentValue="{value}" displayValue="{value}%" state="Error" />
+                                </VBox>
+                            </f:content>
+                        </f:Card>
+                    </f:GridContainer>
+                </VBox>
+
+                <!-- In Progress Segment -->
+                <VBox class="sapUiSmallMargin">
+                    <!-- <layoutData>
+                        <FlexItemData
+                            growFactor="1"
+                            baseSize="0"
+                            backgroundDesign="Solid"
+                            styleClass="sapUiTinyMargin"
+                        />
+                    </layoutData> -->
+                     <ObjectStatus text="IN PROGRESS"  state="Warning" />
+                    <f:GridContainer
+                        id="grid2"
+                        width="100%"
+                        snapToRow="true"
+                        items="{ path: '/grid2' }"
+                    >
+                        <f:layout>
+                            <f:GridContainerSettings
+                                rowSize="10px"
+                                columnSize="400px"
+                                gap="20px"
+                                class="sapUiSmallMargin"
+                            />
+                        </f:layout>
+                    <f:Card class="sapUiTinyMargin"  press="onCardPress" semanticRole="ListItem">
+                            <f:header>
+                                <card:Header
+                                    title="Activity: {title}"
+                                    subtitle="{subtitle}"
+                                    iconSrc="{iconSrc}"
+                                />
+                            </f:header>
+                            <f:content>
+                                <VBox class="sapUiTinyMargin">
+                                    <Text text="Task: {task}" />
+                                    <Text text="Owner: {owner}" />
+                                    <Text text="Deadline: {deadline}" />
+                                     <ProgressIndicator percentValue="{value}" displayValue="{value}%" state="Warning" />
+                                </VBox>
+                            </f:content>
+                        </f:Card>
+                    </f:GridContainer>
+                </VBox>
+
+                <!-- Completed Segment -->
+                <VBox class="sapUiSmallMargin">
+                    <!-- <layoutData>
+                        <FlexItemData
+                            growFactor="1"
+                            baseSize="0"
+                            backgroundDesign="Solid"
+                            styleClass="sapUiTinyMargin"
+                        />
+                    </layoutData> -->
+                      <ObjectStatus text="COMPLETED"  state="Success" />
+                    <f:GridContainer
+                        id="grid3"
+                        width="100%"
+                        snapToRow="true"
+                        items="{ path: '/grid3' }"
+                    >
+                        <f:layout>
+                            <f:GridContainerSettings
+                                rowSize="10px"
+                                columnSize="400px"
+                                gap="20px"
+                                class="sapUiSmallMargin"
+                            />
+                        </f:layout>
+                    <f:Card class="sapUiTinyMargin"  press="onCardPress" semanticRole="ListItem">
+                            <f:header>
+                                <card:Header
+                                    title="Activity: {title}"
+                                    subtitle="{subtitle}"
+                                    iconSrc="{iconSrc}"
+                                />
+                            </f:header>
+                            <f:content>
+                                <VBox class="sapUiTinyMargin">
+                                    <Text text="Task: {task}" />
+                                    <Text text="Owner: {owner}" />
+                                    <Text text="Deadline: {deadline}" />
+                                     <ProgressIndicator percentValue="{value}" displayValue="{value}%" state="Success" />
+                                </VBox>
+                            </f:content>
+                        </f:Card>
+                    </f:GridContainer>
+                </VBox>
+            </FlexBox>
+        </l:VerticalLayout>
+    </Page>
+</mvc:View>

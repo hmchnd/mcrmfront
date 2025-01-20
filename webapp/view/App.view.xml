@@ -1,0 +1,76 @@
+<mvc:View controllerName="framsys.com.framsysfrontend.controller.App" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt">
+    <Page showHeader="false">
+        <tnt:ToolPage id="toolpage" class="sapUiDemoToolPage">
+            <tnt:header>
+                <tnt:ToolHeader>
+                    <Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress" tooltip="{i18n>collpaseMenuButtonText}">
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                        </layoutData>
+                    </Button>
+                    <Image src="../media/framsys_log.png" height="30px" decorative="false" press="onLogoPressed" tooltip="SAP Logo">
+                        <layoutData>
+                            <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                        </layoutData>
+                    </Image>
+                    <ToolbarSpacer/>
+                    <Title text="{i18n>appTitle}" level="H2"/>
+                    <ToolbarSpacer/>
+                    <Button id="errorButton" icon="sap-icon://message-popup" visible="{= ${alerts>/alerts/errors}.length === 0 ? false : true }" type="Transparent" press=".onMessagePopoverPress" tooltip="{i18n>Error/Warnings}">
+                        <layoutData>
+                            <OverflowToolbarLayoutData closeOverflowOnInteraction="false"/>
+                        </layoutData>
+                    </Button>
+                    <Button id="notificationButton" icon="sap-icon://bell-2" visible="{= ${alerts>/alerts/notifications}.length === 0 ? false : true }" type="Transparent" press=".onNotificationPress" tooltip="{i18n>Notifications}">
+                        <layoutData>
+                            <OverflowToolbarLayoutData closeOverflowOnInteraction="false"/>
+                        </layoutData>
+                    </Button>
+
+                </tnt:ToolHeader>
+
+
+            </tnt:header>
+
+            <tnt:subHeader>
+                <tnt:ToolHeader>
+
+
+                    <!-- <Button type="Accept" text="Kanban" class="sapUiLargeMarginBegin"/>
+                    <Button type="Critical" text="" icon="sap-icon://add" class="sapUiTinyMargin"/> -->
+                    <ToolbarSpacer/>
+                    
+                  <Label text="Manage Projects" class="sapUiLargeMarginBegin"/>
+                    <ToolbarSpacer/>
+                    <Button icon="sap-icon://add" class="sapUiTinyMargin" type="Critical" press="onAddNewItem"/>
+                    <Button type="Critical"  icon="sap-icon://add-filter" class="sapUiTinyMargin"/>
+                   
+
+                </tnt:ToolHeader>
+            </tnt:subHeader>
+
+            <tnt:sideContent>
+                <tnt:SideNavigation expanded="true" selectedKey="{sideContentModel>/selectedKey}" itemSelect=".onSelect">
+                    <tnt:NavigationList items="{path: 'sideContentModel>/navigation'}">
+                        <tnt:NavigationListItem text="{sideContentModel>title}" icon="{sideContentModel>icon}" enabled="{sideContentModel>enabled}" expanded="{sideContentModel>expanded}" items="{sideContentModel>items}" key="{sideContentModel>key}">
+                            <tnt:NavigationListItem text="{sideContentModel>title}" key="{sideContentModel>key}" icon="{sideContentModel>icon}" enabled="{sideContentModel>enabled}" />
+                        </tnt:NavigationListItem>
+                    </tnt:NavigationList>
+                    <tnt:fixedItem>
+                        <tnt:NavigationList items="{path: 'sideContentModel>/fixedNavigation'}">
+                            <tnt:NavigationListItem text="{sideContentModel>title}" icon="{sideContentModel>icon}" />
+                        </tnt:NavigationList>
+                    </tnt:fixedItem>
+                </tnt:SideNavigation>
+            </tnt:sideContent>
+            <tnt:mainContents>
+                <App id="app"/>
+                <!--  <App id="mainContents"/>  -->
+                <!--  <App><f:FlexibleColumnLayout id="mainContents"/></App>  -->
+            </tnt:mainContents>
+        </tnt:ToolPage>
+    </Page>
+</mvc:View>
