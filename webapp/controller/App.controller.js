@@ -43,9 +43,12 @@ sap.ui.define([
       },
       onAddNewItem:function(){
         var sLayout = LayoutType.TwoColumnsBeginExpanded;
-        this.getModel("projectLayoutView").setProperty("/layout", sLayout);
-        this.getModel("projectLayoutView").refresh(true);
-        this.AppState.data.oSelectedProject = new Project();
+        if(this.AppState.data.currentPage == "PROJECT"){
+          this.getModel("projectLayoutView").setProperty("/layout", sLayout);
+          this.getModel("projectLayoutView").refresh(true);
+          this.AppState.data.oSelectedProject = new Project();
+        }
+       
       }
   });
 });

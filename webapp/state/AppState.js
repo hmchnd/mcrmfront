@@ -27,7 +27,8 @@ sap.ui.define([
 			this.data = {
 				aProjects: [],
 				oSelectedProject:{},
-				showGlobalAddButton:false
+				showGlobalAddButton:false,
+				currentPage:""
 			};
 
 			// Initialize base object.
