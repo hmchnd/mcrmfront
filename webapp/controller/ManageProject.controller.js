@@ -14,6 +14,7 @@ sap.ui.define([
           this.AppState = this.getOwnerComponent().getState("App");
           this.getView().setModel(this.AppState.getModel(), "AppState");
 			    this.AppState.getModel().setSizeLimit(999999);
+          this.AppState.data.showGlobalAddButton=true;
           let oGridListControl = this.byId("gridList");
           this.AppState.getMyProjectsList(oGridListControl);
         },

@@ -11,6 +11,8 @@
 		<content>
 			<f:FlexibleColumnLayout layout="{projectLayoutView>/layout}">
 				<f:beginColumnPages>
+				 <Page showHeader="false">
+                <content>
 					<!-- <OverflowToolbar height="3rem">
 							<Title text="Projects(1)" class="sapUiLargeMarginBegin"/>
 							<ToolbarSpacer/>
@@ -25,7 +27,7 @@
 							<grid:GridBasicLayout gridAutoRows="repeat(auto-fit)" gridGap="0.5rem" />
 						</f:customLayout>
 
-						<f:GridListItem detailPress="onDetailPress" press="onPress" highlight="Success" type="Active" counter="001">
+						<f:GridListItem detailPress="onDetailPress" press="onPress" highlight="Success" type="Active" >
 							<l:VerticalLayout class="sapUiContentPadding equalColumns" width="100%">
 								<FlexBox class="columns">
 
@@ -71,6 +73,9 @@
 						</f:GridListItem>
 
 					</f:GridList>
+					 </content>
+					 </Page >
+               
 				</f:beginColumnPages>
 
 				<f:midColumnPages>

@@ -34,6 +34,8 @@ sap.ui.define([
       },
       onRouteChange: function (oEvent) {
         this.AppState = this.getOwnerComponent().getState("App");
+          this.getView().setModel(this.AppState.getModel(), "AppState");
+			    this.AppState.getModel().setSizeLimit(999999);
         this.getModel("sideContentModel").setProperty(
           "/selectedKey",
           oEvent.getParameter("name")

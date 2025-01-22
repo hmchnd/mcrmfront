@@ -22,11 +22,7 @@ sap.ui.define([
             // set the device model
             this.setModel(models.createDeviceModel(), "device");
             this.setModel(models.createLocalJsonModel(),"sideContentModel")
-            this.setModel(models.createProjectViewLayoutModel(),"projectLayoutView")
-            let currentAppStateData = {
-                "currentpage":""
-            }
-            this.setModel(models.currentAppStateModel(currentAppStateData),"currentAppStateModel")
+            this.setModel(models.createProjectViewLayoutModel(),"projectLayoutView")    
             // Instantiating services and states  
 			this._oAppService = new AppService(this.getModel());
             this._oAppState = new AppState(this._oAppService, this.getModel("i18n").getResourceBundle());
