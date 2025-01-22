@@ -1,0 +1,181 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+>
+    <NavContainer id="wizardNavContainer">
+        <pages>
+            <Page
+                id="wizardContentPage"
+                showHeader="false"
+            >
+                <content>
+                    <Wizard
+                        id="CreateProductWizard"
+                        class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+                        stepActivated="onStepActivated"
+                    >
+                        <WizardStep
+                            id="ProductTypeStep"
+                            title="Framework Details"
+                        >
+                            <VBox width="80%">
+                                <form:SimpleForm
+                                    editable="true"
+                                    layout="ResponsiveGridLayout"
+                                >
+                                    <Label
+                                        text="Name"
+                                        required="true"
+                                    />
+                                    <Input />
+                                    <Label
+                                        text="Description"
+                                        required="true"
+                                    />
+                                    <TextArea />
+                                </form:SimpleForm>
+                            </VBox>
+                        </WizardStep>
+                        <WizardStep
+                            id="ProductInfoStep"
+                            title="Project Type"
+                        >
+                            <VBox width="80%">
+                                <form:SimpleForm
+                                    editable="true"
+                                    layout="ResponsiveGridLayout"
+                                >
+                                    <Label
+                                        text="Class"
+                                        required="true"
+                                    />
+                                    <Select
+                                        placeholder="Select Area"
+                                        change="onAreaChange"
+                                    >
+                                        <core:Item
+                                            key="A1"
+                                            text="Software Development"
+                                        />
+                                        <core:Item
+                                            key="A2"
+                                            text="Agile Scrum"
+                                        />
+                                        <core:Item
+                                            key="A3"
+                                            text="Digital Marketing"
+                                        />
+                                        <core:Item
+                                            key="A4"
+                                            text="Design"
+                                        />
+                                    </Select>
+                                </form:SimpleForm>
+                            </VBox>
+                        </WizardStep>
+                        <WizardStep
+                            id="classandarea"
+                            title="Area and Phases"
+                        >
+                            <VBox width="80%">
+                                <Table
+                                    id="SimpleTable6"
+                                    inset="false"
+                                    class="sapUiMediumMarginBottom"
+                                    width="100%"
+                                >
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <ToolbarSpacer />
+                                            <Button icon="sap-icon://add" />
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <!-- Define the single column -->
+                                    <columns>
+                                        <Column>
+                                            <header>
+                                                <Label text="Area" />
+                                            </header>
+                                        </Column>
+                                        <Column width="3rem">
+                                            <Label text="" />
+                                        </Column>
+                                    </columns>
+                                    <!-- Bind the items -->
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <Text text="Area 1" />
+                                                <Button
+                                                    icon="sap-icon://delete"
+                                                />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+
+                                <Table
+                                    id="SimpleTable3"
+                                    inset="false"
+                                    width="100%"
+                                >
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <ToolbarSpacer />
+                                            <Button icon="sap-icon://add" />
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <!-- Define the single column -->
+                                    <columns>
+                                        <Column>
+                                            <header>
+                                                <Label text="Phases" />
+                                            </header>
+                                        </Column>
+                                        <Column width="3rem">
+                                            <Label text="" />
+                                        </Column>
+                                    </columns>
+                                    <!-- Bind the items -->
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <Text text="Phase 1" />
+                                                <Button
+                                                    icon="sap-icon://delete"
+                                                />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </WizardStep>
+                    </Wizard>
+                </content>
+                <footer>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            text="Cancel"
+                            press="onCloseDetailPage"
+                        />
+                        <Button
+                            text="Next"
+                            press="handleNext"
+                            id="nextButton"
+                        />
+                    </OverflowToolbar>
+                </footer>
+            </Page>
+        </pages>
+    </NavContainer>
+
+    <!-- <beginButton>
+			<Button type="Accept" text="Create Project" press="onCreateProject"/>
+		</beginButton>
+		<endButton>
+			<Button type="Reject" text="Cancel" press="onCloseNewProject"/>
+		</endButton> -->
+</core:FragmentDefinition>

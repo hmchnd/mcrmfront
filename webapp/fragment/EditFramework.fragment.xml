@@ -1,0 +1,180 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:uxap="sap.uxap"
+    xmlns:form="sap.ui.layout.form"
+>
+<Page >
+    <uxap:ObjectPageLayout
+        id="ObjectPageLayout1"
+        upperCaseAnchorBar="false"
+        showAnchorBar="true"
+        enableLazyLoading="true"
+    >
+        <uxap:sections>
+            <uxap:ObjectPageSection
+                id="_IDGenObjectPageSection3"
+                showTitle="false"
+            >
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection
+                        id="_IDGenObjectPageSubSection6"
+                        title="Framework Detail"
+                    >
+                        <uxap:blocks>
+                            <VBox width="80%">
+                                <form:SimpleForm
+                                    editable="true"
+                                    layout="ResponsiveGridLayout"
+                                >
+                                    <Label
+                                        text="Name"
+                                        
+                                    />
+                                    <Input value="Project template 1"  />
+                                    <Label
+                                        text="Description"
+                                        
+                                    />
+                                    <TextArea value="Description 1" />
+                                </form:SimpleForm>
+                            </VBox>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                    <uxap:ObjectPageSubSection
+                        id="_IDGenObjectPageSubSection7"
+                        title="Project Type"
+                    >
+                        <uxap:blocks>
+                            <VBox width="80%">
+                                <form:SimpleForm
+                                    editable="true"
+                                    layout="ResponsiveGridLayout"
+                                >
+                                      <Label
+                                                        text="Class"
+                                                    />
+                                                    <Select
+                                                        placeholder="Select Area"
+                                                        change="onAreaChange"
+                                                        selectedKey="A1"
+                                                    >
+                                                        <core:Item
+                                                            key="A1"
+                                                            text="Software Development"
+                                                        />
+                                                        <core:Item
+                                                            key="A2"
+                                                            text="Agile Scrum"
+                                                        />
+                                                        <core:Item
+                                                            key="A3"
+                                                            text="Digital Marketing"
+                                                        />
+                                                        <core:Item
+                                                            key="A4"
+                                                            text="Design"
+                                                        />
+                                                    </Select>
+                                </form:SimpleForm>
+                            </VBox>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                    <uxap:ObjectPageSubSection
+                        id="_IDGenObjectPageSubSection8"
+                        title="Area and Phases"
+                    >
+                        <uxap:blocks>
+                            <VBox width="80%">
+                                <Table
+                                    id="SimpleTable1"
+                                    inset="false"
+                                    class="sapUiMediumMarginBottom"
+                                    width="100%"
+                                    
+                                >
+                                <headerToolbar>
+                                <OverflowToolbar >
+                                <ToolbarSpacer ></ToolbarSpacer>
+                                                                <Button icon="sap-icon://add"></Button>
+
+                                </OverflowToolbar>
+                                </headerToolbar>
+                                    <!-- Define the single column -->
+                                    <columns>
+                                        <Column>
+                                            <header>
+                                                <Label text="Area" />
+                                            </header>
+                                        </Column>
+                                        <Column width="3rem" >
+                                                <Label text="" />
+                                        </Column>
+                                    </columns>
+                                    <!-- Bind the items -->
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <Text text="Area 1" />
+                                                <Button icon="sap-icon://delete"/>
+
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+
+                                <Table
+                                    id="SimpleTable"
+                                    inset="false"
+                                    width="100%"
+                                    
+
+                                    
+                                >
+                                <headerToolbar>
+                                <OverflowToolbar >
+                                <ToolbarSpacer ></ToolbarSpacer>
+                                <Button icon="sap-icon://add"></Button>
+                                </OverflowToolbar>
+                                </headerToolbar>
+                                    <!-- Define the single column -->
+                                    <columns>
+                                        <Column>
+                                            <header>
+                                                <Label text="Phases" />
+                                            </header>
+                                        </Column>
+                                         <Column width="3rem" >
+                                                <Label text="" />
+                                        </Column>
+                                    </columns>
+                                    <!-- Bind the items -->
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <Text text="Phase 1" />
+                                                <Button icon="sap-icon://delete"/>
+
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </VBox>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+    <footer>
+    <OverflowToolbar >
+    <ToolbarSpacer ></ToolbarSpacer>
+    <Button text="Next"></Button>
+    <Button text="Cancel" press="onCloseDetailPage"></Button>
+
+    
+    </OverflowToolbar>
+    </footer>
+  </Page>  
+</core:FragmentDefinition>

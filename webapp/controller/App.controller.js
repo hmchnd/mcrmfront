@@ -52,7 +52,6 @@ sap.ui.define([
           this.AppState.data.oSelectedProject = new Project();
         }else if(this.AppState.data.currentPage == "roadmapTemplate"){
           let sLayout = LayoutType.TwoColumnsMidExpanded;
-
           this.getModel("roadmapTemplateLayoutView").setProperty("/layout", sLayout);
           this.getModel("roadmapTemplateLayoutView").refresh(true);
           this.AppState.data.oSelectedProject = new Project();
