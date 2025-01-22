@@ -1,94 +1,153 @@
 <core:FragmentDefinition
-    xmlns="sap.m"
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
 >
-    <Dialog
-        id="taskDialog"
-        title="Add Task"
-        afterClose="onAfterClose"
+    <ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        isChildPage="true"
+        upperCaseAnchorBar="false"
     >
-        <content>
-            <VBox
-                id="id1VBox3333"
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:Title
+                        text="{AppState>/oSelectedProject/ID}"
+                        wrapping="true"
+                    />
+                </expandedHeading>
+                <actions>
+                    <m:Button
+                        text="Manage Activities"
+                        type="Emphasized"
+                        press="onCloseDetailPage"
+                    />
+                    <m:Button
+                        text="Save"
+                        icon="sap-icon://save"
+                        type="Emphasized"
+                        press="onSaveProjectDetails"
+                    />
+                    <m:Button
+                        icon="sap-icon://decline"
+                        type="Emphasized"
+                        press="onCloseDetailPage"
+                    />
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <m:FlexBox
+                wrap="Wrap"
                 fitContainer="true"
-                class="sapUiTinyMargin"
+                alignItems="Stretch"
             >
-                <!-- Label -->
-                <Label
-                    id="idLabel1"
-                    text="Task Name"
-                    class="sapUiTinyMarginTopBottom"
+                <f:Avatar
+                    src="sap-icon://idea-wall"
+                    showBorder="false"
+                    displaySize="XS"
+                    displayShape="Circle"
+                    imageFitType="Contain"
                 />
+            </m:FlexBox>
+        </headerContent>
 
-                <Input
-                    id="idinput1"
-                    value=""
-                />
+        <sections>
+            <ObjectPageSection title="Task Details">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm
+                                id="SimpleFormChange354"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                title=""
+                                labelSpanXL="3"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="4"
+                                emptySpanL="4"
+                                emptySpanM="4"
+                                emptySpanS="0"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="1"
+                                singleContainerFullSize="false"
+                            >
+                                <form:content>
+                                    <m:Label text="Task Name" />
+                                    <m:Input
+                                        id="pname"
+                                        value="{AppState>/oSelectedProject/name}"
+                                    />
 
-                <Label
-                    id="idLabel2"
-                    text="Task Description"
-                    class="sapUiTinyMarginTopBottom"
-                />
+                                    <m:Label text="Task Description" />
+                                    <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
+                                    <m:ComboBox
+                                        showSecondaryValues="true"
+                                        items="{
+					path: '/Framework'
+				}"
+                                    >
+                                        <core:ListItem
+                                            key="{ID}"
+                                            text="{name}"
+                                        />
+                                    </m:ComboBox>
 
-                <Input
-                    id="idinput2"
-                    value=""
-                />
+                                    <m:Label text="Project Planned Start" />
+                                    <m:DatePicker
+                                        id="pstart"
+                                        value="{AppState>/oSelectedProject/planned_start}"
+                                    />
 
-                <Label
-                    id="idLabel3"
-                    text="Project"
-                    class="sapUiTinyMarginTopBottom"
-                />
+                                    <m:Label text="Project Planned End" />
+                                    <m:DatePicker
+                                        id="pend"
+                                        value="{AppState>/oSelectedProject/planned_finish}"
+                                    />
 
-                <Input
-                    id="idinput3"
-                    value="Cloud Transformation S4 HANA Project"
-					editable="false"
-                />
+                                    <m:Label text="Forecasted / Actual Start" />
+                                    <m:DatePicker
+                                        editable="false"
+                                        value="{AppState>/oSelectedProject/fore_act_start}"
+                                    />
 
-				 <Label
-                 
-                    text="Phase"
-                    class="sapUiTinyMarginTopBottom"
-                />
+                                    <m:Label text="Forecasted / Actual End" />
+                                    <m:DatePicker
+                                        editable="false"
+                                        value="{AppState>/oSelectedProject/fore_act_finish}"
+                                    />
 
-                <Input
-                  
-                    value="Discover"
-					editable="false"
-                />
+                                    <m:Label text="Task Progress" />
+                                    <m:Input
+                                        value=""
+                                    />
 
-				 <Label
-                   
-                    text="Area"
-                    class="sapUiTinyMarginTopBottom"
-                />
-
-                <Input
-                   
-                    value="Project Management"
-					editable="false"
-                />
-            </VBox>
-        </content>
-        <footer>
-            <OverflowToolbar id="_IDGenOverflowToolbar1">
-                <ToolbarSpacer id="_IDGenToolbarSpacer2" />
-                <Button
-                    id="idOK1Button"
-                    text="Create Task"
-					type="Accept"
-                    press="onCreateNewTask"
-                />
-                <Button
-                    id="idCancel123"
-					type="Reject"
-                    text="Cancel Task"
-                    press="onCancelTask"
-                />
-            </OverflowToolbar>
-        </footer>
-    </Dialog>
+                                    <m:Label text="Phase" />
+                                    <m:Input
+                                        value=""
+                                    />
+                                    <m:Label text="Area" />
+                                    <m:Input
+                                        value=""
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
 </core:FragmentDefinition>

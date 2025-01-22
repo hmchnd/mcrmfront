@@ -19,6 +19,7 @@ server:
           - scp: true
             path: /odata
             url: http://localhost:4004
+
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
