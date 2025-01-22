@@ -1,11 +1,13 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "./BaseController",
     "sap/ui/model/json/JSONModel",
 	"sap/ui/core/dnd/DragInfo",
 	"sap/f/dnd/GridDropInfo",
 	"sap/ui/core/library",
-    "sap/ui/core/Fragment"
-], (Controller, JSONModel, DragInfo, GridDropInfo, coreLibrary, Fragment) => {
+    "sap/ui/core/Fragment",
+    "sap/f/LayoutType",
+
+], (Controller, JSONModel, DragInfo, GridDropInfo, coreLibrary, Fragment,LayoutType) => {
     "use strict";
 // Shortcuts for drag-and-drop constants
 var DropPosition = coreLibrary.dnd.DropPosition;
@@ -74,6 +76,8 @@ var DropLayout = coreLibrary.dnd.DropLayout;
             this.getView().setModel(oModel);
 
 			this.attachDragAndDrop();
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			        oRouter.attachRouteMatched(this.onRouteMatched, this);
 
         },
         attachDragAndDrop: function () {
@@ -186,24 +190,47 @@ var DropLayout = coreLibrary.dnd.DropLayout;
             // Optional: Show a success message
             sap.m.MessageToast.show("New activity added successfully!");
         },
-        onCardPress:function(){
-            if (!this.oEditDialog) {
-                Fragment.load({
-                    id: this.getView().getId(),
-                    name: "framsys.com.framsysfrontend.fragment.EditActivity",
-                    controller: this,
-                }).then((oDialog) => {
-                    this.oEditDialog = oDialog;
-                    this.getView().addDependent(this.oEditDialog);
-                    oDialog.open();
-                });
-            } else {
-                this.oEditDialog.open();
-            }
-        },
+        // onCardPress:function(){
+        //     if (!this.oEditDialog) {
+        //         Fragment.load({
+        //             id: this.getView().getId(),
+        //             name: "framsys.com.framsysfrontend.fragment.EditActivity",
+        //             controller: this,
+        //         }).then((oDialog) => {
+        //             this.oEditDialog = oDialog;
+        //             this.getView().addDependent(this.oEditDialog);
+        //             oDialog.open();
+        //         });
+        //     } else {
+        //         this.oEditDialog.open();
+        //     }
+        // },
         onCancelEditDialog:function(){
             this.oEditDialog.close();
-        }
+        },
+        onAfterRendering:function(){
+            var sLayout = LayoutType.OneColumn;
+            this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+          },
+          onCardPress:function(oEvent){
+            let oSelectedProjectObject = oEvent.getSource()?.getBindingContext("AppState")?.getObject() || {};
+            this.AppState.data.oSelectedProject = oSelectedProjectObject;
+              var sLayout = LayoutType.TwoColumnsBeginExpanded;
+            this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+          },
+          onCloseDetailPage:function(){
+              var sLayout = LayoutType.OneColumn;
+            this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+          },
+          onRouteMatched:function(oEvent){
+            this.AppState = this.getOwnerComponent().getState("App");
+            this.getView().setModel(this.AppState.getModel(), "AppState");
+                  this.AppState.getModel().setSizeLimit(999999);
+            this.AppState.data.showGlobalAddButton=true;
+            this.AppState.data.currentPage = "manageActivity";
+            let oGridListControl = this.byId("gridList");
+            this.AppState.getMyProjectsList(oGridListControl);
+          },
         
     });
 });
