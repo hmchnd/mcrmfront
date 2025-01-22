@@ -5,8 +5,13 @@
     xmlns:f="sap.f"
     xmlns:card="sap.f.cards"
     xmlns:l="sap.ui.layout"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:core="sap.ui.core"
+
+
 >
     <Page title="Projects / Manage Activity">
+    <content>
         <Bar class="customBar">
             <!-- Left Section (Empty for now) -->
             <contentLeft />
@@ -30,7 +35,40 @@
                 />
             </contentRight>
         </Bar>
+ <f:FlexibleColumnLayout layout="{activityLayoutView>/layout}">
+                <f:beginColumnPages>
+                    <Page showHeader="false">
+                        <content>
+                            <!-- <OverflowToolbar height="3rem">
+							<Title text="Projects(1)" class="sapUiLargeMarginBegin"/>
+							<ToolbarSpacer/>
 
+						</OverflowToolbar> -->
+                            <f:GridList
+                                id="gridList"
+                                mode="None"
+                                growingThreshold="10"
+                                growing="true"
+                                growingDirection="Downwards"
+                                growingScrollToLoad="true"
+                                items="{AppState>/aProjects}"
+                                selectionChange="onSelectionChange"
+                                delete="onDelete"
+                                class="sapUiResponsiveContentPadding"
+                            >
+                                <f:customLayout>
+                                    <grid:GridBasicLayout
+                                        gridAutoRows="repeat(auto-fit)"
+                                        gridGap="0.5rem"
+                                    />
+                                </f:customLayout>
+
+                                <f:GridListItem
+                                    detailPress="onDetailPress"
+                                    press="onPress"
+                                    highlight="Success"
+                                    type="Active"
+                                >
         <l:VerticalLayout
             class="sapUiContentPadding equalColumns"
             width="100%"
@@ -174,5 +212,21 @@
                 </VBox>
             </FlexBox>
         </l:VerticalLayout>
+         </f:GridListItem>
+                            </f:GridList>
+                        </content>
+                    </Page>
+                </f:beginColumnPages>
+
+                <f:midColumnPages>
+                    <core:Fragment
+                        fragmentName="framsys.com.framsysfrontend.fragment.ProjectDetails"
+                        type="XML"
+                    />
+                </f:midColumnPages>
+
+                <f:endColumnPages />
+            </f:FlexibleColumnLayout>
+        </content>
     </Page>
 </mvc:View>

@@ -22,7 +22,10 @@ sap.ui.define([
             // set the device model
             this.setModel(models.createDeviceModel(), "device");
             this.setModel(models.createLocalJsonModel(),"sideContentModel")
-            this.setModel(models.createProjectViewLayoutModel(),"projectLayoutView")    
+            this.setModel(models.createProjectViewLayoutModel(),"projectLayoutView") 
+            this.setModel(models.manageActivityViewLayoutModel(),"activityLayoutView")    
+            this.setModel(models.roadmapTemplateViewLayoutModel(),"roadmapTemplateLayoutView")    
+            this.setModel(models.manageRoadmapViewLayoutModel(),"manageRoadmapLayoutView")    
             // Instantiating services and states  
 			this._oAppService = new AppService(this.getModel());
             this._oAppState = new AppState(this._oAppService, this.getModel("i18n").getResourceBundle());

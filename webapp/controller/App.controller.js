@@ -42,10 +42,31 @@ sap.ui.define([
         );
       },
       onAddNewItem:function(){
-        var sLayout = LayoutType.TwoColumnsBeginExpanded;
+        debugger
+        
         if(this.AppState.data.currentPage == "PROJECT"){
+        let sLayout = LayoutType.TwoColumnsBeginExpanded;
+
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
           this.getModel("projectLayoutView").refresh(true);
+          this.AppState.data.oSelectedProject = new Project();
+        }else if(this.AppState.data.currentPage == "roadmapTemplate"){
+          let sLayout = LayoutType.EndColumnFullScreen;
+
+          this.getModel("roadmapTemplateLayoutView").setProperty("/layout", sLayout);
+          this.getModel("roadmapTemplateLayoutView").refresh(true);
+          this.AppState.data.oSelectedProject = new Project();
+        }else if(this.AppState.data.currentPage == "Roadmap"){
+          let sLayout = LayoutType.TwoColumnsBeginExpanded;
+
+          this.getModel("manageRoadmapLayoutView").setProperty("/layout", sLayout);
+          this.getModel("manageRoadmapLayoutView").refresh(true);
+          this.AppState.data.oSelectedProject = new Project();
+        }else if(this.AppState.data.currentPage == "manageActivity"){
+          let sLayout = LayoutType.TwoColumnsBeginExpanded;
+
+          this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+          this.getModel("activityLayoutView").refresh(true);
           this.AppState.data.oSelectedProject = new Project();
         }
        
