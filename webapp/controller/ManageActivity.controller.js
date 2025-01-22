@@ -212,10 +212,10 @@ var DropLayout = coreLibrary.dnd.DropLayout;
             var sLayout = LayoutType.OneColumn;
             this.getModel("activityLayoutView").setProperty("/layout", sLayout);
           },
-          onPress:function(oEvent){
+          onCardPress:function(oEvent){
             let oSelectedProjectObject = oEvent.getSource()?.getBindingContext("AppState")?.getObject() || {};
             this.AppState.data.oSelectedProject = oSelectedProjectObject;
-              var sLayout = LayoutType.MidColumnFullScreen;
+              var sLayout = LayoutType.TwoColumnsBeginExpanded;
             this.getModel("activityLayoutView").setProperty("/layout", sLayout);
           },
           onCloseDetailPage:function(){
