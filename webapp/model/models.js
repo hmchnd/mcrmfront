@@ -91,6 +91,18 @@ function (JSONModel, Device) {
         currentAppStateModel:function(data){
             let oModel = new JSONModel(data);
             return oModel;
+        },
+        manageActivityViewLayoutModel:function(data){
+            let oModel = new JSONModel(data);
+            return oModel;
+        },
+        roadmapTemplateViewLayoutModel:function(data){
+            let oModel = new JSONModel(data);
+            return oModel;
+        },
+        manageRoadmapViewLayoutModel:function(data){
+            let oModel = new JSONModel(data);
+            return oModel;
         }
     };
 
