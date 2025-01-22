@@ -1,83 +1,173 @@
-<mvc:View controllerName="framsys.com.framsysfrontend.controller.RoadmapTemplate"
+<mvc:View
+    controllerName="framsys.com.framsysfrontend.controller.RoadmapTemplate"
+    xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    xmlns:layout="sap.ui.layout"
+    xmlns:l="sap.ui.layout"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
-    xmlns:t="sap.ui.table"
-   xmlns:viz="sap.viz.ui5.controls" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"  xmlns:viz.data="sap.viz.ui5.data" 
-    xmlns:microchart="sap.suite.ui.microchart"
-    xmlns:p="sap.ui.comp.smartmicrochart"
     xmlns:mc="sap.suite.ui.microchart"
-    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
-    xmlns:mvc="sap.ui.core.mvc">
+    xmlns:form="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:fb="sap.ui.comp.filterbar"
+>
     <Page showHeader="false">
-        <landmarkInfo>
-            <PageAccessibleLandmarkInfo rootRole="Region" rootLabel="{i18n>Home_rootLabel}" contentRole="Main" contentLabel="{i18n>Home_contentLabel}"/>
-        </landmarkInfo>
-        <Image src="../media/FRAMSYS.png" width="100%" height="30%"/>
-        <layout:VerticalLayout>
-            <Title titleStyle="H3" text="Quick Controls" class="sapUiTinyMarginBegin"/>
-            <layout:HorizontalLayout allowWrapping="true">
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Active Projects" subheader="Active Project Details" press="onNavToProcessFlow">
-                    <tileContent>
-                        <TileContent>
-                            <content>
-                                <NumericContent scale="" value="3" valueColor="Good" indicator="Up" withMargin="false" />
-                            </content>
-                        </TileContent>
-                    </tileContent>
-                </GenericTile>
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Most Used Templates" press="onNavToAriba">
-                    <tileContent>
-                        <TileContent>
-                            <content>
-                                <NumericContent scale="" value="6" valueColor="Critical" indicator="Up" withMargin="false" />
-                            </content>
-                        </TileContent>
-                    </tileContent>
-                </GenericTile>
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="High Priority Tasks" subheader="Details of Hight Priority Items" press="onNavToERP">
-                    <tileContent>
-                        <TileContent>
-                            <content>
-                                <NumericContent scale="" value="12" valueColor="Error" indicator="Up" withMargin="false" />
-                            </content>
-                        </TileContent>
-                    </tileContent>
-                </GenericTile>
+        <content>
+            <f:FlexibleColumnLayout
+                layout="{roadmapTemplateLayoutView>/layout}"
+            >
+                <f:beginColumnPages>
+                    <Page showHeader="false">
+                        <content>
+                            <!-- <OverflowToolbar height="3rem">
+							<Title text="Projects(1)" class="sapUiLargeMarginBegin"/>
+							<ToolbarSpacer/>
 
+						</OverflowToolbar> -->
+                            <f:GridList
+                                id="gridList"
+                                mode="None"
+                                growingThreshold="10"
+                                growing="true"
+                                growingDirection="Downwards"
+                                growingScrollToLoad="true"
+                                items="{AppState>/aProjects}"
+                                selectionChange="onSelectionChange"
+                                delete="onDelete"
+                                class="sapUiResponsiveContentPadding"
+                            >
+                                <f:customLayout>
+                                    <grid:GridBasicLayout
+                                        gridAutoRows="repeat(auto-fit)"
+                                        gridGap="0.5rem"
+                                    />
+                                </f:customLayout>
 
-            </layout:HorizontalLayout>
-      
-      </layout:VerticalLayout>
-            <Title titleStyle="H3" text="Analytics" class="sapUiTinyMarginBegin"/>
-            <Toolbar>
-                <Button icon="sap-icon://filter" text="{i18n>Filters}" press="onFilterPress"/>
-            </Toolbar>
-      
-                <viz:VizFrame 
-                    id="salesChart" 
-                    height="400px" 
-                    width="100%" 
-                  
-                    uiConfig="{applicationSet:'fiori'}" 
-                    vizType="column">
-                    <viz:dataset>
-                        <viz.data:FlattenedDataset   data="{chartData>/salesData}">
-                            <viz.data:dimensions>
-                                <viz.data:DimensionDefinition name="Month" value="{chartData>month}" />
-                            </viz.data:dimensions>
-                            <viz.data:measures>
-                                <viz.data:MeasureDefinition name="Budget (In USD)" value="{chartData>revenue}" />
-                            </viz.data:measures>
-                           
-                        </viz.data:FlattenedDataset>
-                    </viz:dataset>
-                    <viz:feeds>
-                        <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
-                        <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Budget (In USD)" />
-                    </viz:feeds>
-                </viz:VizFrame>
-   
-      
+                                <f:GridListItem
+                                    detailPress="onDetailPress"
+                                    press="onPress"
+                                    highlight="Success"
+                                    type="Active"
+                                >
+                                    <l:VerticalLayout
+                                        class="sapUiContentPadding equalColumns"
+                                        width="100%"
+                                    >
+                                        <FlexBox class="columns">
+                                            <Title
+                                                text="Project template 1"
+                                                wrapping="true"
+                                            >
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </Title>
+
+                                            <ObjectAttribute
+                                                title="Description"
+                                                text="Description 1"
+                                            >
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </ObjectAttribute>
+
+                                            <ObjectAttribute
+                                                title="Project Type"
+                                                text="Software Development"
+                                            >
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </ObjectAttribute>
+
+                                            <ObjectStatus
+                                                title="Status"
+                                                text="{AppState>status}"
+                                                state="Warning"
+                                            >
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </ObjectStatus>
+
+                                            <!-- <VBox>
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                                <Label
+                                                    text="Percentage of Completion"
+                                                />
+                                                <mc:RadialMicroChart
+                                                    size="M"
+                                                    percentage="{AppState>pct_complete}"
+                                                    valueColor="Good"
+                                                    press="press"
+                                                    class="sapUiSmallMargin"
+                                                />
+                                            </VBox> -->
+
+                                            <!-- <mc:DeltaMicroChart
+                                                size="M"
+                                                press="press"
+                                                value1="-7"
+                                                value2="16"
+                                                title1="Jan 2025"
+                                                title2="Apr 2025"
+                                                displayValue1="Planned"
+                                                displayValue2="Forecasted"
+                                                deltaDisplayValue="1 year"
+                                                color="Critical"
+                                                class="sapUiSmallMargin"
+                                            /> -->
+                                        </FlexBox>
+                                    </l:VerticalLayout>
+                                </f:GridListItem>
+                            </f:GridList>
+                        </content>
+                    </Page>
+                </f:beginColumnPages>
+
+                <f:midColumnPages>
+                   
+                     <core:Fragment
+                        fragmentName="framsys.com.framsysfrontend.fragment.EditFramework"
+                        type="XML"
+                    />
+                </f:midColumnPages>
+
+                <f:endColumnPages >
+                 <core:Fragment
+                        fragmentName="framsys.com.framsysfrontend.fragment.CreateFramework"
+                        type="XML"
+                    />
+                </f:endColumnPages>
+            </f:FlexibleColumnLayout>
+        </content>
     </Page>
 </mvc:View>
