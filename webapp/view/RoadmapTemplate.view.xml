@@ -96,6 +96,20 @@
                                                 </layoutData>
                                             </ObjectAttribute>
 
+                                            <ObjectAttribute
+                                                title="Industry Type"
+                                                text="Software"
+                                            >
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </ObjectAttribute>
+
                                             <ObjectStatus
                                                 title="Status"
                                                 text="Draft"
