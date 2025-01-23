@@ -98,7 +98,7 @@
 
                                             <ObjectStatus
                                                 title="Status"
-                                                text="{AppState>status}"
+                                                text="Draft"
                                                 state="Warning"
                                             >
                                                 <layoutData>
