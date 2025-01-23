@@ -27,7 +27,7 @@
                     <m:Button
                         text="Manage Activities"
                         type="Emphasized"
-                        press="onCloseDetailPage"
+                        press="onManageActivity"
                     />
                     <m:Button
                         text="Save"

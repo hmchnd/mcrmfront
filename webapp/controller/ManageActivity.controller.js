@@ -228,6 +228,7 @@ var DropLayout = coreLibrary.dnd.DropLayout;
                   this.AppState.getModel().setSizeLimit(999999);
             this.AppState.data.showGlobalAddButton=true;
             this.AppState.data.currentPage = "manageActivity";
+             this.AppState.data.currentPageLabel="Manage Project Task and Activity"
            
           
           },

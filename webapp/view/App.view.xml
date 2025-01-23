@@ -43,7 +43,7 @@
                     <Button type="Critical" text="" icon="sap-icon://add" class="sapUiTinyMargin"/> -->
                     <ToolbarSpacer/>
                     
-                  <Label text="Manage Projects" class="sapUiLargeMarginBegin"/>
+                  <Label text="{AppState>/currentPageLabel}" class="sapUiLargeMarginBegin"/>
                     <ToolbarSpacer/>
                     <Button icon="sap-icon://add" class="sapUiTinyMargin" type="Critical" press="onAddNewItem" id="GlobalAddButton" visible="{AppState>/showGlobalAddButton}"/>
                     <Button type="Critical"  icon="sap-icon://add-filter" class="sapUiTinyMargin"/>

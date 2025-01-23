@@ -21,7 +21,7 @@
 							
 						</expandedHeading>
 						<actions>
-                         <m:Button  text="Manage Roadmap"  type="Emphasized" press="onCloseDetailPage"/>
+                         <m:Button  text="Manage Roadmap"  type="Emphasized" press="onManageRoadmap"/>
                         <m:Button  text="Save" icon="sap-icon://save" type="Emphasized" press="onSaveProjectDetails"/>
 					<m:Button  icon="sap-icon://decline" type="Emphasized" press="onCloseDetailPage"/>
 				

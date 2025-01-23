@@ -16,6 +16,7 @@ sap.ui.define([
 			    this.AppState.getModel().setSizeLimit(999999);
           this.AppState.data.showGlobalAddButton=true;
           this.AppState.data.currentPage = "PROJECT";
+          this.AppState.data.currentPageLabel="Manage Projects"
           let oGridListControl = this.byId("gridList");
           this.AppState.getMyProjectsList(oGridListControl);
         },
@@ -39,6 +40,9 @@ sap.ui.define([
           oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
           oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
           this.AppState.createNewProjectEntry(oProjectDetails);
+        },
+        onManageRoadmap:function(){
+          this.getOwnerComponent().getRouter().navTo("ManageRoadmap")
         }
         
     });

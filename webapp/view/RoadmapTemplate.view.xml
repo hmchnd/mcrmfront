@@ -31,7 +31,6 @@
                                 growing="true"
                                 growingDirection="Downwards"
                                 growingScrollToLoad="true"
-                                items="{AppState>/aProjects}"
                                 selectionChange="onSelectionChange"
                                 delete="onDelete"
                                 class="sapUiResponsiveContentPadding"
@@ -55,7 +54,7 @@
                                     >
                                         <FlexBox class="columns">
                                             <Title
-                                                text="Project template 1"
+                                                text="Framsys Roadmap Template"
                                                 wrapping="true"
                                             >
                                                 <layoutData>
@@ -70,7 +69,7 @@
 
                                             <ObjectAttribute
                                                 title="Description"
-                                                text="Description 1"
+                                                text="Framsys Roadmap template for Project"
                                             >
                                                 <layoutData>
                                                     <FlexItemData
@@ -125,40 +124,7 @@
                                                 </layoutData>
                                             </ObjectStatus>
 
-                                            <!-- <VBox>
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                                <Label
-                                                    text="Percentage of Completion"
-                                                />
-                                                <mc:RadialMicroChart
-                                                    size="M"
-                                                    percentage="{AppState>pct_complete}"
-                                                    valueColor="Good"
-                                                    press="press"
-                                                    class="sapUiSmallMargin"
-                                                />
-                                            </VBox> -->
-
-                                            <!-- <mc:DeltaMicroChart
-                                                size="M"
-                                                press="press"
-                                                value1="-7"
-                                                value2="16"
-                                                title1="Jan 2025"
-                                                title2="Apr 2025"
-                                                displayValue1="Planned"
-                                                displayValue2="Forecasted"
-                                                deltaDisplayValue="1 year"
-                                                color="Critical"
-                                                class="sapUiSmallMargin"
-                                            /> -->
+                                          
                                         </FlexBox>
                                     </l:VerticalLayout>
                                 </f:GridListItem>

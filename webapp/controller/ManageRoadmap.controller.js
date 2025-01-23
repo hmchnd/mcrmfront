@@ -20,6 +20,8 @@ sap.ui.define(
         onInit() {
           this.initData();
           this.attachDragAndDrop();
+          var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+          oRouter.attachRouteMatched(this.onRouteMatched, this);
         },
         initData: function () {
           // Initialize JSON Model
@@ -788,6 +790,7 @@ sap.ui.define(
 			    this.AppState.getModel().setSizeLimit(999999);
           this.AppState.data.showGlobalAddButton=true;
           this.AppState.data.currentPage = "Roadmap";
+          this.AppState.data.currentPageLabel="Manage Project Roadmap"
         },
         onAfterRendering:function(){
           var sLayout = LayoutType.OneColumn;
@@ -842,13 +845,9 @@ sap.ui.define(
           // Show success message
           sap.m.MessageToast.show("New task added successfully!");
         },
-        onRoadmap2Press:function(){
-          this.getOwnerComponent().getRouter().navTo("ManageRoadmap2")
-        },
-        onRoadmap3Press:function(){
-          this.getOwnerComponent().getRouter().navTo("ManageRoadmap3")
-        }
-
+       onManageActivity:function(){
+        this.getOwnerComponent().getRouter().navTo("ManageActivity")
+       }
 
       }
     );
