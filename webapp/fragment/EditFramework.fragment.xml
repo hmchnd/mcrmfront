@@ -6,6 +6,15 @@
     xmlns:form="sap.ui.layout.form"
 >
 <Page >
+<headerContent>
+<OverflowToolbar >
+    <ToolbarSpacer ></ToolbarSpacer>
+    <Button text="Save" type="Emphasized" ></Button>
+    <Button text="Cancel" press="onCloseDetailPage"></Button>
+
+    
+    </OverflowToolbar>
+</headerContent>
     <uxap:ObjectPageLayout
         id="ObjectPageLayout1"
         upperCaseAnchorBar="false"
@@ -20,7 +29,7 @@
                 <uxap:subSections>
                     <uxap:ObjectPageSubSection
                         id="_IDGenObjectPageSubSection6"
-                        title="Framework Detail"
+                        title="Roadmap Detail"
                     >
                         <uxap:blocks>
                             <VBox width="80%">
@@ -53,8 +62,32 @@
                                     layout="ResponsiveGridLayout"
                                 >
                                       <Label
-                                                        text="Class"
+                                                        text="Project Type"
                                                     />
+                                                    <Select
+                                                        placeholder="Select Area"
+                                                        change="onAreaChange"
+                                                        selectedKey="A1"
+                                                    >
+                                                        <core:Item
+                                                            key="A1"
+                                                            text="Software Development"
+                                                        />
+                                                        <core:Item
+                                                            key="A2"
+                                                            text="Agile Scrum"
+                                                        />
+                                                        <core:Item
+                                                            key="A3"
+                                                            text="Digital Marketing"
+                                                        />
+                                                        <core:Item
+                                                            key="A4"
+                                                            text="Design"
+                                                        />
+                                                    </Select>
+                                                    <Label text="Industry Type"></Label>
+                                                    
                                                     <Select
                                                         placeholder="Select Area"
                                                         change="onAreaChange"
@@ -92,12 +125,13 @@
                                     inset="false"
                                     class="sapUiMediumMarginBottom"
                                     width="100%"
+                                    items="{editAreaModel>/}"
                                     
                                 >
                                 <headerToolbar>
                                 <OverflowToolbar >
                                 <ToolbarSpacer ></ToolbarSpacer>
-                                                                <Button icon="sap-icon://add"></Button>
+                                                                <Button icon="sap-icon://add"  press="onEditCreateArea" ></Button>
 
                                 </OverflowToolbar>
                                 </headerToolbar>
@@ -116,8 +150,8 @@
                                     <items>
                                         <ColumnListItem>
                                             <cells>
-                                                <Text text="Area 1" />
-                                                <Button icon="sap-icon://delete"/>
+                                                <Input value="{editAreaModel>area}" />
+                                                <Button icon="sap-icon://delete" press="onDeleteEditArea"/>
 
                                             </cells>
                                         </ColumnListItem>
@@ -128,6 +162,7 @@
                                     id="SimpleTable"
                                     inset="false"
                                     width="100%"
+                                    items="{editPhaseModel>/}"
                                     
 
                                     
@@ -135,7 +170,7 @@
                                 <headerToolbar>
                                 <OverflowToolbar >
                                 <ToolbarSpacer ></ToolbarSpacer>
-                                <Button icon="sap-icon://add"></Button>
+                                <Button icon="sap-icon://add"  press="onEditCreatePhase" ></Button>
                                 </OverflowToolbar>
                                 </headerToolbar>
                                     <!-- Define the single column -->
@@ -153,8 +188,8 @@
                                     <items>
                                         <ColumnListItem>
                                             <cells>
-                                                <Text text="Phase 1" />
-                                                <Button icon="sap-icon://delete"/>
+                                                <Input value="{editPhaseModel>phase}" />
+                                                <Button icon="sap-icon://delete"  press="onDeleteEditPhase" />
 
                                             </cells>
                                         </ColumnListItem>
@@ -168,13 +203,13 @@
         </uxap:sections>
     </uxap:ObjectPageLayout>
     <footer>
-    <OverflowToolbar >
+    <!-- <OverflowToolbar >
     <ToolbarSpacer ></ToolbarSpacer>
     <Button text="Next"></Button>
     <Button text="Cancel" press="onCloseDetailPage"></Button>
 
     
-    </OverflowToolbar>
+    </OverflowToolbar> -->
     </footer>
   </Page>  
 </core:FragmentDefinition>
