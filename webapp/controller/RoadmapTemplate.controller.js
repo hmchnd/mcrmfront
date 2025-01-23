@@ -8,6 +8,41 @@ sap.ui.define([
 
     return Controller.extend("framsys.com.framsysfrontend.controller.RoadmapTemplate", {
       onInit() {
+        let createAreaData=[{
+          "area":"Area1"
+        },
+       ]
+        let createArea=  new JSONModel(createAreaData)
+        this.getView().setModel(createArea,"createAreaModel")
+
+
+        let editAreaData=[{
+          "area":"Area1"
+          
+        },
+        {
+          "area":"Area2"
+          
+        }]
+        let editArea=  new JSONModel(editAreaData)
+        this.getView().setModel(editArea,"editAreaModel")
+
+         let createPhaseData=[{
+          "phase":"phase1"
+        },
+       ]
+        let createPhase=  new JSONModel(createPhaseData)
+        this.getView().setModel(createPhase,"createPhaseModel")
+
+
+        let editPhaseData=[{
+          "phase":"phase"
+          
+        }
+        ]
+        let editPhase=  new JSONModel(editPhaseData)
+        this.getView().setModel(editPhase,"editPhaseModel")
+
         var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.attachRouteMatched(this.onRouteMatched, this);
 
@@ -20,6 +55,8 @@ sap.ui.define([
         this.AppState.getModel().setSizeLimit(999999);
         this.AppState.data.showGlobalAddButton=true;
         this.AppState.data.currentPage = "roadmapTemplate";
+        let oGridListControl = this.byId("gridList");
+        this.AppState.getMyProjectsList(oGridListControl);
       },
       onAfterRendering:function(){
         var sLayout = LayoutType.OneColumn;
@@ -39,6 +76,95 @@ sap.ui.define([
         const currentStep = oEvent.getParameter("step").getId();
         this.getView().getModel().setProperty("/currentStep", currentStep);
     },
+    onEditCreateArea:function(){
+      let editAreaModel = this.getView().getModel("editAreaModel");
+
+      let data = editAreaModel.getData();
+  
+      data.push({ area: "" });
+  
+      editAreaModel.setData(data);
+
+    }
+   ,
+    onEditCreatePhase:function(){
+      let editPhaseModel = this.getView().getModel("editPhaseModel");
+
+      let data = editPhaseModel.getData();
+  
+      data.push({ phase: "" });
+  
+      editPhaseModel.setData(data);
+    }
+   ,
+    onCreateArea:function(){
+      let createAreaModel = this.getView().getModel("createAreaModel");
+
+      let data = createAreaModel.getData();
+  
+      data.push({ area: "" });
+  
+      createAreaModel.setData(data);
+    }
+   ,
+    onCreatePhase:function(){
+      let createPhaseModel = this.getView().getModel("createPhaseModel");
+
+      let data = createPhaseModel.getData();
+  
+      data.push({ phase: "" });
+  
+      createPhaseModel.setData(data);
+    },
+    onDeleteCreateArea:function(oEvent){
+      let oBindingContext = oEvent.getSource().getBindingContext("createAreaModel");
+
+      let createAreaModel = this.getView().getModel("createAreaModel");
+      let data = createAreaModel.getData();
+  
+      let rowIndex = parseInt(oBindingContext.getPath().split("/")[1]);
+  
+      data.splice(rowIndex, 1);
+  
+      createAreaModel.setData(data);
+    },
+    onDeleteCreatePhase:function(oEvent){
+      let oBindingContext = oEvent.getSource().getBindingContext("createPhaseModel");
+
+      let createPhaseModel = this.getView().getModel("createPhaseModel");
+      let data = createPhaseModel.getData();
+  
+      let rowIndex = parseInt(oBindingContext.getPath().split("/")[1]);
+  
+      data.splice(rowIndex, 1);
+  
+      createPhaseModel.setData(data);
+      
+    },
+    onDeleteEditArea:function(oEvent){
+      let oBindingContext = oEvent.getSource().getBindingContext("editAreaModel");
+
+      let editAreaModel = this.getView().getModel("editAreaModel");
+      let data = editAreaModel.getData();
+  
+      let rowIndex = parseInt(oBindingContext.getPath().split("/")[1]);
+  
+      data.splice(rowIndex, 1);
+  
+      editAreaModel.setData(data);
+    },
+    onDeleteEditPhase:function(oEvent){
+      let oBindingContext = oEvent.getSource().getBindingContext("editPhaseModel");
+
+      let editPhaseModel = this.getView().getModel("editPhaseModel");
+      let data = editPhaseModel.getData();
+  
+      let rowIndex = parseInt(oBindingContext.getPath().split("/")[1]);
+  
+      data.splice(rowIndex, 1);
+  
+      editPhaseModel.setData(data);
+    }
    
       
     });
