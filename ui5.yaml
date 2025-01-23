@@ -18,8 +18,7 @@ server:
         backend:
           - scp: true
             path: /odata
-            url: https://terralink-technologies-mena-dmcc-development-and-test-k7f4d54b9.cfapps.eu10-004.hana.ondemand.com
-            destination: PM_DEST
+            url: http://localhost:4004/
 
     - name: fiori-tools-appreload
       afterMiddleware: compression
