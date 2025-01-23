@@ -94,19 +94,19 @@
                                     >
                                         <core:Item
                                             key="A1"
-                                            text="Software Development"
+                                            text="Software"
                                         />
                                         <core:Item
                                             key="A2"
-                                            text="Agile Scrum"
+                                            text="Automobile"
                                         />
                                         <core:Item
                                             key="A3"
-                                            text="Digital Marketing"
+                                            text="Medical and Research"
                                         />
                                         <core:Item
                                             key="A4"
-                                            text="Design"
+                                            text="Oil and Gas "
                                         />
                                     </Select>
                                 </form:SimpleForm>

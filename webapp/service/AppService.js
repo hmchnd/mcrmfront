@@ -23,6 +23,18 @@
                                 ID: oProject.ID
                             });
                             return this.odata(sObjectPath).put(oProject);
+                        },
+                        getFramework(){
+                            return this.odata("/Framework").get();
+                         },
+                         saveFramework: function (oFramework) {
+                            return this.odata("/Framework").post(oFramework);
+                        },
+                        updateFramework : function (oFramework){
+                            var sObjectPath = this.model.createKey("/Framework", {
+                                ID: oFramework.ID
+                            });
+                            return this.odata(sObjectPath).put(oFramework);
                         }
                 
                      });

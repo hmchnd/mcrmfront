@@ -86,30 +86,31 @@
                                                             text="Design"
                                                         />
                                                     </Select>
-                                                    <Label text="Industry Type"></Label>
-                                                    
-                                                    <Select
-                                                        placeholder="Select Area"
-                                                        change="onAreaChange"
-                                                        selectedKey="A1"
-                                                    >
-                                                        <core:Item
-                                                            key="A1"
-                                                            text="Software Development"
-                                                        />
-                                                        <core:Item
-                                                            key="A2"
-                                                            text="Agile Scrum"
-                                                        />
-                                                        <core:Item
-                                                            key="A3"
-                                                            text="Digital Marketing"
-                                                        />
-                                                        <core:Item
-                                                            key="A4"
-                                                            text="Design"
-                                                        />
-                                                    </Select>
+                                                   <Label
+                                        text="Industry Type"
+                                        required="true"
+                                    />
+                                    <Select
+                                        placeholder="Select Area"
+                                        change="onAreaChange"
+                                    >
+                                        <core:Item
+                                            key="A1"
+                                            text="Software"
+                                        />
+                                        <core:Item
+                                            key="A2"
+                                            text="Automobile"
+                                        />
+                                        <core:Item
+                                            key="A3"
+                                            text="Medical and Research"
+                                        />
+                                        <core:Item
+                                            key="A4"
+                                            text="Oil and Gas "
+                                        />
+                                    </Select>
                                 </form:SimpleForm>
                             </VBox>
                         </uxap:blocks>

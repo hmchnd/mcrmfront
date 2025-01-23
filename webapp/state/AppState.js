@@ -83,7 +83,21 @@ sap.ui.define([
    
 
 
-	}
+	},
+	getMyFrameworkList:function(oGridListControl){
+		let aPromises = [];
+		aPromises.push(this.AppService.getFramework());
+		let that = this;
+		oGridListControl.setBusy(true);
+	Promise.all(aPromises).then(function (result) {
+		let aFrameworkList = result[0]?.data?.results || [];
+		aFrameworkList= aFrameworkList.map(function(item){
+			return new Project(item);
+		});
+		that.data.aProjects = aFrameworkList;
+		oGridListControl.setBusy(false);
+	})
+}
 		
 	});
 	return AppState;
