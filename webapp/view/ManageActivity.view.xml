@@ -44,31 +44,7 @@
 							<ToolbarSpacer/>
 
 						</OverflowToolbar> -->
-                            <f:GridList
-                                id="gridList"
-                                mode="None"
-                                growingThreshold="10"
-                                growing="true"
-                                growingDirection="Downwards"
-                                growingScrollToLoad="true"
-                                items="{AppState>/aProjects}"
-                                selectionChange="onSelectionChange"
-                                delete="onDelete"
-                                class="sapUiResponsiveContentPadding"
-                            >
-                                <f:customLayout>
-                                    <grid:GridBasicLayout
-                                        gridAutoRows="repeat(auto-fit)"
-                                        gridGap="0.5rem"
-                                    />
-                                </f:customLayout>
-
-                                <f:GridListItem
-                                    detailPress="onDetailPress"
-                                    press="onPress"
-                                    highlight="Success"
-                                    type="Active"
-                                >
+                           
         <l:VerticalLayout
             class="sapUiContentPadding equalColumns"
             width="100%"
@@ -212,8 +188,7 @@
                 </VBox>
             </FlexBox>
         </l:VerticalLayout>
-         </f:GridListItem>
-                            </f:GridList>
+        
                         </content>
                     </Page>
                 </f:beginColumnPages>

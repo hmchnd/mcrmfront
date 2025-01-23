@@ -20,8 +20,6 @@ sap.ui.define([
         this.AppState.getModel().setSizeLimit(999999);
         this.AppState.data.showGlobalAddButton=true;
         this.AppState.data.currentPage = "roadmapTemplate";
-        let oGridListControl = this.byId("gridList");
-        this.AppState.getMyProjectsList(oGridListControl);
       },
       onAfterRendering:function(){
         var sLayout = LayoutType.OneColumn;

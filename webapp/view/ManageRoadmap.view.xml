@@ -23,7 +23,6 @@
                                 growing="true"
                                 growingDirection="Downwards"
                                 growingScrollToLoad="true"
-                                items="{AppState>/aProjects}"
                                 selectionChange="onSelectionChange"
                                 delete="onDelete"
                                 class="sapUiResponsiveContentPadding"
