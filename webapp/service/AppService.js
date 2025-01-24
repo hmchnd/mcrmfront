@@ -35,7 +35,20 @@
                                 ID: oFramework.ID
                             });
                             return this.odata(sObjectPath).put(oFramework);
+                        },
+                        getActivity(){
+                            return this.odata("/Activity").get();
+                         },
+                         saveActivity: function (oActivity) {
+                            return this.odata("/Activity").post(oActivity);
+                        },
+                        updateActivity : function (oActivity){
+                            var sObjectPath = this.model.createKey("/Activity", {
+                                ID: oActivity.ID
+                            });
+                            return this.odata(sObjectPath).put(oActivity);
                         }
+
                 
                      });
                      return AppService;

@@ -213,8 +213,9 @@ var DropLayout = coreLibrary.dnd.DropLayout;
             this.getModel("activityLayoutView").setProperty("/layout", sLayout);
           },
           onCardPress:function(oEvent){
-            let oSelectedProjectObject = oEvent.getSource()?.getBindingContext("AppState")?.getObject() || {};
-            this.AppState.data.oSelectedProject = oSelectedProjectObject;
+            
+            let oSelectedActivityObject = oEvent.getSource()?.getBindingContext("AppState")?.getObject() || {};
+            this.AppState.data.oSelectedActivity = oSelectedActivityObject;
               var sLayout = LayoutType.TwoColumnsBeginExpanded;
             this.getModel("activityLayoutView").setProperty("/layout", sLayout);
           },
@@ -228,10 +229,18 @@ var DropLayout = coreLibrary.dnd.DropLayout;
                   this.AppState.getModel().setSizeLimit(999999);
             this.AppState.data.showGlobalAddButton=true;
             this.AppState.data.currentPage = "manageActivity";
-             this.AppState.data.currentPageLabel="Manage Project Task and Activity"
-           
+            let oGridListControl = this.byId("gridList");
+          this.AppState.getMyActivityList(oGridListControl);
           
           },
+          onSaveProjectDetails:function(){
+            debugger
+            let oActivityDetails = this.AppState.data.oSelectedActivity;
+  
+            // oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
+            // oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
+            this.AppState.createNewActivityEntry(oActivityDetails);
+          }
         
     });
 });
