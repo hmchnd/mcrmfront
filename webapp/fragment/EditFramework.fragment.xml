@@ -9,7 +9,7 @@
 <headerContent>
 <OverflowToolbar >
     <ToolbarSpacer ></ToolbarSpacer>
-    <Button text="Save" type="Emphasized" ></Button>
+    <Button text="Save" type="Emphasized" press="onSaveFrameworkDetails" ></Button>
     <Button text="Cancel" press="onCloseDetailPage"></Button>
 
     
@@ -41,12 +41,12 @@
                                         text="Name"
                                         
                                     />
-                                    <Input value="Project template 1"  />
+                                    <Input value="{AppState>/oSelectedFramework/name}"  />
                                     <Label
                                         text="Description"
                                         
                                     />
-                                    <TextArea value="Description 1" />
+                                    <TextArea value="{AppState>/oSelectedFramework/description}" />
                                 </form:SimpleForm>
                             </VBox>
                         </uxap:blocks>

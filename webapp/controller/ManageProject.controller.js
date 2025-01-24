@@ -35,6 +35,7 @@ sap.ui.define([
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
         },
         onSaveProjectDetails:function(){
+          debugger
           let oProjectDetails = this.AppState.data.oSelectedProject;
 
           oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);

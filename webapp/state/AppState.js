@@ -3,7 +3,9 @@ sap.ui.define([
 	"../model/BaseObject",
 	"../model/Project",
 	"sap/m/MessageBox",
-], function (BaseObject,Project,MessageBox) {
+	"../model/Framework",
+
+], function (BaseObject,Project,MessageBox,Framework) {
 	"use strict";
 	var AppState = BaseObject.extend("framsys.com.framsysfrontend.state.AppState", {
 		/**
@@ -26,7 +28,10 @@ sap.ui.define([
 
 			this.data = {
 				aProjects: [],
+				aFramework:[],
 				oSelectedProject:{},
+				oSelectedFramework:{},
+
 				showGlobalAddButton:false,
 				currentPage:"",
 				currentPageLabel:"",
@@ -93,7 +98,7 @@ sap.ui.define([
 		})
 	},
 	createNewProjectEntry:function(oProject){
-
+debugger
 	 if(oProject.ID){
 		delete oProject.framework;
 		delete oProject.fore_act_start;
@@ -122,14 +127,47 @@ sap.ui.define([
 		let that = this;
 		oGridListControl.setBusy(true);
 	Promise.all(aPromises).then(function (result) {
+		debugger
 		let aFrameworkList = result[0]?.data?.results || [];
 		aFrameworkList= aFrameworkList.map(function(item){
-			return new Project(item);
+			return new Framework(item);
 		});
-		that.data.aProjects = aFrameworkList;
+		that.data.aFramework = aFrameworkList;
 		oGridListControl.setBusy(false);
 	})
-}
+},
+createNewFrameworkEntry:function(oFramework){
+debugger
+	if(oFramework.ID){
+		let frameworkID=oFramework.ID
+	//    delete oFramework.Classes;
+	//    delete oFramework.phases;
+	//    delete oFramework.areas;
+	    oFramework.Classes=[];
+	    oFramework.phases=[];
+	    oFramework.areas=[];
+	//    delete oFramework.pct_complete;
+	   oFramework.ID =frameworkID ;
+	   this.AppService.updateFramework(oFramework).then(function(result){
+		   MessageBox.success(`Project Details Updated!`)
+		})
+
+	   }else{
+		//    oFramework.ID = '225eaa61-ade1-48d2-a712-ba8dbee7a02d';
+		   oFramework.Classes=[];
+	    oFramework.phases=[];
+	    oFramework.areas=[];
+		   this.AppService.saveFramework(oFramework).then(function(result){
+			  MessageBox.success(`Project Details Saved!`)
+		   })
+	   }
+
+
+  
+
+
+   }
+
 		
 	});
 	return AppState;
