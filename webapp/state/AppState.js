@@ -128,9 +128,9 @@ sap.ui.define(
           Promise.all(aPromises).then(function (result) {
             let aFrameworkList = result[0]?.data?.results || [];
             aFrameworkList = aFrameworkList.map(function (item) {
-              return new Project(item);
+              return new Framework(item);
             });
-            that.data.aProjects = aFrameworkList;
+            that.data.aFramework = aFrameworkList;
             oGridListControl.setBusy(false);
           });
         },
@@ -171,7 +171,7 @@ sap.ui.define(
             //    delete oActivity.pct_complete;
             oActivity.ID = frameworkID;
             this.AppService.updateActivity(oActivity).then(function (result) {
-              MessageBox.success(`Project Details Updated!`);
+              MessageBox.success(`Activity Details Updated!`);
             });
           } else {
             //    oActivity.ID = '225eaa61-ade1-48d2-a712-ba8dbee7a02d';
@@ -180,7 +180,7 @@ sap.ui.define(
             // oActivity.areas=[];
 
             this.AppService.saveActivity(oActivity).then(function (result) {
-              MessageBox.success(`Project Details Saved!`);
+              MessageBox.success(`Activity Details Saved!`);
             });
           }
         },
@@ -213,7 +213,7 @@ sap.ui.define(
             //    delete oFramework.pct_complete;
             oFramework.ID = frameworkID;
             this.AppService.updateFramework(oFramework).then(function (result) {
-              MessageBox.success(`Project Details Updated!`);
+              MessageBox.success(`Roadmap Template Details Updated!`);
             });
           } else {
             //    oFramework.ID = '225eaa61-ade1-48d2-a712-ba8dbee7a02d';
@@ -221,7 +221,7 @@ sap.ui.define(
             oFramework.phases = [];
             oFramework.areas = [];
             this.AppService.saveFramework(oFramework).then(function (result) {
-              MessageBox.success(`Project Details Saved!`);
+              MessageBox.success(`Roadmap Template Details Saved!`);
             });
           }
         },
