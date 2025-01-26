@@ -3,8 +3,9 @@ sap.ui.define([
   "sap/f/LayoutType",
   "../model/Project",
   "../model/Activity",
+"../model/Framework",
+], (BaseController,LayoutType,Project,Framework,Activity) => {
 
-], (BaseController,LayoutType,Project,Activity) => {
   "use strict";
 
   return BaseController.extend("framsys.com.framsysfrontend.controller.App", {
@@ -56,7 +57,7 @@ sap.ui.define([
           let sLayout = LayoutType.EndColumnFullScreen;
           this.getModel("roadmapTemplateLayoutView").setProperty("/layout", sLayout);
           this.getModel("roadmapTemplateLayoutView").refresh(true);
-          this.AppState.data.oSelectedProject = new Project();
+          this.AppState.data.oSelectedFramework = new Framework();
         }else if(this.AppState.data.currentPage == "Roadmap"){
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
 

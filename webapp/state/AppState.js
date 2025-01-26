@@ -4,7 +4,9 @@ sap.ui.define([
 	"../model/Project",
 	"sap/m/MessageBox",
 	"../model/Activity",
-], function (BaseObject, Project, MessageBox,Activity) {
+	"../model/Framework",
+], function (BaseObject, Project, MessageBox,Activity,Framework) {
+
 	"use strict";
 	var AppState = BaseObject.extend("framsys.com.framsysfrontend.state.AppState", {
 		/**
@@ -28,12 +30,18 @@ sap.ui.define([
 			this.data = {
 				aProjects: [],
 				aActivity:[],
+        aFramework:[],
 				oSelectedActivity:{},
 				oSelectedProject: {},
+        oSelectedFramework:{},
 				showGlobalAddButton: false,
 				currentPage: "",
 				currentPageLabel: "",
 				dummyLineChartJson: {
+				showGlobalAddButton:false,
+				currentPage:"",
+				currentPageLabel:"",
+				dummyLineChartJson:{
 					"description": "Project KPI",
 					"threshold": 50,
 					"leftTopLabel": "120 M",
@@ -86,38 +94,27 @@ sap.ui.define([
 			aPromises.push(this.AppService.getProjects());
 			let that = this;
 			oGridListControl.setBusy(true);
-			Promise.all(aPromises).then(function (result) {
-				let aProjectsList = result[0]?.data?.results || [];
-				aProjectsList = aProjectsList.map(function (item) {
-					return new Project(item);
-				});
-				that.data.aProjects = aProjectsList;
-				oGridListControl.setBusy(false);
-			})
-		},
-		createNewProjectEntry: function (oProject) {
 
-			if (oProject.ID) {
-				delete oProject.framework;
-				delete oProject.fore_act_start;
-				delete oProject.fore_act_finish;
-				delete oProject.pct_complete;
-				oProject.framework_ID = '215eaa61-ade1-48d2-a712-ba8dbee7a02d';
-				this.AppService.updateProject(oProject).then(function (result) {
-					MessageBox.success(`Project Details Updated!`)
-				})
-
-			} else {
-				oProject.framework_ID = '215eaa61-ade1-48d2-a712-ba8dbee7a02d';
-				this.AppService.saveProject(oProject).then(function (result) {
-					MessageBox.success(`Project Details Saved!`)
-				})
-			}
-
-
-
-
-
+		Promise.all(aPromises).then(function (result) {
+			let aProjectsList = result[0]?.data?.results || [];
+			aProjectsList= aProjectsList.map(function(item){
+				return new Project(item);
+			});
+			that.data.aProjects = aProjectsList;
+			oGridListControl.setBusy(false);
+		})
+	},
+	createNewProjectEntry:function(oProject){
+debugger
+	 if(oProject.ID){
+		delete oProject.framework;
+		delete oProject.fore_act_start;
+		delete oProject.fore_act_finish;
+		delete oProject.pct_complete;
+		oProject.framework_ID = '215eaa61-ade1-48d2-a712-ba8dbee7a02d';
+		this.AppService.updateProject(oProject).then(function(result){
+			MessageBox.success(`Project Details Updated!`)
+		 })
 		},
 		getMyFrameworkList: function (oGridListControl) {
 			let aPromises = [];
@@ -152,7 +149,6 @@ sap.ui.define([
 				    oActivity.planned_finish=this._formatODataDate(oActivity.planned_finish);
 				    oActivity.fore_act_start=this._formatODataDate(oActivity.fore_act_start);
 				    oActivity.fore_act_finish=this._formatODataDate(oActivity.fore_act_finish);
-
 
 				if(oActivity.ID){
 					let frameworkID=oActivity.ID
@@ -197,6 +193,40 @@ sap.ui.define([
 					}
 					return null;
 				}
+
+	},
+
+createNewFrameworkEntry:function(oFramework){
+debugger
+	if(oFramework.ID){
+		let frameworkID=oFramework.ID
+	//    delete oFramework.Classes;
+	//    delete oFramework.phases;
+	//    delete oFramework.areas;
+	    oFramework.Classes=[];
+	    oFramework.phases=[];
+	    oFramework.areas=[];
+	//    delete oFramework.pct_complete;
+	   oFramework.ID =frameworkID ;
+	   this.AppService.updateFramework(oFramework).then(function(result){
+		   MessageBox.success(`Project Details Updated!`)
+		})
+
+	   }else{
+		//    oFramework.ID = '225eaa61-ade1-48d2-a712-ba8dbee7a02d';
+		   oFramework.Classes=[];
+	    oFramework.phases=[];
+	    oFramework.areas=[];
+		   this.AppService.saveFramework(oFramework).then(function(result){
+			  MessageBox.success(`Project Details Saved!`)
+		   })
+	   }
+
+
+  
+
+
+   }
 
 	});
 	return AppState;

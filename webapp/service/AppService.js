@@ -1,5 +1,4 @@
 
-
                   sap.ui.define([
                     "./CoreService",
                     "sap/ui/model/FilterOperator",

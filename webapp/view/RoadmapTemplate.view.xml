@@ -25,12 +25,13 @@
 
 						</OverflowToolbar> -->
                             <f:GridList
-                                id="gridList"
+                                id="gridList1"
                                 mode="None"
                                 growingThreshold="10"
                                 growing="true"
                                 growingDirection="Downwards"
                                 growingScrollToLoad="true"
+                                items="{AppState>/aFramework}"
                                 selectionChange="onSelectionChange"
                                 delete="onDelete"
                                 class="sapUiResponsiveContentPadding"
@@ -54,7 +55,7 @@
                                     >
                                         <FlexBox class="columns">
                                             <Title
-                                                text="Framsys Roadmap Template"
+                                                text="{AppState>name}"
                                                 wrapping="true"
                                             >
                                                 <layoutData>
@@ -69,7 +70,7 @@
 
                                             <ObjectAttribute
                                                 title="Description"
-                                                text="Framsys Roadmap template for Project"
+                                                text="{AppState>description}"
                                             >
                                                 <layoutData>
                                                     <FlexItemData
@@ -83,7 +84,7 @@
 
                                             <ObjectAttribute
                                                 title="Project Type"
-                                                text="Software Development"
+                                                text="{AppState>Classes/results/ProjectType}"
                                             >
                                                 <layoutData>
                                                     <FlexItemData
@@ -124,7 +125,7 @@
                                                 </layoutData>
                                             </ObjectStatus>
 
-                                          
+                                           
                                         </FlexBox>
                                     </l:VerticalLayout>
                                 </f:GridListItem>

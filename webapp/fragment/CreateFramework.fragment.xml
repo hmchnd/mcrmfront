@@ -8,7 +8,7 @@
 <headerContent>
 <OverflowToolbar >
     <ToolbarSpacer ></ToolbarSpacer>
-    <Button text="Save" type="Emphasized" ></Button>
+    <Button text="Save" type="Emphasized" press="onSaveFrameworkDetails" ></Button>
     <Button text="Cancel" press="onCloseDetailPage"></Button>
 
     
@@ -41,12 +41,12 @@
                                         text="Name"
                                         required="true"
                                     />
-                                    <Input />
+                                    <Input value="{AppState>/oSelectedFramework/name}" />
                                     <Label
                                         text="Description"
                                         required="true"
                                     />
-                                    <TextArea />
+                                    <TextArea value="{AppState>/oSelectedFramework/description}" />
                                 </form:SimpleForm>
                             </VBox>
                         </WizardStep>
