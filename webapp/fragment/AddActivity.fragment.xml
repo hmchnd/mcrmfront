@@ -16,7 +16,7 @@
 				<headerTitle>
 					<ObjectPageDynamicHeaderTitle>
 						<expandedHeading>
-							<m:Title text="{AppState>/oSelectedProject/ID}" wrapping="true"/>
+							<m:Title text="{AppState>/oSelectedActivity/ID}" wrapping="true"/>
 
 							
 						</expandedHeading>
@@ -70,26 +70,29 @@
 			singleContainerFullSize="false" >
 			<form:content>
 				<m:Label text=" Name" />
-				<m:Input id="pname01" value="{AppState>/oSelectedProject/name}" />
+				<m:Input id="pname01" value="{AppState>/oSelectedActivity/name}" />
 
 
                 <m:Label text=" Planned Start" />
-				<m:DatePicker id="pstart01"  value="{AppState>/oSelectedProject/planned_start}"/>
+				<m:DatePicker id="pstart01"  value="{AppState>/oSelectedActivity/planned_start}"/>
 
                 <m:Label text=" Planned End" />
-				<m:DatePicker id="pend01"  value="{AppState>/oSelectedProject/planned_finish}"/>
+				<m:DatePicker id="pend01"  value="{AppState>/oSelectedActivity/planned_finish}"/>
 
                 <m:Label text="Forecasted / Actual Start" />
-				<m:DatePicker  value="{AppState>/oSelectedProject/fore_act_start}"/>
+				<m:DatePicker  value="{AppState>/oSelectedActivity/fore_act_start}"/>
 
                 <m:Label text="Forecasted / Actual End"  />
-				<m:DatePicker value="{AppState>/oSelectedProject/fore_act_finish}"/>
+				<m:DatePicker value="{AppState>/oSelectedActivity/fore_act_finish}"/>
 
-				<m:Label text="Completion %" />
-				<m:Input value="{AppState>/oSelectedProject/value}" />
+				<m:Label text="pct_weight %" />
+				<m:Input value="{AppState>/oSelectedActivity/pct_weight}" />
+
+				<m:Label text="pct_complete %" />
+				<m:Input value="{AppState>/oSelectedActivity/pct_complete}" />
 
 				<m:Label text="State" />
-				<m:Input value="{AppState>/oSelectedProject/state}" />
+				<m:Input value="{AppState>/oSelectedActivity/state}" />
 				
 			</form:content>
 		</form:SimpleForm>	

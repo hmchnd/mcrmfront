@@ -38,8 +38,8 @@ sap.ui.define([
           debugger
           let oProjectDetails = this.AppState.data.oSelectedProject;
 
-          oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
-          oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
+          // oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
+          // oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
           this.AppState.createNewProjectEntry(oProjectDetails);
         },
         onManageRoadmap:function(){

@@ -7,8 +7,10 @@
     xmlns:l="sap.ui.layout"
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:core="sap.ui.core"
+ 
+   
 >
-    <Page showHeader="false">
+    <Page title="Projects / Manage Activity">
         <content>
             <Bar class="customBar">
                 <!-- Left Section (Empty for now) -->
@@ -42,11 +44,12 @@
 							<ToolbarSpacer/>
 
 						</OverflowToolbar> -->
-
+ <ScrollContainer >
                             <l:VerticalLayout
                                 class="sapUiContentPadding equalColumns"
                                 width="100%"
                             >
+                           
                                 <FlexBox class="columns">
                                     <!-- New Segment -->
                                     <VBox class="sapUiSmallMargin">
@@ -58,7 +61,7 @@
                                             id="grid1"
                                             width="100%"
                                             snapToRow="true"
-                                            items="{ path: '/grid1' }"
+                                            items="{AppState>/aActivity}"
                                         >
                                             <f:layout>
                                                 <f:GridContainerSettings
@@ -85,7 +88,7 @@
                                             >
                                                 <f:header>
                                                     <card:Header
-                                                        title="Activity: {title}"
+                                                        title="Activity: {AppState>name}"
                                                         subtitle="{subtitle}"
                                                         iconSrc="{iconSrc}"
                                                     />
@@ -95,17 +98,17 @@
                                                         class="sapUiTinyMargin"
                                                     >
                                                         <Text
-                                                            text="Task: {task}"
+                                                            text="Task: Strategic Planning"
                                                         />
                                                         <Text
-                                                            text="Owner: {owner}"
+                                                            text="Owner: John Doe"
                                                         />
                                                         <Text
-                                                            text="Deadline: {deadline}"
+                                                            text="Deadline: {AppState>planned_start}"
                                                         />
                                                         <ProgressIndicator
-                                                            percentValue="{value}"
-                                                            displayValue="{value}%"
+                                                            percentValue="{AppState>pct_complete}"
+                                                            displayValue="{AppState>pct_complete}%"
                                                             state="Error"
                                                         />
                                                     </VBox>
@@ -113,7 +116,7 @@
                                             </f:Card>
                                         </f:GridContainer>
                                     </VBox>
-
+ 
                                     <!-- In Progress Segment -->
                                     <VBox class="sapUiSmallMargin">
                                         <!-- <layoutData>
@@ -233,8 +236,10 @@
                                             </f:Card>
                                         </f:GridContainer>
                                     </VBox>
+                                    
                                 </FlexBox>
                             </l:VerticalLayout>
+                            </ScrollContainer>
                         </content>
                     </Page>
                 </f:beginColumnPages>

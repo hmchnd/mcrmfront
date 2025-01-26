@@ -3,9 +3,10 @@ sap.ui.define([
 	"../model/BaseObject",
 	"../model/Project",
 	"sap/m/MessageBox",
+	"../model/Activity",
 	"../model/Framework",
+], function (BaseObject, Project, MessageBox,Activity,Framework) {
 
-], function (BaseObject,Project,MessageBox,Framework) {
 	"use strict";
 	var AppState = BaseObject.extend("framsys.com.framsysfrontend.state.AppState", {
 		/**
@@ -28,10 +29,15 @@ sap.ui.define([
 
 			this.data = {
 				aProjects: [],
-				aFramework:[],
-				oSelectedProject:{},
-				oSelectedFramework:{},
-
+				aActivity:[],
+        aFramework:[],
+				oSelectedActivity:{},
+				oSelectedProject: {},
+        oSelectedFramework:{},
+				showGlobalAddButton: false,
+				currentPage: "",
+				currentPageLabel: "",
+				dummyLineChartJson: {
 				showGlobalAddButton:false,
 				currentPage:"",
 				currentPageLabel:"",
@@ -44,28 +50,28 @@ sap.ui.define([
 					"rightBottomLabel": "Oct 2016",
 					"showPoints": true,
 					"lines": [
-					  {
-						"points": [
-						  {"x": 0, "y": 50},
-						  {"x": 8, "y": 68},
-						  {"x": 20, "y": 25},
-						  {"x": 30, "y": 45},
-						  {"x": 40, "y": 67},
-						  {"x": 100, "y": 88}
-						]
-					  },
-					  {
-						"points": [
-						  {"x": 2, "y": 55},
-						  {"x": 8, "y": 40},
-						  {"x": 15, "y": 20},
-						  {"x": 30, "y": 75},
-						  {"x": 40, "y": 30},
-						  {"x": 100, "y": 50}
-						]
-					  }
+						{
+							"points": [
+								{ "x": 0, "y": 50 },
+								{ "x": 8, "y": 68 },
+								{ "x": 20, "y": 25 },
+								{ "x": 30, "y": 45 },
+								{ "x": 40, "y": 67 },
+								{ "x": 100, "y": 88 }
+							]
+						},
+						{
+							"points": [
+								{ "x": 2, "y": 55 },
+								{ "x": 8, "y": 40 },
+								{ "x": 15, "y": 20 },
+								{ "x": 30, "y": 75 },
+								{ "x": 40, "y": 30 },
+								{ "x": 100, "y": 50 }
+							]
+						}
 					]
-				  }
+				}
 			};
 
 			// Initialize base object.
@@ -83,11 +89,12 @@ sap.ui.define([
 		getTextResources: function () {
 			return this.ResourceBundle;
 		},
-		getMyProjectsList:function(oGridListControl){
+		getMyProjectsList: function (oGridListControl) {
 			let aPromises = [];
 			aPromises.push(this.AppService.getProjects());
 			let that = this;
 			oGridListControl.setBusy(true);
+
 		Promise.all(aPromises).then(function (result) {
 			let aProjectsList = result[0]?.data?.results || [];
 			aProjectsList= aProjectsList.map(function(item){
@@ -108,34 +115,87 @@ debugger
 		this.AppService.updateProject(oProject).then(function(result){
 			MessageBox.success(`Project Details Updated!`)
 		 })
-
-		}else{
-			oProject.framework_ID = '215eaa61-ade1-48d2-a712-ba8dbee7a02d';
-			this.AppService.saveProject(oProject).then(function(result){
-			   MessageBox.success(`Project Details Saved!`)
+		},
+		getMyFrameworkList: function (oGridListControl) {
+			let aPromises = [];
+			aPromises.push(this.AppService.getFramework());
+			let that = this;
+			oGridListControl.setBusy(true);
+			Promise.all(aPromises).then(function (result) {
+				let aFrameworkList = result[0]?.data?.results || [];
+				aFrameworkList = aFrameworkList.map(function (item) {
+					return new Project(item);
+				});
+				that.data.aProjects = aFrameworkList;
+				oGridListControl.setBusy(false);
 			})
-		}
+		},
+		getMyActivityList: function () {
+			let aPromises = [];
+			aPromises.push(this.AppService.getActivity());
+			let that = this;
+			Promise.all(aPromises).then(function (result) {
+				debugger
+				let aActivityList = result[0]?.data?.results || [];
+				aActivityList = aActivityList.map(function (item) {
+					return new Activity(item);
+				});
+				that.data.aActivity = aActivityList;
+			})
+		},
+		createNewActivityEntry:function(oActivity){
+			debugger
+			    oActivity.planned_start= this._formatODataDate(oActivity.planned_start);
+				    oActivity.planned_finish=this._formatODataDate(oActivity.planned_finish);
+				    oActivity.fore_act_start=this._formatODataDate(oActivity.fore_act_start);
+				    oActivity.fore_act_finish=this._formatODataDate(oActivity.fore_act_finish);
 
+				if(oActivity.ID){
+					let frameworkID=oActivity.ID
+				
+					// oActivity.Classes=[];
+					// oActivity.phases=[];
+					// oActivity.areas=[];
+				//    delete oActivity.pct_complete;
+				   oActivity.ID =frameworkID ;
+				   this.AppService.updateActivity(oActivity).then(function(result){
+					   MessageBox.success(`Project Details Updated!`)
+					})
+			 
+				   }else{
+					//    oActivity.ID = '225eaa61-ade1-48d2-a712-ba8dbee7a02d';
+					//    oActivity.Classes=[];
+					// oActivity.phases=[];
+					// oActivity.areas=[];
 
-   
-
+					   this.AppService.saveActivity(oActivity).then(function(result){
+						  MessageBox.success(`Project Details Saved!`)
+					   })
+				   }
+			 
+			 
+			 
+			 
+			 
+			   },
+			    /**
+         * Helper function to format a date into "/Date(…)/" format.
+         * @param {Date | string} date - The date to format.
+         * @returns {string | null} The formatted date or null if invalid.
+         */
+				_formatODataDate: function (date) {
+					if (date) {
+						const parsedDate = new Date(date);
+						if (!isNaN(parsedDate.getTime())) {
+							// Convert to "/Date(…)/" format
+							return `/Date(${parsedDate.getTime()})/`;
+						}
+					}
+					return null;
+				}
 
 	},
-	getMyFrameworkList:function(oGridListControl){
-		let aPromises = [];
-		aPromises.push(this.AppService.getFramework());
-		let that = this;
-		oGridListControl.setBusy(true);
-	Promise.all(aPromises).then(function (result) {
-		debugger
-		let aFrameworkList = result[0]?.data?.results || [];
-		aFrameworkList= aFrameworkList.map(function(item){
-			return new Framework(item);
-		});
-		that.data.aFramework = aFrameworkList;
-		oGridListControl.setBusy(false);
-	})
-},
+
 createNewFrameworkEntry:function(oFramework){
 debugger
 	if(oFramework.ID){
@@ -168,7 +228,6 @@ debugger
 
    }
 
-		
 	});
 	return AppState;
 });

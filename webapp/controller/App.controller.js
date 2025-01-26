@@ -2,9 +2,10 @@ sap.ui.define([
   "./BaseController",
   "sap/f/LayoutType",
   "../model/Project",
-  "../model/Framework",
+  "../model/Activity",
+"../model/Framework",
+], (BaseController,LayoutType,Project,Framework,Activity) => {
 
-], (BaseController,LayoutType,Project,Framework) => {
   "use strict";
 
   return BaseController.extend("framsys.com.framsysfrontend.controller.App", {
@@ -62,13 +63,12 @@ sap.ui.define([
 
           this.getModel("manageRoadmapLayoutView").setProperty("/layout", sLayout);
           this.getModel("manageRoadmapLayoutView").refresh(true);
-          this.AppState.data.oSelectedProject = new Project();
+          this.AppState.data.oSelectedProject = new Activity();
         }else if(this.AppState.data.currentPage == "manageActivity"){
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
-
           this.getModel("activityLayoutView").setProperty("/layout", sLayout);
           this.getModel("activityLayoutView").refresh(true);
-          this.AppState.data.oSelectedProject = new Project();
+          this.AppState.data.oSelectedActivity = new Activity();
         }
        
       }
