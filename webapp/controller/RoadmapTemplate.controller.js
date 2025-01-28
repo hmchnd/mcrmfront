@@ -9,7 +9,7 @@ sap.ui.define([
   return Controller.extend("framsys.com.framsysfrontend.controller.RoadmapTemplate", {
     onInit() {
       let createAreaData = [{
-        "area": "Area1"
+        "area": ""
       },
       ]
       let createArea = new JSONModel(createAreaData)
@@ -63,7 +63,7 @@ sap.ui.define([
       this.getModel("roadmapTemplateLayoutView").setProperty("/layout", sLayout);
     },
     onPress: function (oEvent) {
-      let aaa = this.getView().getModel("AppState").getData().aFramework;
+      let aaa = this.getView().getModel("AppState").getData().aFramework.Classes;
       debugger
       let oSelectedFrameworkObject = oEvent.getSource()?.getBindingContext("AppState")?.getObject() || {};
       this.AppState.data.oSelectedFramework = oSelectedFrameworkObject;
@@ -169,11 +169,47 @@ sap.ui.define([
     }, onSaveFrameworkDetails: function () {
       debugger
       let oFrameworkDetails = this.AppState.data.oSelectedFramework;
+      if(!oFrameworkDetails.ID){
+        let area=[];
+        let phases =[];
+        let areatable=this.getView().byId("createTable");
+        let areaItems = areatable.getItems();
+        areaItems.forEach(function (oItem) {
+          let name = oItem.getCells()[0].getValue();
+          area.push({
+              name:name,
+              
+          });
+      });
+
+      let phasetable=this.getView().byId("createTable");
+      let phaseItems = phasetable.getItems();
+      phaseItems.forEach(function (oItem) {
+        let name = oItem.getCells()[0].getValue();
+        phases.push({
+            name:name,
+            
+        });
+    });
+
+        oFrameworkDetails.ProjectType=this.getView().byId("projectType").getSelectedItem().getText()
+        oFrameworkDetails.IndustryType=this.getView().byId("industryType").getSelectedItem().getText()
+        oFrameworkDetails.area=area;
+        oFrameworkDetails.phase=phases;
+      }
 
       // oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
       // oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
       this.AppState.createNewFrameworkEntry(oFrameworkDetails);
-    }
+    },
+    onDeleteFramework: function () {
+      debugger
+      let oFrameworkDetails = this.AppState.data.oSelectedFramework;
+      this.AppState.deleteFrameworkEntry(oFrameworkDetails)
+      var sLayout = LayoutType.OneColumn;
+      this.getModel("roadmapTemplateLayoutView").setProperty("/layout", sLayout);
+         
+  },
 
 
   });

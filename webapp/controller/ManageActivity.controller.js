@@ -240,7 +240,15 @@ var DropLayout = coreLibrary.dnd.DropLayout;
             // oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
             // oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
             this.AppState.createNewActivityEntry(oActivityDetails);
-          }
+          },
+          onDeleteActivity: function () {
+            debugger
+            let oActivityDetails = this.AppState.data.oSelectedActivity;
+            this.AppState.deleteActivityEntry(oActivityDetails)
+            var sLayout = LayoutType.OneColumn;
+            this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+               
+        },
         
     });
 });
