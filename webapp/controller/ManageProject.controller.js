@@ -44,7 +44,15 @@ sap.ui.define([
         },
         onManageRoadmap:function(){
           this.getOwnerComponent().getRouter().navTo("ManageRoadmap")
-        }
+        },
+        onDeleteProject: function () {
+          debugger
+          let oProjectDetails = this.AppState.data.oSelectedProject;
+          this.AppState.deleteProjectEntry(oProjectDetails)
+          var sLayout = LayoutType.OneColumn;
+          this.getModel("projectLayoutView").setProperty("/layout", sLayout);
+             
+      },
         
     });
 });

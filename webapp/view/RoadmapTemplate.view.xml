@@ -84,7 +84,7 @@
 
                                             <ObjectAttribute
                                                 title="Project Type"
-                                                text="{AppState>Classes/results/ProjectType}"
+                                                text="{AppState>Classes/results/0/ProjectType}"
                                             >
                                                 <layoutData>
                                                     <FlexItemData

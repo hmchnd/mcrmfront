@@ -5,8 +5,12 @@ sap.ui.define(
     "sap/m/MessageBox",
     "../model/Activity",
     "../model/Framework",
+    "../model/Class",
+    "../model/ProjectType",
+    "../model/IndustryType",
+
   ],
-  function (BaseObject, Project, MessageBox, Activity, Framework) {
+  function (BaseObject, Project, MessageBox, Activity, Framework,Class,ProjectType,IndustryType) {
     "use strict";
     var AppState = BaseObject.extend(
       "framsys.com.framsysfrontend.state.AppState",
@@ -32,9 +36,15 @@ sap.ui.define(
           this.data = {
             aProjects: [],
             aActivity: [],
+            aClass: [],
+            aProjectType: [],
+            aIndustryType: [],
+
             aFramework: [],
             oSelectedActivity: {},
             oSelectedProject: {},
+            oSelectedClass: {},
+
             oSelectedFramework: {},
             showGlobalAddButton: false,
             currentPage: "",
@@ -117,23 +127,139 @@ sap.ui.define(
 					oProject.framework_ID = '215eaa61-ade1-48d2-a712-ba8dbee7a02d';
 					this.AppService.saveProject(oProject).then(function(result){
 					   MessageBox.success(`Project Details Saved!`)
+             that.data.aProjects = that.data.aProjects.filter(Project => Project.ID !== oProject.ID);
+
 					})
 				}
         },
+        deleteProjectEntry: function (oProject) {
+          debugger
+          if (!oProject || !oProject.ID) {
+              MessageBox.error("Invalid Project: Cannot delete without a valid ID.");
+              return;
+          }
+     
+          let that = this;
+          this.AppService.deleteProject(oProject)
+              .then(function () {
+                  MessageBox.success(`Project deleted successfully!`);
+                  // Optionally remove the deleted Project from the local data list
+                  that.data.aProjects = that.data.aProjects.filter(Project => Project.ID !== oProject.ID);
+              })
+              .catch(function (oError) {
+                  MessageBox.error(`Failed to delete Project: ${oError.message}`);
+              });
+      },
+
+
+
+
+
+
         getMyFrameworkList: function (oGridListControl) {
+          debugger
           let aPromises = [];
-          aPromises.push(this.AppService.getFramework());
+          // Add promises for fetching Framework and Class data
+          aPromises.push(this.AppService.getFramework(), this.AppService.getClass());
           let that = this;
           oGridListControl.setBusy(true);
-          Promise.all(aPromises).then(function (result) {
-            let aFrameworkList = result[0]?.data?.results || [];
-            aFrameworkList = aFrameworkList.map(function (item) {
-              return new Framework(item);
-            });
-            that.data.aFramework = aFrameworkList;
-            oGridListControl.setBusy(false);
+      
+          Promise.all(aPromises).then(function (results) {
+              // Process Framework data
+              let aFrameworkList = results[0]?.data?.results || [];
+              aFrameworkList = aFrameworkList.map(function (item) {
+                  return new Framework(item);
+              });
+      
+              // Process Class data
+              let aClassList = results[1]?.data?.results || [];
+              aClassList = aClassList.map(function (item) {
+                  return new Class(item);
+              });
+      
+              // Store the processed data in the corresponding arrays
+              that.data.aFramework = aFrameworkList;
+              // that.data.aFramework.class = aClassList;
+      
+              oGridListControl.setBusy(false);
+              that.getMyProjectType();
+              that.getMyIndustryType();
+          }).catch(function (error) {
+              // Handle any errors during the Promise resolution
+              console.error("Error fetching Framework or Class data:", error);
+              oGridListControl.setBusy(false);
           });
         },
+
+        createNewFrameworkEntry: function (oFramework) {
+          debugger;
+          if (oFramework.ID) {
+            let frameworkID = oFramework.ID;
+            //    delete oFramework.Classes;
+            //    delete oFramework.phases;
+            //    delete oFramework.areas;
+            // oFramework.Classes = [];
+            oFramework.phases = [];
+            oFramework.areas = [];
+            //    delete oFramework.pct_complete;
+            oFramework.ID = frameworkID;
+            this.AppService.updateFramework(oFramework).then(function (result) {
+              MessageBox.success(`Roadmap Template Details Updated!`);
+            });
+          } else {
+            //    oFramework.ID = '225eaa61-ade1-48d2-a712-ba8dbee7a02d';
+            oFramework.Classes = [{
+              ProjectType:oFramework.ProjectType,
+              IndustryType:oFramework.IndustryType
+            }];
+               delete oFramework.ProjectType;
+               delete oFramework.IndustryType;
+
+
+            oFramework.areas = oFramework.area;
+            oFramework.phases = oFramework.phase;
+            delete oFramework.area;
+            delete oFramework.phase;
+
+            debugger
+            this.AppService.saveFramework(oFramework).then(function (result) {
+              MessageBox.success(`Roadmap Template Details Saved!`);
+              that.data.aFramework = that.data.aFramework.filter(Framework => Framework.ID !== oFramework.ID);
+
+            });
+          }
+        },
+
+
+        deleteFrameworkEntry: function (oFramework) {
+          debugger
+          if (!oFramework || !oFramework.ID) {
+              MessageBox.error("Invalid Framework: Cannot delete without a valid ID.");
+              return;
+          }
+     
+          let that = this;
+          this.AppService.deleteFramework(oFramework)
+              .then(function () {
+
+                  MessageBox.success(`Framework deleted successfully!`);
+                 
+                  // Optionally remove the deleted Framework from the local data list
+                  that.data.aFramework = that.data.aFramework.filter(Framework => Framework.ID !== oFramework.ID);
+              })
+              .catch(function (oError) {
+                  MessageBox.error(`Failed to delete Framework: ${oError.message}`);
+              });
+      },
+
+
+
+
+
+
+
+
+
         getMyActivityList: function () {
           let aPromises = [];
           aPromises.push(this.AppService.getActivity());
@@ -184,6 +310,7 @@ sap.ui.define(
             });
           }
         },
+
         /**
          * Helper function to format a date into "/Date(…)/" format.
          * @param {Date | string} date - The date to format.
@@ -199,32 +326,66 @@ sap.ui.define(
           }
           return null;
         },
-
-        createNewFrameworkEntry: function (oFramework) {
-          debugger;
-          if (oFramework.ID) {
-            let frameworkID = oFramework.ID;
-            //    delete oFramework.Classes;
-            //    delete oFramework.phases;
-            //    delete oFramework.areas;
-            oFramework.Classes = [];
-            oFramework.phases = [];
-            oFramework.areas = [];
-            //    delete oFramework.pct_complete;
-            oFramework.ID = frameworkID;
-            this.AppService.updateFramework(oFramework).then(function (result) {
-              MessageBox.success(`Roadmap Template Details Updated!`);
-            });
-          } else {
-            //    oFramework.ID = '225eaa61-ade1-48d2-a712-ba8dbee7a02d';
-            oFramework.Classes = [];
-            oFramework.phases = [];
-            oFramework.areas = [];
-            this.AppService.saveFramework(oFramework).then(function (result) {
-              MessageBox.success(`Roadmap Template Details Saved!`);
-            });
+        deleteActivityEntry: function (oActivity) {
+          debugger
+          if (!oActivity || !oActivity.ID) {
+              MessageBox.error("Invalid Activity: Cannot delete without a valid ID.");
+              return;
           }
+     
+          let that = this;
+          this.AppService.deleteActivity(oActivity)
+              .then(function () {
+                  MessageBox.success(`Activity deleted successfully!`);
+                  // Optionally remove the deleted activity from the local data list
+                  that.data.aActivity = that.data.aActivity.filter(activity => activity.ID !== oActivity.ID);
+              })
+              .catch(function (oError) {
+                  MessageBox.error(`Failed to delete activity: ${oError.message}`);
+              });
+      },
+
+        
+        getMyClassList: function () {
+          let aPromises = [];
+          aPromises.push(this.AppService.getClass());
+          let that = this;
+          Promise.all(aPromises).then(function (result) {
+            debugger;
+            let aClassList = result[0]?.data?.results || [];
+            aClassList = aClassList.map(function (item) {
+              return new Class(item);
+            });
+            that.data.aClass = aClassList;
+          });
         },
+        getMyProjectType: function () {
+          let aPromises = [];
+          aPromises.push(this.AppService.getProjectType());
+          let that = this;
+          Promise.all(aPromises).then(function (result) {
+            debugger;
+            let aProjectType = result[0]?.data?.results || [];
+            aProjectType = aProjectType.map(function (item) {
+              return new ProjectType(item);
+            });
+            that.data.aProjectType = aProjectType;
+          });
+        },
+        getMyIndustryType: function () {
+          let aPromises = [];
+          aPromises.push(this.AppService.getIndustryType());
+          let that = this;
+          Promise.all(aPromises).then(function (result) {
+            debugger;
+            let aIndustryType = result[0]?.data?.results || [];
+            aIndustryType = aIndustryType.map(function (item) {
+              return new IndustryType(item);
+            });
+            that.data.aIndustryType = aIndustryType;
+          });
+        },
+       
       }
     );
     return AppState;

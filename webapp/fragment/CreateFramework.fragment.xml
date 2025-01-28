@@ -62,27 +62,19 @@
                                     <Label
                                         text="Project Type"
                                         required="true"
+
                                     />
                                     <Select
                                         placeholder="Select Area"
                                         change="onAreaChange"
+                                        items="{AppState>/aProjectType}"
+                                        id="projectType"
+
                                     >
                                         <core:Item
-                                            key="A1"
-                                            text="Software Development"
+                                            text="{AppState>ProjectType}"
                                         />
-                                        <core:Item
-                                            key="A2"
-                                            text="Agile Scrum"
-                                        />
-                                        <core:Item
-                                            key="A3"
-                                            text="Digital Marketing"
-                                        />
-                                        <core:Item
-                                            key="A4"
-                                            text="Design"
-                                        />
+                                        
                                     </Select>
                                     <Label
                                         text="Industry Type"
@@ -91,22 +83,12 @@
                                     <Select
                                         placeholder="Select Area"
                                         change="onAreaChange"
+                                        items="{AppState>/aIndustryType}"
+                                        id="industryType"
+
                                     >
-                                        <core:Item
-                                            key="A1"
-                                            text="Software"
-                                        />
-                                        <core:Item
-                                            key="A2"
-                                            text="Automobile"
-                                        />
-                                        <core:Item
-                                            key="A3"
-                                            text="Medical and Research"
-                                        />
-                                        <core:Item
-                                            key="A4"
-                                            text="Oil and Gas "
+                                         <core:Item
+                                            text="{AppState>IndustryType}"
                                         />
                                     </Select>
                                 </form:SimpleForm>
@@ -118,7 +100,7 @@
                         >
                             <VBox width="80%">
                                 <Table
-                                    id="SimpleTable6"
+                                    id="createTable"
                                     inset="false"
                                     class="sapUiMediumMarginBottom"
                                     width="100%"
@@ -157,7 +139,7 @@
                                 </Table>
 
                                 <Table
-                                    id="SimpleTable3"
+                                    id="phasesTable"
                                     inset="false"
                                     width="100%"
                                     items="{createPhaseModel>/}"
@@ -192,6 +174,63 @@
                                         </ColumnListItem>
                                     </items>
                                 </Table>
+                            </VBox>
+                        </WizardStep>
+                        <WizardStep
+                            id="ManageTask"
+                            title="Manage Tasks"
+                        >
+                            <VBox width="80%">
+                                <Table
+                                    id="ManageTaskTable"
+                                    inset="false"
+                                    class="sapUiMediumMarginBottom"
+                                    width="100%"
+                                    items="{createAreaModel>/}"
+                                >
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <ToolbarSpacer />
+                                            <Button icon="sap-icon://add" press="onCreateArea" />
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <!-- Define the single column -->
+                                    <columns>
+                                        <Column>
+                                            <header>
+                                                <Label text="Task Name" />
+                                            </header>
+                                        </Column>
+                                        <Column >
+                                            <Label text="Description" />
+                                        </Column>
+                                        <Column >
+                                            <Label text="Area" required="true"/>
+                                        </Column>
+                                        <Column >
+                                            <Label text="Phase" required="true"/>
+                                        </Column>
+                                        <Column width="3rem">
+                                            <Label text="" />
+                                        </Column>
+                                    </columns>
+                                    <!-- Bind the items -->
+                                    <items>
+                                        <ColumnListItem>
+                                            <cells>
+                                                <Input value="{createAreaModel>area}" />
+                                                <Input value="{createAreaModel>area}" />
+                                                <Input value="{createAreaModel>area}" />
+                                                <Input value="{createAreaModel>area}" />
+                                                <Button
+                                                    icon="sap-icon://delete"
+                                                    press="onDeleteCreateArea"
+ 
+                                                />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>                              
                             </VBox>
                         </WizardStep>
                     </Wizard>
