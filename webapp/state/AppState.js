@@ -4,10 +4,7 @@ sap.ui.define(
     "../model/Project",
     "sap/m/MessageBox",
     "../model/Activity",
-    "../model/Framework",
-    "../model/Class",
-    "../model/ProjectType",
-    "../model/IndustryType",
+    "../model/Framework"
 
   ],
   function (BaseObject, Project, MessageBox, Activity, Framework,Class,ProjectType,IndustryType) {
@@ -36,15 +33,9 @@ sap.ui.define(
           this.data = {
             aProjects: [],
             aActivity: [],
-            aClass: [],
-            aProjectType: [],
-            aIndustryType: [],
-
             aFramework: [],
             oSelectedActivity: {},
             oSelectedProject: {},
-            oSelectedClass: {},
-
             oSelectedFramework: {},
             showGlobalAddButton: false,
             currentPage: "",
@@ -160,7 +151,7 @@ sap.ui.define(
           debugger
           let aPromises = [];
           // Add promises for fetching Framework and Class data
-          aPromises.push(this.AppService.getFramework(), this.AppService.getClass());
+          aPromises.push(this.AppService.getFramework());
           let that = this;
           oGridListControl.setBusy(true);
       
@@ -171,19 +162,14 @@ sap.ui.define(
                   return new Framework(item);
               });
       
-              // Process Class data
-              let aClassList = results[1]?.data?.results || [];
-              aClassList = aClassList.map(function (item) {
-                  return new Class(item);
-              });
+           
       
               // Store the processed data in the corresponding arrays
               that.data.aFramework = aFrameworkList;
               // that.data.aFramework.class = aClassList;
       
               oGridListControl.setBusy(false);
-              that.getMyProjectType();
-              that.getMyIndustryType();
+             
           }).catch(function (error) {
               // Handle any errors during the Promise resolution
               console.error("Error fetching Framework or Class data:", error);
@@ -345,47 +331,6 @@ sap.ui.define(
               });
       },
 
-        
-        getMyClassList: function () {
-          let aPromises = [];
-          aPromises.push(this.AppService.getClass());
-          let that = this;
-          Promise.all(aPromises).then(function (result) {
-            debugger;
-            let aClassList = result[0]?.data?.results || [];
-            aClassList = aClassList.map(function (item) {
-              return new Class(item);
-            });
-            that.data.aClass = aClassList;
-          });
-        },
-        getMyProjectType: function () {
-          let aPromises = [];
-          aPromises.push(this.AppService.getProjectType());
-          let that = this;
-          Promise.all(aPromises).then(function (result) {
-            debugger;
-            let aProjectType = result[0]?.data?.results || [];
-            aProjectType = aProjectType.map(function (item) {
-              return new ProjectType(item);
-            });
-            that.data.aProjectType = aProjectType;
-          });
-        },
-        getMyIndustryType: function () {
-          let aPromises = [];
-          aPromises.push(this.AppService.getIndustryType());
-          let that = this;
-          Promise.all(aPromises).then(function (result) {
-            debugger;
-            let aIndustryType = result[0]?.data?.results || [];
-            aIndustryType = aIndustryType.map(function (item) {
-              return new IndustryType(item);
-            });
-            that.data.aIndustryType = aIndustryType;
-          });
-        },
-       
       }
     );
     return AppState;

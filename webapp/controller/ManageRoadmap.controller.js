@@ -18,10 +18,10 @@ sap.ui.define(
       "framsys.com.framsysfrontend.controller.ManageRoadmap",
       {
         onInit() {
-          this.initData();
-          this.attachDragAndDrop();
-          var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-          oRouter.attachRouteMatched(this.onRouteMatched, this);
+        //  this.initData();
+          //this.attachDragAndDrop();
+          //var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+          //oRouter.attachRouteMatched(this.onRouteMatched, this);
         },
         initData: function () {
           // Initialize JSON Model

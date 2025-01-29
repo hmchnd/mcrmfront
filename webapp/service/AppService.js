@@ -30,81 +30,46 @@ sap.ui.define(
         getFramework() {
          let mParameters = {
             urlParameters: {
-              $expand: "Classes,phases,areas"
+              $expand: "templatePhases,templateAreas,templateTasks"
             }
           };
-          return this.odata("/Framework").get(mParameters);
+          return this.odata("/RoadmapTemplate").get(mParameters);
         },
         saveFramework: function (oFramework) {
 
-          return this.odata("/Framework").post(oFramework);
+          return this.odata("/RoadmapTemplate").post(oFramework);
         },
         updateFramework: function (oFramework) {
-          var sObjectPath = this.model.createKey("/Framework", {
+          var sObjectPath = this.model.createKey("/RoadmapTemplate", {
             ID: oFramework.ID,
           });
           return this.odata(sObjectPath).put(oFramework);
         },
         deleteFramework: function (oFramework) {
-          var sObjectPath = this.model.createKey("/Framework", {
+          var sObjectPath = this.model.createKey("/RoadmapTemplate", {
               ID: oFramework.ID // Assuming 'ID' is the key of your entity
           });
           return this.odata(sObjectPath).delete();
       },
         getActivity() {
-          return this.odata("/Activity").get();
+          return this.odata("/ProjectActivity").get();
         },
         saveActivity: function (oActivity) {
-          return this.odata("/Activity").post(oActivity);
+          return this.odata("/ProjectActivity").post(oActivity);
         },
         updateActivity: function (oActivity) {
-          var sObjectPath = this.model.createKey("/Activity", {
+          var sObjectPath = this.model.createKey("/ProjectActivity", {
             ID: oActivity.ID,
           });
           return this.odata(sObjectPath).put(oActivity);
         },
         deleteActivity: function (oActivity) {
-          var sObjectPath = this.model.createKey("/Activity", {
+          var sObjectPath = this.model.createKey("/ProjectActivity", {
               ID: oActivity.ID // Assuming 'ID' is the key of your entity
           });
           return this.odata(sObjectPath).delete();
       },
-        getClass() {
-          return this.odata("/Class").get();
-        },
-        saveClass: function (oClass) {
-          return this.odata("/Class").post(oClass);
-        },
-        updateClass: function (oClass) {
-          var sObjectPath = this.model.createKey("/Class", {
-            ID: oClass.ID,
-          });
-          return this.odata(sObjectPath).put(oClass);
-        },
-         getProjectType() {
-          return this.odata("/ProjectType").get();
-        },
-        saveProjectType: function (oProjectType) {
-          return this.odata("/ProjectType").post(oProjectType);
-        },
-        updateProjectType: function (oProjectType) {
-          var sObjectPath = this.model.createKey("/ProjectType", {
-            ID: oProjectType.ID,
-          });
-          return this.odata(sObjectPath).put(oProjectType);
-        },
-         getIndustryType() {
-          return this.odata("/IndustryType").get();
-        },
-        saveIndustryType: function (oIndustryType) {
-          return this.odata("/IndustryType").post(oIndustryType);
-        },
-        updateIndustryType: function (oIndustryType) {
-          var sObjectPath = this.model.createKey("/IndustryType", {
-            ID: oIndustryType.ID,
-          });
-          return this.odata(sObjectPath).put(oIndustryType);
-        },
+        
       }
     );
     return AppService;
