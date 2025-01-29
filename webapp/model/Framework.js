@@ -11,9 +11,9 @@ sap.ui.define([
                 this.ID = data?.ID || "";
                 this.name = data?.name || "";
                 this.description = data?.description || "";
-                this.Classes = data?.Classes || "";
-                this.phases = data?.phases || "";
-                this.areas = data?.areas || "";
+                this.templatePhases = data?.templatePhases || "";
+                this.templateAreas = data?.templateAreas || "";
+                this.templateTasks = data?.templateTasks || "";
 
             }
         },

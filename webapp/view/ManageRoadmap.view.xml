@@ -10,11 +10,11 @@
     <Page title="SAP Activate for RISE with SAP S/4 HANA Cloud Project Roadmap">
         <content>
             <Panel>
-                <f:GridList>
+                <f:GridList items="{AppState>/aFramework/0/templatePhases/results}" >
 
-                    <f:GridListItem  press="onCardPress" type="Active">
+                    <f:GridListItem  press="onCardPress" type="Active"   >
                         <VBox class="sapUiTinyMargin">
-                            <Title text="Identify" wrapping="true" />
+                            <Title text="{AppState>name}" wrapping="true" />
                             <Label text="Jan 2025" wrapping="true" />
                         </VBox>
                         <HBox class="sapUiTinyMargin">
@@ -23,7 +23,7 @@
                         </HBox>
                     </f:GridListItem>
 
-                    <f:GridListItem press="onCardPress" type="Active">
+                    <!-- <f:GridListItem press="onCardPress" type="Active">
                         <VBox class="sapUiTinyMargin">
                             <Title text="Select" wrapping="true" />
                             <Label text="Feb 2025" wrapping="true" />
@@ -53,11 +53,11 @@
                             <Title text="Close" wrapping="true" />
                             <Label text="Jun 2025" wrapping="true" />
                         </VBox>
-                    </f:GridListItem>
+                    </f:GridListItem> -->
                 </f:GridList>
             </Panel>
 
-            <Panel expandable="true" expanded="true" headerText="Project Management" enableScrolling="false">
+            <!-- <Panel expandable="true" expanded="true" headerText="Project Management" enableScrolling="false">
                 <headerToolbar>
                     <Toolbar>
                         <ToolbarSpacer/>
@@ -177,7 +177,8 @@
                         <ToolbarSpacer/>
                     </Toolbar>
                 </headerToolbar>
-            </Panel>
+            </Panel> -->
+            <VBox id="panelContainer" class="sapUiTinyMargin"/>
         </content>
     </Page>
 </mvc:View>

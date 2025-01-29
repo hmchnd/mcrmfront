@@ -30,7 +30,7 @@ sap.ui.define(
         getFramework() {
          let mParameters = {
             urlParameters: {
-              $expand: "templatePhases,templateAreas,templateTasks"
+              $expand: "templatePhases,templateAreas,templateTasks($expand=area,phase)"
             }
           };
           return this.odata("/RoadmapTemplate").get(mParameters);

@@ -50,7 +50,7 @@
                                 </form:SimpleForm>
                             </VBox>
                         </WizardStep>
-                        <WizardStep
+                        <!-- <WizardStep
                             id="ProductInfoStep"
                             title="Project Type"
                         >
@@ -93,7 +93,7 @@
                                     </Select>
                                 </form:SimpleForm>
                             </VBox>
-                        </WizardStep>
+                        </WizardStep> -->
                         <WizardStep
                             id="classandarea"
                             title="Area and Phases"
@@ -186,12 +186,12 @@
                                     inset="false"
                                     class="sapUiMediumMarginBottom"
                                     width="100%"
-                                    items="{createAreaModel>/}"
+                                    items="{taskModel>/}"
                                 >
                                     <headerToolbar>
                                         <OverflowToolbar>
                                             <ToolbarSpacer />
-                                            <Button icon="sap-icon://add" press="onCreateArea" />
+                                            <Button icon="sap-icon://add" press="onCreateTasks" />
                                         </OverflowToolbar>
                                     </headerToolbar>
                                     <!-- Define the single column -->
@@ -218,10 +218,10 @@
                                     <items>
                                         <ColumnListItem>
                                             <cells>
-                                                <Input value="{createAreaModel>area}" />
-                                                <Input value="{createAreaModel>area}" />
-                                                <Input value="{createAreaModel>area}" />
-                                                <Input value="{createAreaModel>area}" />
+                                                <Input value="{taskModel>name}" />
+                                                <Input value="{taskModel>desc}" />
+                                                <Input value="{taskModel>area}" />
+                                                <Input value="{taskModel>phase}" />
                                                 <Button
                                                     icon="sap-icon://delete"
                                                     press="onDeleteCreateArea"
