@@ -228,7 +228,7 @@ sap.ui.define(
           });
         },
         createNewActivityEntry: function (oActivity) {
-          debugger;
+         var that = this;
           oActivity.planned_start = this._formatODataDate(
             oActivity.planned_start
           );
@@ -252,6 +252,7 @@ sap.ui.define(
             oActivity.ID = frameworkID;
             this.AppService.updateActivity(oActivity).then(function (result) {
               MessageBox.success(`Activity Details Updated!`);
+              that.updateProgress();
             });
           } else {
             //    oActivity.ID = '225eaa61-ade1-48d2-a712-ba8dbee7a02d';
@@ -310,6 +311,15 @@ sap.ui.define(
             MessageBox.success(`New Task Created`);
           });
         },
+        updateProgress:function(){
+          let aPromises = [];
+          aPromises.push(this.AppService.processTaskProgress());
+          let that = this;
+          Promise.all(aPromises).then(function (result) {
+            MessageBox.success('Task Progress Updated!!');
+          
+          });
+        }
       }
     );
     return AppState;

@@ -72,6 +72,9 @@ sap.ui.define(
         createTask: function (oTask) {
           return this.odata("/TemplateTask").post(oTask);
         },
+        processTaskProgress:function(){
+          return this.odata("/updateTaskProgress").post({})
+        }
       }
     );
     return AppService;

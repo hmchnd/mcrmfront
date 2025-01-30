@@ -264,6 +264,7 @@ sap.ui.define(
           // oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
           this.AppState.createNewActivityEntry(oActivityDetails);
         },
+        
         onDeleteActivity: function () {
           debugger;
           let oActivityDetails = this.AppState.data.oSelectedActivity;
