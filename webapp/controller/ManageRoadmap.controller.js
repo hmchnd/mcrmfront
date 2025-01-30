@@ -21,37 +21,24 @@ sap.ui.define([
         oRouter.attachRouteMatched(this.onRouteMatched, this);
       },
        
-      onRouteMatched: async function (oEvent) {
+      onRouteMatched:  function (oEvent) {
         this.AppState = this.getOwnerComponent().getState("App");
         this.getView().setModel(this.AppState.getModel(), "AppState");
         this.AppState.getModel().setSizeLimit(999999);
+        this.AppState.setViewController(this);
         this.AppState.data.showGlobalAddButton = true;
         this.AppState.data.currentPage = "ManageRoadmap";
         this.AppState.data.currentPageLabel = "Manage Roadmap";
    
-        await this.AppState.getMyFrameworkList();
-        setTimeout(() => {
-          this.getFrameworkData();
-        }, 1000);
-      },
-   
-      getFrameworkData: function() {
-        let FrameworkData = this.getView().getModel("AppState").getData().aFramework;
-        var oModel = new JSONModel(FrameworkData);
-        this.getView().setModel(oModel, "panelModel");
-        this.createPanels();
+         this.AppState.getMyFrameworkList();
       },
    
       createPanels: function() {
         var oView = this.getView();
-        var oModel = oView.getModel("panelModel");
-        var oData = oModel.getData();
-        var aTasks = oData[0].templateTasks.results;
-      
+        var aTasks = this.getView().getModel("AppState").getProperty("/aFramework/0/templateTasks/results");
         // Get all unique areas and phases from your data
         var aAllAreas = this.getView().getModel("AppState").getProperty("/aFramework/0/templateAreas/results");
         var aAllPhases = this.getView().getModel("AppState").getProperty("/aFramework/0/templatePhases/results");
-      
         var oVBox = oView.byId("panelContainer");
         oVBox.removeAllItems();
       

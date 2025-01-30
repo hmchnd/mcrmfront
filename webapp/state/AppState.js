@@ -48,37 +48,6 @@ sap.ui.define(
             showGlobalAddButton: false,
             currentPage: "",
             currentPageLabel: "",
-            dummyLineChartJson: {
-              description: "Project KPI",
-              threshold: 50,
-              leftTopLabel: "120 M",
-              rightTopLabel: "140 M",
-              leftBottomLabel: "Sept 2016",
-              rightBottomLabel: "Oct 2016",
-              showPoints: true,
-              lines: [
-                {
-                  points: [
-                    { x: 0, y: 50 },
-                    { x: 8, y: 68 },
-                    { x: 20, y: 25 },
-                    { x: 30, y: 45 },
-                    { x: 40, y: 67 },
-                    { x: 100, y: 88 },
-                  ],
-                },
-                {
-                  points: [
-                    { x: 2, y: 55 },
-                    { x: 8, y: 40 },
-                    { x: 15, y: 20 },
-                    { x: 30, y: 75 },
-                    { x: 40, y: 30 },
-                    { x: 100, y: 50 },
-                  ],
-                },
-              ],
-            },
           };
 
           // Initialize base object.
@@ -176,6 +145,7 @@ sap.ui.define(
               // that.data.aFramework.class = aClassList;
 
               // oGridListControl.setBusy(false);
+              that.ViewController.createPanels();
             })
             .catch(function (error) {
               // Handle any errors during the Promise resolution

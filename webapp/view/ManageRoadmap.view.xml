@@ -1,5 +1,6 @@
 <mvc:View controllerName="framsys.com.framsysfrontend.controller.ManageRoadmap" displayBlock="true"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:pf="sap.suite.ui.commons"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
@@ -10,17 +11,22 @@
     <Page title="SAP Activate for RISE with SAP S/4 HANA Cloud Project Roadmap">
         <content>
             <Panel>
-                <f:GridList items="{AppState>/aFramework/0/templatePhases/results}" >
+                <f:GridList items="{AppState>/aFramework/0/templatePhases/results}">
 
-                    <f:GridListItem  press="onCardPress" type="Active"   >
+                    <f:GridListItem press="onCardPress" type="Active">
                         <VBox class="sapUiTinyMargin">
                             <Title text="{AppState>name}" wrapping="true" />
-                            <Label text="Jan 2025" wrapping="true" />
+                            <Label text="{path:'AppState>planned_start', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMMM yyyy' }}-{path:'AppState>planned_finish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMMM yyyy' }}" wrapping="true" />
                         </VBox>
-                        <HBox class="sapUiTinyMargin">
-                        <Button icon="sap-icon://accept" type="Accept"/> 
-                        <Button icon="sap-icon://accept" type="Accept"/> 
-                        </HBox>
+                        <pf:MicroProcessFlow>
+                            <pf:content>
+                                <pf:MicroProcessFlowItem state="Success"/>
+                                <pf:MicroProcessFlowItem state="Warning"/>
+                                <pf:MicroProcessFlowItem state="Warning"/>
+                                <pf:MicroProcessFlowItem state="Warning"/>
+                                <pf:MicroProcessFlowItem/>
+                            </pf:content>
+                        </pf:MicroProcessFlow>
                     </f:GridListItem>
 
                     <!-- <f:GridListItem press="onCardPress" type="Active">
@@ -30,7 +36,7 @@
                         </VBox>
                     </f:GridListItem>
 
-                    <f:GridListItem  press="onCardPress" type="Active">
+                    <f:GridListItem press="onCardPress" type="Active">
                         <VBox class="sapUiTinyMargin">
                             <Title text="Define" wrapping="true" />
                             <Label text="March 2025" wrapping="true" />
@@ -67,15 +73,13 @@
                 </headerToolbar>
                 <f:GridList>
 
-                    <f:GridListItem  press="onCardPress" type="Active">
+                    <f:GridListItem press="onCardPress" type="Active">
                         <VBox class="sapUiTinyMargin">
                             <Title text="Task1" wrapping="true" />
                             <Label text="Task1 Details" wrapping="true" />
                        
                       
-                       <ProgressIndicator percentValue="80"
-															                   displayValue="80%"
-															                   state="Success"/>
+                       <ProgressIndicator percentValue="80" displayValue="80%" state="Success"/>
                         	<Text text="1-Jan - 31 Jan"/>
                         </VBox>
                     </f:GridListItem>
@@ -87,7 +91,7 @@
                         </VBox>
                     </f:GridListItem>
 
-                    <f:GridListItem  press="onCardPress" type="Active">
+                    <f:GridListItem press="onCardPress" type="Active">
                         <VBox class="sapUiTinyMargin">
                             <Title text="Define" wrapping="true" />
                             <Label text="March 2025" wrapping="true" />
@@ -124,7 +128,7 @@
                 </headerToolbar>
                 <f:GridList>
 
-                    <f:GridListItem  press="onCardPress" type="Active">
+                    <f:GridListItem press="onCardPress" type="Active">
                         <VBox class="sapUiTinyMargin">
                             <Title text="Identify" wrapping="true" />
                             <Label text="Jan 2025" wrapping="true" />
@@ -142,7 +146,7 @@
                         </VBox>
                     </f:GridListItem>
 
-                    <f:GridListItem  press="onCardPress" type="Active">
+                    <f:GridListItem press="onCardPress" type="Active">
                         <VBox class="sapUiTinyMargin">
                             <Title text="Define" wrapping="true" />
                             <Label text="March 2025" wrapping="true" />
