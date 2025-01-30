@@ -85,6 +85,7 @@
                                                 class="sapUiTinyMargin"
                                                 press="onCardPress"
                                                 semanticRole="ListItem"
+                                                visible="{path:'AppState>pct_complete',formatter:'.fnMakeNewVisibleCard'}"
                                             >
                                                 <f:header>
                                                     <card:Header
@@ -98,18 +99,18 @@
                                                         class="sapUiTinyMargin"
                                                     >
                                                         <Text
-                                                            text="Task: Strategic Planning"
+                                                            text="Task:  Identify a project based on opportunities"
                                                         />
                                                         <Text
                                                             text="Owner: John Doe"
                                                         />
                                                         <Text
-                                                            text="Deadline: {AppState>planned_start}"
+                                                            text="Deadline: {AppState>planned_finish}"
                                                         />
                                                         <ProgressIndicator
                                                             percentValue="{AppState>pct_complete}"
                                                             displayValue="{AppState>pct_complete}%"
-                                                            state="Error"
+                                                            
                                                         />
                                                     </VBox>
                                                 </f:content>
@@ -135,7 +136,7 @@
                                             id="grid2"
                                             width="100%"
                                             snapToRow="true"
-                                            items="{ path: '/grid2' }"
+                                            items="{AppState>/aActivity}"
                                         >
                                             <f:layout>
                                                 <f:GridContainerSettings
@@ -145,10 +146,10 @@
                                                     class="sapUiSmallMargin"
                                                 />
                                             </f:layout>
-                                            <f:Card class="sapUiTinyMargin">
+                                            <f:Card  semanticRole="ListItem" class="sapUiTinyMargin" visible="{path:'AppState>pct_complete',formatter:'.fnMakeProgressVisibleCard'}"   press="onCardPress">
                                                 <f:header>
                                                     <card:Header
-                                                        title="Activity: {title}"
+                                                        title="Activity: {AppState>name}"
                                                         subtitle="{subtitle}"
                                                         iconSrc="{iconSrc}"
                                                     />
@@ -158,17 +159,17 @@
                                                         class="sapUiTinyMargin"
                                                     >
                                                         <Text
-                                                            text="Task: {task}"
+                                                            text="Task:  Identify a project based on opportunities"
                                                         />
                                                         <Text
-                                                            text="Owner: {owner}"
+                                                            text="Owner: John Doe"
                                                         />
                                                         <Text
-                                                            text="Deadline: {deadline}"
+                                                            text="Deadline: {AppState>planned_finish}"
                                                         />
                                                         <ProgressIndicator
-                                                            percentValue="{value}"
-                                                            displayValue="{value}%"
+                                                            percentValue="{AppState>pct_complete}"
+                                                            displayValue="{AppState>pct_complete}%"
                                                             state="Warning"
                                                         />
                                                     </VBox>
@@ -195,7 +196,7 @@
                                             id="grid3"
                                             width="100%"
                                             snapToRow="true"
-                                            items="{ path: '/grid3' }"
+                                            items="{AppState>/aActivity}"
                                         >
                                             <f:layout>
                                                 <f:GridContainerSettings
@@ -205,10 +206,10 @@
                                                     class="sapUiSmallMargin"
                                                 />
                                             </f:layout>
-                                            <f:Card class="sapUiTinyMargin">
+                                            <f:Card  semanticRole="ListItem" class="sapUiTinyMargin"  visible="{path:'AppState>pct_complete',formatter:'.fnMakeCompleteVisibleCard'}"  press="onCardPress">
                                                 <f:header>
                                                     <card:Header
-                                                        title="Activity: {title}"
+                                                         title="Activity: {AppState>name}"
                                                         subtitle="{subtitle}"
                                                         iconSrc="{iconSrc}"
                                                     />
@@ -217,20 +218,21 @@
                                                     <VBox
                                                         class="sapUiTinyMargin"
                                                     >
-                                                        <Text
-                                                            text="Task: {task}"
+                                                         <Text
+                                                            text="Task:  Identify a project based on opportunities"
                                                         />
                                                         <Text
-                                                            text="Owner: {owner}"
+                                                            text="Owner: John Doe"
                                                         />
                                                         <Text
-                                                            text="Deadline: {deadline}"
+                                                            text="Deadline: {AppState>planned_finish}"
                                                         />
                                                         <ProgressIndicator
-                                                            percentValue="{value}"
-                                                            displayValue="{value}%"
+                                                            percentValue="{AppState>pct_complete}"
+                                                            displayValue="{AppState>pct_complete}%"
                                                             state="Success"
                                                         />
+                                                      
                                                     </VBox>
                                                 </f:content>
                                             </f:Card>

@@ -23,20 +23,20 @@ sap.ui.define(
         },
         deleteProject: function (oProject) {
           var sObjectPath = this.model.createKey("/Project", {
-              ID: oProject.ID // Assuming 'ID' is the key of your entity
+            ID: oProject.ID, // Assuming 'ID' is the key of your entity
           });
           return this.odata(sObjectPath).delete();
-      },
+        },
         getFramework() {
-         let mParameters = {
+          let mParameters = {
             urlParameters: {
-              $expand: "templatePhases,templateAreas,templateTasks($expand=area,phase)"
-            }
+              $expand:
+                "templatePhases,templateAreas,templateTasks($expand=area,phase)",
+            },
           };
           return this.odata("/RoadmapTemplate").get(mParameters);
         },
         saveFramework: function (oFramework) {
-
           return this.odata("/RoadmapTemplate").post(oFramework);
         },
         updateFramework: function (oFramework) {
@@ -47,29 +47,31 @@ sap.ui.define(
         },
         deleteFramework: function (oFramework) {
           var sObjectPath = this.model.createKey("/RoadmapTemplate", {
-              ID: oFramework.ID // Assuming 'ID' is the key of your entity
+            ID: oFramework.ID, // Assuming 'ID' is the key of your entity
           });
           return this.odata(sObjectPath).delete();
-      },
+        },
         getActivity() {
-          return this.odata("/ProjectActivity").get();
+          return this.odata("/TemplateActivity").get();
         },
         saveActivity: function (oActivity) {
-          return this.odata("/ProjectActivity").post(oActivity);
+          return this.odata("/TemplateActivity").post(oActivity);
         },
         updateActivity: function (oActivity) {
-          var sObjectPath = this.model.createKey("/ProjectActivity", {
+          var sObjectPath = this.model.createKey("/TemplateActivity", {
             ID: oActivity.ID,
           });
           return this.odata(sObjectPath).put(oActivity);
         },
         deleteActivity: function (oActivity) {
-          var sObjectPath = this.model.createKey("/ProjectActivity", {
-              ID: oActivity.ID // Assuming 'ID' is the key of your entity
+          var sObjectPath = this.model.createKey("/TemplateActivity", {
+            ID: oActivity.ID, // Assuming 'ID' is the key of your entity
           });
           return this.odata(sObjectPath).delete();
-      },
-        
+        },
+        createTask: function (oTask) {
+          return this.odata("/TemplateTask").post(oTask);
+        },
       }
     );
     return AppService;

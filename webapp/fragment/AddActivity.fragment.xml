@@ -80,19 +80,19 @@
 				<m:DatePicker id="pend01"  value="{AppState>/oSelectedActivity/planned_finish}"/>
 
                 <m:Label text="Forecasted / Actual Start" />
-				<m:DatePicker  value="{AppState>/oSelectedActivity/fore_act_start}"/>
+				<m:DatePicker  value="{AppState>/oSelectedActivity/fore_act_start}"  editable="false"/>
 
                 <m:Label text="Forecasted / Actual End"  />
-				<m:DatePicker value="{AppState>/oSelectedActivity/fore_act_finish}"/>
+				<m:DatePicker value="{AppState>/oSelectedActivity/fore_act_finish}" editable="false"/>
 
 				<m:Label text="pct_weight %" />
-				<m:Input value="{AppState>/oSelectedActivity/pct_weight}" />
+				<m:Input value="{AppState>/oSelectedActivity/pct_weight}" editable="false"/>
 
 				<m:Label text="pct_complete %" />
 				<m:Input value="{AppState>/oSelectedActivity/pct_complete}" />
 
 				<m:Label text="State" />
-				<m:Input value="{AppState>/oSelectedActivity/state}" />
+				<m:Input value="{AppState>/oSelectedActivity/state}" editable="false" />
 				
 			</form:content>
 		</form:SimpleForm>	

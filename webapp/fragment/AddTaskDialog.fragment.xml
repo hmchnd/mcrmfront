@@ -33,7 +33,7 @@
                         text="Save"
                         icon="sap-icon://save"
                         type="Emphasized"
-                        press="onSaveProjectDetails"
+                        press="onSaveTask"
                     />
                     <m:Button
                         icon="sap-icon://decline"
@@ -88,15 +88,46 @@
                                     <m:Label text="Task Name" />
                                     <m:Input
                                         id="pname"
-                                        value="{AppState>/oSelectedProject/name}"
+                                        value="{AppState>/oSelectedTask/name}"
                                     />
 
                                     <m:Label text="Task Description" />
                                     <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
+                                    <m:TextArea value="{AppState>/oSelectedTask/description}" />
+
+                                    <m:Label text="Project Planned Start" />
+                                    <m:DatePicker
+                                        id="pstart"
+                                        value="{AppState>/oSelectedTask/planned_start}"
+                                    />
+
+                                    <m:Label text="Project Planned End" />
+                                    <m:DatePicker
+                                        id="pend"
+                                        value="{AppState>/oSelectedTask/planned_finish}"
+                                    />
+
+                                    <m:Label text="Forecasted / Actual Start" />
+                                    <m:DatePicker
+                                        editable="false"
+                                        value="{AppState>/oSelectedTask/fore_act_start}"
+                                    />
+
+                                    <m:Label text="Forecasted / Actual End" />
+                                    <m:DatePicker
+                                        editable="false"
+                                        value="{AppState>/oSelectedTask/fore_act_finish}"
+                                    />
+
+                                    <m:Label text="Task Progress" />
+                                    <m:Input value="{AppState>/oSelectedTask/pct_complete}" />
+
+                                    <m:Label text="Phase" />
                                     <m:ComboBox
                                         showSecondaryValues="true"
+                                        selectedKey="{AppState>/oSelectedTask/phase_ID}"
                                         items="{
-					path: '/Framework'
+					path: '/TemplatePhase'
 				}"
                                     >
                                         <core:ListItem
@@ -104,44 +135,19 @@
                                             text="{name}"
                                         />
                                     </m:ComboBox>
-
-                                    <m:Label text="Project Planned Start" />
-                                    <m:DatePicker
-                                        id="pstart"
-                                        value="{AppState>/oSelectedProject/planned_start}"
-                                    />
-
-                                    <m:Label text="Project Planned End" />
-                                    <m:DatePicker
-                                        id="pend"
-                                        value="{AppState>/oSelectedProject/planned_finish}"
-                                    />
-
-                                    <m:Label text="Forecasted / Actual Start" />
-                                    <m:DatePicker
-                                        editable="false"
-                                        value="{AppState>/oSelectedProject/fore_act_start}"
-                                    />
-
-                                    <m:Label text="Forecasted / Actual End" />
-                                    <m:DatePicker
-                                        editable="false"
-                                        value="{AppState>/oSelectedProject/fore_act_finish}"
-                                    />
-
-                                    <m:Label text="Task Progress" />
-                                    <m:Input
-                                        value=""
-                                    />
-
-                                    <m:Label text="Phase" />
-                                    <m:Input
-                                        value=""
-                                    />
                                     <m:Label text="Area" />
-                                    <m:Input
-                                        value=""
-                                    />
+                                    <m:ComboBox
+                                        showSecondaryValues="true"
+                                        selectedKey="{AppState>/oSelectedTask/area_ID}"
+                                        items="{
+					path: '/TemplateArea'
+				}"
+                                    >
+                                        <core:ListItem
+                                            key="{ID}"
+                                            text="{name}"
+                                        />
+                                    </m:ComboBox>
                                 </form:content>
                             </form:SimpleForm>
                         </blocks>

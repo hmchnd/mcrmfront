@@ -5,17 +5,9 @@ sap.ui.define(
     "sap/m/MessageBox",
     "../model/Activity",
     "../model/Framework",
+    "../model/Task",
   ],
-  function (
-    BaseObject,
-    Project,
-    MessageBox,
-    Activity,
-    Framework,
-    Class,
-    ProjectType,
-    IndustryType
-  ) {
+  function (BaseObject, Project, MessageBox, Activity, Framework, Task) {
     "use strict";
     var AppState = BaseObject.extend(
       "framsys.com.framsysfrontend.state.AppState",
@@ -42,8 +34,10 @@ sap.ui.define(
             aProjects: [],
             aActivity: [],
             aFramework: [],
+            aTask: [],
             oSelectedActivity: {},
             oSelectedProject: {},
+            oSelectedTask: {},
             oSelectedFramework: {},
             showGlobalAddButton: false,
             currentPage: "",
@@ -85,7 +79,7 @@ sap.ui.define(
             delete oProject.fore_act_start;
             delete oProject.fore_act_finish;
             delete oProject.pct_complete;
-           // oProject.framework_ID = "215eaa61-ade1-48d2-a712-ba8dbee7a02d";
+            // oProject.framework_ID = "215eaa61-ade1-48d2-a712-ba8dbee7a02d";
             this.AppService.updateProject(oProject).then(function (result) {
               MessageBox.success(`Project Details Updated!`);
             });
@@ -307,6 +301,14 @@ sap.ui.define(
             .catch(function (oError) {
               MessageBox.error(`Failed to delete activity: ${oError.message}`);
             });
+        },
+        createNewTask: function (oTask) {
+          oTask.planned_start = new Date(oTask.planned_start);
+          oTask.planned_finish = new Date(oTask.planned_finish);
+          oTask.parent_key_ID = "7c80d6d0-4457-4e07-9de1-946d2085c9ea";
+          this.AppService.createTask(oTask).then(function (result) {
+            MessageBox.success(`New Task Created`);
+          });
         },
       }
     );

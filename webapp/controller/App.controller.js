@@ -4,7 +4,8 @@ sap.ui.define([
   "../model/Project",
   "../model/Activity",
 "../model/Framework",
-], (BaseController,LayoutType,Project,Framework,Activity) => {
+"../model/Task",
+], (BaseController,LayoutType,Project,Activity,Framework,Task) => {
 
   "use strict";
 
@@ -52,7 +53,7 @@ sap.ui.define([
 
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
           this.getModel("projectLayoutView").refresh(true);
-          this.AppState.data.oSelectedProject = new Project();
+          this.AppState.data.oSelectedTask = new Task();
         }else if(this.AppState.data.currentPage == "roadmapTemplate"){
           let sLayout = LayoutType.EndColumnFullScreen;
           this.getModel("roadmapTemplateLayoutView").setProperty("/layout", sLayout);
