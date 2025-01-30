@@ -58,7 +58,7 @@ sap.ui.define([
           this.getModel("roadmapTemplateLayoutView").setProperty("/layout", sLayout);
           this.getModel("roadmapTemplateLayoutView").refresh(true);
           this.AppState.data.oSelectedFramework = new Framework();
-        }else if(this.AppState.data.currentPage == "Roadmap"){
+        }else if(this.AppState.data.currentPage == "ManageRoadmap"){
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
 
           this.getModel("manageRoadmapLayoutView").setProperty("/layout", sLayout);

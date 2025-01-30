@@ -8,8 +8,13 @@
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:mc="sap.suite.ui.microchart"
     xmlns:fb="sap.ui.comp.filterbar">
+    
     <Page title="SAP Activate for RISE with SAP S/4 HANA Cloud Project Roadmap">
         <content>
+        <f:FlexibleColumnLayout layout="{manageRoadmapLayoutView>/layout}">
+                <f:beginColumnPages>
+                <Page showHeader="false">
+                        <content>
             <Panel>
                 <f:GridList items="{AppState>/aFramework/0/templatePhases/results}">
 
@@ -20,7 +25,7 @@
                         </VBox>
                         <pf:MicroProcessFlow>
                             <pf:content>
-                                <pf:MicroProcessFlowItem state="Success"/>
+                                <pf:MicroProcessFlowItem state="Warning"/>
                                 <pf:MicroProcessFlowItem state="Warning"/>
                                 <pf:MicroProcessFlowItem state="Warning"/>
                                 <pf:MicroProcessFlowItem state="Warning"/>
@@ -183,6 +188,19 @@
                 </headerToolbar>
             </Panel> -->
             <VBox id="panelContainer" class="sapUiTinyMargin"/>
+                 </content>
+                    </Page>
+                </f:beginColumnPages>
+
+                <f:midColumnPages>
+                    <core:Fragment
+                        fragmentName="framsys.com.framsysfrontend.fragment.AddTaskDialog"
+                        type="XML"
+                    />
+                </f:midColumnPages>
+
+                <f:endColumnPages />
+            </f:FlexibleColumnLayout>
         </content>
     </Page>
 </mvc:View>
