@@ -28,9 +28,9 @@ sap.ui.define([
         this.AppState.setViewController(this);
         this.AppState.data.showGlobalAddButton = true;
         this.AppState.data.currentPage = "ManageRoadmap";
-        this.AppState.data.currentPageLabel = "Manage Roadmap";
-   
          this.AppState.getMyFrameworkList();
+         this.AppState.data.currentPageLabel = "Manage Roadmap";
+         this.AppState.getModel().refresh(true);
       },
    
       createPanels: function() {

@@ -16,9 +16,11 @@ sap.ui.define([
 			    this.AppState.getModel().setSizeLimit(999999);
           this.AppState.data.showGlobalAddButton=true;
           this.AppState.data.currentPage = "PROJECT";
-          this.AppState.data.currentPageLabel="Manage Projects"
+         
           let oGridListControl = this.byId("gridList");
           this.AppState.getMyProjectsList(oGridListControl);
+          this.AppState.data.currentPageLabel="Manage Projects"
+          this.AppState.getModel().refresh(true);
         },
         onAfterRendering:function(){
           var sLayout = LayoutType.OneColumn;

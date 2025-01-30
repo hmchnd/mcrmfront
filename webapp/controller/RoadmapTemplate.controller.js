@@ -67,6 +67,8 @@ sap.ui.define([
       this.AppState.data.currentPage = "roadmapTemplate";
       let oGridListControl = this.byId("gridList1");
       this.AppState.getMyFrameworkList(oGridListControl);
+      this.AppState.data.currentPageLabel="Manage Roadmap Template"
+      this.AppState.getModel().refresh(true);
     },
     onAfterRendering: function () {
       var sLayout = LayoutType.OneColumn;

@@ -231,6 +231,8 @@ var DropLayout = coreLibrary.dnd.DropLayout;
             this.AppState.data.currentPage = "manageActivity";
             let oGridListControl = this.byId("gridList");
           this.AppState.getMyActivityList(oGridListControl);
+          this.AppState.data.currentPageLabel="Manage Activity"
+          this.AppState.getModel().refresh(true);
           
           },
           onSaveProjectDetails:function(){
