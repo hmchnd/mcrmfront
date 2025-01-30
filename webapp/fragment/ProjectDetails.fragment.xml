@@ -73,12 +73,16 @@
 				<m:Label text="Project Name" />
 				<m:Input id="pname" value="{AppState>/oSelectedProject/name}" />
 
+				<m:Label text="Project Description" />
+				<m:TextArea  value="{AppState>/oSelectedProject/description}" />
+
                 <m:Label text="Roadmap" />
 				<!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
 				<m:ComboBox
 				showSecondaryValues= "true"
+				selectedKey="{AppState>/oSelectedProject/roadmapTemplate_ID}"
 				items="{
-					path: '/Framework'
+					path: '/RoadmapTemplate'
 				}">
 				<core:ListItem key="{ID}" text="{name}" />
 			</m:ComboBox>
@@ -96,10 +100,21 @@
 				<m:DatePicker editable="false" value="{AppState>/oSelectedProject/fore_act_finish}"/>
 
 				<m:Label text="Project Budget" />
-				<m:Input value="{AppState>/oSelectedProject/value}" />
+				<m:Input value="{AppState>/oSelectedProject/initialBudget}" />
 
 				<m:Label text="Currency" />
 				<m:Input value="{AppState>/oSelectedProject/currency}" />
+
+				  <m:Label text="Project Manager" />
+				<!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
+				<m:ComboBox
+				showSecondaryValues= "true"
+				selectedKey="{AppState>/oSelectedProject/projectManager_ID}"
+				items="{
+					path: '/Employee'
+				}">
+				<core:ListItem key="{ID}" text="{name}" />
+			</m:ComboBox>
 				
 			</form:content>
 		</form:SimpleForm>	

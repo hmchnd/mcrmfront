@@ -99,7 +99,7 @@ sap.ui.define([
                       text: task.description
                     })
                   ]
-                }).addStyleClass("sapUiSmallMarginBegin");
+                }).addStyleClass("sapUiTinyMargin");
       
                 // Add Progress Indicator
                 if (task.pct_complete !== null) {
@@ -108,14 +108,17 @@ sap.ui.define([
                     displayValue: `${task.pct_complete}%`,
                     state: "Success",
                     height: "1.5rem"
-                  }));
+                  })).addStyleClass("sapUiTinyMargin");
                 }
       
                 // Add dates if available
                 if (task.planned_start && task.planned_finish) {
+                  oTaskBox.addItem(new Label({
+                    text:'Planned Start - Planned Finish'
+                  })).addStyleClass("sapUiTinyMargin");
                   oTaskBox.addItem(new Text({
-                    text: `${task.planned_start} - ${task.planned_finish}`
-                  }));
+                    text: `${task.planned_start.toISOString().slice(0,10)} - ${task.planned_finish.toISOString().slice(0,10)}`
+                  })).addStyleClass("sapUiTinyMargin");
                 }
       
                 oPhaseContainer.addItem(oTaskBox);
