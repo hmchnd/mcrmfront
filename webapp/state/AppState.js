@@ -153,7 +153,7 @@ sap.ui.define(
           // Add promises for fetching Framework and Class data
           aPromises.push(this.AppService.getFramework());
           let that = this;
-          oGridListControl.setBusy(true);
+          // oGridListControl.setBusy(true);
       
           Promise.all(aPromises).then(function (results) {
               // Process Framework data
@@ -168,7 +168,7 @@ sap.ui.define(
               that.data.aFramework = aFrameworkList;
               // that.data.aFramework.class = aClassList;
       
-              oGridListControl.setBusy(false);
+              // oGridListControl.setBusy(false);
              
           }).catch(function (error) {
               // Handle any errors during the Promise resolution
@@ -180,32 +180,35 @@ sap.ui.define(
         createNewFrameworkEntry: function (oFramework) {
           debugger;
           if (oFramework.ID) {
-            let frameworkID = oFramework.ID;
+            // let frameworkID = oFramework.ID;
             //    delete oFramework.Classes;
             //    delete oFramework.phases;
             //    delete oFramework.areas;
             // oFramework.Classes = [];
-            oFramework.phases = [];
-            oFramework.areas = [];
+            // oFramework.templateAreas = oFramework.area;
+            // oFramework.templatePhases = oFramework.phase;
+            // oFramework.templateTasks = oFramework.task;
             //    delete oFramework.pct_complete;
-            oFramework.ID = frameworkID;
+            // oFramework.ID = frameworkID;
             this.AppService.updateFramework(oFramework).then(function (result) {
               MessageBox.success(`Roadmap Template Details Updated!`);
             });
           } else {
             //    oFramework.ID = '225eaa61-ade1-48d2-a712-ba8dbee7a02d';
-            oFramework.Classes = [{
-              ProjectType:oFramework.ProjectType,
-              IndustryType:oFramework.IndustryType
-            }];
-               delete oFramework.ProjectType;
-               delete oFramework.IndustryType;
+            // oFramework.Classes = [{
+            //   ProjectType:oFramework.ProjectType,
+            //   IndustryType:oFramework.IndustryType
+            // }];
+              //  delete oFramework.ProjectType;
+              //  delete oFramework.IndustryType;
 
 
-            oFramework.areas = oFramework.area;
-            oFramework.phases = oFramework.phase;
+            oFramework.templateAreas = oFramework.area;
+            oFramework.templatePhases = oFramework.phase;
+            oFramework.templateTasks = oFramework.task;
             delete oFramework.area;
             delete oFramework.phase;
+            delete oFramework.task;
 
             debugger
             this.AppService.saveFramework(oFramework).then(function (result) {

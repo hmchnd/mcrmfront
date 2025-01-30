@@ -5,54 +5,62 @@
     xmlns:uxap="sap.uxap"
     xmlns:form="sap.ui.layout.form"
 >
-<Page >
-<headerContent>
-<OverflowToolbar >
-    <ToolbarSpacer ></ToolbarSpacer>
-    <Button  text="Delete" icon="sap-icon://delete" type="Emphasized" press="onDeleteFramework"/>
-    <Button text="Save" type="Emphasized" press="onSaveFrameworkDetails" ></Button>
-    <Button text="Cancel" press="onCloseDetailPage"></Button>
-
-    
-    </OverflowToolbar>
-</headerContent>
-    <uxap:ObjectPageLayout
-        id="ObjectPageLayout1"
-        upperCaseAnchorBar="false"
-        showAnchorBar="true"
-        enableLazyLoading="true"
-    >
-        <uxap:sections>
-            <uxap:ObjectPageSection
-                id="_IDGenObjectPageSection3"
-                showTitle="false"
-            >
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection
-                        id="_IDGenObjectPageSubSection6"
-                        title="Roadmap Detail"
-                    >
-                        <uxap:blocks>
-                            <VBox width="80%">
-                                <form:SimpleForm
-                                    editable="true"
-                                    layout="ResponsiveGridLayout"
-                                >
-                                    <Label
-                                        text="Name"
-                                        
-                                    />
-                                    <Input value="{AppState>/oSelectedFramework/name}"  />
-                                    <Label
-                                        text="Description"
-                                        
-                                    />
-                                    <TextArea value="{AppState>/oSelectedFramework/description}" />
-                                </form:SimpleForm>
-                            </VBox>
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                    <uxap:ObjectPageSubSection
+    <Page>
+        <headerContent>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    text="Delete"
+                    icon="sap-icon://delete"
+                    type="Emphasized"
+                    press="onDeleteFramework"
+                />
+                <Button
+                    text="Save"
+                    type="Emphasized"
+                    press="onSaveFrameworkDetails"
+                />
+                <Button
+                    text="Cancel"
+                    press="onCloseDetailPage"
+                />
+            </OverflowToolbar>
+        </headerContent>
+        <uxap:ObjectPageLayout
+            id="ObjectPageLayout1"
+            upperCaseAnchorBar="false"
+            showAnchorBar="true"
+            enableLazyLoading="true"
+        >
+            <uxap:sections>
+                <uxap:ObjectPageSection
+                    id="_IDGenObjectPageSection3"
+                    showTitle="false"
+                >
+                    <uxap:subSections>
+                        <uxap:ObjectPageSubSection
+                            id="_IDGenObjectPageSubSection6"
+                            title="Roadmap Detail"
+                        >
+                            <uxap:blocks>
+                                <VBox width="80%">
+                                    <form:SimpleForm
+                                        editable="true"
+                                        layout="ResponsiveGridLayout"
+                                    >
+                                        <Label text="Name" />
+                                        <Input
+                                            value="{AppState>/oSelectedFramework/name}"
+                                        />
+                                        <Label text="Description" />
+                                        <TextArea
+                                            value="{AppState>/oSelectedFramework/description}"
+                                        />
+                                    </form:SimpleForm>
+                                </VBox>
+                            </uxap:blocks>
+                        </uxap:ObjectPageSubSection>
+                        <!-- <uxap:ObjectPageSubSection
                         id="_IDGenObjectPageSubSection7"
                         title="Project Type"
                     >
@@ -94,103 +102,199 @@
                                 </form:SimpleForm>
                             </VBox>
                         </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                    <uxap:ObjectPageSubSection
-                        id="_IDGenObjectPageSubSection8"
-                        title="Area and Phases"
-                    >
-                        <uxap:blocks>
-                            <VBox width="80%">
-                                <Table
-                                    id="SimpleTable1"
-                                    inset="false"
-                                    class="sapUiMediumMarginBottom"
-                                    width="100%"
-                                    items="{editAreaModel>/}"
-                                    
-                                >
-                                <headerToolbar>
-                                <OverflowToolbar >
-                                <ToolbarSpacer ></ToolbarSpacer>
-                                                                <Button icon="sap-icon://add"  press="onEditCreateArea" ></Button>
-
-                                </OverflowToolbar>
-                                </headerToolbar>
-                                    <!-- Define the single column -->
-                                    <columns>
-                                        <Column>
-                                            <header>
-                                                <Label text="Area" />
-                                            </header>
-                                        </Column>
-                                        <Column width="3rem" >
+                    </uxap:ObjectPageSubSection> -->
+                        <uxap:ObjectPageSubSection
+                            id="_IDGenObjectPageSubSection8"
+                            title="Area and Phases"
+                        >
+                            <uxap:blocks>
+                                <VBox width="80%">
+                                    <Table
+                                        id="SimpleTable1"
+                                        inset="false"
+                                        class="sapUiMediumMarginBottom"
+                                        width="100%"
+                                        items="{AppState>/oSelectedFramework/templateAreas/results}"
+                                    >
+                                        <headerToolbar>
+                                            <OverflowToolbar>
+                                                <ToolbarSpacer />
+                                                <Button
+                                                    icon="sap-icon://add"
+                                                    press="onEditCreateArea"
+                                                />
+                                            </OverflowToolbar>
+                                        </headerToolbar>
+                                        <!-- Define the single column -->
+                                        <columns>
+                                            <Column>
+                                                <header>
+                                                    <Label text="Area" />
+                                                </header>
+                                            </Column>
+                                            <Column width="3rem">
                                                 <Label text="" />
-                                        </Column>
-                                    </columns>
-                                    <!-- Bind the items -->
-                                    <items>
-                                        <ColumnListItem>
-                                            <cells>
-                                                <Input value="{editAreaModel>area}" />
-                                                <Button icon="sap-icon://delete" press="onDeleteEditArea"/>
+                                            </Column>
+                                        </columns>
+                                        <!-- Bind the items -->
+                                        <items>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <Input
+                                                        value="{AppState>name}"
+                                                    />
+                                                    <Button
+                                                        icon="sap-icon://delete"
+                                                        press="onDeleteEditArea"
+                                                    />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
 
-                                            </cells>
-                                        </ColumnListItem>
-                                    </items>
-                                </Table>
-
-                                <Table
-                                    id="SimpleTable"
-                                    inset="false"
-                                    width="100%"
-                                    items="{editPhaseModel>/}"
-                                    
-
-                                    
-                                >
-                                <headerToolbar>
-                                <OverflowToolbar >
-                                <ToolbarSpacer ></ToolbarSpacer>
-                                <Button icon="sap-icon://add"  press="onEditCreatePhase" ></Button>
-                                </OverflowToolbar>
-                                </headerToolbar>
-                                    <!-- Define the single column -->
-                                    <columns>
-                                        <Column>
-                                            <header>
-                                                <Label text="Phases" />
-                                            </header>
-                                        </Column>
-                                         <Column width="3rem" >
+                                    <Table
+                                        id="SimpleTable"
+                                        inset="false"
+                                        width="100%"
+                                        items="{AppState>/oSelectedFramework/templatePhases/results}"
+                                    >
+                                        <headerToolbar>
+                                            <OverflowToolbar>
+                                                <ToolbarSpacer />
+                                                <Button
+                                                    icon="sap-icon://add"
+                                                    press="onEditCreatePhase"
+                                                />
+                                            </OverflowToolbar>
+                                        </headerToolbar>
+                                        <!-- Define the single column -->
+                                        <columns>
+                                            <Column>
+                                                <header>
+                                                    <Label text="Phases" />
+                                                </header>
+                                            </Column>
+                                            <Column width="3rem">
                                                 <Label text="" />
-                                        </Column>
-                                    </columns>
-                                    <!-- Bind the items -->
-                                    <items>
-                                        <ColumnListItem>
-                                            <cells>
-                                                <Input value="{editPhaseModel>phase}" />
-                                                <Button icon="sap-icon://delete"  press="onDeleteEditPhase" />
+                                            </Column>
+                                        </columns>
+                                        <!-- Bind the items -->
+                                        <items>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <Input
+                                                        value="{AppState>name}"
+                                                    />
 
-                                            </cells>
-                                        </ColumnListItem>
-                                    </items>
-                                </Table>
-                            </VBox>
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
-        </uxap:sections>
-    </uxap:ObjectPageLayout>
-    <footer>
-    <!-- <OverflowToolbar >
+                                                    <Button
+                                                        icon="sap-icon://delete"
+                                                        press="onDeleteEditPhase"
+                                                    />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </VBox>
+                            </uxap:blocks>
+                        </uxap:ObjectPageSubSection>
+                        <uxap:ObjectPageSubSection
+                            id="_IDGenObjectPageSubSection9"
+                            title="Tasks"
+                        >
+                            <uxap:blocks>
+                                <VBox width="80%">
+                                    <Table
+                                        id="editManageTaskTable"
+                                        inset="false"
+                                        class="sapUiMediumMarginBottom"
+                                        width="100%"
+                                        items="{AppState>/oSelectedFramework/templateTasks/results}"
+                                    >
+                                        <headerToolbar>
+                                            <OverflowToolbar>
+                                                <ToolbarSpacer />
+                                                <Button
+                                                    icon="sap-icon://add"
+                                                    press="onCreateTasks"
+                                                />
+                                            </OverflowToolbar>
+                                        </headerToolbar>
+                                        <columns>
+                                            <Column>
+                                                <header>
+                                                    <Label text="Task Name" />
+                                                </header>
+                                            </Column>
+                                            <Column>
+                                                <Label text="Description" />
+                                            </Column>
+                                            <Column>
+                                                <Label
+                                                    text="Area"
+                                                    required="true"
+                                                />
+                                            </Column>
+                                            <Column>
+                                                <Label
+                                                    text="Phase"
+                                                    required="true"
+                                                />
+                                            </Column>
+                                            <Column width="3rem">
+                                                <Label text="" />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <Input
+                                                        value="{AppState>name}"
+                                                    />
+                                                    <Input
+                                                        value="{taskModel>desc}"
+                                                    />
+                                                    <Select
+                                                        placeholder="Select Area"
+                                                        change="onAreaChange"
+                                                        items="{AppState>/oSelectedFramework/templateAreas/results}"
+                                                        
+                                                    >
+                                                        <core:Item
+                                                            text="{AppState>name}"
+                                                        />
+                                                    </Select>
+                                                    <Select
+                                                        placeholder="Select Area"
+                                                        change="onAreaChange"
+                                                        items="{AppState>/oSelectedFramework/templatePhases/results}"
+                                                    >
+                                                        <core:Item
+                                                            text="{AppState>name}"
+                                                        />
+                                                    </Select>
+                                                    <Button
+                                                        icon="sap-icon://delete"
+                                                        press="onDeleteCreateArea"
+                                                    />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </VBox>
+                            </uxap:blocks>
+                        </uxap:ObjectPageSubSection>
+                    </uxap:subSections>
+                </uxap:ObjectPageSection>
+            </uxap:sections>
+        </uxap:ObjectPageLayout>
+        <footer>
+            <!-- <OverflowToolbar >
     <ToolbarSpacer ></ToolbarSpacer>
     <Button text="Next"></Button>
     <Button text="Cancel" press="onCloseDetailPage"></Button>
 
     
     </OverflowToolbar> -->
-    </footer>
-  </Page>  
+        </footer>
+    </Page>
 </core:FragmentDefinition>
