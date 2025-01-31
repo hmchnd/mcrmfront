@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Popover id="popupPopover" title="Select an Option" placement="Bottom">
+        <VBox>
+            <RadioButtonGroup id="radioGroup">
+                <buttons>
+                    <RadioButton text="Create Milestone" selected="true"/>
+                    <RadioButton text="Create Task"/>
+                </buttons>
+            </RadioButtonGroup>
+        </VBox>
+        <footer>
+            <Bar>
+                <contentRight>
+                    <Button text="OK" press="onPopoverOk"/>
+                    <Button text="Cancel" press="onPopoverCancel"/>
+                </contentRight>
+            </Bar>
+        </footer>
+    </Popover>
+</core:FragmentDefinition>

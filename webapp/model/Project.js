@@ -1,4 +1,3 @@
-
 sap.ui.define([
     "./BaseObject"
 ], function (BaseObject) {
@@ -15,6 +14,7 @@ sap.ui.define([
                 this.currency = data?.currency || "";
                 this.roadmapTemplate_ID = data?.roadmapTemplate_ID || "";
                 this.projectManager_ID = data?.projectManager_ID || "";
+                this.projectGateKeeper_ID = data?.projectGateKeeper_ID || "";
                 this.fore_act_start = data?.fore_act_start?.toISOString()?.slice(0,10) || null;
                 this.fore_act_finish = data?.fore_act_finish?.toISOString()?.slice(0,10) || null;
                 this.pct_complete = Number(data?.pct_complete || 0);

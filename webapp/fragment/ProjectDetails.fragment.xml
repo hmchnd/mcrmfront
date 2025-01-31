@@ -22,7 +22,8 @@
 						</expandedHeading>
 						<actions>
 						<m:Button  text="Delete" icon="sap-icon://delete" type="Emphasized" press="onDeleteProject"/>
-                         <m:Button  text="Manage Roadmap"  type="Emphasized" press="onManageRoadmap"/>
+                         <m:Button  text="Manage Roadmap"  type="Emphasized" press="onManageRoadmap" />
+ 
                         <m:Button  text="Save" icon="sap-icon://save" type="Emphasized" press="onSaveProjectDetails"/>
 					<m:Button  icon="sap-icon://decline" type="Emphasized" press="onCloseDetailPage"/>
 				
@@ -34,13 +35,7 @@
 			 <headerContent>
 					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
 
-						<f:Avatar src="sap-icon://idea-wall"
-								  showBorder ="false"
-								  displaySize ="XS"
-								  displayShape="Circle"
-								  imageFitType="Contain"
-								  >
-						</f:Avatar>
+						
 					</m:FlexBox>
 				
 				</headerContent>
@@ -115,7 +110,16 @@
 				}">
 				<core:ListItem key="{ID}" text="{name}" />
 			</m:ComboBox>
-				
+			 <m:Label text="Project Gatekeeper" />
+				<!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
+				<m:ComboBox
+				showSecondaryValues= "true"
+				selectedKey="{AppState>/oSelectedProject/projectGateKeeper_ID}"
+				items="{
+					path: '/Employee'
+				}">
+				<core:ListItem key="{ID}" text="{name}" />
+			</m:ComboBox>
 			</form:content>
 		</form:SimpleForm>	
 				

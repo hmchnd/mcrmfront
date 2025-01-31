@@ -7,8 +7,6 @@
     xmlns:l="sap.ui.layout"
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:core="sap.ui.core"
- 
-   
 >
     <Page title="Projects / Manage Activity">
         <content>
@@ -44,35 +42,37 @@
 							<ToolbarSpacer/>
 
 						</OverflowToolbar> -->
- <ScrollContainer >
-                            <l:VerticalLayout
-                                class="sapUiContentPadding equalColumns"
-                                width="100%"
-                            >
-                           
-                                <FlexBox class="columns">
-                                    <!-- New Segment -->
-                                    <VBox class="sapUiSmallMargin">
-                                        <ObjectStatus
-                                            text="NEW"
-                                            state="Error"
-                                        />
-                                        <f:GridContainer
-                                            id="grid1"
-                                            width="100%"
-                                            snapToRow="true"
-                                            items="{AppState>/aActivity}"
-                                        >
-                                            <f:layout>
-                                                <f:GridContainerSettings
-                                                    rowSize="10px"
-                                                    columnSize="400px"
-                                                    gap="20px"
-                                                    class="sapUiSmallMargin"
-                                                />
-                                            </f:layout>
+                            <ScrollContainer>
+                                <l:VerticalLayout
+                                    class="sapUiContentPadding equalColumns"
+                                    width="100%"
+                                >
+                                    <FlexBox class="columns">
+                                        <!-- New Segment -->
+                                        <VBox class="sapUiSmallMargin">
+                                            <ObjectStatus
+                                                text="NEW"
+                                                state="Error"
+                                            />
+                                            <f:GridContainer
+                                                id="NEW"
+                                                width="100%"
+                                                snapToRow="true"
+                                                items="{
+        path: 'AppState>/aActivity',
+        filters: [{ path: 'state', operator: 'EQ', value1: 'NEW' }]
+    }"
+                                            >
+                                                <f:layout>
+                                                    <f:GridContainerSettings
+                                                        rowSize="10px"
+                                                        columnSize="400px"
+                                                        gap="20px"
+                                                        class="sapUiSmallMargin"
+                                                    />
+                                                </f:layout>
 
-                                            <!-- <layoutData>
+                                                <!-- <layoutData>
                             <FlexItemData
                                 growFactor="1"
                                 baseSize="0"
@@ -81,106 +81,47 @@
                             />
                         </layoutData> -->
 
-                                            <f:Card
-                                                class="sapUiTinyMargin"
-                                                press="onCardPress"
-                                                semanticRole="ListItem"
-                                                visible="{path:'AppState>pct_complete',formatter:'.fnMakeNewVisibleCard'}"
-                                            >
-                                                <f:header>
-                                                    <card:Header
-                                                        title="Activity: {AppState>name}"
-                                                        subtitle="{subtitle}"
-                                                        iconSrc="{iconSrc}"
-                                                    />
-                                                </f:header>
-                                                <f:content>
-                                                    <VBox
-                                                        class="sapUiTinyMargin"
-                                                    >
-                                                        <Text
-                                                            text="Task:  Identify a project based on opportunities"
+                                                <f:Card
+                                                    class="sapUiTinyMargin"
+                                                    press="onCardPress"
+                                                    semanticRole="ListItem"
+                                                >
+                                                    <f:header>
+                                                        <card:Header
+                                                            title="Activity: {AppState>name}"
+                                                            subtitle="{subtitle}"
+                                                            iconSrc="{iconSrc}"
                                                         />
-                                                        <Text
+                                                    </f:header>
+                                                    <f:content>
+                                                        <VBox
+                                                            width="20rem"
+                                                            class="sapUiTinyMargin"
+                                                        >
+                                                            <!-- <Text
+                                                                text="Task: Strategic Planning"
+                                                            /> -->
+                                                            <!-- <Text
                                                             text="Owner: John Doe"
-                                                        />
-                                                        <Text
-                                                            text="Deadline: {AppState>planned_finish}"
-                                                        />
-                                                        <ProgressIndicator
-                                                            percentValue="{AppState>pct_complete}"
-                                                            displayValue="{AppState>pct_complete}%"
-                                                            
-                                                        />
-                                                    </VBox>
-                                                </f:content>
-                                            </f:Card>
-                                        </f:GridContainer>
-                                    </VBox>
- 
-                                    <!-- In Progress Segment -->
-                                    <VBox class="sapUiSmallMargin">
-                                        <!-- <layoutData>
-                        <FlexItemData
-                            growFactor="1"
-                            baseSize="0"
-                            backgroundDesign="Solid"
-                            styleClass="sapUiTinyMargin"
-                        />
-                    </layoutData> -->
-                                        <ObjectStatus
-                                            text="IN PROGRESS"
-                                            state="Warning"
-                                        />
-                                        <f:GridContainer
-                                            id="grid2"
-                                            width="100%"
-                                            snapToRow="true"
-                                            items="{AppState>/aActivity}"
-                                        >
-                                            <f:layout>
-                                                <f:GridContainerSettings
-                                                    rowSize="10px"
-                                                    columnSize="400px"
-                                                    gap="20px"
-                                                    class="sapUiSmallMargin"
-                                                />
-                                            </f:layout>
-                                            <f:Card  semanticRole="ListItem" class="sapUiTinyMargin" visible="{path:'AppState>pct_complete',formatter:'.fnMakeProgressVisibleCard'}"   press="onCardPress">
-                                                <f:header>
-                                                    <card:Header
-                                                        title="Activity: {AppState>name}"
-                                                        subtitle="{subtitle}"
-                                                        iconSrc="{iconSrc}"
-                                                    />
-                                                </f:header>
-                                                <f:content>
-                                                    <VBox
-                                                        class="sapUiTinyMargin"
-                                                    >
-                                                        <Text
-                                                            text="Task:  Identify a project based on opportunities"
-                                                        />
-                                                        <Text
-                                                            text="Owner: John Doe"
-                                                        />
-                                                        <Text
-                                                            text="Deadline: {AppState>planned_finish}"
-                                                        />
-                                                        <ProgressIndicator
-                                                            percentValue="{AppState>pct_complete}"
-                                                            displayValue="{AppState>pct_complete}%"
-                                                            state="Warning"
-                                                        />
-                                                    </VBox>
-                                                </f:content>
-                                            </f:Card>
-                                        </f:GridContainer>
-                                    </VBox>
+                                                        /> -->
+                                                            <Text
+                                                                text="Deadline: {AppState>planned_finish}"
+                                                            />
 
-                                    <!-- Completed Segment -->
-                                    <VBox class="sapUiSmallMargin">
-                                        <!-- <layoutData>
+                                                            <ProgressIndicator
+                                                                percentValue="{AppState>pct_complete}"
+                                                                displayValue="{AppState>pct_complete}%"
+                                                                state="Error"
+                                                            />
+                                                        </VBox>
+                                                    </f:content>
+                                                </f:Card>
+                                            </f:GridContainer>
+                                        </VBox>
+
+                                        <!-- In Progress Segment -->
+                                        <VBox class="sapUiSmallMargin">
+                                            <!-- <layoutData>
                         <FlexItemData
                             growFactor="1"
                             baseSize="0"
@@ -188,59 +129,126 @@
                             styleClass="sapUiTinyMargin"
                         />
                     </layoutData> -->
-                                        <ObjectStatus
-                                            text="COMPLETED"
-                                            state="Success"
-                                        />
-                                        <f:GridContainer
-                                            id="grid3"
-                                            width="100%"
-                                            snapToRow="true"
-                                            items="{AppState>/aActivity}"
-                                        >
-                                            <f:layout>
-                                                <f:GridContainerSettings
-                                                    rowSize="10px"
-                                                    columnSize="400px"
-                                                    gap="20px"
-                                                    class="sapUiSmallMargin"
-                                                />
-                                            </f:layout>
-                                            <f:Card  semanticRole="ListItem" class="sapUiTinyMargin"  visible="{path:'AppState>pct_complete',formatter:'.fnMakeCompleteVisibleCard'}"  press="onCardPress">
-                                                <f:header>
-                                                    <card:Header
-                                                         title="Activity: {AppState>name}"
-                                                        subtitle="{subtitle}"
-                                                        iconSrc="{iconSrc}"
+                                            <ObjectStatus
+                                                text="IN PROGRESS"
+                                                state="Warning"
+                                            />
+                                            <f:GridContainer
+                                                id="INPROGRESS"
+                                                width="100%"
+                                                snapToRow="true"
+                                                items="{
+        path: 'AppState>/aActivity',
+        filters: [{ path: 'state', operator: 'EQ', value1: 'INPROGRESS' }]
+    }"
+                                            >
+                                                <f:layout>
+                                                    <f:GridContainerSettings
+                                                        rowSize="10px"
+                                                        columnSize="400px"
+                                                        gap="20px"
+                                                        class="sapUiSmallMargin"
                                                     />
-                                                </f:header>
-                                                <f:content>
-                                                    <VBox
-                                                        class="sapUiTinyMargin"
-                                                    >
-                                                         <Text
-                                                            text="Task:  Identify a project based on opportunities"
+                                                </f:layout>
+                                                <f:Card class="sapUiTinyMargin">
+                                                    <f:header>
+                                                        <card:Header
+                                                            title="Activity: {AppState>name}"
+                                                            subtitle="{subtitle}"
+                                                            iconSrc="{iconSrc}"
                                                         />
-                                                        <Text
+                                                    </f:header>
+                                                    <f:content>
+                                                        <VBox
+                                                            width="20rem"
+                                                            class="sapUiTinyMargin"
+                                                        >
+                                                            <!-- <Text
+                                                                text="Task: Strategic Planning"
+                                                            /> -->
+                                                            <!-- <Text
                                                             text="Owner: John Doe"
+                                                        /> -->
+                                                            <Text
+                                                                text="Deadline: {AppState>planned_finish}"
+                                                            />
+
+                                                            <ProgressIndicator
+                                                                percentValue="{AppState>pct_complete}"
+                                                                displayValue="{AppState>pct_complete}%"
+                                                                state="Warning"
+                                                            />
+                                                        </VBox>
+                                                    </f:content>
+                                                </f:Card>
+                                            </f:GridContainer>
+                                        </VBox>
+
+                                        <!-- Completed Segment -->
+                                        <VBox class="sapUiSmallMargin">
+                                            <!-- <layoutData>
+                        <FlexItemData
+                            growFactor="1"
+                            baseSize="0"
+                            backgroundDesign="Solid"
+                            styleClass="sapUiTinyMargin"
+                        />
+                    </layoutData> -->
+                                            <ObjectStatus
+                                                text="COMPLETED"
+                                                state="Success"
+                                            />
+                                            <f:GridContainer
+                                                id="COMPLETED"
+                                                width="100%"
+                                                snapToRow="true"
+                                                items="{
+        path: 'AppState>/aActivity',
+        filters: [{ path: 'state', operator: 'EQ', value1: 'COMPLETED' }]
+    }"
+                                            >
+                                                <f:layout>
+                                                    <f:GridContainerSettings
+                                                        rowSize="10px"
+                                                        columnSize="400px"
+                                                        gap="20px"
+                                                        class="sapUiSmallMargin"
+                                                    />
+                                                </f:layout>
+                                                <f:Card class="sapUiTinyMargin">
+                                                    <f:header>
+                                                        <card:Header
+                                                            title="Activity: {AppState>name}"
+                                                            subtitle="{subtitle}"
+                                                            iconSrc="{iconSrc}"
                                                         />
-                                                        <Text
-                                                            text="Deadline: {AppState>planned_finish}"
-                                                        />
-                                                        <ProgressIndicator
-                                                            percentValue="{AppState>pct_complete}"
-                                                            displayValue="{AppState>pct_complete}%"
-                                                            state="Success"
-                                                        />
-                                                      
-                                                    </VBox>
-                                                </f:content>
-                                            </f:Card>
-                                        </f:GridContainer>
-                                    </VBox>
-                                    
-                                </FlexBox>
-                            </l:VerticalLayout>
+                                                    </f:header>
+                                                    <f:content>
+                                                        <VBox
+                                                            width="20rem"
+                                                            class="sapUiTinyMargin"
+                                                        >
+                                                            <!-- <Text
+                                                                text="Task: Strategic Planning"
+                                                            /> -->
+                                                            <!-- <Text
+                                                            text="Owner: John Doe"
+                                                        /> -->
+                                                            <Text
+                                                                text="Deadline: {AppState>planned_finish}"
+                                                            />
+                                                            <ProgressIndicator
+                                                                percentValue="{AppState>pct_complete}"
+                                                                displayValue="{AppState>pct_complete}%"
+                                                                state="Success"
+                                                            />
+                                                        </VBox>
+                                                    </f:content>
+                                                </f:Card>
+                                            </f:GridContainer>
+                                        </VBox>
+                                    </FlexBox>
+                                </l:VerticalLayout>
                             </ScrollContainer>
                         </content>
                     </Page>

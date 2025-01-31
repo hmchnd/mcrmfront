@@ -42,6 +42,10 @@ sap.ui.define(
             showGlobalAddButton: false,
             currentPage: "",
             currentPageLabel: "",
+            makeTaskMilestoneVisiblity: {
+              taskvisiblity: false,
+              milestonevisiblity: false,
+            },
           };
 
           // Initialize base object.
@@ -225,6 +229,7 @@ sap.ui.define(
               return new Activity(item);
             });
             that.data.aActivity = aActivityList;
+            that.ViewController.attachDragAndDrop();
           });
         },
         createNewActivityEntry: function (oActivity) {
