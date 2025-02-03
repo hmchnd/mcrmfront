@@ -46,11 +46,9 @@ sap.ui.define(
         },
 
         onRouteMatched: function (oEvent) {
-          let sProjectName = oEvent.getParameter("arguments").sRoadmapID;
+          let sRoadmapID = oEvent.getParameter("arguments").sRoadmapID;
+          let sProjectName = oEvent.getParameter("arguments").sProjectName;
           this.getView().byId("manageRoadmapPage").setTitle(sProjectName);
-          var sRoadmapID =
-            oEvent.getParameter("roadmapID") ||
-            "7c80d6d0-4457-4e07-9de1-946d2085c9ea";
           debugger;
           this.AppState = this.getOwnerComponent().getState("App");
           this.getView().setModel(this.AppState.getModel(), "AppState");
@@ -139,7 +137,8 @@ sap.ui.define(
                         text: "Owner: " + (task.responsible?.name ?? ""),
                       }),
                       new Text({
-                        text: "Owner: " + (task.ID ?? ""), visible: false,
+                        text: "Owner: " + (task.ID ?? ""),
+                        visible: false,
                       }),
                       new Button({
                         icon: "sap-icon://flag",
@@ -263,7 +262,7 @@ sap.ui.define(
           this.getOwnerComponent().getRouter().navTo("ManageActivity");
         },
         onSaveTask: function () {
-          debugger
+          debugger;
           if (!this._validateTaskForm()) {
             return;
           }

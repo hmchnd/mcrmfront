@@ -61,7 +61,8 @@ sap.ui.define(
           debugger
           let oProjectDetails = this.AppState.data.oSelectedProject;
           this.getOwnerComponent().getRouter().navTo("ManageRoadmap",{
-            sRoadmapID: oProjectDetails.name
+            sRoadmapID: oProjectDetails.roadmapTemplate_ID,
+            sProjectName:oProjectDetails.name
           });
 
         },

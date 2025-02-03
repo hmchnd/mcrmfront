@@ -58,19 +58,19 @@ sap.ui.define(
                 "responsible",
             },
           }
-          return this.odata("/TemplateActivity").get(mParameters);
+          return this.odata("/ProjectActivity").get(mParameters);
         },
         saveActivity: function (oActivity) {
-          return this.odata("/TemplateActivity").post(oActivity);
+          return this.odata("/ProjectActivity").post(oActivity);
         },
         updateActivity: function (oActivity) {
-          var sObjectPath = this.model.createKey("/TemplateActivity", {
+          var sObjectPath = this.model.createKey("/ProjectActivity", {
             ID: oActivity.ID,
           });
           return this.odata(sObjectPath).put(oActivity);
         },
         deleteActivity: function (oActivity) {
-          var sObjectPath = this.model.createKey("/TemplateActivity", {
+          var sObjectPath = this.model.createKey("/ProjectActivity", {
             ID: oActivity.ID, // Assuming 'ID' is the key of your entity
           });
           return this.odata(sObjectPath).delete();

@@ -121,7 +121,7 @@
         },
         {
           "name": "ManageRoadmap",
-          "pattern": "ManageRoadmap/:sRoadmapID:",
+          "pattern": "ManageRoadmap/:sRoadmapID:/:sProjectName:",
           "target":"ManageRoadmap"
         },
         {

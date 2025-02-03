@@ -421,6 +421,7 @@ sap.ui.define(
             });
         },
         getProjectRoadmapById: function (sRoadmapID) {
+          this.ViewController.getView().setBusy(true);
           let aPromises = [];
           aPromises.push(this.AppService.getProjectRoadmapByID(sRoadmapID));
           let that = this;
@@ -435,6 +436,7 @@ sap.ui.define(
             that.data.aTask = oFetchedProjectRoadmap.projectTask.results || [];
             that.updateModel(true);
             that.ViewController.createPanels();
+            that.ViewController.getView().setBusy(false);
           });
         },
       }

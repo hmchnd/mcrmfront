@@ -82,7 +82,7 @@
                                                 </layoutData>
                                             </ObjectAttribute>
 
-                                            <ObjectAttribute
+                                            <!-- <ObjectAttribute
                                                 title="Project Type"
                                                 text="Oil and Gas"
                                             >
@@ -94,9 +94,9 @@
                                                         styleClass="sapUiTinyMargin"
                                                     />
                                                 </layoutData>
-                                            </ObjectAttribute>
+                                            </ObjectAttribute> -->
 
-                                            <ObjectAttribute
+                                            <!-- <ObjectAttribute
                                                 title="Industry Type"
                                                 text="Oil and Gas"
                                             >
@@ -108,7 +108,7 @@
                                                         styleClass="sapUiTinyMargin"
                                                     />
                                                 </layoutData>
-                                            </ObjectAttribute>
+                                            </ObjectAttribute> -->
 
                                             <ObjectStatus
                                                 title="Status"
