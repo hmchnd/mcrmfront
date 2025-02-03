@@ -1,10 +1,9 @@
-
 sap.ui.define([
     "./BaseObject"
 ], function (BaseObject) {
     "use strict";
     return BaseObject.extend("framsys.com.framsysfrontend.model.Activity", {
-
+ 
         constructor: function (data) {
             BaseObject.call(this, {});
             if (data) {
@@ -17,10 +16,12 @@ sap.ui.define([
                 this.pct_weight = Number(data?.pct_weight || 0);
                 this.pct_complete = Number(data?.pct_complete || 0);
                 this.state = data?.state || "";
-                
+                this.responsible_ID = data?.responsible_ID || "";
+                this.responsible = data?.responsible || "";
+               
             }
         },
-        
+       
     });
-
+ 
 });

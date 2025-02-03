@@ -54,7 +54,7 @@ sap.ui.define([
       this.getView().setModel(tasks, "taskModel")
 
       var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-      oRouter.attachRouteMatched(this.onRouteMatched, this);
+      oRouter.getRoute("RoadmapTemplate").attachPatternMatched(this.onRouteMatched, this);
 
       this._editFragment = null;
       this._createFragment = null;
@@ -64,6 +64,7 @@ sap.ui.define([
       this.getView().setModel(this.AppState.getModel(), "AppState");
       this.AppState.getModel().setSizeLimit(999999);
       this.AppState.data.showGlobalAddButton = true;
+      this.AppState.data.showBackToRoadmapButton = false;
       this.AppState.data.currentPage = "roadmapTemplate";
       let oGridListControl = this.byId("gridList1");
       this.AppState.getMyFrameworkList(oGridListControl);
@@ -75,6 +76,7 @@ sap.ui.define([
       this.getModel("roadmapTemplateLayoutView").setProperty("/layout", sLayout);
     },
     onPress: function (oEvent) {
+      this.AppState.data.sidePanelOpen = false;
       let aaa = this.getView().getModel("AppState").getData().aFramework;
       debugger
       let oSelectedFrameworkObject = oEvent.getSource()?.getBindingContext("AppState")?.getObject() || {};

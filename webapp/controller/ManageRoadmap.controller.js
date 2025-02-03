@@ -12,6 +12,7 @@ sap.ui.define(
     "sap/m/ProgressIndicator",
     "sap/m/Text",
     "sap/f/LayoutType",
+    "sap/m/MessageBox",
   ],
   function (
     BaseController,
@@ -25,7 +26,8 @@ sap.ui.define(
     Label,
     ProgressIndicator,
     Text,
-    LayoutType
+    LayoutType,
+    MessageBox
   ) {
     "use strict";
  
@@ -34,20 +36,29 @@ sap.ui.define(
       {
         onInit: function () {
           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-          oRouter.attachRouteMatched(this.onRouteMatched, this);
+          oRouter.getRoute("ManageRoadmap").attachPatternMatched(this.onRouteMatched, this);
+
+         
+       
+
         },
  
         onRouteMatched: function (oEvent) {
+          let sProjectName = oEvent.getParameter("arguments").sRoadmapID;
+          this.getView().byId("manageRoadmapPage").setTitle(sProjectName);
           var sRoadmapID = oEvent.getParameter("roadmapID") || '7c80d6d0-4457-4e07-9de1-946d2085c9ea';
+          debugger
           this.AppState = this.getOwnerComponent().getState("App");
           this.getView().setModel(this.AppState.getModel(), "AppState");
           this.AppState.getModel().setSizeLimit(999999);
           this.AppState.setViewController(this);
           this.AppState.data.showGlobalAddButton = true;
+          this.AppState.data.showBackToRoadmapButton = false;
           this.AppState.data.currentPage = "ManageRoadmap";
           this.AppState.getProjectRoadmapById(sRoadmapID);
           this.AppState.data.currentPageLabel = "Manage Roadmap";
           this.AppState.getModel().refresh(true);
+
         },
  
         createPanels: function () {
@@ -110,6 +121,7 @@ sap.ui.define(
                     items: [
                       new Label({ text: task.name, wrapping: true, design: "Bold" }),
                       new Text({ text: task.description }),
+                      new Text({ text: "Owner: " + (task.responsible?.name ?? "") }),
                     ],
                   }).addStyleClass("sapUiTinyMargin");
        
@@ -225,12 +237,89 @@ sap.ui.define(
           this.getOwnerComponent().getRouter().navTo("ManageActivity");
         },
         onSaveTask: function () {
+          if(!this._validateTaskForm()){
+            return;
+          }
           var oTask = this.AppState.data.oSelectedTask;
           this.AppState.createNewTask(oTask);
         },
         onSaveMilestone:function(){
+          if(!this._validateMilestoneForm()){
+            return;
+          }
           let oSelectedMilestone = this.AppState.data.oSelectedMilestone;
           this.AppState.createMilestone(oSelectedMilestone);
+        },
+        onClickMilestone : function(oEvent){
+          this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity =true ;
+          this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity =false ;
+          let oSelectedMilestoneObject =
+            oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
+            {};
+          this.AppState.data.oSelectedMilestone = oSelectedMilestoneObject;
+          var sLayout = LayoutType.TwoColumnsBeginExpanded;
+          this.getModel("manageRoadmapLayoutView").setProperty("/layout", sLayout);
+        },
+        _validateTaskForm: function () {
+          var bValid = true;
+          var oView = this.getView();
+          var aInputs = [
+            oView.byId("name"),
+            oView.byId("tstart"),
+            oView.byId("tend"),
+            oView.byId("idphase"),
+            oView.byId("idarea"),
+            oView.byId("idowner"),
+          ];
+          aInputs.forEach(function (oInput) {
+            if (!oInput.getValue()) {
+              oInput.setValueState("Error");
+              oInput.setValueStateText("This field is mandatory");
+              bValid = false;
+            } else {
+              oInput.setValueState("None");
+            }
+          });
+
+          return bValid;
+        },
+        _validateMilestoneForm: function () {
+          var bValid = true;
+          var oView = this.getView();
+          var aInputs = [
+            oView.byId("idmilestonename"),
+            oView.byId("idmilestonephase"),
+            oView.byId("idmilestonetargetDate"),
+          ];
+          aInputs.forEach(function (oInput) {
+            if (!oInput.getValue()) {
+              oInput.setValueState("Error");
+              oInput.setValueStateText("This field is mandatory");
+              bValid = false;
+            } else {
+              oInput.setValueState("None");
+            }
+          });
+
+          return bValid;
+        },
+        onDeleteMilestone:function(){
+          var that = this;
+          MessageBox.warning("Are you sure you want to delete this Milestone?", {
+            actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+            onClose: function (sAction) {
+              if (sAction === MessageBox.Action.OK) {
+                let oMilestoneDetails = that.AppState.data.oSelectedMilestone;
+                if (oMilestoneDetails)
+                  that.AppState.deleteMilestoneEntry(oMilestoneDetails);
+                var sLayout = LayoutType.OneColumn;
+                that
+                  .getModel("manageRoadmapLayoutView")
+                  .setProperty("/layout", sLayout);
+              }
+            },
+          });
+
         }
        
       }

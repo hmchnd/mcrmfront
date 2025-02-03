@@ -27,8 +27,10 @@ sap.ui.define([
             this.byId("SelectedDateRange").setValue(sDateRange);
         },
         onSave:function(){
+           
             MessageBox.success("Task Saved Successfully!");
-        }
+        },
+       
         
     });
 });
