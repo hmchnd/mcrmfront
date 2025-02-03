@@ -78,19 +78,19 @@
                                 singleContainerFullSize="false"
                             >
                                 <form:content>
-                                    <m:Label text=" Name" />
+                                    <m:Label text=" Name" required="true" />
                                     <m:Input
                                         id="aname"
                                         value="{AppState>/oSelectedActivity/name}"
                                     />
 
-                                    <m:Label text=" Planned Start" />
+                                    <m:Label text=" Planned Start" required="true" />
                                     <m:DatePicker
                                         id="astart"
                                         value="{AppState>/oSelectedActivity/planned_start}"
                                     />
 
-                                    <m:Label text=" Planned End" />
+                                    <m:Label text=" Planned End" required="true" />
                                     <m:DatePicker
                                         id="aend"
                                         value="{AppState>/oSelectedActivity/planned_finish}"
@@ -125,7 +125,7 @@
                                         value="{AppState>/oSelectedActivity/state}"
                                         editable="false"
                                     />
-                                    <m:Label text="Owner" />
+                                    <m:Label text="Owner" required="true" />
                                     <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
                                     <m:ComboBox
                                     id="aowner"
