@@ -55,14 +55,9 @@ sap.ui.define(
           var aTasks = oView.getModel("AppState").getProperty("/aTask");
           var aAllAreas = oView.getModel("AppState").getProperty("/aArea");
           var aAllPhases = oView.getModel("AppState").getProperty("/aPhase");
-          // aAllPhases = aAllPhases.map(function(item){
-           
-          //   if(item.name=='Identify'){
-          //     item.displaySequence=1;
-          //   }
 
-
-          // })
+          aAllPhases.sort((a, b) => a.displaySequence - b.displaySequence);
+          aAllAreas.sort((a, b) => a.displaySequence - b.displaySequence);
           console.log(aTasks)
           console.log(aAllAreas)
           console.log(aAllPhases)
