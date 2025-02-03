@@ -76,7 +76,13 @@ sap.ui.define(
           return this.odata(sObjectPath).delete();
         },
         createTask: function (oTask) {
-          return this.odata("/TemplateTask").post(oTask);
+          return this.odata("/ProjectTask").post(oTask);
+        },
+        updateTask: function (oTask) {
+          var sObjectPath = this.model.createKey("/ProjectTask", {
+            ID: oTask.ID,
+          });
+          return this.odata(sObjectPath).put(oTask);
         },
         processTaskProgress:function(){
           return this.odata("/updateTaskProgress").post({})

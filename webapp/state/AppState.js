@@ -268,12 +268,8 @@ sap.ui.define(
           oActivity.planned_finish = this._formatODataDate(
             oActivity.planned_finish
           );
-          oActivity.fore_act_start = this._formatODataDate(
-            oActivity.planned_start
-          );
-          oActivity.fore_act_finish = this._formatODataDate(
-            oActivity.planned_finish
-          );
+          oActivity.fore_act_start = oActivity.planned_start
+          oActivity.fore_act_finish = oActivity.planned_finish
           oActivity.state = "NEW";
           oActivity.pct_complete = 0;
 
@@ -340,6 +336,12 @@ sap.ui.define(
         },
        
         createNewTask: function (oTask) {
+          if (oTask.ID) {
+           
+            this.AppService.updateTask(oTask).then(function (result) {
+              MessageBox.success(`Roadmap Template Details Updated!`);
+            });
+          } else {
           oTask.planned_start = new Date(oTask.planned_start);
           oTask.planned_finish = new Date(oTask.planned_finish);
           oTask.parent_key_ID = "7c80d6d0-4457-4e07-9de1-946d2085c9ea";
@@ -351,6 +353,7 @@ sap.ui.define(
           this.AppService.createTask(oTask).then(function (result) {
             MessageBox.success(`New Task Created`);
           });
+        }
         },
         updateProgress: function () {
           let aPromises = [];
