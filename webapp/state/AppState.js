@@ -6,8 +6,10 @@ sap.ui.define(
     "../model/Activity",
     "../model/Framework",
     "../model/Task",
+    "../model/Milestone",
+    "../model/Phases"
   ],
-  function (BaseObject, Project, MessageBox, Activity, Framework, Task) {
+  function (BaseObject, Project, MessageBox, Activity, Framework, Task,Milestone,Phases) {
     "use strict";
     var AppState = BaseObject.extend(
       "framsys.com.framsysfrontend.state.AppState",
@@ -35,6 +37,10 @@ sap.ui.define(
             aActivity: [],
             aFramework: [],
             aTask: [],
+            aMilestone:[],
+            aPhase:[],
+            aArea:[],
+            oSelectedMilestone:{},
             oSelectedActivity: {},
             oSelectedProject: {},
             oSelectedTask: {},
@@ -79,6 +85,7 @@ sap.ui.define(
           });
         },
         createNewProjectEntry: function (oProject) {
+          let that = this;
           if (oProject.ID) {
             delete oProject.fore_act_start;
             delete oProject.fore_act_finish;
@@ -91,11 +98,22 @@ sap.ui.define(
             //	oProject.framework_ID = '215eaa61-ade1-48d2-a712-ba8dbee7a02d';
             oProject.planned_start = new Date(oProject.planned_start);
             oProject.planned_finish = new Date(oProject.planned_finish);
+
+            oProject.fore_act_start = new Date(oProject.planned_start);
+            oProject.fore_act_finish = new Date(oProject.planned_finish);
+            oProject.status = 'Not Started'
+            oProject.state = 'Not Started'
+
+            let sRoadmapTemplateID = oProject.roadmapTemplate_ID;
+
+            this.ViewController.getView().setBusy(true)
+
             this.AppService.saveProject(oProject).then(function (result) {
-              MessageBox.success(`Project Details Saved!`);
-              that.data.aProjects = that.data.aProjects.filter(
-                (Project) => Project.ID !== oProject.ID
-              );
+              that.ViewController.getView().setBusy(false)
+              that.copyRoadmapTemplateToNewProject(sRoadmapTemplateID)
+              // that.data.aProjects = that.data.aProjects.filter(
+              //   (Project) => Project.ID !== oProject.ID
+              // );
             });
           }
         },
@@ -142,8 +160,7 @@ sap.ui.define(
               that.data.aFramework = aFrameworkList;
               // that.data.aFramework.class = aClassList;
 
-              // oGridListControl.setBusy(false);
-              that.ViewController.createPanels();
+             
             })
             .catch(function (error) {
               // Handle any errors during the Promise resolution
@@ -324,7 +341,43 @@ sap.ui.define(
             MessageBox.success('Task Progress Updated!!');
           
           });
+        },
+        copyRoadmapTemplateToNewProject:function(sTemplateId){
+          let aPromises = [];
+          this.ViewController.getView().setBusy(true);
+
+          aPromises.push(this.AppService.CopyRoadmapTemplateForProject(sTemplateId));
+          let that = this;
+          Promise.all(aPromises).then(function (result) {
+            that.ViewController.getView().setBusy(false);
+
+            MessageBox.success('Project Created and Template Details Configured Successfully In Project Roadmap!!');
+          
+          });
+        },
+        createMilestone:function(oMilestone){
+          oMilestone.targetAchievementDate = new Date(oMilestone.targetAchievementDate);
+          this.AppService.createMilestone(oMilestone).then(function (result) {
+            MessageBox.success(`New Milestone created!`);
+          });
+
+        },
+        getProjectRoadmapById:function(sRoadmapID){
+          let aPromises = [];
+          aPromises.push(this.AppService.getProjectRoadmapByID(sRoadmapID));
+          let that = this;
+          Promise.all(aPromises).then(function (result) {
+            debugger;
+            let oFetchedProjectRoadmap = result[0].data || {};
+            that.data.aPhase = oFetchedProjectRoadmap.projectPhase.results.map((item) => new Phases(item)) || [];
+            that.data.aArea = oFetchedProjectRoadmap.projectArea.results   || [];
+            that.data.aTask = oFetchedProjectRoadmap.projectTask.results   || [];
+            that.updateModel(true);
+             that.ViewController.createPanels();
+          });
+
         }
+       
       }
     );
     return AppState;

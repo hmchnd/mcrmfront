@@ -38,22 +38,34 @@ sap.ui.define(
         },
  
         onRouteMatched: function (oEvent) {
+          var sRoadmapID = oEvent.getParameter("roadmapID") || '7c80d6d0-4457-4e07-9de1-946d2085c9ea';
           this.AppState = this.getOwnerComponent().getState("App");
           this.getView().setModel(this.AppState.getModel(), "AppState");
           this.AppState.getModel().setSizeLimit(999999);
           this.AppState.setViewController(this);
           this.AppState.data.showGlobalAddButton = true;
           this.AppState.data.currentPage = "ManageRoadmap";
-          this.AppState.getMyFrameworkList();
+          this.AppState.getProjectRoadmapById(sRoadmapID);
           this.AppState.data.currentPageLabel = "Manage Roadmap";
           this.AppState.getModel().refresh(true);
         },
  
         createPanels: function () {
           var oView = this.getView();
-          var aTasks = oView.getModel("AppState").getProperty("/aFramework/0/templateTasks/results");
-          var aAllAreas = oView.getModel("AppState").getProperty("/aFramework/0/templateAreas/results");
-          var aAllPhases = oView.getModel("AppState").getProperty("/aFramework/0/templatePhases/results");
+          var aTasks = oView.getModel("AppState").getProperty("/aTask");
+          var aAllAreas = oView.getModel("AppState").getProperty("/aArea");
+          var aAllPhases = oView.getModel("AppState").getProperty("/aPhase");
+          // aAllPhases = aAllPhases.map(function(item){
+           
+          //   if(item.name=='Identify'){
+          //     item.displaySequence=1;
+          //   }
+
+
+          // })
+          console.log(aTasks)
+          console.log(aAllAreas)
+          console.log(aAllPhases)
           var oVBox = oView.byId("panelContainer");
           oVBox.removeAllItems();
        
@@ -62,7 +74,7 @@ sap.ui.define(
             // Calculate max tasks per phase in this specific area
             var maxTaskCount = Math.max(
               ...aAllPhases.map(oPhase =>
-                aTasks.filter(task => task.area.ID === oArea.ID && task.phase.ID === oPhase.ID).length
+                aTasks.filter(task => task.area_ID=== oArea.ID && task.phase_ID === oPhase.ID).length
               ),
               1 // Ensure at least 1 GridList exists
             );
@@ -92,7 +104,7 @@ sap.ui.define(
        
             // Iterate over all phases
             aAllPhases.forEach(oPhase => {
-              var aPhaseTasks = aTasks.filter(task => task.area.ID === oArea.ID && task.phase.ID === oPhase.ID);
+              var aPhaseTasks = aTasks.filter(task => task.area_ID === oArea.ID && task.phase_ID === oPhase.ID);
        
               // Track which GridLists have tasks added
               var addedTasks = new Array(maxTaskCount).fill(false);
@@ -221,6 +233,10 @@ sap.ui.define(
           var oTask = this.AppState.data.oSelectedTask;
           this.AppState.createNewTask(oTask);
         },
+        onSaveMilestone:function(){
+          let oSelectedMilestone = this.AppState.data.oSelectedMilestone;
+          this.AppState.createMilestone(oSelectedMilestone);
+        }
        
       }
     );

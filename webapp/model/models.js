@@ -29,13 +29,6 @@ function (JSONModel, Device) {
                         "enabled":true,
                     },
                     {
-                        "title":"Recents",
-                        "icon":"sap-icon://history",
-                        "key":"Dashboard",
-                        "expanded": true,
-                        "enabled":true,
-                    },
-                    {
                         "title":"Portfolio",
                         "icon":"sap-icon://folder-blank",
                         "key":"manage_projects",
@@ -58,24 +51,6 @@ function (JSONModel, Device) {
                         "title":"Kanban",
                         "key":"ManageActivity",
                         "icon":"sap-icon://filter-facets",
-                        "enabled":true
-                    },
-                    {
-                        "title":"Gantt",
-                        "key":"manage_Schedule",
-                        "icon":"sap-icon://gantt-bars",
-                        "enabled":true
-                    },
-                    {
-                        "title":"Team",
-                        "key":"manage_Schedule",
-                        "icon":"sap-icon://group",
-                        "enabled":true
-                    },
-                    {
-                        "title":"Reports",
-                        "key":"manage_Schedule",
-                        "icon":"sap-icon://vertical-bar-chart",
                         "enabled":true
                     }
                    

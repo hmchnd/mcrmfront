@@ -11,6 +11,7 @@
                 <ToolbarSpacer />
                 <Button
                     text="Delete"
+                    visible="false"
                     icon="sap-icon://delete"
                     type="Emphasized"
                     press="onDeleteFramework"
@@ -18,6 +19,7 @@
                 <Button
                     text="Save"
                     type="Emphasized"
+                    visible="false"
                     press="onSaveFrameworkDetails"
                 />
                 <Button
@@ -51,10 +53,12 @@
                                         <Label text="Name" />
                                         <Input
                                             value="{AppState>/oSelectedFramework/name}"
+                                            editable="false"
                                         />
                                         <Label text="Description" />
                                         <TextArea
                                             value="{AppState>/oSelectedFramework/description}"
+                                             editable="false"
                                         />
                                     </form:SimpleForm>
                                 </VBox>
@@ -122,6 +126,7 @@
                                                 <Button
                                                     icon="sap-icon://add"
                                                     press="onEditCreateArea"
+                                                    visible="false"
                                                 />
                                             </OverflowToolbar>
                                         </headerToolbar>
@@ -140,12 +145,15 @@
                                         <items>
                                             <ColumnListItem>
                                                 <cells>
-                                                    <Input
+                                                    <TextArea
                                                         value="{AppState>name}"
+                                                        cols="40"
+                                                         editable="false"
                                                     />
                                                     <Button
                                                         icon="sap-icon://delete"
                                                         press="onDeleteEditArea"
+                                                        visible="false"
                                                     />
                                                 </cells>
                                             </ColumnListItem>
@@ -164,6 +172,7 @@
                                                 <Button
                                                     icon="sap-icon://add"
                                                     press="onEditCreatePhase"
+                                                    visible="false"
                                                 />
                                             </OverflowToolbar>
                                         </headerToolbar>
@@ -184,11 +193,13 @@
                                                 <cells>
                                                     <Input
                                                         value="{AppState>name}"
+                                                         editable="false"
                                                     />
 
                                                     <Button
                                                         icon="sap-icon://delete"
                                                         press="onDeleteEditPhase"
+                                                        visible="false"
                                                     />
                                                 </cells>
                                             </ColumnListItem>
@@ -216,6 +227,7 @@
                                                 <Button
                                                     icon="sap-icon://add"
                                                     press="onCreateTasks"
+                                                    visible="false"
                                                 />
                                             </OverflowToolbar>
                                         </headerToolbar>
@@ -240,21 +252,24 @@
                                                     required="true"
                                                 />
                                             </Column>
-                                            <Column width="3rem">
+                                            <Column >
                                                 <Label text="" />
                                             </Column>
                                         </columns>
                                         <items>
                                             <ColumnListItem>
                                                 <cells>
-                                                    <Input
-                                                        value="{AppState>name}"
+                                                    <Text
+                                                        text="{AppState>name}"
+                                                         editable="false"
                                                     />
-                                                    <Input
-                                                        value="{taskModel>desc}"
+                                                    <Text
+                                                        text="{taskModel>desc}"
+                                                         editable="false"
                                                     />
                                                     <Select
                                                         placeholder="Select Area"
+                                                         
                                                         change="onAreaChange"
                                                         items="{AppState>/oSelectedFramework/templateAreas/results}"
                                                         
@@ -266,6 +281,7 @@
                                                     <Select
                                                         placeholder="Select Area"
                                                         change="onAreaChange"
+                                                        
                                                         items="{AppState>/oSelectedFramework/templatePhases/results}"
                                                     >
                                                         <core:Item
@@ -274,6 +290,7 @@
                                                     </Select>
                                                     <Button
                                                         icon="sap-icon://delete"
+                                                        visible="false"
                                                         press="onDeleteCreateArea"
                                                     />
                                                 </cells>

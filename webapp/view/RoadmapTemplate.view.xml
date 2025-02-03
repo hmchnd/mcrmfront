@@ -84,7 +84,7 @@
 
                                             <ObjectAttribute
                                                 title="Project Type"
-                                                text="{AppState>Classes/results/0/ProjectType}"
+                                                text="Oil and Gas"
                                             >
                                                 <layoutData>
                                                     <FlexItemData
@@ -112,8 +112,8 @@
 
                                             <ObjectStatus
                                                 title="Status"
-                                                text="Draft"
-                                                state="Warning"
+                                                text="Published"
+                                                state="Success"
                                             >
                                                 <layoutData>
                                                     <FlexItemData

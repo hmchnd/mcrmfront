@@ -74,6 +74,27 @@ sap.ui.define(
         },
         processTaskProgress:function(){
           return this.odata("/updateTaskProgress").post({})
+        },
+        CopyRoadmapTemplateForProject:function(sTemplateId){
+          let oPayload = {
+             "roadmapTemplateID":sTemplateId
+          }
+          return this.odata("/CopyRoadmapTemplateForProject").post(oPayload);
+        },
+        createMilestone:function(oMilestone){
+          return this.odata("/Milestone").post(oMilestone);
+        },
+        getProjectRoadmapByID:function(sRoadmapId){
+          var sObjectPath = this.model.createKey("/ProjectRoadmap", {
+            ID: sRoadmapId // Assuming 'ID' is the key of your entity
+          });
+          let mParameters = {
+            urlParameters: {
+              $expand:
+                "projectPhase/milestone,projectArea,projectTask",
+            },
+          };
+          return this.odata(sObjectPath).get(mParameters);
         }
       }
     );
