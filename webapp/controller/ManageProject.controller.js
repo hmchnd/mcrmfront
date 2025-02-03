@@ -13,13 +13,14 @@ sap.ui.define(
       {
         onInit() {
           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-          oRouter.attachRouteMatched(this.onRouteMatched, this);
+          oRouter.getRoute("manage_projects").attachPatternMatched(this.onRouteMatched, this);
         },
         onRouteMatched: function (oEvent) {
           this.AppState = this.getOwnerComponent().getState("App");
           this.getView().setModel(this.AppState.getModel(), "AppState");
           this.AppState.getModel().setSizeLimit(999999);
           this.AppState.data.showGlobalAddButton = true;
+          this.AppState.data.showBackToRoadmapButton = false;
           this.AppState.setViewController(this);
           this.AppState.data.currentPage = "PROJECT";
 
@@ -33,6 +34,7 @@ sap.ui.define(
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
         },
         onPress: function (oEvent) {
+          this.AppState.data.sidePanelOpen = false;
           let oSelectedProjectObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
             {};
@@ -55,8 +57,13 @@ sap.ui.define(
           // oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
           this.AppState.createNewProjectEntry(oProjectDetails);
         },
-        onManageRoadmap: function () {
-          this.getOwnerComponent().getRouter().navTo("ManageRoadmap");
+        onManageRoadmap: function (oEvent) {
+          debugger
+          let oProjectDetails = this.AppState.data.oSelectedProject;
+          this.getOwnerComponent().getRouter().navTo("ManageRoadmap",{
+            sRoadmapID: oProjectDetails.name
+          });
+
         },
         onDeleteProject: function () {
           var that = this;

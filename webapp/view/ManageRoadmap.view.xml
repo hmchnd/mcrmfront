@@ -9,7 +9,7 @@
     xmlns:mc="sap.suite.ui.microchart"
     xmlns:fb="sap.ui.comp.filterbar">
     
-    <Page title="SAP Activate for RISE with SAP S/4 HANA Cloud Project Roadmap">
+    <Page id="manageRoadmapPage" >
         <content>
         <f:FlexibleColumnLayout layout="{manageRoadmapLayoutView>/layout}">
                 <f:beginColumnPages>
@@ -25,7 +25,7 @@
                         </VBox>
                         <pf:MicroProcessFlow content="{AppState>milestone}">
                             <pf:content>
-                                <pf:MicroProcessFlowItem state="Warning" title="{AppState>name}"/>
+                                <pf:MicroProcessFlowItem state="Warning" title="{AppState>name}" press="onClickMilestone"/>
                                
                             </pf:content>
                         </pf:MicroProcessFlow>

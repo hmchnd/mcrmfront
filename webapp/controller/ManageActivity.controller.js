@@ -7,6 +7,7 @@ sap.ui.define(
     "sap/ui/core/library",
     "sap/ui/core/Fragment",
     "sap/f/LayoutType",
+    "sap/m/MessageBox",
   ],
   (
     Controller,
@@ -15,7 +16,8 @@ sap.ui.define(
     GridDropInfo,
     coreLibrary,
     Fragment,
-    LayoutType
+    LayoutType,
+    MessageBox
   ) => {
     "use strict";
     // Shortcuts for drag-and-drop constants
@@ -26,146 +28,147 @@ sap.ui.define(
       "framsys.com.framsysfrontend.controller.ManageActivity",
       {
         onInit() {
-        //   var oData = {
-        //     grid1: [
-        //       {
-        //         title:
-        //           "Create an Innovation Strategy and a High-Level Road Map",
-        //         subtitle:
-        //           "Create an Innovation Strategy and a High-Level Road Map",
-        //         iconSrc: "sap-icon://bus-public-transport",
-        //         task: "Strategic Planning",
-        //         owner: "John Doe",
-        //         deadline: "2024-01-10",
-        //         value: "0",
-        //       },
-        //     ],
-        //     grid2: [
-        //       {
-        //         title: "Run an Innovation Discovery and Design Workshop",
-        //         subtitle: "Run an Innovation Discovery and Design Workshop",
-        //         iconSrc: "sap-icon://presentation",
-        //         task: "Strategic Planning",
-        //         owner: "Emily Davis",
-        //         deadline: "2024-01-25",
-        //         value: "30",
-        //       },
-        //       {
-        //         title: "Create a 360-Degree View on Security",
-        //         subtitle: "Create a 360-Degree View on Security",
-        //         iconSrc: "sap-icon://group",
-        //         task: "Strategic Planning",
-        //         owner: "Alex Martinez",
-        //         deadline: "2024-02-10",
-        //         value: "40",
-        //       },
-        //     ],
-        //     grid3: [
-        //       {
-        //         title: "Define the Analytics Architecture",
-        //         subtitle: "Define the Analytics Architecture",
-        //         iconSrc: "sap-icon://presentation",
-        //         task: "Strategic Planning",
-        //         owner: "Emily Davis",
-        //         deadline: "2024-01-25",
-        //         value: "100",
-        //       },
-        //       {
-        //         title: "Define Clean Core Success Plan",
-        //         subtitle: "Define Clean Core Success Plan",
-        //         iconSrc: "sap-icon://group",
-        //         task: "Strategic Planning",
-        //         owner: "Alex Martinez",
-        //         deadline: "2024-02-10",
-        //         value: "100",
-        //       },
-        //     ],
-        //   };
+          //   var oData = {
+          //     grid1: [
+          //       {
+          //         title:
+          //           "Create an Innovation Strategy and a High-Level Road Map",
+          //         subtitle:
+          //           "Create an Innovation Strategy and a High-Level Road Map",
+          //         iconSrc: "sap-icon://bus-public-transport",
+          //         task: "Strategic Planning",
+          //         owner: "John Doe",
+          //         deadline: "2024-01-10",
+          //         value: "0",
+          //       },
+          //     ],
+          //     grid2: [
+          //       {
+          //         title: "Run an Innovation Discovery and Design Workshop",
+          //         subtitle: "Run an Innovation Discovery and Design Workshop",
+          //         iconSrc: "sap-icon://presentation",
+          //         task: "Strategic Planning",
+          //         owner: "Emily Davis",
+          //         deadline: "2024-01-25",
+          //         value: "30",
+          //       },
+          //       {
+          //         title: "Create a 360-Degree View on Security",
+          //         subtitle: "Create a 360-Degree View on Security",
+          //         iconSrc: "sap-icon://group",
+          //         task: "Strategic Planning",
+          //         owner: "Alex Martinez",
+          //         deadline: "2024-02-10",
+          //         value: "40",
+          //       },
+          //     ],
+          //     grid3: [
+          //       {
+          //         title: "Define the Analytics Architecture",
+          //         subtitle: "Define the Analytics Architecture",
+          //         iconSrc: "sap-icon://presentation",
+          //         task: "Strategic Planning",
+          //         owner: "Emily Davis",
+          //         deadline: "2024-01-25",
+          //         value: "100",
+          //       },
+          //       {
+          //         title: "Define Clean Core Success Plan",
+          //         subtitle: "Define Clean Core Success Plan",
+          //         iconSrc: "sap-icon://group",
+          //         task: "Strategic Planning",
+          //         owner: "Alex Martinez",
+          //         deadline: "2024-02-10",
+          //         value: "100",
+          //       },
+          //     ],
+          //   };
 
-        //   var oModel = new JSONModel(oData);
-        //   this.getView().setModel(oModel);
+          //   var oModel = new JSONModel(oData);
+          //   this.getView().setModel(oModel);
 
-        //   this.attachDragAndDrop();
+          //   this.attachDragAndDrop();
           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-          oRouter.attachRouteMatched(this.onRouteMatched, this);
+          oRouter.getRoute("ManageActivity").attachPatternMatched(this.onRouteMatched, this);
+
         },
         attachDragAndDrop: function () {
-            var aGridIds = ["NEW", "INPROGRESS", "COMPLETED"];
-            var oView = this.getView();
+          var aGridIds = ["NEW", "INPROGRESS", "COMPLETED"];
+          var oView = this.getView();
 
-            aGridIds.forEach(function (sGridId) {
-                var oGrid = oView.byId(sGridId);
+          aGridIds.forEach(function (sGridId) {
+            var oGrid = oView.byId(sGridId);
 
-                // Enable dragging
-                oGrid.addDragDropConfig(new DragInfo({
-                    sourceAggregation: "items"
-                }));
+            // Enable dragging
+            oGrid.addDragDropConfig(new DragInfo({
+              sourceAggregation: "items"
+            }));
 
-                // Enable dropping
-                oGrid.addDragDropConfig(new GridDropInfo({
-                    targetAggregation: "items",
-                    dropPosition: DropPosition.Between,
-                    dropLayout: DropLayout.Horizontal,
-                    dropIndicatorSize: this.onDropIndicatorSize.bind(this),
-                    drop: this.onDrop.bind(this)
-                }));
-            }.bind(this));
+            // Enable dropping
+            oGrid.addDragDropConfig(new GridDropInfo({
+              targetAggregation: "items",
+              dropPosition: DropPosition.Between,
+              dropLayout: DropLayout.Horizontal,
+              dropIndicatorSize: this.onDropIndicatorSize.bind(this),
+              drop: this.onDrop.bind(this)
+            }));
+          }.bind(this));
         },
         onDropIndicatorSize: function (oDraggedControl) {
-            var oBindingContext = oDraggedControl.getBindingContext("AppState"),
-                oData = oBindingContext.getModel("AppState").getProperty(oBindingContext.getPath());
+          var oBindingContext = oDraggedControl.getBindingContext("AppState"),
+            oData = oBindingContext.getModel("AppState").getProperty(oBindingContext.getPath());
 
-            return {
-                rows: oData.rows,
-                columns: oData.columns
-            };
+          return {
+            rows: oData.rows,
+            columns: oData.columns
+          };
         },
 
         onDrop: function (oInfo) {
-            debugger
-			var oDragged = oInfo.getParameter("draggedControl"),
-				oDropped = oInfo.getParameter("droppedControl"),
-				sInsertPosition = oInfo.getParameter("dropPosition"),
-				oDragContainer = oDragged.getParent(),
-				oDropContainer = oInfo.getSource().getParent(),
-				oDragModel = oDragContainer.getModel("AppState"),
-				oDropModel = oDropContainer.getModel("AppState"),
-				sDragPath = oDragged.getBindingContext("AppState").getPath(),
-				oDraggedData = oDragModel.getProperty(sDragPath),
-				sTargetGridId = oDropContainer.getId(),  // Get the target grid ID
-		
-				// Determine the new GridID based on the target grid
-				sNewGridID = sTargetGridId.split("-").pop();  // Extract grid number from ID (e.g., 'grid2' -> '2')
-		
-			// Remove dragged item from its original container
-			var aDragData = oDragModel.getProperty(oDragContainer.getBinding("items").getPath());
-			aDragData.splice(oDragContainer.indexOfItem(oDragged), 1);
-		
-			// Handle the case where the drop target is empty
-			var aDropData = oDropModel.getProperty(oDropContainer.getBinding("items").getPath());
-			if (oDropped) {
-				var iDropIndex = oDropContainer.indexOfItem(oDropped);
-				if (sInsertPosition === "After") {
-					iDropIndex++;
-				}
-				aDropData.splice(iDropIndex, 0, oDraggedData);
-			} else {
-				// If no tile exists in the drop container, simply add the dragged tile
-				aDropData.push(oDraggedData);
-			}
-		
-			// Update the GridID of the dragged item to reflect the new grid
-			oDraggedData.state = sNewGridID;  
-            if(oDraggedData.state=="COMPLETED"){
-                oDraggedData.pct_complete="100"
+          debugger
+          var oDragged = oInfo.getParameter("draggedControl"),
+            oDropped = oInfo.getParameter("droppedControl"),
+            sInsertPosition = oInfo.getParameter("dropPosition"),
+            oDragContainer = oDragged.getParent(),
+            oDropContainer = oInfo.getSource().getParent(),
+            oDragModel = oDragContainer.getModel("AppState"),
+            oDropModel = oDropContainer.getModel("AppState"),
+            sDragPath = oDragged.getBindingContext("AppState").getPath(),
+            oDraggedData = oDragModel.getProperty(sDragPath),
+            sTargetGridId = oDropContainer.getId(),  // Get the target grid ID
+
+            // Determine the new GridID based on the target grid
+            sNewGridID = sTargetGridId.split("-").pop();  // Extract grid number from ID (e.g., 'grid2' -> '2')
+
+          // Remove dragged item from its original container
+          var aDragData = oDragModel.getProperty(oDragContainer.getBinding("items").getPath());
+          aDragData.splice(oDragContainer.indexOfItem(oDragged), 1);
+
+          // Handle the case where the drop target is empty
+          var aDropData = oDropModel.getProperty(oDropContainer.getBinding("items").getPath());
+          if (oDropped) {
+            var iDropIndex = oDropContainer.indexOfItem(oDropped);
+            if (sInsertPosition === "After") {
+              iDropIndex++;
             }
-            let oActivityDetails = oDraggedData;// Update the GridID in the model
-		
-			// Call OData update to update the GridID in the backend
-			this.AppState.createNewActivityEntry(oActivityDetails);
-            this.getView().getModel("AppState").refresh(true);
-           
-		},	
+            aDropData.splice(iDropIndex, 0, oDraggedData);
+          } else {
+            // If no tile exists in the drop container, simply add the dragged tile
+            aDropData.push(oDraggedData);
+          }
+
+          // Update the GridID of the dragged item to reflect the new grid
+          oDraggedData.state = sNewGridID;
+          if (oDraggedData.state == "COMPLETED") {
+            oDraggedData.pct_complete = "100"
+          }
+          let oActivityDetails = oDraggedData;// Update the GridID in the model
+
+          // Call OData update to update the GridID in the backend
+          this.AppState.createNewActivityEntry(oActivityDetails);
+          this.getView().getModel("AppState").refresh(true);
+
+        },
         onAddActivity: function () {
           if (!this.oAddDialog) {
             Fragment.load({
@@ -235,6 +238,7 @@ sap.ui.define(
           this.getModel("activityLayoutView").setProperty("/layout", sLayout);
         },
         onCardPress: function (oEvent) {
+          this.AppState.data.sidePanelOpen = false;
           let oSelectedActivityObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
             {};
@@ -251,6 +255,7 @@ sap.ui.define(
           this.getView().setModel(this.AppState.getModel(), "AppState");
           this.AppState.getModel().setSizeLimit(999999);
           this.AppState.data.showGlobalAddButton = true;
+          this.AppState.data.showBackToRoadmapButton = true;
           this.AppState.setViewController(this);
           this.AppState.data.currentPage = "manageActivity";
           let oGridListControl = this.byId("gridList");
@@ -260,47 +265,99 @@ sap.ui.define(
         },
         onSaveProjectDetails: function () {
           debugger;
+          if (!this._validateActivityForm()) {
+            return;
+          }
           let oActivityDetails = this.AppState.data.oSelectedActivity;
 
           // oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
           // oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
           this.AppState.createNewActivityEntry(oActivityDetails);
         },
-        
+        _validateActivityForm: function () {
+          var bValid = true;
+          var oView = this.getView();
+          var aInputs = [
+            oView.byId("aname"),
+            oView.byId("astart"),
+            oView.byId("aend"),
+            oView.byId("aowner"),
+
+          ];
+          aInputs.forEach(function (oInput) {
+            if (!oInput.getValue()) {
+              oInput.setValueState("Error");
+              oInput.setValueStateText("This field is mandatory");
+              bValid = false;
+            } else {
+              oInput.setValueState("None");
+            }
+          });
+
+          return bValid;
+        },
+
+        calculateActivityCounts: function () {
+          debugger
+          let oModel = this.getView().getModel("AppState");
+          let aActivities = oModel.getProperty("/aActivity") || [];
+
+          var iNotStarted = aActivities.filter(item => item.state === "NEW").length || 0;
+          var iInProgress = aActivities.filter(item => item.state === "INPROGRESS").length || 0;
+          var iCompleted = aActivities.filter(item => item.state === "COMPLETED").length || 0;
+          this.getView().byId("new").setText(`NOT STARTED (${iNotStarted})`);
+          this.getView().byId("completed").setText(`COMPLETED (${iCompleted})`);
+          this.getView().byId("inprogress").setText(`IN PROGRESS (${iInProgress})`);
+
+
+
+        },
         onDeleteActivity: function () {
-          debugger;
-          let oActivityDetails = this.AppState.data.oSelectedActivity;
-          this.AppState.deleteActivityEntry(oActivityDetails);
-          var sLayout = LayoutType.OneColumn;
-          this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+
+          var that = this;
+          MessageBox.warning("Are you sure you want to delete this Activity?", {
+            actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+            onClose: function (sAction) {
+              if (sAction === MessageBox.Action.OK) {
+                let oActivityDetails = that.AppState.data.oSelectedActivity;
+                if (oActivityDetails)
+                  that.AppState.deleteActivityEntry(oActivityDetails);
+                var sLayout = LayoutType.OneColumn;
+                that
+                  .getModel("activityLayoutView")
+                  .setProperty("/layout", sLayout);
+              }
+            },
+          });
+
         },
         fnMakeCompleteVisibleCard: function (sValue) {
-          if (sValue==100) {
+          if (sValue == 100) {
 
             return true;
 
-          }else{
+          } else {
             return false;
           }
         },
-        fnMakeProgressVisibleCard:function(sValue){
-            if (sValue>0 && sValue<100) {
+        fnMakeProgressVisibleCard: function (sValue) {
+          if (sValue > 0 && sValue < 100) {
 
-                return true;
-    
-              }else{
-                return false;
-              }
+            return true;
+
+          } else {
+            return false;
+          }
 
         },
-        fnMakeNewVisibleCard:function(sValue){
-            if (sValue==0) {
+        fnMakeNewVisibleCard: function (sValue) {
+          if (sValue == 0) {
 
-                return true;
-    
-              }else{
-                return false;
-              }
+            return true;
+
+          } else {
+            return false;
+          }
         }
       }
     );

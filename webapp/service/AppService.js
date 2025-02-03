@@ -52,7 +52,13 @@ sap.ui.define(
           return this.odata(sObjectPath).delete();
         },
         getActivity() {
-          return this.odata("/TemplateActivity").get();
+          let mParameters = {
+            urlParameters: {
+              $expand:
+                "responsible",
+            },
+          }
+          return this.odata("/TemplateActivity").get(mParameters);
         },
         saveActivity: function (oActivity) {
           return this.odata("/TemplateActivity").post(oActivity);
@@ -84,6 +90,18 @@ sap.ui.define(
         createMilestone:function(oMilestone){
           return this.odata("/Milestone").post(oMilestone);
         },
+        updateMilestone: function (oMilestone) {
+          var sObjectPath = this.model.createKey("/Milestone", {
+            ID: oMilestone.ID,
+          });
+          return this.odata(sObjectPath).put(oMilestone);
+        },
+        deleteMilestone: function (oMilestone) {
+          var sObjectPath = this.model.createKey("/Milestone", {
+            ID: oMilestone.ID, // Assuming 'ID' is the key of your entity
+          });
+          return this.odata(sObjectPath).delete();
+        },
         getProjectRoadmapByID:function(sRoadmapId){
           var sObjectPath = this.model.createKey("/ProjectRoadmap", {
             ID: sRoadmapId // Assuming 'ID' is the key of your entity
@@ -91,7 +109,7 @@ sap.ui.define(
           let mParameters = {
             urlParameters: {
               $expand:
-                "projectPhase/milestone,projectArea,projectTask",
+                "projectPhase/milestone,projectArea,projectTask($expand=responsible)",
             },
           };
           return this.odata(sObjectPath).get(mParameters);

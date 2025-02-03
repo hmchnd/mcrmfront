@@ -1,110 +1,151 @@
-<core:FragmentDefinition xmlns="sap.uxap"
-		xmlns:mvc="sap.ui.core.mvc"
-		xmlns:m="sap.m"
-		xmlns:f="sap.f"
-        
-		   xmlns:core="sap.ui.core"
-		xmlns:form="sap.ui.layout.form">
+<core:FragmentDefinition
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+    <ObjectPageLayout
+        id="ObjectPageLayout0"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        isChildPage="true"
+        upperCaseAnchorBar="false"
+    >
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:Title
+                        text="{AppState>/oSelectedActivity/ID}"
+                        wrapping="true"
+                    />
+                </expandedHeading>
+                <actions>
+                    <m:Button
+                        text="Save"
+                        icon="sap-icon://save"
+                        type="Critical"
+                        press="onSaveProjectDetails"
+                    />
+                    <m:Button
+                        icon="sap-icon://decline"
+                        type="Critical"
+                        press="onCloseDetailPage"
+                    />
+                    <m:Button
+                        icon="sap-icon://delete"
+                        type="Critical"
+                        press="onDeleteActivity"
+                    />
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
 
-  <ObjectPageLayout id="ObjectPageLayout0"
-					 showTitleInHeaderContent="true"
-					alwaysShowContentHeader="false"
-					preserveHeaderStateOnScroll="false"
-					headerContentPinnable="true"
-					isChildPage="true"
-					upperCaseAnchorBar="false">
-				<headerTitle>
-					<ObjectPageDynamicHeaderTitle>
-						<expandedHeading>
-							<m:Title text="{AppState>/oSelectedActivity/ID}" wrapping="true"/>
+        <headerContent>
+            <m:FlexBox
+                wrap="Wrap"
+                fitContainer="true"
+                alignItems="Stretch"
+            >
+            </m:FlexBox>
+        </headerContent>
 
-							
-						</expandedHeading>
-						<actions>
-                         <m:Button  text="Delete" icon="sap-icon://delete" type="Emphasized" press="onDeleteActivity"/>
-                        <m:Button  text="Save" icon="sap-icon://save" type="Emphasized" press="onSaveProjectDetails"/>
-					<m:Button  icon="sap-icon://decline" type="Emphasized" press="onCloseDetailPage"/>
-				
-				</actions>
-					</ObjectPageDynamicHeaderTitle>
-				
-				</headerTitle>
+        <sections>
+            <ObjectPageSection title="Activity Details">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm
+                                id="SimpleFormChange0354"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                title=""
+                                labelSpanXL="3"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="4"
+                                emptySpanL="4"
+                                emptySpanM="4"
+                                emptySpanS="0"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="1"
+                                singleContainerFullSize="false"
+                            >
+                                <form:content>
+                                    <m:Label text=" Name" />
+                                    <m:Input
+                                        id="aname"
+                                        value="{AppState>/oSelectedActivity/name}"
+                                    />
 
-			 <headerContent>
-					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+                                    <m:Label text=" Planned Start" />
+                                    <m:DatePicker
+                                        id="astart"
+                                        value="{AppState>/oSelectedActivity/planned_start}"
+                                    />
 
-						<f:Avatar src="sap-icon://idea-wall"
-								  showBorder ="false"
-								  displaySize ="XS"
-								  displayShape="Circle"
-								  imageFitType="Contain"
-								  >
-						</f:Avatar>
-					</m:FlexBox>
-				
-				</headerContent>
+                                    <m:Label text=" Planned End" />
+                                    <m:DatePicker
+                                        id="aend"
+                                        value="{AppState>/oSelectedActivity/planned_finish}"
+                                    />
 
-		<sections>
-			<ObjectPageSection title="Activity Details">
-				<subSections>
-					<ObjectPageSubSection>
-						<blocks>
-							
-							<form:SimpleForm id="SimpleFormChange0354"
-							
-			editable="true"
-			layout="ResponsiveGridLayout"
-			title=""
-			labelSpanXL="3"
-			labelSpanL="3"
-			labelSpanM="3"
-			labelSpanS="12"
-			adjustLabelSpan="false"
-			emptySpanXL="4"
-			emptySpanL="4"
-			emptySpanM="4"
-			emptySpanS="0"
-			columnsXL="1"
-			columnsL="1"
-			columnsM="1"
-			singleContainerFullSize="false" >
-			<form:content>
-				<m:Label text=" Name" />
-				<m:Input id="pname01" value="{AppState>/oSelectedActivity/name}" />
+                                    <m:Label text="Forecasted / Actual Start" />
+                                    <m:DatePicker
+                                        value="{AppState>/oSelectedActivity/fore_act_start}"
+                                        editable="false"
+                                    />
 
+                                    <m:Label text="Forecasted / Actual End" />
+                                    <m:DatePicker
+                                        value="{AppState>/oSelectedActivity/fore_act_finish}"
+                                        editable="false"
+                                    />
 
-                <m:Label text=" Planned Start" />
-				<m:DatePicker id="pstart01"  value="{AppState>/oSelectedActivity/planned_start}"/>
+                                    <m:Label text="pct_weight %" />
+                                    <m:Input
+                                        value="{AppState>/oSelectedActivity/pct_weight}"
+                                        editable="false"
+                                    />
 
-                <m:Label text=" Planned End" />
-				<m:DatePicker id="pend01"  value="{AppState>/oSelectedActivity/planned_finish}"/>
+                                    <m:Label text="pct_complete %" />
+                                    <m:Input
+                                        value="{AppState>/oSelectedActivity/pct_complete}"
+                                        editable="false"
+                                    />
 
-                <m:Label text="Forecasted / Actual Start" />
-				<m:DatePicker  value="{AppState>/oSelectedActivity/fore_act_start}"  editable="false"/>
-
-                <m:Label text="Forecasted / Actual End"  />
-				<m:DatePicker value="{AppState>/oSelectedActivity/fore_act_finish}" editable="false"/>
-
-				<m:Label text="pct_weight %" />
-				<m:Input value="{AppState>/oSelectedActivity/pct_weight}" editable="false"/>
-
-				<m:Label text="pct_complete %" />
-				<m:Input value="{AppState>/oSelectedActivity/pct_complete}" />
-
-				<m:Label text="State" />
-				<m:Input value="{AppState>/oSelectedActivity/state}" editable="false" />
-				
-			</form:content>
-		</form:SimpleForm>	
-				
-
-
-							
-						</blocks>
-					</ObjectPageSubSection>
-				</subSections>
-			</ObjectPageSection>
-			
-		</sections> 
-	</ObjectPageLayout>
+                                    <m:Label text="State" />
+                                    <m:Input
+                                        value="{AppState>/oSelectedActivity/state}"
+                                        editable="false"
+                                    />
+                                    <m:Label text="Owner" />
+                                    <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
+                                    <m:ComboBox
+                                    id="aowner"
+                                        showSecondaryValues="true"
+                                        selectedKey="{AppState>/oSelectedActivity/responsible_ID}"
+                                        items="{
+					path: '/Employee'
+				}"
+                                    >
+                                        <core:ListItem
+                                            key="{ID}"
+                                            text="{name}"
+                                        />
+                                    </m:ComboBox>
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
 </core:FragmentDefinition>

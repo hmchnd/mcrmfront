@@ -59,6 +59,7 @@ sap.ui.define(
       },
       onAddNewItem: function (oEvent) {
         debugger;
+        this.AppState.data.sidePanelOpen = false;
 
         if (this.AppState.data.currentPage == "PROJECT") {
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
@@ -129,6 +130,7 @@ sap.ui.define(
         if (iSelectedIndex === 0) {
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = true;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
+          this.AppState.data.oSelectedMilestone = {};
           this.getModel("manageRoadmapLayoutView").setProperty(
             "/layout",
             sLayout
@@ -150,6 +152,12 @@ sap.ui.define(
         this.onSideNavButtonPress();
         // this.getModel("manageRoadmapLayoutView").setProperty("/layout", "TwoColumnsBeginExpanded");
       },
+      onBackToRoadmap:function(){
+       this.getOwnerComponent().getRouter().navTo("ManageRoadmap");
+      },
+      onPopoverCancel: function () {
+        this._oPopover.close();
+      }
     });
   }
 );
