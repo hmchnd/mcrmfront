@@ -166,7 +166,7 @@ sap.ui.define(
 
           // Call OData update to update the GridID in the backend
           this.AppState.createNewActivityEntry(oActivityDetails);
-          this.getView().getModel("AppState").refresh(true);
+          // this.getView().getModel("AppState").refresh(true);
 
         },
         onAddActivity: function () {
@@ -251,6 +251,10 @@ sap.ui.define(
           this.getModel("activityLayoutView").setProperty("/layout", sLayout);
         },
         onRouteMatched: function (oEvent) {
+          let sTaskID = oEvent.getParameter("arguments").sTaskID;
+          let sTaskName = oEvent.getParameter("arguments").sTaskName;
+          let sProjectName = oEvent.getParameter("arguments").sProjectName;
+          this.getView().byId("projectTitle").setTitle(`${sProjectName} / ${sTaskName}`);
           this.AppState = this.getOwnerComponent().getState("App");
           this.getView().setModel(this.AppState.getModel(), "AppState");
           this.AppState.getModel().setSizeLimit(999999);
@@ -258,8 +262,9 @@ sap.ui.define(
           this.AppState.data.showBackToRoadmapButton = true;
           this.AppState.setViewController(this);
           this.AppState.data.currentPage = "manageActivity";
-          let oGridListControl = this.byId("gridList");
-          this.AppState.getMyActivityList(oGridListControl);
+          // let oGridListControl = this.byId("gridList");
+          this.AppState.data.oSelectedTask = sTaskID;
+          this.AppState.getMyActivityList(this.AppState.data.oSelectedTask);
           this.AppState.data.currentPageLabel = "Manage Activity";
           this.AppState.getModel().refresh(true);
         },

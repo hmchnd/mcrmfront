@@ -19,7 +19,7 @@
             <ObjectPageDynamicHeaderTitle>
                 <expandedHeading>
                     <m:Title
-                        text="{AppState>/oSelectedProject/ID}"
+                        text="{AppState>/oSelectedTask/ID}"
                         wrapping="true"
                     />
                 </expandedHeading>
@@ -46,6 +46,13 @@
                           visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
                     />
                     <m:Button
+                        text="Save"
+                        icon="sap-icon://save"
+                        type="Critical"
+                        press="onSaveArea"
+                          visible="{AppState>/makeTaskMilestoneVisiblity/EditAreaVisiblity}"
+                    />
+                    <m:Button
                         icon="sap-icon://decline"
                         type="Critical"
                         press="onCloseDetailPage"
@@ -67,7 +74,8 @@
             />
         </headerContent>
         <sections>
-            <ObjectPageSection title="{= ${AppState>/makeTaskMilestoneVisiblity/taskvisiblity} ? 'Task Details' : 'Milestone Details'}">
+            <ObjectPageSection title="{= ${AppState>/makeTaskMilestoneVisiblity/taskvisiblity} ? 'Task Details' : ${AppState>/makeTaskMilestoneVisiblity/milestonevisiblity} ? 'Milestone Details' : 'Edit Area Details'}">
+
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
@@ -117,7 +125,7 @@
                                     />
                                     <m:DatePicker
                                         id="tstart"
-                                        value="{AppState>/oSelectedTask/planned_start}"
+                                        value="{path:'AppState>/oSelectedTask/planned_start', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:Label
@@ -128,7 +136,7 @@
                                     <m:DatePicker
                                         id="tend"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
-                                        value="{AppState>/oSelectedTask/planned_finish}"
+                                        value="{path:'AppState>/oSelectedTask/planned_finish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
                                     />
                                     <m:Label
                                         text="Forecasted / Actual Start"
@@ -137,7 +145,7 @@
                                     <m:DatePicker
                                         editable="false"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
-                                        value="{AppState>/oSelectedTask/fore_act_start}"
+                                        value="{path:'AppState>/oSelectedTask/fore_act_start', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
                                     />
                                     <m:Label
                                         text="Forecasted / Actual End"
@@ -146,7 +154,7 @@
                                     <m:DatePicker
                                         editable="false"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
-                                        value="{AppState>/oSelectedTask/fore_act_finish}"
+                                        value="{path:'AppState>/oSelectedTask/fore_act_finish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
                                     />
                                     <m:Label
                                         text="Task Progress"
@@ -301,6 +309,36 @@
                                         editable="false"
                                         value="{AppState>/oSelectedMilestone/status}"
                                     />
+
+                                    <!-- Edit Area Details -->
+
+                                    <m:Label
+                                        text="Area Name"
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/EditAreaVisiblity}"
+                                    />
+                                    <m:Input
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/EditAreaVisiblity}"
+                                        value="{AppState>/oSelectedArea/name}"
+                                    />
+                                    <m:Label
+                                        text="Owner"
+                                        required="true"
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/EditAreaVisiblity}"
+                                    />
+                                    <m:ComboBox
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/EditAreaVisiblity}"
+                                        id="idAreaOwner"
+                                        showSecondaryValues="true"
+                                        selectedKey="{AppState>/oSelectedArea/responsible_ID}"
+                                        items="{
+                                            path: '/Employee'
+                                        }"
+                                    >
+                                        <core:ListItem
+                                            key="{ID}"
+                                            text="{name}"
+                                        />
+                                    </m:ComboBox>
                                 </form:content>
                             </form:SimpleForm>
                         </blocks>

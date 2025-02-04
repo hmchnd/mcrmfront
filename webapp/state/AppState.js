@@ -8,6 +8,8 @@ sap.ui.define(
     "../model/Task",
     "../model/Milestone",
     "../model/Phases",
+    
+
   ],
   function (
     BaseObject,
@@ -53,6 +55,9 @@ sap.ui.define(
             oSelectedActivity: {},
             oSelectedProject: {},
             oSelectedTask: {},
+            oSelectedArea: {},
+            oSelectedTaskActivity: "",
+            sSelectedProjectRoadmapID: "",
             oSelectedFramework: {},
             showGlobalAddButton: false,
             showBackToRoadmapButton: false,
@@ -62,6 +67,7 @@ sap.ui.define(
             makeTaskMilestoneVisiblity: {
               taskvisiblity: false,
               milestonevisiblity: false,
+              EditAreaVisiblity: false,
             },
           };
 
@@ -244,9 +250,10 @@ sap.ui.define(
             });
         },
 
-        getMyActivityList: function () {
+        getMyActivityList: function (sTaskID) {
+          debugger
           let aPromises = [];
-          aPromises.push(this.AppService.getActivity());
+          aPromises.push(this.AppService.getActivity(sTaskID));
           let that = this;
           Promise.all(aPromises).then(function (result) {
             debugger;
@@ -270,8 +277,7 @@ sap.ui.define(
           );
           oActivity.fore_act_start = oActivity.planned_start
           oActivity.fore_act_finish = oActivity.planned_finish
-          oActivity.state = "NEW";
-          oActivity.pct_complete = 0;
+         
 
           if (oActivity.ID) {
             let ActivityID = oActivity.ID;
@@ -286,22 +292,19 @@ sap.ui.define(
               that.updateProgress();
             });
           } else {
-            //    oActivity.ID = '225eaa61-ade1-48d2-a712-ba8dbee7a02d';
-            //    oActivity.Classes=[];
-            // oActivity.phases=[];
-            // oActivity.areas=[];
+            oActivity.pct_complete = 0;
+          oActivity.state = "NEW";
+          oActivity.parent_key_ID = that.data.oSelectedTask;
 
             this.AppService.saveActivity(oActivity).then(function (result) {
               MessageBox.success(`Activity Details Saved!`);
             });
           }
+          
+          that.getMyActivityList(that.data.oSelectedTask);
+          that.ViewController.onCloseDetailPage();
         },
 
-        /**
-         * Helper function to format a date into "/Date(…)/" format.
-         * @param {Date | string} date - The date to format.
-         * @returns {string | null} The formatted date or null if invalid.
-         */
         _formatODataDate: function (date) {
           if (date) {
             const parsedDate = new Date(date);
@@ -335,7 +338,15 @@ sap.ui.define(
             });
         },
        
+        updateProjectArea :function(oAreaDetails){
+          this.AppService.updateProjectArea(oAreaDetails).then(function (result) {
+            MessageBox.success(`Area Updated!`);
+          });
+          this.ViewController.createPanels();
+        },
+       
         createNewTask: function (oTask) {
+          let that = this;
           if (oTask.ID) {
            
             this.AppService.updateTask(oTask).then(function (result) {
@@ -354,6 +365,8 @@ sap.ui.define(
             MessageBox.success(`New Task Created`);
           });
         }
+        that.ViewController.onCloseDetailPage();
+        this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
         updateProgress: function () {
           let aPromises = [];
@@ -432,6 +445,7 @@ sap.ui.define(
               oFetchedProjectRoadmap.projectPhase.results.map(
                 (item) => new Phases(item)
               ) || [];
+            // that.data.aPhase = oFetchedProjectRoadmap.projectPhase.results || [];
             that.data.aArea = oFetchedProjectRoadmap.projectArea.results || [];
             that.data.aTask = oFetchedProjectRoadmap.projectTask.results || [];
             that.updateModel(true);

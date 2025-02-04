@@ -8,31 +8,9 @@
     xmlns:grid="sap.ui.layout.cssgrid"
     xmlns:core="sap.ui.core"
 >
-    <Page title="Projects / Manage Activity">
+    <Page id="projectTitle">
         <content>
-            <Bar class="customBar">
-                <!-- Left Section (Empty for now) -->
-                <contentLeft />
-
-                <!-- Middle Section: Title -->
-                <contentMiddle>
-                    <VBox>
-                        <Title
-                            text="SAP Activate for RISE with SAP S/4 HANA Cloud Project / Strategic Planning Task Activities"
-                            class="sapUiTinyMargin"
-                        />
-                    </VBox>
-                </contentMiddle>
-
-                <!-- Right Section: Button -->
-                <contentRight>
-                    <!-- <Button
-                    text="Create New Activity"
-                    press="onAddActivity"
-                    type="Emphasized"
-                /> -->
-                </contentRight>
-            </Bar>
+           
             <f:FlexibleColumnLayout layout="{activityLayoutView>/layout}">
                 <f:beginColumnPages>
                     <Page showHeader="false">

@@ -131,7 +131,7 @@
         },
         {
           "name": "ManageActivity",
-          "pattern": "ManageActivity",
+          "pattern": "ManageActivity/:sTaskID:/:sTaskName:/:sProjectName:",
           "target":["ManageActivity"]
         },
         {

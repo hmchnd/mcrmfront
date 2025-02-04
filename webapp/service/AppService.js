@@ -51,15 +51,18 @@ sap.ui.define(
           });
           return this.odata(sObjectPath).delete();
         },
-        getActivity() {
+        getActivity(sTaskID) {
+          let sFilter = new sap.ui.model.Filter("parent_key_ID", sap.ui.model.FilterOperator.EQ, sTaskID);
+          
           let mParameters = {
-            urlParameters: {
-              $expand:
-                "responsible",
-            },
+              filters: [sFilter],
+              urlParameters: {
+                $expand: "responsible",
           }
+        }
           return this.odata("/ProjectActivity").get(mParameters);
-        },
+      },
+      
         saveActivity: function (oActivity) {
           return this.odata("/ProjectActivity").post(oActivity);
         },
@@ -119,7 +122,16 @@ sap.ui.define(
             },
           };
           return this.odata(sObjectPath).get(mParameters);
-        }
+        },
+        updateProjectArea: function (oProjectArea) {
+          var sObjectPath = this.model.createKey("/ProjectArea", {
+            ID: oProjectArea.ID,
+          });
+          return this.odata(sObjectPath).put(oProjectArea);
+        },
+        getProjectArea() {
+          return this.odata("/ProjectArea").get();
+        },
       }
     );
     return AppService;

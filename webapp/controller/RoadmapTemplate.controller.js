@@ -63,7 +63,7 @@ sap.ui.define([
       this.AppState = this.getOwnerComponent().getState("App");
       this.getView().setModel(this.AppState.getModel(), "AppState");
       this.AppState.getModel().setSizeLimit(999999);
-      this.AppState.data.showGlobalAddButton = true;
+      this.AppState.data.showGlobalAddButton = false;
       this.AppState.data.showBackToRoadmapButton = false;
       this.AppState.data.currentPage = "roadmapTemplate";
       let oGridListControl = this.byId("gridList1");

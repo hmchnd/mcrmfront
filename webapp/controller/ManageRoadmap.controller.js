@@ -46,11 +46,14 @@ sap.ui.define(
         },
 
         onRouteMatched: function (oEvent) {
+          debugger
+          this.AppState = this.getOwnerComponent().getState("App");
           let sRoadmapID = oEvent.getParameter("arguments").sRoadmapID;
+          this.AppState.data.sSelectedProjectRoadmapID  = sRoadmapID;
+           sRoadmapID =this.AppState.data.sSelectedProjectRoadmapID;
           let sProjectName = oEvent.getParameter("arguments").sProjectName;
           this.getView().byId("manageRoadmapPage").setTitle(sProjectName);
           debugger;
-          this.AppState = this.getOwnerComponent().getState("App");
           this.getView().setModel(this.AppState.getModel(), "AppState");
           this.AppState.getModel().setSizeLimit(999999);
           this.AppState.setViewController(this);
@@ -101,6 +104,7 @@ sap.ui.define(
               content: [
                 new ToolbarSpacer(),
                 new Title({ text: oArea.name, level: "H1" }),
+                new Button({ icon: "sap-icon://edit", press: this.onEditArea.bind(this)}),
                 new ToolbarSpacer(),
               ],
             });
@@ -136,10 +140,14 @@ sap.ui.define(
                       new Text({
                         text: "Owner: " + (task.responsible?.name ?? ""),
                       }),
-                      new Text({
-                        text: "Owner: " + (task.ID ?? ""),
-                        visible: false,
-                      }),
+                      // new Text({
+                      //   text: "ID: " + (task.ID ?? ""),
+                      //   visible: false,
+                      // }),
+                      // new Text({
+                      //   text: "IsCritical: " + (task.isCriticalToMilestone ?? ""),
+                      //   visible: false,
+                      // }),
                       new Button({
                         icon: "sap-icon://flag",
                         type: "Critical",
@@ -218,10 +226,10 @@ sap.ui.define(
         },
 
         onCardPress: function (oEvent) {
-          debugger;
-
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = true;
+          this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = false;
+          this.AppState.data.sidePanelOpen = false;
 
           // Get full task object from `customData`
           let oTask = oEvent.getSource().getCustomData()[0].getValue();
@@ -229,6 +237,13 @@ sap.ui.define(
           // Prepare payload
           let oSelectedPayload = {
             ID: oTask.ID,
+            description: oTask.description,
+            isCriticalToMilestone: oTask.isCriticalToMilestone,
+            fore_act_start: oTask.fore_act_start,
+            fore_act_finish: oTask.fore_act_finish,
+            responsible_ID: oTask.responsible_ID,
+            state: oTask.state,
+            status: oTask.status,
             name: oTask.name,
             planned_start: oTask.planned_start
               ? new Date(oTask.planned_start)
@@ -252,6 +267,34 @@ sap.ui.define(
           );
           this.getModel("manageRoadmapLayoutView").refresh(true);
         },
+        onEditArea: function (oEvent) {
+          debugger
+          this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
+          this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
+          this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = true;
+      
+          // Retrieve the selected panel area details
+          let oPanel = oEvent.getSource().getParent().getParent(); // Get the Panel
+          let sAreaName = oPanel.getHeaderText(); // Get the Area Name
+      
+          let oView = this.getView();
+          let aAllAreas = oView.getModel("AppState").getProperty("/aArea");
+          let oSelectedArea = aAllAreas.find(area => area.name === sAreaName) || {};
+      
+          this.AppState.data.oSelectedArea = {
+              name: oSelectedArea.name,
+              responsible_ID: oSelectedArea.responsible_ID || null,
+              ID: oSelectedArea.ID || null
+          };
+      
+          // Change Layout
+          let sLayout = LayoutType.TwoColumnsBeginExpanded;
+          this.getModel("manageRoadmapLayoutView").setProperty("/layout", sLayout);
+      }, 
+      onSaveArea: function () {
+        let oProjectAreaDetails = this.AppState.data.oSelectedArea;
+        this.AppState.updateProjectArea(oProjectAreaDetails);
+      },     
         onCloseDetailPage: function () {
           var sLayout = LayoutType.OneColumn;
           this.getView()
@@ -259,7 +302,14 @@ sap.ui.define(
             .setProperty("/layout", sLayout);
         },
         onManageActivity: function () {
-          this.getOwnerComponent().getRouter().navTo("ManageActivity");
+          let sTaskID = this.AppState.data.oSelectedTask.ID;
+          let sTaskName = this.AppState.data.oSelectedTask.name;
+          let sProjectName = this.getView().byId("manageRoadmapPage").getTitle();
+          this.getOwnerComponent().getRouter().navTo("ManageActivity",{
+            sTaskID: sTaskID,
+            sTaskName: sTaskName,
+            sProjectName: sProjectName
+          });
         },
         onSaveTask: function () {
           debugger;
@@ -277,6 +327,7 @@ sap.ui.define(
           this.AppState.createMilestone(oSelectedMilestone);
         },
         onClickMilestone: function (oEvent) {
+          this.AppState.data.sidePanelOpen = false;
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = true;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
           let oSelectedMilestoneObject =

@@ -64,6 +64,7 @@ sap.ui.define(
             sRoadmapID: oProjectDetails.roadmapTemplate_ID,
             sProjectName:oProjectDetails.name
           });
+          this.AppState.data.sSelectedProjectRoadmapID = oProjectDetails.roadmapTemplate_ID;
 
         },
         onDeleteProject: function () {
