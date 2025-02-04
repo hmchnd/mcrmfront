@@ -213,7 +213,7 @@
                             title="Tasks"
                         >
                             <uxap:blocks>
-                                <VBox width="80%">
+                                <VBox width="100%">
                                     <Table
                                         id="editManageTaskTable"
                                         inset="false"
@@ -232,7 +232,7 @@
                                             </OverflowToolbar>
                                         </headerToolbar>
                                         <columns>
-                                            <Column>
+                                            <Column width="13rem">
                                                 <header>
                                                     <Label text="Task Name" />
                                                 </header>
@@ -240,16 +240,14 @@
                                             <Column>
                                                 <Label text="Description" />
                                             </Column>
-                                            <Column>
+                                            <Column width="18rem">
                                                 <Label
                                                     text="Area"
-                                                    required="true"
                                                 />
                                             </Column>
-                                            <Column>
+                                            <Column width="8rem">
                                                 <Label
                                                     text="Phase"
-                                                    required="true"
                                                 />
                                             </Column>
                                             <Column >
@@ -261,30 +259,35 @@
                                                 <cells>
                                                     <Text
                                                         text="{AppState>name}"
-                                                         editable="false"
+                                                        
                                                     />
                                                     <Text
                                                         text="{taskModel>desc}"
-                                                         editable="false"
+                                                        
                                                     />
                                                     <Select
                                                         placeholder="Select Area"
-                                                         
+                                                         width="18rem"
                                                         change="onAreaChange"
                                                         items="{AppState>/oSelectedFramework/templateAreas/results}"
+                                                        selectedKey="{AppState>area_ID}"
+                                                        editable="false"
                                                         
                                                     >
                                                         <core:Item
+                                                        key="{AppState>ID}"
                                                             text="{AppState>name}"
                                                         />
                                                     </Select>
                                                     <Select
-                                                        placeholder="Select Area"
+                                                         width="12rem"
                                                         change="onAreaChange"
-                                                        
+                                                        editable="false"
+                                                        selectedKey="{AppState>phase_ID}"
                                                         items="{AppState>/oSelectedFramework/templatePhases/results}"
                                                     >
                                                         <core:Item
+                                                        key="{AppState>ID}"
                                                             text="{AppState>name}"
                                                         />
                                                     </Select>

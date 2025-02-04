@@ -8,6 +8,8 @@ sap.ui.define([
             BaseObject.call(this, {});
             if (data) {
                 this.ID = data?.ID || "";
+                this.name = data?.name || "";
+                this.responsible_ID = data?.responsible_ID || "";
                 this.ProjectType = data?.ProjectType || "";
  
             }

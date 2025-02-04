@@ -11,6 +11,9 @@ sap.ui.define([
                 this.name = data?.name || "";
                 this.displaySequence = data?.displaySequence;
                 this.milestone = data?.milestone.results || [];
+                this.planned_start = data?.planned_start || [];
+                this.planned_finish = data?.planned_finish || [];
+
             
  
             }

@@ -6,7 +6,7 @@ sap.ui.define(["./BaseObject"], function (BaseObject) {
       if (data) {
         this.ID = data?.ID || "";
         this.name = data?.name || "";
-        this.description = data?.description || ""
+        this.description = data?.description || "";
         this.planned_start =
           data?.planned_start?.toISOString()?.slice(0, 10) || null;
         this.planned_finish =
@@ -21,7 +21,7 @@ sap.ui.define(["./BaseObject"], function (BaseObject) {
         this.status = data?.status || "";
         this.area_ID = data?.area_ID || "";
         this.phase_ID = data?.phase_ID || "";
-        this.parent_key_ID = data?.parent_key_ID || ""
+        this.parent_key_ID = data?.parent_key_ID || "";
       }
     },
   });
