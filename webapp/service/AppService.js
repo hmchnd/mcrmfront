@@ -87,6 +87,19 @@ sap.ui.define(
           });
           return this.odata(sObjectPath).put(oTask);
         },
+        deleteTask: function (oTask) {
+          var sObjectPath = this.model.createKey("/ProjectTask", {
+            ID: oTask.ID, // Assuming 'ID' is the key of your entity
+          });
+          return this.odata(sObjectPath).delete();
+        },
+        processDateUpdate:function(Itemtype, currentItemID){
+          debugger
+          return this.odata("/plannedVsActualDatesCalc").post({
+            currentItemID : currentItemID,
+            Itemtype: Itemtype
+          })
+        },
         processTaskProgress:function(sTaskId){
           return this.odata("/updateTaskProgress").post({
             taskID : sTaskId

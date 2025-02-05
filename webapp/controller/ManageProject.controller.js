@@ -106,6 +106,30 @@ sap.ui.define(
 
           return bValid;
         },
+        calculateDeltaInMonths: function (aParts,aParts2) {
+          debugger
+          // Extract plannedStart and forecastStart from parts
+          let plannedStart = aParts;
+          let forecastStart = aParts2;
+
+          if (!plannedStart || !forecastStart) {
+              return ""; // Handle missing values gracefully
+          }
+
+          let plannedDate = new Date(plannedStart);
+          let forecastDate = new Date(forecastStart);
+
+          if (isNaN(plannedDate) || isNaN(forecastDate)) {
+              return ""; // Invalid date handling
+          }
+
+          // Calculate difference in months
+          let yearsDiff = forecastDate.getFullYear() - plannedDate.getFullYear();
+          let monthsDiff = forecastDate.getMonth() - plannedDate.getMonth();
+          let totalMonths = yearsDiff * 12 + monthsDiff;
+
+          return totalMonths + " months";
+      }
       }
     );
   }

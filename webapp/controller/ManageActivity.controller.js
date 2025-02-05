@@ -269,11 +269,12 @@ sap.ui.define(
           this.AppState.getModel().refresh(true);
         },
         onSaveProjectDetails: function () {
-          debugger;
           if (!this._validateActivityForm()) {
             return;
           }
           let oActivityDetails = this.AppState.data.oSelectedActivity;
+          this.AppState.data.Itemtype = "Activity"; 
+          this.AppState.data.currentItemID = oActivityDetails.ID;
 
           // oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
           // oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);

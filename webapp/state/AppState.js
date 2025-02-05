@@ -72,7 +72,9 @@ sap.ui.define(
               EditAreaVisiblity: false,
             },
             currentRoadmapID:"",
-            currentTaskID:""
+            currentTaskID:"",
+            Itemtype: "",
+            currentItemID: ""
           };
 
           // Initialize base object.
@@ -137,6 +139,7 @@ sap.ui.define(
               // );
             });
           }
+          // this.getMyProjectsList()
         },
         deleteProjectEntry: function (oProject) {
           debugger;
@@ -191,27 +194,11 @@ sap.ui.define(
         createNewFrameworkEntry: function (oFramework) {
           debugger;
           if (oFramework.ID) {
-            // let frameworkID = oFramework.ID;
-            //    delete oFramework.Classes;
-            //    delete oFramework.phases;
-            //    delete oFramework.areas;
-            // oFramework.Classes = [];
-            // oFramework.templateAreas = oFramework.area;
-            // oFramework.templatePhases = oFramework.phase;
-            // oFramework.templateTasks = oFramework.task;
-            //    delete oFramework.pct_complete;
-            // oFramework.ID = frameworkID;
+           
             this.AppService.updateFramework(oFramework).then(function (result) {
               MessageBox.success(`Roadmap Template Details Updated!`);
             });
           } else {
-            //    oFramework.ID = '225eaa61-ade1-48d2-a712-ba8dbee7a02d';
-            // oFramework.Classes = [{
-            //   ProjectType:oFramework.ProjectType,
-            //   IndustryType:oFramework.IndustryType
-            // }];
-            //  delete oFramework.ProjectType;
-            //  delete oFramework.IndustryType;
 
             oFramework.templateAreas = oFramework.area;
             oFramework.templatePhases = oFramework.phase;
@@ -256,6 +243,10 @@ sap.ui.define(
 
         getMyActivityList: function (sTaskID) {
           debugger
+          if(!sTaskID){
+          this.ViewController.getView().setBusy(true);
+          }
+          else{
           let aPromises = [];
           aPromises.push(this.AppService.getActivity(sTaskID));
           let that = this;
@@ -267,8 +258,10 @@ sap.ui.define(
             });
             that.data.aActivity = aActivityList;
             that.ViewController.attachDragAndDrop();
+            that.ViewController.getView().setBusy(false);
             that.ViewController.calculateActivityCounts();
           });
+        }
         },
         createNewActivityEntry: function (oActivity) {
           debugger;
@@ -279,8 +272,7 @@ sap.ui.define(
           oActivity.planned_finish = this._formatODataDate(
             oActivity.planned_finish
           );
-          oActivity.fore_act_start = oActivity.planned_start
-          oActivity.fore_act_finish = oActivity.planned_finish
+         
          
 
           if (oActivity.ID) {
@@ -294,8 +286,11 @@ sap.ui.define(
             this.AppService.updateActivity(oActivity).then(function (result) {
               MessageBox.success(`Activity Details Updated!`);
               that.updateProgress(that.data.currentTaskID);
+              // that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
             });
           } else {
+            oActivity.fore_act_start = oActivity.planned_start
+            oActivity.fore_act_finish = oActivity.planned_finish
             oActivity.pct_complete = 0;
           oActivity.state = "NEW";
           oActivity.parent_key_ID = that.data.oSelectedTask;
@@ -343,10 +338,12 @@ sap.ui.define(
         },
        
         updateProjectArea :function(oAreaDetails){
+          let that = this;
           this.AppService.updateProjectArea(oAreaDetails).then(function (result) {
             MessageBox.success(`Area Updated!`);
           });
-          this.ViewController.createPanels();
+          that.ViewController.onCloseDetailPage();
+          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
        
         createNewTask: function (oTask) {
@@ -356,6 +353,7 @@ sap.ui.define(
             this.AppService.updateTask(oTask).then(function (result) {
               MessageBox.success(`Roadmap Template Details Updated!`);
               that.updateProjectProgress(that.data.currentRoadmapID);
+              // that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
             });
           } else {
           oTask.planned_start = new Date(oTask.planned_start);
@@ -373,6 +371,47 @@ sap.ui.define(
         that.ViewController.onCloseDetailPage();
         this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
+        deleteTaskEntry: function (oTask) {
+          if (!oTask || !oTask.ID) {
+            MessageBox.error(
+              "Invalid Task: Cannot delete without a valid ID."
+            );
+            return;
+          }
+
+          let that = this;
+          this.AppService.deleteTask(oTask)
+            .then(function () {
+              MessageBox.success(`Task deleted successfully!`);
+              // Optionally remove the deleted task from the local data list
+              that.data.aTask = that.data.aTask.filter(
+                (task) => task.ID !== oTask.ID
+              );
+            })
+            .catch(function (oError) {
+              MessageBox.error(`Failed to delete task: ${oError.message}`);
+            });
+            that.ViewController.onCloseDetailPage();
+        this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
+        },
+        updatePlannedDates: function (Itemtype, currentItemID) {
+          debugger
+          let aPromises = [];
+          aPromises.push(this.AppService.processDateUpdate(Itemtype, currentItemID));
+          let that = this;
+          Promise.all(aPromises).then(function (result) {
+            MessageToast.show("Dates Updated!!")
+            // that.updateProjectPlannedDates(that.data.currentRoadmapID);
+          });
+        },
+        // updateProjectPlannedDates: function (sTaskId) {
+        //   let aPromises = [];
+        //   aPromises.push(this.AppService.processProjectDateUpdate(sTaskId));
+        //   let that = this;
+        //   Promise.all(aPromises).then(function (result) {
+        //     MessageToast.show("Project Dates Updated!!")
+        //   });
+        // },
         updateProgress: function (sTaskId) {
           let aPromises = [];
           aPromises.push(this.AppService.processTaskProgress(sTaskId));
@@ -423,7 +462,8 @@ sap.ui.define(
               MessageBox.success(`New Milestone created!`);
             });
           }
-          
+          that.ViewController.onCloseDetailPage();
+          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
         deleteMilestoneEntry: function (oMilestone) {
           debugger;
@@ -446,6 +486,8 @@ sap.ui.define(
             .catch(function (oError) {
               MessageBox.error(`Failed to delete milestone: ${oError.message}`);
             });
+            that.ViewController.onCloseDetailPage();
+          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
         getProjectRoadmapById: function (sRoadmapID) {
           this.ViewController.getView().setBusy(true);
