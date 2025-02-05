@@ -137,11 +137,17 @@
                                                 press="press"
                                                 value1="-7"
                                                 value2="16"
-                                                title1="Jan 2025"
-                                                title2="Apr 2025"
+                                                title1="{AppState>planned_start}"
+                                                title2="{AppState>fore_act_start}"
                                                 displayValue1="Planned"
                                                 displayValue2="Forecasted"
-                                                deltaDisplayValue="1 year"
+                                                 deltaDisplayValue="{
+        parts: [
+            { path: 'AppState>planned_start' },
+            { path: 'AppState>fore_act_start' }
+        ],
+        formatter: '.calculateDeltaInMonths'
+    }"
                                                 color="Critical"
                                                 class="sapUiSmallMargin"
                                             />

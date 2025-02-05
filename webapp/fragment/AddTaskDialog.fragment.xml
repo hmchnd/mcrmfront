@@ -63,6 +63,12 @@
                         press="onDeleteMilestone"
                         visible="{= ${AppState>/oSelectedMilestone/ID} ? true : false }"
                     />
+                    <m:Button
+                        icon="sap-icon://delete"
+                        type="Critical"
+                        press="onDeleteTask"
+                        visible="{= ${AppState>/oSelectedTask/ID} ? true : false }"
+                    />
                 </actions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
@@ -176,7 +182,7 @@
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                         selectedKey="{AppState>/oSelectedTask/phase_ID}"
                                         items="{
-                                            path: '/TemplatePhase'
+                                            path: '/ProjectPhase'
                                         }"
                                     >
                                         <core:ListItem
@@ -195,7 +201,7 @@
                                         selectedKey="{AppState>/oSelectedTask/area_ID}"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                         items="{
-                                            path: '/TemplateArea'
+                                            path: '/ProjectArea'
                                         }"
                                     >
                                         <core:ListItem
@@ -286,7 +292,7 @@
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
                                         required="true"
                                     />
-                                    <m:DatePicker visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}" value="{AppState>/oSelectedMilestone/targetAchievementDate}" id="idmilestonetargetDate"/>
+                                    <m:DatePicker visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}" value="{path:'AppState>/oSelectedMilestone/targetAchievementDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}" id="idmilestonetargetDate" />
                                     <m:Label
                                         text="Forecasted Achievement Date"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"

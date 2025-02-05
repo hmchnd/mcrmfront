@@ -105,8 +105,8 @@ sap.ui.define(
               content: [
                 new ToolbarSpacer(),
                 new Title({ text: oArea.name, level: "H1" }),
-                new Button({ icon: "sap-icon://edit", press: this.onEditArea.bind(this)}),
                 new ToolbarSpacer(),
+                new Button({ icon: "sap-icon://edit",type:"Critical", press: this.onEditArea.bind(this)}),
               ],
             });
             oPanel.setHeaderToolbar(oToolbar);
@@ -227,6 +227,7 @@ sap.ui.define(
         },
 
         onCardPress: function (oEvent) {
+          this.AppState.data.oSelectedMilestone = {};
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = true;
           this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = false;
@@ -319,6 +320,8 @@ sap.ui.define(
             return;
           }
           var oTask = this.AppState.data.oSelectedTask;
+          this.AppState.data.Itemtype = "Task"; 
+          this.AppState.data.currentItemID = oTask.ID;
           this.AppState.createNewTask(oTask);
         },
         onSaveMilestone: function () {
@@ -329,6 +332,7 @@ sap.ui.define(
           this.AppState.createMilestone(oSelectedMilestone);
         },
         onClickMilestone: function (oEvent) {
+          this.AppState.data.oSelectedTask = {};
           this.AppState.data.sidePanelOpen = false;
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = true;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
@@ -405,6 +409,26 @@ sap.ui.define(
             }
           );
         },
+        onDeleteTask: function () {
+          var that = this;
+          MessageBox.warning(
+            "Are you sure you want to delete this Task?",
+            {
+              actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+              onClose: function (sAction) {
+                if (sAction === MessageBox.Action.OK) {
+                  let oTaskDetails = that.AppState.data.oSelectedTask;
+                  if (oTaskDetails)
+                    that.AppState.deleteTaskEntry(oTaskDetails);
+                  var sLayout = LayoutType.OneColumn;
+                  that
+                    .getModel("manageRoadmapLayoutView")
+                    .setProperty("/layout", sLayout);
+                }
+              },
+            }
+          );
+        }
       }
     );
   }
