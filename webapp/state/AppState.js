@@ -8,18 +8,20 @@ sap.ui.define(
     "../model/Task",
     "../model/Milestone",
     "../model/Phases",
+    "sap/m/MessageToast"
     
 
   ],
   function (
     BaseObject,
-    Project,
-    MessageBox,
-    Activity,
-    Framework,
-    Task,
-    Milestone,
-    Phases
+	Project,
+	MessageBox,
+	Activity,
+	Framework,
+	Task,
+	Milestone,
+	Phases,
+	MessageToast
   ) {
     "use strict";
     var AppState = BaseObject.extend(
@@ -69,6 +71,8 @@ sap.ui.define(
               milestonevisiblity: false,
               EditAreaVisiblity: false,
             },
+            currentRoadmapID:"",
+            currentTaskID:""
           };
 
           // Initialize base object.
@@ -289,7 +293,7 @@ sap.ui.define(
             oActivity.ID = ActivityID;
             this.AppService.updateActivity(oActivity).then(function (result) {
               MessageBox.success(`Activity Details Updated!`);
-              that.updateProgress();
+              that.updateProgress(that.data.currentTaskID);
             });
           } else {
             oActivity.pct_complete = 0;
@@ -351,6 +355,7 @@ sap.ui.define(
            
             this.AppService.updateTask(oTask).then(function (result) {
               MessageBox.success(`Roadmap Template Details Updated!`);
+              that.updateProjectProgress(that.data.currentRoadmapID);
             });
           } else {
           oTask.planned_start = new Date(oTask.planned_start);
@@ -368,12 +373,21 @@ sap.ui.define(
         that.ViewController.onCloseDetailPage();
         this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
-        updateProgress: function () {
+        updateProgress: function (sTaskId) {
           let aPromises = [];
-          aPromises.push(this.AppService.processTaskProgress());
+          aPromises.push(this.AppService.processTaskProgress(sTaskId));
           let that = this;
           Promise.all(aPromises).then(function (result) {
-            MessageBox.success("Task Progress Updated!!");
+            MessageToast.show("Task Progress Updated!!")
+            that.updateProjectProgress(that.data.currentRoadmapID);
+          });
+        },
+        updateProjectProgress:function(sRoadmapId){
+          let aPromises = [];
+          aPromises.push(this.AppService.processProjectProgress(sRoadmapId));
+          let that = this;
+          Promise.all(aPromises).then(function (result) {
+            MessageToast.show("Project Progress Updated!!")
           });
         },
         copyRoadmapTemplateToNewProject: function (sTemplateId) {

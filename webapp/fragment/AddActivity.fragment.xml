@@ -117,7 +117,7 @@
                                     <m:Label text="pct_complete %" />
                                     <m:Input
                                         value="{AppState>/oSelectedActivity/pct_complete}"
-                                        editable="false"
+                                        editable="true"
                                     />
 
                                     <m:Label text="State" />

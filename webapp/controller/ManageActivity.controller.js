@@ -252,7 +252,7 @@ sap.ui.define(
         },
         onRouteMatched: function (oEvent) {
           let sTaskID = oEvent.getParameter("arguments").sTaskID;
-          let sTaskName = oEvent.getParameter("arguments").sTaskName;
+          let sTaskName = decodeURIComponent(oEvent.getParameter("arguments").sTaskName);
           let sProjectName = oEvent.getParameter("arguments").sProjectName;
           this.getView().byId("projectTitle").setTitle(`${sProjectName} / ${sTaskName}`);
           this.AppState = this.getOwnerComponent().getState("App");

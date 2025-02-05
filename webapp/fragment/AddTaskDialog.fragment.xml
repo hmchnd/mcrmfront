@@ -163,7 +163,7 @@
                                     <m:Input
                                         value="{AppState>/oSelectedTask/pct_complete}"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
-                                        editable="false"
+                                        editable="true"
                                     />
                                     <m:Label
                                         text="Phase"

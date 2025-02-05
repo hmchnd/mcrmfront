@@ -49,6 +49,7 @@ sap.ui.define(
           debugger
           this.AppState = this.getOwnerComponent().getState("App");
           let sRoadmapID = oEvent.getParameter("arguments").sRoadmapID;
+          this.AppState.data.currentRoadmapID = sRoadmapID;
           this.AppState.data.sSelectedProjectRoadmapID  = sRoadmapID;
            sRoadmapID =this.AppState.data.sSelectedProjectRoadmapID;
           let sProjectName = oEvent.getParameter("arguments").sProjectName;
@@ -303,11 +304,12 @@ sap.ui.define(
         },
         onManageActivity: function () {
           let sTaskID = this.AppState.data.oSelectedTask.ID;
+          this.AppState.data.currentTaskID = sTaskID;
           let sTaskName = this.AppState.data.oSelectedTask.name;
           let sProjectName = this.getView().byId("manageRoadmapPage").getTitle();
           this.getOwnerComponent().getRouter().navTo("ManageActivity",{
             sTaskID: sTaskID,
-            sTaskName: sTaskName,
+            sTaskName: encodeURIComponent(sTaskName),
             sProjectName: sProjectName
           });
         },

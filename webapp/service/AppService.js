@@ -87,8 +87,16 @@ sap.ui.define(
           });
           return this.odata(sObjectPath).put(oTask);
         },
-        processTaskProgress:function(){
-          return this.odata("/updateTaskProgress").post({})
+        processTaskProgress:function(sTaskId){
+          return this.odata("/updateTaskProgress").post({
+            taskID : sTaskId
+          })
+        },
+        processProjectProgress:function(sRoadmapId){
+
+          return this.odata("/updateProjectProgress").post({
+            sRoadmapId : sRoadmapId
+          })
         },
         CopyRoadmapTemplateForProject:function(sTemplateId){
           let oPayload = {
