@@ -21,6 +21,7 @@ sap.ui.define(["./BaseObject"], function (BaseObject) {
         this.status = data?.status || "";
         this.area_ID = data?.area_ID || "";
         this.phase_ID = data?.phase_ID || "";
+        this.precedingTaskID = data?.precedingTaskID || "";
         this.parent_key_ID = data?.parent_key_ID || "";
       }
     },

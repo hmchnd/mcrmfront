@@ -9,6 +9,7 @@ sap.ui.define([
             if (data) {
                 this.ID = data?.ID || "";
                 this.name = data?.name || "";
+                this.description = data?.description || "";
                 this.planned_start = data?.planned_start?.toISOString()?.slice(0,10)|| null;
                 this.planned_finish = data?.planned_finish?.toISOString()?.slice(0,10)|| null;
                 this.fore_act_start = data?.fore_act_start?.toISOString()?.slice(0,10)|| null;
@@ -18,6 +19,7 @@ sap.ui.define([
                 this.state = data?.state || "";
                 this.responsible_ID = data?.responsible_ID || "";
                 this.responsible = data?.responsible || "";
+                this.precedingActivityID = data?.precedingActivityID || "";
                
             }
         },
