@@ -113,12 +113,18 @@ sap.ui.define(
             delete oProject.fore_act_start;
             delete oProject.fore_act_finish;
             delete oProject.pct_complete;
-            // oProject.framework_ID = "215eaa61-ade1-48d2-a712-ba8dbee7a02d";
+
+            oProject.planned_start = new Date(oProject.planned_start);
+            oProject.planned_finish = new Date(oProject.planned_finish);
+
+            oProject.fore_act_start = new Date(oProject.planned_start);
+            oProject.fore_act_finish = new Date(oProject.planned_finish);
+           
             this.AppService.updateProject(oProject).then(function (result) {
               MessageBox.success(`Project Details Updated!`);
             });
           } else {
-            //	oProject.framework_ID = '215eaa61-ade1-48d2-a712-ba8dbee7a02d';
+          
             oProject.planned_start = new Date(oProject.planned_start);
             oProject.planned_finish = new Date(oProject.planned_finish);
 
@@ -286,7 +292,7 @@ sap.ui.define(
             this.AppService.updateActivity(oActivity).then(function (result) {
               MessageBox.success(`Activity Details Updated!`);
               that.updateProgress(that.data.currentTaskID);
-              // that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
+              that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
             });
           } else {
             oActivity.fore_act_start = oActivity.planned_start
@@ -353,7 +359,7 @@ sap.ui.define(
             this.AppService.updateTask(oTask).then(function (result) {
               MessageBox.success(`Roadmap Template Details Updated!`);
               that.updateProjectProgress(that.data.currentRoadmapID);
-              // that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
+              that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
             });
           } else {
           oTask.planned_start = new Date(oTask.planned_start);
