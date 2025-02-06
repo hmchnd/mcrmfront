@@ -1,150 +1,345 @@
-<core:FragmentDefinition xmlns="sap.uxap"
-		xmlns:mvc="sap.ui.core.mvc"
-		xmlns:m="sap.m"
-		xmlns:f="sap.f"
-        
-		   xmlns:core="sap.ui.core"
-		xmlns:form="sap.ui.layout.form">
+<core:FragmentDefinition
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+    <ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        isChildPage="true"
+        upperCaseAnchorBar="false"
+    >
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:Title
+                        text="{AppState>/oSelectedProject/ID}"
+                        wrapping="true"
+                    />
+                </expandedHeading>
+                <actions>
+                    <m:Button
+                        text="Save"
+                        icon="sap-icon://save"
+                        type="Critical"
+                        press="onSaveProjectDetails"
+                    />
+                    <m:Button
+                        text="Manage Roadmap"
+                        icon="sap-icon://heatmap-chart"
+                        type="Critical"
+                        press="onManageRoadmap"
+                        visible="{= ${AppState>/oSelectedProject/ID} ? true : false }"
+                    />
+                    <m:Button
+                        icon="sap-icon://decline"
+                        type="Critical"
+                        press="onCloseDetailPage"
+                    />
+                    <m:Button
+                        icon="sap-icon://delete"
+                        type="Critical"
+                        press="onDeleteProject"
+                    />
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
 
-  <ObjectPageLayout id="ObjectPageLayout"
-					 showTitleInHeaderContent="true"
-					alwaysShowContentHeader="false"
-					preserveHeaderStateOnScroll="false"
-					headerContentPinnable="true"
-					isChildPage="true"
-					upperCaseAnchorBar="false">
-				<headerTitle>
-					<ObjectPageDynamicHeaderTitle>
-						<expandedHeading>
-							<m:Title text="{AppState>/oSelectedProject/ID}" wrapping="true"/>
+        <headerContent>
+            <m:FlexBox
+                wrap="Wrap"
+                fitContainer="true"
+                alignItems="Stretch"
+            />
+        </headerContent>
 
-							
-						</expandedHeading>
-						<actions>
-						   <m:Button  text="Save" icon="sap-icon://save" type="Critical" press="onSaveProjectDetails"/>
-						    <m:Button  text="Manage Roadmap" icon="sap-icon://heatmap-chart"  type="Critical" press="onManageRoadmap" />
-							<m:Button  icon="sap-icon://decline" type="Critical" press="onCloseDetailPage"/>
-						    <m:Button   icon="sap-icon://delete" type="Critical" press="onDeleteProject"/>
-                        
-				</actions>
-					</ObjectPageDynamicHeaderTitle>
-				
-				</headerTitle>
+        <sections>
+            <ObjectPageSection title="Project Details">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm
+                                id="SimpleFormChange354"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                labelSpanXL="3"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="4"
+                                emptySpanL="4"
+                                emptySpanM="4"
+                                emptySpanS="0"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="1"
+                                singleContainerFullSize="false"
+                            >
+                                <form:content>
+                                    <m:Label
+                                        text="Name"
+                                        required="true"
+                                    />
+                                    <m:Input
+                                        id="pname"
+                                        value="{AppState>/oSelectedProject/name}"
+                                    />
 
-			 <headerContent>
-					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+                                    <m:Label text="Description" />
+                                    <m:TextArea
+                                        value="{AppState>/oSelectedProject/description}"
+                                    />
 
-						
-					</m:FlexBox>
-				
-				</headerContent>
-
-		<sections>
-			<ObjectPageSection title="Project Details">
-				<subSections>
-					<ObjectPageSubSection>
-						<blocks>
-							
-							<form:SimpleForm id="SimpleFormChange354"
-							
-			editable="true"
-			layout="ResponsiveGridLayout"
-			title=""
-			labelSpanXL="3"
-			labelSpanL="3"
-			labelSpanM="3"
-			labelSpanS="12"
-			adjustLabelSpan="false"
-			emptySpanXL="4"
-			emptySpanL="4"
-			emptySpanM="4"
-			emptySpanS="0"
-			columnsXL="1"
-			columnsL="1"
-			columnsM="1"
-			singleContainerFullSize="false" >
-			<form:content>
-				<m:Label text="Project Name" required="true"/>
-				<m:Input id="pname" value="{AppState>/oSelectedProject/name}" />
-
-				<m:Label text="Project Description" />
-				<m:TextArea  value="{AppState>/oSelectedProject/description}" />
-
-                <m:Label text="Roadmap" required="true"/>
-				<!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
-				<m:ComboBox
-				showSecondaryValues= "true"
-				id="roadmapTemplate"
-				selectedKey="{AppState>/oSelectedProject/roadmapTemplate_ID}"
-				items="{
+                                    <m:Label
+                                        text="Roadmap"
+                                        required="true"
+                                    />
+                                    <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
+                                    <m:ComboBox
+                                        showSecondaryValues="true"
+                                        id="roadmapTemplate"
+                                        selectedKey="{AppState>/oSelectedProject/roadmapTemplate_ID}"
+                                        items="{
 					path: '/RoadmapTemplate'
-				}">
-				<core:ListItem key="{ID}" text="{name}" />
-			</m:ComboBox>
+				}"
+                                    >
+                                        <core:ListItem
+                                            key="{ID}"
+                                            text="{name}"
+                                        />
+                                    </m:ComboBox>
 
-                <m:Label text="Project Planned Start" required="true"/>
-				<m:DatePicker id="pstart"  value="{AppState>/oSelectedProject/planned_start}"/>
+                                    <m:Label
+                                        text="Initial Start Date"
+                                        required="true"
+                                    />
+                                    <m:DatePicker
+                                        id="pstart"
+                                        value="{AppState>/oSelectedProject/planned_start}"
+                                    />
+                                    <m:Label text="Currency" />
+                                    <!-- <m:Input value="{AppState>/oSelectedProject/currency}" /> -->
+                                    <m:ComboBox
+                                        showSecondaryValues="true"
+                                        selectedKey="{AppState>/oSelectedProject/currency}"
+                                    >
+                                        <core:ListItem
+                                            key="USD"
+                                            text="USD"
+                                        />
+                                        <core:ListItem
+                                            key="AED"
+                                            text="AED"
+                                        />
+                                        <core:ListItem
+                                            key="EURO"
+                                            text="EURO"
+                                        />
+                                        <core:ListItem
+                                            key="INR"
+                                            text="INR"
+                                        />
+                                    </m:ComboBox>
 
-                <m:Label text="Project Planned End" required="true"/>
-				<m:DatePicker id="pend"  value="{AppState>/oSelectedProject/planned_finish}"/>
-
-                <m:Label text="Forecasted / Actual Start" />
-				<m:DatePicker editable="false"  value="{AppState>/oSelectedProject/fore_act_start}"/>
-
-                <m:Label text="Forecasted / Actual End"  />
-				<m:DatePicker editable="false" value="{AppState>/oSelectedProject/fore_act_finish}"/>
-
-				<m:Label text="Project Budget" />
-				<m:Input value="{AppState>/oSelectedProject/initialBudget}" />
-
-				<m:Label text="Currency" />
-				<!-- <m:Input value="{AppState>/oSelectedProject/currency}" /> -->
-				<m:ComboBox
-				showSecondaryValues= "true"
-				selectedKey="{AppState>/oSelectedProject/currency}"
-				>
-				<core:ListItem key="USD" text="USD" />
-				<core:ListItem key="AED" text="AED" />
-				<core:ListItem key="EURO" text="EURO" />
-				<core:ListItem key="INR" text="INR" />
-			</m:ComboBox>
-
-				  <m:Label text="Project Manager" />
-				<!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
-				<m:ComboBox
-				showSecondaryValues= "true"
-				selectedKey="{AppState>/oSelectedProject/projectManager_ID}"
-				items="{
+                                    <m:Label text="Project Manager" />
+                                    <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
+                                    <m:ComboBox
+                                        showSecondaryValues="true"
+                                        selectedKey="{AppState>/oSelectedProject/projectManager_ID}"
+                                        items="{
 					path: '/Employee'
-				}">
-				<core:ListItem key="{ID}" text="{name}" />
-			</m:ComboBox>
-			 <m:Label text="Project Gatekeeper" />
-				<!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
-				<m:ComboBox
-				showSecondaryValues= "true"
-				selectedKey="{AppState>/oSelectedProject/projectGateKeeper_ID}"
-				items="{
+				}"
+                                    >
+                                        <core:ListItem
+                                            key="{ID}"
+                                            text="{name}"
+                                        />
+                                    </m:ComboBox>
+                                    <m:Label text="Project Gatekeeper" />
+                                    <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
+                                    <m:ComboBox
+                                        showSecondaryValues="true"
+                                        selectedKey="{AppState>/oSelectedProject/projectGateKeeper_ID}"
+                                        items="{
 					path: '/Employee'
-				}">
-				<core:ListItem key="{ID}" text="{name}" />
-			</m:ComboBox>
+				}"
+                                    >
+                                        <core:ListItem
+                                            key="{ID}"
+                                            text="{name}"
+                                        />
+                                    </m:ComboBox>
+                                </form:content>
+                            </form:SimpleForm>
 
-				<m:Label text="Status" />
-				<m:Input value="{AppState>/oSelectedProject/status}" editable="false"/>
-					<m:Label text="% of completion" />
-				<m:Input value="{AppState>/oSelectedProject/pct_complete}" editable="false"/>
-			</form:content>
-		</form:SimpleForm>	
-				
+                            <form:SimpleForm
+                                id="SimpleFormChange"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                title="Extended Project Details"
+                                labelSpanXL="3"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="4"
+                                emptySpanL="4"
+                                emptySpanM="4"
+                                emptySpanS="0"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="1"
+                                singleContainerFullSize="false"
+                            >
+                                <form:content>
+                                    <m:Label text="Initial Budget" />
+                                    <m:Input
+                                        value="{AppState>/oSelectedProject/initialBudget}"
+                                    />
 
+                                    <m:Label
+                                        text="Initial Finish Date"
+                                        required="true"
+                                    />
+                                    <m:DatePicker
+                                        id="pend"
+                                        value="{AppState>/oSelectedProject/planned_finish}"
+                                    />
 
-							
-						</blocks>
-					</ObjectPageSubSection>
-				</subSections>
-			</ObjectPageSection>
-			
-		</sections> 
-	</ObjectPageLayout>
+                                    <m:Label
+                                        text="Forecasted / Actual Start Date"
+                                    />
+                                    <m:DatePicker
+                                        editable="true"
+                                        value="{AppState>/oSelectedProject/fore_act_start}"
+                                    />
+
+                                    <m:Label
+                                        text="Forecasted / Actual Finish Date"
+                                    />
+                                    <m:DatePicker
+                                        editable="true"
+                                        value="{AppState>/oSelectedProject/fore_act_finish}"
+                                    />
+                                    <m:Label text="Percentage of Completion" />
+                                    <m:Input
+                                        value="{AppState>/oSelectedProject/pct_complete}"
+                                        editable="true"
+                                    />
+                                    <m:Label text="State" />
+                                    <m:Input
+                                        value="{AppState>/oSelectedProject/state}"
+                                        editable="false"
+                                    />
+                                    <m:Label text="Status" />
+                                    <m:Input
+                                        value="{AppState>/oSelectedProject/status}"
+                                        editable="false"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+
+                     <ObjectPageSubSection
+                    >
+                        <blocks>
+                            <form:SimpleForm
+                                id="DefinitionSimpleForm"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                title="Definition"
+                                labelSpanXL="3"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="4"
+                                emptySpanL="4"
+                                emptySpanM="4"
+                                emptySpanS="0"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="1"
+                                singleContainerFullSize="false"                                
+                            >
+                                <form:content>                                   
+                                    <m:Label text="Purpose" />
+                                    <m:TextArea
+                                        value="{AppState>/oSelectedProject/purpose}"
+                                        editable="true"
+                                    />
+                                    <m:Label text="Result" />
+                                    <m:TextArea
+                                        value="{AppState>/oSelectedProject/result}"
+                                        editable="true"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+
+                    <ObjectPageSubSection
+                        visible="{= ${AppState>/oSelectedProject/ID} ? true : false }"
+                    >
+                        <blocks>
+                            <m:Table
+                                id="SimpleTable11"
+                                inset="false"
+                                width="100%"
+                                items="{AppState>/aPhase}"
+                            >
+                                <m:columns>
+                                    <m:Column>
+                                        <m:Label text="Phases" />
+                                    </m:Column>
+                                </m:columns>
+                                <!-- Bind the items -->
+                                <m:items>
+                                    <m:ColumnListItem>
+                                        <m:cells>
+                                            <m:Text text="{AppState>name}" />
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                    <ObjectPageSubSection
+                        visible="{= ${AppState>/oSelectedProject/ID} ? true : false }"
+                    >
+                        <blocks>
+                            <m:Table
+                                id="AreaTable"
+                                inset="false"
+                                width="100%"
+                                items="{AppState>/aArea}"
+                            >
+                                <m:columns>
+                                    <m:Column>
+                                        <m:Label text="Areas" />
+                                    </m:Column>
+                                </m:columns>
+                                <!-- Bind the items -->
+                                <m:items>
+                                    <m:ColumnListItem>
+                                        <m:cells>
+                                            <m:Text text="{AppState>name}" />
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
 </core:FragmentDefinition>

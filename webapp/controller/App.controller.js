@@ -63,6 +63,9 @@ sap.ui.define(
 
         if (this.AppState.data.currentPage == "PROJECT") {
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
+          this.AppState.data.aPhase={}
+          this.AppState.data.aArea={}
+          this.AppState.data.aTask={}
 
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
           this.getModel("projectLayoutView").refresh(true);

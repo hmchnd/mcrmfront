@@ -304,9 +304,12 @@ sap.ui.define(
             .setProperty("/layout", sLayout);
         },
         onManageActivity: function () {
+          debugger
           let sTaskID = this.AppState.data.oSelectedTask.ID;
           this.AppState.data.currentTaskID = sTaskID;
           let sTaskName = this.AppState.data.oSelectedTask.name;
+          this.AppState.data.sTaskStartDate = this.AppState.data.oSelectedTask.planned_start;
+          this.AppState.data.sTaskFinishDate = this.AppState.data.oSelectedTask.planned_finish;
           let sProjectName = this.getView().byId("manageRoadmapPage").getTitle();
           this.getOwnerComponent().getRouter().navTo("ManageActivity",{
             sTaskID: sTaskID,
