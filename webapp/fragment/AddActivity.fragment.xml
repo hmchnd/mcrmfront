@@ -115,11 +115,9 @@
                                     />
                                     <m:Label text="Actual Start" />
                                     <m:DatePicker
-                                        value="{AppState>/oSelectedActivity/act_start}"
                                         editable="true"/>
                                     <m:Label text="Actual Finish" />
                                     <m:DatePicker
-                                        value="{AppState>/oSelectedActivity/act_finish}"
                                         editable="true"/>
 
                                     <m:Label text="Progress Increment %" />
@@ -143,7 +141,7 @@
                                   <m:ComboBox
                                     id="aPActivity"
                                         showSecondaryValues="true"
-                                        selectedKey="{AppState>/oSelectedActivity/ID}"
+                                        selectedKey="{AppState>/oSelectedActivity/precedingActivityID}"
                                         items="{
 					path: 'AppState>/aActivity'
 				}"

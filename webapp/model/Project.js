@@ -10,7 +10,9 @@ sap.ui.define([
                 this.ID = data?.ID || "";
                 this.name = data?.name || "";
                 this.description = data?.description || "";
-                this.initialBudget = data?.initialBudget || "";
+                this.initialBudget = data?.initialBudget || 0;
+                this.purpose = data?.purpose || "";
+                this.result = data?.result || "";
                 this.currency = data?.currency || "";
                 this.roadmapTemplate_ID = data?.roadmapTemplate_ID || "";
                 this.projectManager_ID = data?.projectManager_ID || "";

@@ -19,11 +19,9 @@
             <ObjectPageDynamicHeaderTitle>
                 <expandedHeading>
                     <m:Title
-                       text="{= ${AppState>/oSelectedTask/ID} ? ${AppState>/oSelectedTask/ID} : ${AppState>/oSelectedMilestone/ID} }"
+                        text="{= ${AppState>/oSelectedTask/ID} ? ${AppState>/oSelectedTask/ID} : ${AppState>/oSelectedMilestone/ID} }"
                         wrapping="true"
-                        
                     />
-                    
                 </expandedHeading>
                 <actions>
                     <m:Button
@@ -38,21 +36,21 @@
                         icon="sap-icon://save"
                         type="Critical"
                         press="onSaveTask"
-                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
+                        visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                     />
                     <m:Button
                         text="Save"
                         icon="sap-icon://save"
                         type="Critical"
                         press="onSaveMilestone"
-                          visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
+                        visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
                     />
                     <m:Button
                         text="Save"
                         icon="sap-icon://save"
                         type="Critical"
                         press="onSaveArea"
-                          visible="{AppState>/makeTaskMilestoneVisiblity/EditAreaVisiblity}"
+                        visible="{AppState>/makeTaskMilestoneVisiblity/EditAreaVisiblity}"
                     />
                     <m:Button
                         icon="sap-icon://decline"
@@ -82,8 +80,9 @@
             />
         </headerContent>
         <sections>
-            <ObjectPageSection title="{= ${AppState>/makeTaskMilestoneVisiblity/taskvisiblity} ? 'Task Details' : ${AppState>/makeTaskMilestoneVisiblity/milestonevisiblity} ? 'Milestone Details' : 'Edit Area Details'}">
-
+            <ObjectPageSection
+                title="{= ${AppState>/makeTaskMilestoneVisiblity/taskvisiblity} ? 'Task Details' : ${AppState>/makeTaskMilestoneVisiblity/milestonevisiblity} ? 'Milestone Details' : 'Edit Area Details'}"
+            >
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
@@ -152,35 +151,34 @@
                                         required="true"
                                     />
                                     <m:ComboBox
-                                    id="idPrecedingTask"
+                                        id="idPrecedingTask"
                                         showSecondaryValues="true"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
-                                        selectedKey="{AppState>/oSelectedTask/ID}"
+                                        selectedKey="{AppState>/oSelectedTask/precedingTaskID}"
                                         items="{
-                                            path: 'AppState>/aTask'
-                                        }"
+    path: 'AppState>/aTask'
+}"
                                     >
                                         <core:ListItem
                                             key="{AppState>ID}"
                                             text="{AppState>name}"
                                         />
                                     </m:ComboBox>
-                                    <m:Label 
-                                    text="Outcome Description"
-                                    visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
-                                    />
-                                   <m:Input
-                                        id="outcomeDesc"
-                                        value="{AppState>/oSelectedTask/outcomeDesc}"
+                                    <m:Label
+                                        text="Outcome Description"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
-                                    /> 
+                                    />
+                                    <m:TextArea
+                                        id="outcomeDesc"
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
+                                    />
                                     <m:Label
                                         text="Phase"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                         required="true"
                                     />
                                     <m:ComboBox
-                                    id="idphase"
+                                        id="idphase"
                                         showSecondaryValues="true"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                         selectedKey="{AppState>/oSelectedTask/phase_ID}"
@@ -199,7 +197,7 @@
                                         required="true"
                                     />
                                     <m:ComboBox
-                                    id="idarea"
+                                        id="idarea"
                                         showSecondaryValues="true"
                                         selectedKey="{AppState>/oSelectedTask/area_ID}"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
@@ -207,20 +205,20 @@
                                             path: 'AppState>/aArea'
                                         }"
                                     >
-                                        <core:ListItem  
+                                        <core:ListItem
                                             key="{AppState>ID}"
                                             text="{AppState>name}"
                                         />
-                                    </m:ComboBox>                                                            
-                                    <m:Label 
-                                    text="Weight"
-                                    visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
+                                    </m:ComboBox>
+                                    <m:Label
+                                        text="Weight"
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
-                                   <m:Input
+                                    <m:Input
                                         id="weight"
                                         value="{AppState>/oSelectedTask/pct_weight}"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
-                                    />                                    
+                                    />
                                     <m:Label
                                         text="Forecasted / Actual Start Date"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
@@ -248,14 +246,14 @@
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                         editable="true"
                                     />
-                                    
+
                                     <m:Label
                                         text="Responsible"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                         required="true"
                                     />
                                     <m:ComboBox
-                                    id="idowner"
+                                        id="idowner"
                                         showSecondaryValues="true"
                                         selectedKey="{AppState>/oSelectedTask/responsible_ID}"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
@@ -295,19 +293,27 @@
                                         editable="false"
                                     />
 
-                                 <!-- Milestone Details -->
+                                    <!-- Milestone Details -->
 
                                     <m:Label
                                         text="Milestone Name"
                                         required="true"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
                                     />
-                                    <m:Input visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"  value="{AppState>/oSelectedMilestone/name}" id="idmilestonename"/>
+                                    <m:Input
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
+                                        value="{AppState>/oSelectedMilestone/name}"
+                                        id="idmilestonename"
+                                    />
                                     <m:Label
                                         text="Description"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
                                     />
-                                    <m:Input visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}" value="{AppState>/oSelectedMilestone/description}" id="idmilestonedesc"/>
+                                    <m:Input
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
+                                        value="{AppState>/oSelectedMilestone/description}"
+                                        id="idmilestonedesc"
+                                    />
                                     <m:Label
                                         text="Phase"
                                         required="true"
@@ -332,19 +338,30 @@
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
                                         required="true"
                                     />
-                                    <m:DatePicker visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}" value="{path:'AppState>/oSelectedMilestone/targetAchievementDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}" id="idmilestonetargetDate" />
+                                    <m:DatePicker
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
+                                        value="{path:'AppState>/oSelectedMilestone/targetAchievementDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
+                                        id="idmilestonetargetDate"
+                                    />
                                     <m:Label
                                         text="Forecasted Achievement Date"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
                                     />
-                                    <m:DatePicker visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}" editable="true"/>
+                                    <m:DatePicker
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
+                                        value="{path:'AppState>/oSelectedMilestone/fore_act_achievement_date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
+                                        editable="true"
+                                    />
                                     <m:Label
                                         text="Percentage of Completion"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
+                                        
                                     />
                                     <m:Input
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
                                         editable="true"
+                                        value="{AppState>/oSelectedMilestone/pct_complete}"
+
                                     />
                                     <m:Label
                                         text="Status"

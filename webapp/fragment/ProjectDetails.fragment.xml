@@ -326,12 +326,29 @@
                                     <m:Column>
                                         <m:Label text="Areas" />
                                     </m:Column>
+                                    <m:Column>
+                                        <m:Label text="Area Leads" />
+                                    </m:Column>
                                 </m:columns>
                                 <!-- Bind the items -->
                                 <m:items>
                                     <m:ColumnListItem>
                                         <m:cells>
                                             <m:Text text="{AppState>name}" />
+                                            <m:ComboBox
+                                        id="idAreaLeads"
+                                        showSecondaryValues="true"
+                                        editable="false"
+                                        selectedKey="{AppState>responsible_ID}"
+                                        items="{
+                                            path: '/Employee'
+                                        }"
+                                    >
+                                        <core:ListItem
+                                            key="{ID}"
+                                            text="{name}"
+                                        />
+                                    </m:ComboBox>
                                         </m:cells>
                                     </m:ColumnListItem>
                                 </m:items>
