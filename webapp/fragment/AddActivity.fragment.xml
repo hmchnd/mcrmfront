@@ -83,49 +83,78 @@
                                         id="aname"
                                         value="{AppState>/oSelectedActivity/name}"
                                     />
+                                    <m:Label text=" Description"  />
+                                    <m:Input
+                                        id="adesc"
+                                        value="{AppState>/oSelectedActivity/description}"/>
 
                                     <m:Label text=" Planned Start" required="true" />
                                     <m:DatePicker
                                         id="astart"
+                                        afterValueHelpClose="onChangeDate"
                                         value="{AppState>/oSelectedActivity/planned_start}"
                                     />
 
-                                    <m:Label text=" Planned End" required="true" />
+                                    <m:Label text=" Planned Finish" required="true" />
                                     <m:DatePicker
                                         id="aend"
+                                        afterValueHelpClose="onChangeDate"
                                         value="{AppState>/oSelectedActivity/planned_finish}"
                                     />
 
-                                    <m:Label text="Forecasted / Actual Start" />
+                                    <m:Label text="Forecasted Start" />
                                     <m:DatePicker
                                         value="{AppState>/oSelectedActivity/fore_act_start}"
-                                        editable="false"
+                                        editable="true"
                                     />
 
-                                    <m:Label text="Forecasted / Actual End" />
+                                    <m:Label text="Forecasted Finish" />
                                     <m:DatePicker
                                         value="{AppState>/oSelectedActivity/fore_act_finish}"
-                                        editable="false"
+                                        editable="true"
                                     />
+                                    <m:Label text="Actual Start" />
+                                    <m:DatePicker
+                                        value="{AppState>/oSelectedActivity/act_start}"
+                                        editable="true"/>
+                                    <m:Label text="Actual Finish" />
+                                    <m:DatePicker
+                                        value="{AppState>/oSelectedActivity/act_finish}"
+                                        editable="true"/>
 
-                                    <m:Label text="pct_weight %" />
+                                    <m:Label text="Progress Increment %" />
                                     <m:Input
                                         value="{AppState>/oSelectedActivity/pct_weight}"
-                                        editable="false"
+                                        editable="true"
                                     />
 
-                                    <m:Label text="pct_complete %" />
+                                    <!-- <m:Label text="pct_complete %" />
                                     <m:Input
                                         value="{AppState>/oSelectedActivity/pct_complete}"
                                         editable="true"
-                                    />
+                                    /> -->
 
                                     <m:Label text="State" />
                                     <m:Input
                                         value="{AppState>/oSelectedActivity/state}"
                                         editable="false"
                                     />
-                                    <m:Label text="Owner" required="true" />
+                                  <m:Label text="Preceding Activity"  />
+                                  <m:ComboBox
+                                    id="aPActivity"
+                                        showSecondaryValues="true"
+                                        selectedKey="{AppState>/oSelectedActivity/ID}"
+                                        items="{
+					path: 'AppState>/aActivity'
+				}"
+                                    >
+                                        <core:ListItem
+                                            key="{AppState>ID}"
+                                            text="{AppState>name}"
+                                        />
+                                    </m:ComboBox>
+                                    <m:Label text="Responsible" required="true" />
+
                                     <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
                                     <m:ComboBox
                                     id="aowner"

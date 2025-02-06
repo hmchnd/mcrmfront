@@ -23,8 +23,8 @@ sap.ui.define(
           this.AppState.data.showBackToRoadmapButton = false;
           this.AppState.setViewController(this);
           this.AppState.data.currentPage = "PROJECT";
-
           let oGridListControl = this.byId("gridList");
+          this.AppState.data.oGridListControl = oGridListControl;
           this.AppState.getMyProjectsList(oGridListControl);
           this.AppState.data.currentPageLabel = "Manage Projects";
           this.AppState.getModel().refresh(true);
@@ -34,11 +34,19 @@ sap.ui.define(
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
         },
         onPress: function (oEvent) {
+          debugger
+          // let oGridListControl = this.AppState.data.oGridListControl;
+          // this.AppState.getMyProjectsList(oGridListControl);
+                   
+          let aaa = this.getView().getModel("AppState").getData().aProjects;
           this.AppState.data.sidePanelOpen = false;
           let oSelectedProjectObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
             {};
+            debugger
           this.AppState.data.oSelectedProject = oSelectedProjectObject;
+          let sRoadmapID = oSelectedProjectObject.roadmapTemplate_ID
+          this.AppState.getProjectRoadmapById(sRoadmapID); 
           var sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
         },

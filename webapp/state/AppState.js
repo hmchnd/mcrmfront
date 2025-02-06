@@ -74,7 +74,11 @@ sap.ui.define(
             currentRoadmapID:"",
             currentTaskID:"",
             Itemtype: "",
-            currentItemID: ""
+            currentItemID: "",
+            oGridListControl: {},
+            sTaskStartDate:"",
+            sTaskFinishDate:"",
+
           };
 
           // Initialize base object.
@@ -93,6 +97,7 @@ sap.ui.define(
           return this.ResourceBundle;
         },
         getMyProjectsList: function (oGridListControl) {
+          debugger
           let aPromises = [];
           aPromises.push(this.AppService.getProjects());
           let that = this;
@@ -145,7 +150,7 @@ sap.ui.define(
               // );
             });
           }
-          // this.getMyProjectsList()
+          this.getMyProjectsList(this.data.oGridListControl);
         },
         deleteProjectEntry: function (oProject) {
           debugger;
@@ -458,7 +463,7 @@ sap.ui.define(
             // delete oMilestone.targetAchievementDate;
            
             this.AppService.updateMilestone(oMilestone).then(function (result) {
-              MessageBox.success(`Project Details Updated!`);
+              MessageBox.success(`Milestone Details Updated!`);
             });
           } else {
             oMilestone.targetAchievementDate = new Date(
@@ -511,7 +516,9 @@ sap.ui.define(
             that.data.aArea = oFetchedProjectRoadmap.projectArea.results || [];
             that.data.aTask = oFetchedProjectRoadmap.projectTask.results || [];
             that.updateModel(true);
+            if(that.data.currentPage=="ManageRoadmap"){
             that.ViewController.createPanels();
+            }
             that.ViewController.getView().setBusy(false);
           });
         },
