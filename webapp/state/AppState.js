@@ -144,7 +144,8 @@ sap.ui.define(
 
             this.AppService.saveProject(oProject).then(function (result) {
               that.ViewController.getView().setBusy(false);
-              that.copyRoadmapTemplateToNewProject(sRoadmapTemplateID);
+              let oCreatedProjectDetails = result.data;
+              that.copyRoadmapTemplateToNewProject(sRoadmapTemplateID,oCreatedProjectDetails.ID);
               // that.data.aProjects = that.data.aProjects.filter(
               //   (Project) => Project.ID !== oProject.ID
               // );
@@ -440,12 +441,12 @@ sap.ui.define(
             MessageToast.show("Project Progress Updated!!")
           });
         },
-        copyRoadmapTemplateToNewProject: function (sTemplateId) {
+        copyRoadmapTemplateToNewProject: function (sTemplateId,sProjectID) {
           let aPromises = [];
           this.ViewController.getView().setBusy(true);
 
           aPromises.push(
-            this.AppService.CopyRoadmapTemplateForProject(sTemplateId)
+            this.AppService.CopyRoadmapTemplateForProject(sTemplateId,sProjectID)
           );
           let that = this;
           Promise.all(aPromises).then(function (result) {

@@ -384,7 +384,7 @@
                                         value="{AppState>/oSelectedArea/name}"
                                     />
                                     <m:Label
-                                        text="Owner"
+                                        text="Responsible"
                                         required="true"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/EditAreaVisiblity}"
                                     />

@@ -111,9 +111,10 @@ sap.ui.define(
             sRoadmapId : sRoadmapId
           })
         },
-        CopyRoadmapTemplateForProject:function(sTemplateId){
+        CopyRoadmapTemplateForProject:function(sTemplateId,sProjectID){
           let oPayload = {
-             "roadmapTemplateID":sTemplateId
+             "roadmapTemplateID":sTemplateId,
+             "sProjectID":sProjectID
           }
           return this.odata("/CopyRoadmapTemplateForProject").post(oPayload);
         },
