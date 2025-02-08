@@ -94,7 +94,7 @@ sap.ui.define(
           return this.odata(sObjectPath).delete();
         },
         processDateUpdate:function(Itemtype, currentItemID){
-          debugger
+         
           return this.odata("/plannedVsActualDatesCalc").post({
             currentItemID : currentItemID,
             Itemtype: Itemtype

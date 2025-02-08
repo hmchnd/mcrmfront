@@ -78,7 +78,6 @@ sap.ui.define([
     onPress: function (oEvent) {
       this.AppState.data.sidePanelOpen = false;
       let aaa = this.getView().getModel("AppState").getData().aFramework;
-      debugger
       let oSelectedFrameworkObject = oEvent.getSource()?.getBindingContext("AppState")?.getObject() || {};
       this.AppState.data.oSelectedFramework = oSelectedFrameworkObject;
       var sLayout = LayoutType.TwoColumnsMidExpanded;
@@ -93,7 +92,7 @@ sap.ui.define([
       this.getView().getModel().setProperty("/currentStep", currentStep);
     },
     onEditCreateArea: function () {
-      debugger;
+     
       
       let editAreaModel = this.AppState.data.oSelectedFramework.templateAreas;
   
@@ -131,7 +130,7 @@ sap.ui.define([
       createPhaseModel.setData(data);
     },
     onCreateTasks: function () {
-      debugger
+    
       let createTaskModel = this.getView().getModel("taskModel");
 
       let data = createTaskModel.getData();
@@ -172,7 +171,7 @@ sap.ui.define([
 
     },
     onDeleteEditArea: function (oEvent) {
-        debugger
+       
         let oRowContext = oEvent.getSource().getBindingContext("AppState");
         
         if (!oRowContext) {
@@ -193,7 +192,7 @@ sap.ui.define([
         }
     },
     onDeleteEditPhase: function (oEvent) {
-      debugger
+      
       let oRowContext = oEvent.getSource().getBindingContext("AppState");
       
       if (!oRowContext) {
@@ -213,7 +212,7 @@ sap.ui.define([
           sap.m.MessageToast.show("Row deleted successfully.");
       }
     }, onSaveFrameworkDetails: function () {
-      debugger
+     
       let oFrameworkDetails = this.AppState.data.oSelectedFramework;
       if (!oFrameworkDetails.ID) {
         let area = [];
@@ -262,13 +261,13 @@ sap.ui.define([
         oFrameworkDetails.phase = phases;
         oFrameworkDetails.task = templateTasks;
       }
-debugger
+
       // oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
       // oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
       this.AppState.createNewFrameworkEntry(oFrameworkDetails);
     },
     onDeleteFramework: function () {
-      debugger
+
       let oFrameworkDetails = this.AppState.data.oSelectedFramework;
       this.AppState.deleteFrameworkEntry(oFrameworkDetails)
       var sLayout = LayoutType.OneColumn;

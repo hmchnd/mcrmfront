@@ -97,7 +97,7 @@ sap.ui.define(
           return this.ResourceBundle;
         },
         getMyProjectsList: function (oGridListControl) {
-          debugger
+        
           let aPromises = [];
           aPromises.push(this.AppService.getProjects());
           let that = this;
@@ -114,6 +114,7 @@ sap.ui.define(
         },
         createNewProjectEntry: function (oProject) {
           let that = this;
+          let oGridListControl = this.ViewController.getView().byId("gridList");
           if (oProject.ID) {
             delete oProject.fore_act_start;
             delete oProject.fore_act_finish;
@@ -146,15 +147,14 @@ sap.ui.define(
               that.ViewController.getView().setBusy(false);
               let oCreatedProjectDetails = result.data;
               that.copyRoadmapTemplateToNewProject(sRoadmapTemplateID,oCreatedProjectDetails.ID);
-              // that.data.aProjects = that.data.aProjects.filter(
-              //   (Project) => Project.ID !== oProject.ID
-              // );
+              that.getMyProjectsList(oGridListControl);
+              that.ViewController.resetColumnLayout();
             });
           }
           this.getMyProjectsList(this.data.oGridListControl);
         },
         deleteProjectEntry: function (oProject) {
-          debugger;
+        
           if (!oProject || !oProject.ID) {
             MessageBox.error(
               "Invalid Project: Cannot delete without a valid ID."
@@ -177,7 +177,7 @@ sap.ui.define(
         },
 
         getMyFrameworkList: function (oGridListControl) {
-          debugger;
+         
           let aPromises = [];
           // Add promises for fetching Framework and Class data
           aPromises.push(this.AppService.getFramework());
@@ -204,7 +204,7 @@ sap.ui.define(
         },
 
         createNewFrameworkEntry: function (oFramework) {
-          debugger;
+         
           if (oFramework.ID) {
            
             this.AppService.updateFramework(oFramework).then(function (result) {
@@ -219,7 +219,7 @@ sap.ui.define(
             delete oFramework.phase;
             delete oFramework.task;
 
-            debugger;
+           
             this.AppService.saveFramework(oFramework).then(function (result) {
               MessageBox.success(`Roadmap Template Details Saved!`);
               that.data.aFramework = that.data.aFramework.filter(
@@ -230,7 +230,7 @@ sap.ui.define(
         },
 
         deleteFrameworkEntry: function (oFramework) {
-          debugger;
+        
           if (!oFramework || !oFramework.ID) {
             MessageBox.error(
               "Invalid Framework: Cannot delete without a valid ID."
@@ -254,7 +254,7 @@ sap.ui.define(
         },
 
         getMyActivityList: function (sTaskID) {
-          debugger
+        
           if(!sTaskID){
           this.ViewController.getView().setBusy(true);
           }
@@ -263,7 +263,7 @@ sap.ui.define(
           aPromises.push(this.AppService.getActivity(sTaskID));
           let that = this;
           Promise.all(aPromises).then(function (result) {
-            debugger;
+         
             let aActivityList = result[0]?.data?.results || [];
             aActivityList = aActivityList.map(function (item) {
               return new Activity(item);
@@ -276,7 +276,7 @@ sap.ui.define(
         }
         },
         createNewActivityEntry: function (oActivity) {
-          debugger;
+         
           var that = this;
           oActivity.planned_start = this._formatODataDate(
             oActivity.planned_start
@@ -327,7 +327,7 @@ sap.ui.define(
           return null;
         },
         deleteActivityEntry: function (oActivity) {
-          debugger;
+        
           if (!oActivity || !oActivity.ID) {
             MessageBox.error(
               "Invalid Activity: Cannot delete without a valid ID."
@@ -407,7 +407,7 @@ sap.ui.define(
         this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
         updatePlannedDates: function (Itemtype, currentItemID) {
-          debugger
+        
           let aPromises = [];
           aPromises.push(this.AppService.processDateUpdate(Itemtype, currentItemID));
           let that = this;
@@ -478,7 +478,7 @@ sap.ui.define(
           this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
         deleteMilestoneEntry: function (oMilestone) {
-          debugger;
+         
           if (!oMilestone || !oMilestone.ID) {
             MessageBox.error(
               "Invalid Milestone: Cannot delete without a valid ID."
@@ -507,7 +507,7 @@ sap.ui.define(
           aPromises.push(this.AppService.getProjectRoadmapByID(sRoadmapID));
           let that = this;
           Promise.all(aPromises).then(function (result) {
-            debugger;
+           
             let oFetchedProjectRoadmap = result[0].data || {};
             that.data.aPhase =
               oFetchedProjectRoadmap.projectPhase.results.map(

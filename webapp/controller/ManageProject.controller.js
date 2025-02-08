@@ -33,20 +33,18 @@ sap.ui.define(
           var sLayout = LayoutType.OneColumn;
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
         },
+        resetColumnLayout:function(){
+          var sLayout = LayoutType.OneColumn;
+          this.getModel("projectLayoutView").setProperty("/layout", sLayout);
+        },
         onPress: function (oEvent) {
-          debugger
-          // let oGridListControl = this.AppState.data.oGridListControl;
-          // this.AppState.getMyProjectsList(oGridListControl);
-                   
-          let aaa = this.getView().getModel("AppState").getData().aProjects;
           this.AppState.data.sidePanelOpen = false;
           let oSelectedProjectObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
             {};
-            debugger
+           
           this.AppState.data.oSelectedProject = oSelectedProjectObject;
-          let sRoadmapID = oSelectedProjectObject.roadmapTemplate_ID
-          this.AppState.getProjectRoadmapById(sRoadmapID); 
+       
           var sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
         },
@@ -55,18 +53,15 @@ sap.ui.define(
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
         },
         onSaveProjectDetails: function () {
-          debugger;
+        
           if(!this._validateProjectForm()){
             return;
           }
           let oProjectDetails = this.AppState.data.oSelectedProject;
-
-          // oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
-          // oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
           this.AppState.createNewProjectEntry(oProjectDetails);
         },
         onManageRoadmap: function (oEvent) {
-          debugger
+        
           let oProjectDetails = this.AppState.data.oSelectedProject;
           this.getOwnerComponent().getRouter().navTo("ManageRoadmap",{
             sRoadmapID: oProjectDetails.roadmapTemplate_ID,
@@ -91,7 +86,7 @@ sap.ui.define(
               }
             },
           });
-          debugger;
+          
         },
         _validateProjectForm: function () {
           var bValid = true;
@@ -115,7 +110,7 @@ sap.ui.define(
           return bValid;
         },
         calculateDeltaInMonths: function (aParts,aParts2) {
-          debugger
+         
           // Extract plannedStart and forecastStart from parts
           let plannedStart = aParts;
           let forecastStart = aParts2;

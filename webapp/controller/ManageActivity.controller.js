@@ -125,7 +125,7 @@ sap.ui.define(
         },
 
         onDrop: function (oInfo) {
-          debugger
+         
           var oDragged = oInfo.getParameter("draggedControl"),
             oDropped = oInfo.getParameter("droppedControl"),
             sInsertPosition = oInfo.getParameter("dropPosition"),
@@ -306,7 +306,7 @@ sap.ui.define(
         },
 
         calculateActivityCounts: function () {
-          debugger
+        
           let oModel = this.getView().getModel("AppState");
           let aActivities = oModel.getProperty("/aActivity") || [];
 
@@ -368,7 +368,7 @@ sap.ui.define(
           }
         },
         onChangeDate: function (oEvent) {
-          debugger;
+        
           let oInput = oEvent.getSource(); // Get the input field
           let uservalue = oInput.getValue(); // Format: MM/DD/YY
           let startDate = this.AppState.data.sTaskStartDate; 

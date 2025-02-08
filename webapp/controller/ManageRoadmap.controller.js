@@ -46,7 +46,7 @@ sap.ui.define(
         },
 
         onRouteMatched: function (oEvent) {
-          debugger
+       
           this.AppState = this.getOwnerComponent().getState("App");
           let sRoadmapID = oEvent.getParameter("arguments").sRoadmapID;
           this.AppState.data.currentRoadmapID = sRoadmapID;
@@ -54,7 +54,7 @@ sap.ui.define(
            sRoadmapID =this.AppState.data.sSelectedProjectRoadmapID;
           let sProjectName = oEvent.getParameter("arguments").sProjectName;
           this.getView().byId("manageRoadmapPage").setTitle(sProjectName);
-          debugger;
+        
           this.getView().setModel(this.AppState.getModel(), "AppState");
           this.AppState.getModel().setSizeLimit(999999);
           this.AppState.setViewController(this);
@@ -270,7 +270,7 @@ sap.ui.define(
           this.getModel("manageRoadmapLayoutView").refresh(true);
         },
         onEditArea: function (oEvent) {
-          debugger
+        
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = true;
@@ -304,7 +304,7 @@ sap.ui.define(
             .setProperty("/layout", sLayout);
         },
         onManageActivity: function () {
-          debugger
+         
           let sTaskID = this.AppState.data.oSelectedTask.ID;
           this.AppState.data.currentTaskID = sTaskID;
           let sTaskName = this.AppState.data.oSelectedTask.name;
@@ -318,7 +318,7 @@ sap.ui.define(
           });
         },
         onSaveTask: function () {
-          debugger;
+        
           if (!this._validateTaskForm()) {
             return;
           }

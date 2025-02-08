@@ -58,7 +58,7 @@ sap.ui.define(
         );
       },
       onAddNewItem: function (oEvent) {
-        debugger;
+       
         this.AppState.data.sidePanelOpen = false;
 
         if (this.AppState.data.currentPage == "PROJECT") {
