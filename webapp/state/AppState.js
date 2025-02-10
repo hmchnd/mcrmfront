@@ -276,7 +276,7 @@ sap.ui.define(
         }
         },
         createNewActivityEntry: function (oActivity) {
-         
+          debugger;
           var that = this;
           oActivity.planned_start = this._formatODataDate(
             oActivity.planned_start
@@ -289,6 +289,19 @@ sap.ui.define(
 
           if (oActivity.ID) {
             let ActivityID = oActivity.ID;
+            if(oActivity.state=="NEW"){
+              oActivity.act_start=null
+              oActivity.act_finish=null
+            }
+            else if(oActivity.state=="INPROGRESS"){
+              oActivity.act_start= new Date()
+            }
+            else if(oActivity.state=="COMPLETED"){
+             if(oActivity.act_start==null) {
+              oActivity.act_start= new Date()
+              }
+              oActivity.act_finish= new Date()
+            }
 
             // oActivity.Classes=[];
             // oActivity.phases=[];
@@ -359,6 +372,7 @@ sap.ui.define(
         },
        
         createNewTask: function (oTask) {
+          debugger
           let that = this;
           if (oTask.ID) {
            
@@ -370,7 +384,7 @@ sap.ui.define(
           } else {
           oTask.planned_start = new Date(oTask.planned_start);
           oTask.planned_finish = new Date(oTask.planned_finish);
-          oTask.parent_key_ID = "7c80d6d0-4457-4e07-9de1-946d2085c9ea";
+          oTask.parent_key_ID = that.data.currentRoadmapID;
           oTask.fore_act_start = new Date(oTask.planned_start);
           oTask.fore_act_finish = new Date(oTask.planned_finish);
           oTask.status = "Not Started";

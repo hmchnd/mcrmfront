@@ -23,12 +23,15 @@
                             <Title text="{AppState>name}" wrapping="true" />
                             <Label text="{path:'AppState>planned_start', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM yyyy' }}-{path:'AppState>planned_finish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM yyyy' }}" wrapping="true" />
                         </VBox>
-                        <pf:MicroProcessFlow content="{AppState>milestone}">
+                        <!-- <pf:MicroProcessFlow content="{AppState>milestone}">
                             <pf:content>
                                 <pf:MicroProcessFlowItem state="Warning" title="{AppState>name}" press="onClickMilestone"/>
                                
                             </pf:content>
-                        </pf:MicroProcessFlow>
+                        </pf:MicroProcessFlow> -->
+                         <HBox items="{AppState>milestone}" class="sapUiTinyMargin" wrap="Wrap">
+                                <Button type="Critical" tooltip="{AppState>name}" icon="sap-icon://flag" press="onClickMilestone" />
+                               </HBox>
                     </f:GridListItem>
 
                   

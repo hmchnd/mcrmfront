@@ -84,7 +84,7 @@
                             >
                                 <form:content>
                                     <m:Label
-                                        text="Name"
+                                        text="Project Name"
                                         required="true"
                                     />
                                     <m:Input
@@ -100,9 +100,11 @@
                                     <m:Label
                                         text="Roadmap"
                                         required="true"
+                                         visible="{= ${AppState>/oSelectedProject/ID} ? false : true}"
                                     />
                                     <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
                                     <m:ComboBox
+                                         visible="{= ${AppState>/oSelectedProject/ID} ? false : true}"
                                         showSecondaryValues="true"
                                         id="roadmapTemplate"
                                         selectedKey="{AppState>/oSelectedProject/roadmapTemplate_ID}"
@@ -115,6 +117,26 @@
                                             text="{name}"
                                         />
                                     </m:ComboBox>
+                                    <m:Label
+                                        text="Roadmap"
+                                        required="true"
+                                         visible="{= ${AppState>/oSelectedProject/ID} ? true : false}"
+                                    />
+                                    <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
+                                    <m:ComboBox
+                                         visible="{= ${AppState>/oSelectedProject/ID} ? true : false}"
+                                        showSecondaryValues="true"
+                                        id="roadmapTemplate1"
+                                        selectedKey="{AppState>/oSelectedProject/roadmapTemplate_ID}"
+                                        items="{
+					path: '/ProjectRoadmap'
+				}"
+                                    >
+                                        <core:ListItem
+                                            key="{ID}"
+                                            text="{ID}"
+                                        />
+                                    </m:ComboBox>
 
                                     <m:Label
                                         text="Initial Start Date"
@@ -123,6 +145,14 @@
                                     <m:DatePicker
                                         id="pstart"
                                         value="{AppState>/oSelectedProject/planned_start}"
+                                    />
+                                     <m:Label
+                                        text="Initial Finish Date"
+                                        required="true"
+                                    />
+                                    <m:DatePicker
+                                        id="pend"
+                                        value="{AppState>/oSelectedProject/planned_finish}"
                                     />
                                     <m:Label text="Currency" />
                                     <!-- <m:Input value="{AppState>/oSelectedProject/currency}" /> -->
@@ -148,9 +178,10 @@
                                         />
                                     </m:ComboBox>
 
-                                    <m:Label text="Project Manager" />
+                                    <m:Label text="Project Manager" required="true"/>
                                     <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
                                     <m:ComboBox
+                                    id="idProjectManager"
                                         showSecondaryValues="true"
                                         selectedKey="{AppState>/oSelectedProject/projectManager_ID}"
                                         items="{
@@ -201,20 +232,12 @@
                                 <form:content>
                                     <m:Label text="Initial Budget" />
                                     <m:Input
-                                        value="{AppState>/oSelectedProject/initialBudget}"
-                                    />
+    value="{path: 'AppState>/oSelectedProject/initialBudget', formatter: '.currencyFormatter'}"
+    change="onBudgetChange"
+/>
 
                                     <m:Label
-                                        text="Initial Finish Date"
-                                        required="true"
-                                    />
-                                    <m:DatePicker
-                                        id="pend"
-                                        value="{AppState>/oSelectedProject/planned_finish}"
-                                    />
-
-                                    <m:Label
-                                        text="Forecasted / Actual Start Date"
+                                        text="Forecasted Start Date"
                                     />
                                     <m:DatePicker
                                         editable="true"
@@ -222,16 +245,30 @@
                                     />
 
                                     <m:Label
-                                        text="Forecasted / Actual Finish Date"
+                                        text="Forecasted Finish Date"
                                     />
                                     <m:DatePicker
                                         editable="true"
                                         value="{AppState>/oSelectedProject/fore_act_finish}"
                                     />
+                                    <m:Label
+                                        text="Actual Start Date"
+                                    />
+                                    <m:DatePicker
+                                        editable="true"
+                                        value="{AppState>/oSelectedProject/actualStart}"
+                                    />
+                                    <m:Label
+                                        text="Actual Finish Date"
+                                    />
+                                    <m:DatePicker
+                                        editable="true"
+                                        value="{AppState>/oSelectedProject/actualFinish}"
+                                    />
                                     <m:Label text="Percentage of Completion" />
                                     <m:Input
                                         value="{AppState>/oSelectedProject/pct_complete}"
-                                        editable="true"
+                                        editable="false"
                                     />
                                     <m:Label text="State" />
                                     <m:Input

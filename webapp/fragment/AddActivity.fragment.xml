@@ -49,8 +49,7 @@
                 wrap="Wrap"
                 fitContainer="true"
                 alignItems="Stretch"
-            >
-            </m:FlexBox>
+            />
         </headerContent>
 
         <sections>
@@ -78,24 +77,34 @@
                                 singleContainerFullSize="false"
                             >
                                 <form:content>
-                                    <m:Label text=" Name" required="true" />
+                                    <m:Label
+                                        text="Name"
+                                        required="true"
+                                    />
                                     <m:Input
                                         id="aname"
                                         value="{AppState>/oSelectedActivity/name}"
                                     />
-                                    <m:Label text=" Description"  />
+                                    <m:Label text=" Description" />
                                     <m:Input
                                         id="adesc"
-                                        value="{AppState>/oSelectedActivity/description}"/>
+                                        value="{AppState>/oSelectedActivity/description}"
+                                    />
 
-                                    <m:Label text=" Planned Start" required="true" />
+                                    <m:Label
+                                        text=" Planned Start"
+                                        required="true"
+                                    />
                                     <m:DatePicker
                                         id="astart"
                                         afterValueHelpClose="onChangeDate"
                                         value="{AppState>/oSelectedActivity/planned_start}"
                                     />
 
-                                    <m:Label text=" Planned Finish" required="true" />
+                                    <m:Label
+                                        text=" Planned Finish"
+                                        required="true"
+                                    />
                                     <m:DatePicker
                                         id="aend"
                                         afterValueHelpClose="onChangeDate"
@@ -115,10 +124,15 @@
                                     />
                                     <m:Label text="Actual Start" />
                                     <m:DatePicker
-                                        editable="true"/>
+                                        value="{AppState>/oSelectedActivity/act_start}"
+                                        editable="false"
+                                    />
+
                                     <m:Label text="Actual Finish" />
                                     <m:DatePicker
-                                        editable="true"/>
+                                        value="{AppState>/oSelectedActivity/act_finish}"
+                                        editable="false"
+                                    />
 
                                     <m:Label text="Progress Increment %" />
                                     <m:Input
@@ -137,9 +151,9 @@
                                         value="{AppState>/oSelectedActivity/state}"
                                         editable="false"
                                     />
-                                  <m:Label text="Preceding Activity"  />
-                                  <m:ComboBox
-                                    id="aPActivity"
+                                    <m:Label text="Preceding Activity" />
+                                    <m:ComboBox
+                                        id="aPActivity"
                                         showSecondaryValues="true"
                                         selectedKey="{AppState>/oSelectedActivity/precedingActivityID}"
                                         items="{
@@ -151,11 +165,14 @@
                                             text="{AppState>name}"
                                         />
                                     </m:ComboBox>
-                                    <m:Label text="Responsible" required="true" />
+                                    <m:Label
+                                        text="Responsible"
+                                        required="true"
+                                    />
 
                                     <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
                                     <m:ComboBox
-                                    id="aowner"
+                                        id="aowner"
                                         showSecondaryValues="true"
                                         selectedKey="{AppState>/oSelectedActivity/responsible_ID}"
                                         items="{

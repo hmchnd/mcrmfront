@@ -38,6 +38,7 @@ sap.ui.define(
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
         },
         onPress: function (oEvent) {
+          debugger
           this.AppState.data.sidePanelOpen = false;
           let oSelectedProjectObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
@@ -96,6 +97,7 @@ sap.ui.define(
             oView.byId("pstart"),
             oView.byId("pend"),
             oView.byId("roadmapTemplate"),
+            oView.byId("idProjectManager"),
           ];
           aInputs.forEach(function (oInput) {
             if (!oInput.getValue()) {
@@ -132,7 +134,39 @@ sap.ui.define(
           let totalMonths = yearsDiff * 12 + monthsDiff;
 
           return totalMonths + " months";
-      }
+      },
+      onBudgetChange: function (oEvent) {
+        // let oProjectDetails = this.AppState.data.oSelectedProject;
+        // let sBudget = oEvent.getSource().getValue();
+        // oProjectDetails.budget = sBudget;
+        var oInput = oEvent.getSource();
+        var sValue = oInput.getValue();
+       
+        // Regular expression for integers (positive or negative)
+        var integerRegex = /^[\d,.]+$/;
+       
+        if (!integerRegex.test(sValue)) {
+            // Set value state to Error and show error message
+            oInput.setValueStateText("Please enter a valid integer.");
+            oInput.setValueState("Error");
+        } else {
+            // Clear error state if the input is valid
+            oInput.setValueState("None");
+        }
+        // this.currencyFormatter(sValue);
+      },
+    //   currencyFormatter: function (value) {
+    //     debugger
+    //     if (isNaN(value)) {
+    //         return "";
+    //     }
+   
+    //     // Use Intl.NumberFormat for European-style formatting
+    //     return new Intl.NumberFormat('de-DE', {
+    //         minimumFractionDigits: 2,
+    //         maximumFractionDigits: 2
+    //     }).format(value);
+    // }
       }
     );
   }
