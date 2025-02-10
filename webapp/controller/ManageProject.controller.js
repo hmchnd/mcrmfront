@@ -45,6 +45,9 @@ sap.ui.define(
             {};
            
           this.AppState.data.oSelectedProject = oSelectedProjectObject;
+          let sRoadmapID = oSelectedProjectObject.roadmapTemplate_ID
+          this.AppState.getProjectRoadmapById(sRoadmapID); 
+
        
           var sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
@@ -93,24 +96,37 @@ sap.ui.define(
           var bValid = true;
           var oView = this.getView();
           var aInputs = [
-            oView.byId("pname"),
-            oView.byId("pstart"),
-            oView.byId("pend"),
-            oView.byId("roadmapTemplate"),
-            oView.byId("idProjectManager"),
+              oView.byId("pname"),
+              oView.byId("pstart"),
+              oView.byId("pend"),
+              oView.byId("idProjectManager"),
           ];
+      
+          // Get both roadmapTemplate fields
+          var oRoadmapTemplate1 = oView.byId("roadmapTemplate");
+          var oRoadmapTemplate2 = oView.byId("roadmapTemplate1");
+      
+          // Add only the visible roadmapTemplate field for validation
+          if (oRoadmapTemplate1 && oRoadmapTemplate1.getVisible()) {
+              aInputs.push(oRoadmapTemplate1);
+          } else if (oRoadmapTemplate2 && oRoadmapTemplate2.getVisible()) {
+              aInputs.push(oRoadmapTemplate2);
+          }
+      
           aInputs.forEach(function (oInput) {
-            if (!oInput.getValue()) {
-              oInput.setValueState("Error");
-              oInput.setValueStateText("This field is mandatory");
-              bValid = false;
-            } else {
-              oInput.setValueState("None");
-            }
+              if (!oInput.getValue()) {
+                  oInput.setValueState("Error");
+                  oInput.setValueStateText("This field is mandatory");
+                  bValid = false;
+              } else {
+                  oInput.setValueState("None");
+              }
           });
-
+      
           return bValid;
-        },
+      },
+      
+      
         calculateDeltaInMonths: function (aParts,aParts2) {
          
           // Extract plannedStart and forecastStart from parts
@@ -166,7 +182,25 @@ sap.ui.define(
     //         minimumFractionDigits: 2,
     //         maximumFractionDigits: 2
     //     }).format(value);
-    // }
+    // },
+
+    onChangeDate: function (oEvent) {
+        
+      let oInput = oEvent.getSource(); // Get the input field
+      let uservalue = oInput.getValue(); // Format: MM/DD/YY
+      let startDate = this.AppState.data.oSelectedProject.planned_start; 
+      let userDate = new Date(uservalue);
+      let systemStartDate = new Date(startDate);
+  
+      if (userDate < systemStartDate) {
+          oInput.setValueState("Error");
+          oInput.setValueStateText(`Enter date should not be less than ${startDate}`);
+          oInput.setValue("")
+      } else {
+          oInput.setValueState("None"); 
+          oInput.setValueStateText(""); 
+      }
+  },
       }
     );
   }

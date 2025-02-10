@@ -126,6 +126,7 @@
                                     <m:ComboBox
                                          visible="{= ${AppState>/oSelectedProject/ID} ? true : false}"
                                         showSecondaryValues="true"
+                                        editable="false"
                                         id="roadmapTemplate1"
                                         selectedKey="{AppState>/oSelectedProject/roadmapTemplate_ID}"
                                         items="{
@@ -153,6 +154,7 @@
                                     <m:DatePicker
                                         id="pend"
                                         value="{AppState>/oSelectedProject/planned_finish}"
+                                        change = "onChangeDate"
                                     />
                                     <m:Label text="Currency" />
                                     <!-- <m:Input value="{AppState>/oSelectedProject/currency}" /> -->
@@ -232,7 +234,7 @@
                                 <form:content>
                                     <m:Label text="Initial Budget" />
                                     <m:Input
-    value="{path: 'AppState>/oSelectedProject/initialBudget', formatter: '.currencyFormatter'}"
+    value="{path: 'AppState>/oSelectedProject/initialBudget'}"
     change="onBudgetChange"
 />
 
