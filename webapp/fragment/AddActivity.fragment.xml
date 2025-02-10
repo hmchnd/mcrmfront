@@ -78,21 +78,21 @@
                             >
                                 <form:content>
                                     <m:Label
-                                        text="Name"
+                                        text="Activity Name"
                                         required="true"
                                     />
                                     <m:Input
                                         id="aname"
                                         value="{AppState>/oSelectedActivity/name}"
                                     />
-                                    <m:Label text=" Description" />
+                                    <m:Label text="Description" />
                                     <m:Input
                                         id="adesc"
                                         value="{AppState>/oSelectedActivity/description}"
                                     />
 
                                     <m:Label
-                                        text=" Planned Start"
+                                        text="Planned Start"
                                         required="true"
                                     />
                                     <m:DatePicker
@@ -102,7 +102,7 @@
                                     />
 
                                     <m:Label
-                                        text=" Planned Finish"
+                                        text="Planned Finish"
                                         required="true"
                                     />
                                     <m:DatePicker

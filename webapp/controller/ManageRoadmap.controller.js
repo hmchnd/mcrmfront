@@ -259,6 +259,8 @@ sap.ui.define(
             phase_ID: oTask.phase_ID,
             pct_weight: oTask.pct_weight ?? 0,
             contributeToMilestone_ID: oTask.contributeToMilestone_ID,
+            actualStart: oTask.actualStart,
+            actualFinish: oTask.actualFinish,
 
           };
 
