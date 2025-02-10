@@ -125,6 +125,8 @@ sap.ui.define(
 
             oProject.fore_act_start = new Date(oProject.planned_start);
             oProject.fore_act_finish = new Date(oProject.planned_finish);
+            oProject.actualStart = new Date(oProject.actualStart);
+            oProject.actualFinish = new Date(oProject.actualFinish);
            
             this.AppService.updateProject(oProject).then(function (result) {
               MessageBox.success(`Project Details Updated!`);
@@ -384,6 +386,8 @@ sap.ui.define(
           } else {
           oTask.planned_start = new Date(oTask.planned_start);
           oTask.planned_finish = new Date(oTask.planned_finish);
+          oTask.actualStart = new Date(oTask.actualStart);
+          oTask.actualFinish = new Date(oTask.actualFinish);
           oTask.parent_key_ID = that.data.currentRoadmapID;
           oTask.fore_act_start = new Date(oTask.planned_start);
           oTask.fore_act_finish = new Date(oTask.planned_finish);

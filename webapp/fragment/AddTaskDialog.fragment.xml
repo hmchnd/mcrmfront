@@ -148,7 +148,6 @@
                                     <m:Label
                                         text="Preceding Task"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
-                                        required="true"
                                     />
                                     <m:ComboBox
                                         id="idPrecedingTask"
