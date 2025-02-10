@@ -396,32 +396,7 @@ sap.ui.define(
               oInput.setValueStateText(""); // Remove error message
           }
       },
-      //   onChangeFinishDate: function (oEvent) {
-      //     debugger;
-      //     let oInput = oEvent.getSource(); // Get the input field
-      //     let uservalue = oInput.getValue(); // Format: MM/DD/YY
-      //     let startDate = this.AppState.data.sTaskStartDate; 
-      //     let finishDate = this.AppState.data.sTaskFinishDate; // Date object
-      
-      //     // Convert finishDate to MM/DD/YY format
-      //     let startDateFormatted = (startDate.getMonth() + 1) + "/" + startDate.getDate() + "/" + (startDate.getFullYear() % 100);
-      //     let finishDateFormatted = (finishDate.getMonth() + 1) + "/" + finishDate.getDate() + "/" + (finishDate.getFullYear() % 100);
-      
-      //     // Convert both to Date objects for comparison
-      //     let userDate = new Date(uservalue);
-      //     let systemStartDate = new Date(startDateFormatted);
-      //     let systemEndDate = new Date(finishDateFormatted);
-      
-      //     if (userDate > systemEndDate || userDate < systemStartDate) {
-      //         oInput.setValueState("Error");
-      //         oInput.setValueStateText(`Enter date should not be greater than ${finishDateFormatted}`);
-      //         oInput.setValue("")
-      //     } else {
-      //         oInput.setValueState("None"); // Clear the error state when valid
-      //         oInput.setValueStateText(""); // Remove error message
-      //     }
-      // }
-      
+    
       
       }
     );

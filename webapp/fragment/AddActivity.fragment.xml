@@ -184,6 +184,9 @@
                                             text="{name}"
                                         />
                                     </m:ComboBox>
+                                    <!-- <m:RangeSlider showAdvancedTooltip="true" min="0" max="100" enableTickmarks="true" class="sapUiSmallMarginBottom">
+			<m:ResponsiveScale tickmarksBetweenLabels="5"/>
+		</m:RangeSlider> -->
                                 </form:content>
                             </form:SimpleForm>
                         </blocks>

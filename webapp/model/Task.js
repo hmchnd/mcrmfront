@@ -13,8 +13,9 @@ sap.ui.define(["./BaseObject"], function (BaseObject) {
           data?.planned_finish?.toISOString()?.slice(0, 10) || null;
         this.fore_act_start =
           data?.fore_act_start?.toISOString()?.slice(0, 10) || null;
-        this.fore_act_finish =
-          data?.fore_act_finish?.toISOString()?.slice(0, 10) || null;
+        this.fore_act_finish = data?.fore_act_finish?.toISOString()?.slice(0, 10) || null;
+        this.actualStart = data?.actualStart?.toISOString()?.slice(0, 10) || null;
+        this.actualFinish = data?.actualFinish?.toISOString()?.slice(0, 10) || null;
         this.pct_weight = Number(data?.pct_weight || 0);
         this.pct_complete = Number(data?.pct_complete || 0);
         this.state = data?.state || "";
