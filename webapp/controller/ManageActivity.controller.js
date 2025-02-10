@@ -377,7 +377,6 @@ sap.ui.define(
           let startDate = this.AppState.data.sTaskStartDate; 
           let endDate = this.AppState.data.sTaskFinishDate
       
-          // Convert startDate to MM/DD/YY format
           let startDateFormatted = (startDate.getMonth() + 1) + "/" + startDate.getDate() + "/" + (startDate.getFullYear() % 100);
           let endDateFormatted = (endDate.getMonth() + 1) + "/" + endDate.getDate() + "/" + (endDate.getFullYear() % 100);
 
