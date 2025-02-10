@@ -23,6 +23,7 @@ sap.ui.define(["./BaseObject"], function (BaseObject) {
         this.phase_ID = data?.phase_ID || "";
         this.precedingTaskID = data?.precedingTaskID || "";
         this.parent_key_ID = data?.parent_key_ID || "";
+        this.contributeToMilestone_ID = data?.contributeToMilestone_ID || "";
       }
     },
   });

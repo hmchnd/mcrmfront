@@ -24,6 +24,8 @@ sap.ui.define([
                 this.status = data?.status || "Not Started";
                 this.planned_start = data?.planned_start?.toISOString()?.slice(0,10) || null;
                 this.planned_finish = data?.planned_finish?.toISOString()?.slice(0,10) || null;
+                this.actualStart = data?.actualStart?.toISOString()?.slice(0,10) || null;
+                this.actualFinish = data?.actualFinish?.toISOString()?.slice(0,10) || null;
             }
         },
         

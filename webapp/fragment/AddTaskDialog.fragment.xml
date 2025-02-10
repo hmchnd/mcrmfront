@@ -107,7 +107,7 @@
                             >
                                 <form:content>
                                     <m:Label
-                                        text="Name"
+                                        text="Task Name"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                         required="true"
                                     />
@@ -275,6 +275,25 @@
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:Label
+                                        text="Contribute to Milestone"
+                                        visible="{= ${AppState>/oSelectedTask/isCriticalToMilestone} ? true : false}"
+                                        required="true"
+                                    />
+                                    <m:ComboBox
+                                        id="idMilestone"
+                                        showSecondaryValues="true"
+                                        selectedKey="{AppState>/oSelectedTask/contributeToMilestone_ID}"
+                                        visible="{= ${AppState>/oSelectedTask/isCriticalToMilestone} ? true : false}"
+                                        items="{
+                                            path: '/Milestone'
+                                        }"
+                                    >
+                                        <core:ListItem
+                                            key="{ID}"
+                                            text="{name}"
+                                        />
+                                    </m:ComboBox>
+                                    <m:Label
                                         text="State"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
@@ -355,13 +374,11 @@
                                     <m:Label
                                         text="Percentage of Completion"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
-                                        
                                     />
                                     <m:Input
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
                                         editable="true"
                                         value="{AppState>/oSelectedMilestone/pct_complete}"
-
                                     />
                                     <m:Label
                                         text="Status"

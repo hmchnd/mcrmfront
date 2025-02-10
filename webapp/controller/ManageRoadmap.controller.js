@@ -46,15 +46,16 @@ sap.ui.define(
         },
 
         onRouteMatched: function (oEvent) {
-       
+
           this.AppState = this.getOwnerComponent().getState("App");
           let sRoadmapID = oEvent.getParameter("arguments").sRoadmapID;
           this.AppState.data.currentRoadmapID = sRoadmapID;
-          this.AppState.data.sSelectedProjectRoadmapID  = sRoadmapID;
-           sRoadmapID =this.AppState.data.sSelectedProjectRoadmapID;
+          this.AppState.data.sSelectedProjectRoadmapID = sRoadmapID;
+          sRoadmapID = this.AppState.data.sSelectedProjectRoadmapID;
+
           let sProjectName = oEvent.getParameter("arguments").sProjectName;
           this.getView().byId("manageRoadmapPage").setTitle(sProjectName);
-        
+
           this.getView().setModel(this.AppState.getModel(), "AppState");
           this.AppState.getModel().setSizeLimit(999999);
           this.AppState.setViewController(this);
@@ -106,7 +107,7 @@ sap.ui.define(
                 new ToolbarSpacer(),
                 new Title({ text: oArea.name, level: "H1" }),
                 new ToolbarSpacer(),
-                new Button({ icon: "sap-icon://edit",type:"Critical", press: this.onEditArea.bind(this)}),
+                new Button({ icon: "sap-icon://edit", type: "Critical", press: this.onEditArea.bind(this) }),
               ],
             });
             oPanel.setHeaderToolbar(oToolbar);
@@ -179,8 +180,8 @@ sap.ui.define(
                         text: `${task.planned_start
                           .toISOString()
                           .slice(0, 10)} - ${task.planned_finish
-                          .toISOString()
-                          .slice(0, 10)}`,
+                            .toISOString()
+                            .slice(0, 10)}`,
                       })
                     );
                   }
@@ -256,6 +257,9 @@ sap.ui.define(
             pct_complete: oTask.pct_complete ?? 0,
             area_ID: oTask.area_ID,
             phase_ID: oTask.phase_ID,
+            pct_weight: oTask.pct_weight ?? 0,
+            contributeToMilestone_ID: oTask.contributeToMilestone_ID,
+
           };
 
           // Store in AppState
@@ -270,33 +274,33 @@ sap.ui.define(
           this.getModel("manageRoadmapLayoutView").refresh(true);
         },
         onEditArea: function (oEvent) {
-        
+
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = true;
-      
+
           // Retrieve the selected panel area details
           let oPanel = oEvent.getSource().getParent().getParent(); // Get the Panel
           let sAreaName = oPanel.getHeaderText(); // Get the Area Name
-      
+
           let oView = this.getView();
           let aAllAreas = oView.getModel("AppState").getProperty("/aArea");
           let oSelectedArea = aAllAreas.find(area => area.name === sAreaName) || {};
-      
+
           this.AppState.data.oSelectedArea = {
-              name: oSelectedArea.name,
-              responsible_ID: oSelectedArea.responsible_ID || null,
-              ID: oSelectedArea.ID || null
+            name: oSelectedArea.name,
+            responsible_ID: oSelectedArea.responsible_ID || null,
+            ID: oSelectedArea.ID || null
           };
-      
+
           // Change Layout
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("manageRoadmapLayoutView").setProperty("/layout", sLayout);
-      }, 
-      onSaveArea: function () {
-        let oProjectAreaDetails = this.AppState.data.oSelectedArea;
-        this.AppState.updateProjectArea(oProjectAreaDetails);
-      },     
+        },
+        onSaveArea: function () {
+          let oProjectAreaDetails = this.AppState.data.oSelectedArea;
+          this.AppState.updateProjectArea(oProjectAreaDetails);
+        },
         onCloseDetailPage: function () {
           var sLayout = LayoutType.OneColumn;
           this.getView()
@@ -304,26 +308,27 @@ sap.ui.define(
             .setProperty("/layout", sLayout);
         },
         onManageActivity: function () {
-         
+
           let sTaskID = this.AppState.data.oSelectedTask.ID;
           this.AppState.data.currentTaskID = sTaskID;
           let sTaskName = this.AppState.data.oSelectedTask.name;
           this.AppState.data.sTaskStartDate = this.AppState.data.oSelectedTask.planned_start;
           this.AppState.data.sTaskFinishDate = this.AppState.data.oSelectedTask.planned_finish;
           let sProjectName = this.getView().byId("manageRoadmapPage").getTitle();
-          this.getOwnerComponent().getRouter().navTo("ManageActivity",{
+          this.getOwnerComponent().getRouter().navTo("ManageActivity", {
             sTaskID: sTaskID,
             sTaskName: encodeURIComponent(sTaskName),
             sProjectName: sProjectName
           });
         },
         onSaveTask: function () {
-        
+
           if (!this._validateTaskForm()) {
             return;
           }
           var oTask = this.AppState.data.oSelectedTask;
-          this.AppState.data.Itemtype = "Task"; 
+          debugger
+          this.AppState.data.Itemtype = "Task";
           this.AppState.data.currentItemID = oTask.ID;
           this.AppState.createNewTask(oTask);
         },

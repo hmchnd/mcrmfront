@@ -144,7 +144,7 @@
                                                  deltaDisplayValue="{
         parts: [
             { path: 'AppState>planned_start' },
-            { path: 'AppState>fore_act_start' }
+            { path: 'AppState>planned_finish' }
         ],
         formatter: '.calculateDeltaInMonths'
     }"

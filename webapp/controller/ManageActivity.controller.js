@@ -162,6 +162,9 @@ sap.ui.define(
           if (oDraggedData.state == "COMPLETED") {
             oDraggedData.pct_complete = "100"
           }
+          if (oDraggedData.state == "NEW") {
+            oDraggedData.pct_complete = "0"
+          }
           let oActivityDetails = oDraggedData;// Update the GridID in the model
 
           // Call OData update to update the GridID in the backend
