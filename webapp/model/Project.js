@@ -24,11 +24,17 @@ sap.ui.define([
                 this.status = data?.status || "Not Started";
                 this.planned_start = data?.planned_start?.toISOString()?.slice(0,10) || null;
                 this.planned_finish = data?.planned_finish?.toISOString()?.slice(0,10) || null;
-                this.actualStart = data?.actualStart?.toISOString()?.slice(0,10) || null;
-                this.actualFinish = data?.actualFinish?.toISOString()?.slice(0,10) || null;
+                this.actualStart = data?.actualStart || null;
+                this.actualFinish = data?.actualFinish || null;
             }
         },
-        
+        convertMSDate:function(msDate) {
+           // Extract the timestamp from "/Date(1739836800000)/"
+           const timestamp = parseInt(msDate.match(/\d+/)[0], 10);
+           
+           // Convert to JavaScript Date
+           return new Date(timestamp);
+       }
     });
 
 });
