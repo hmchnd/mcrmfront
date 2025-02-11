@@ -143,6 +143,7 @@
                                     <m:DatePicker
                                         id="tend"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
+                                        change="onChangeDate"
                                         value="{path:'AppState>/oSelectedTask/planned_finish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
                                     />
                                     <m:Label
@@ -211,6 +212,7 @@
                                     </m:ComboBox>
                                     <m:Label
                                         text="Weight"
+                                        required="true"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:Input

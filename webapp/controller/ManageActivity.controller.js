@@ -256,12 +256,14 @@ sap.ui.define(
           this.getModel("activityLayoutView").setProperty("/layout", sLayout);
         },
         onRouteMatched: function (oEvent) {
-          let sTaskID = oEvent.getParameter("arguments").sTaskID;
-          let sTaskName = decodeURIComponent(oEvent.getParameter("arguments").sTaskName);
-          let sProjectName = oEvent.getParameter("arguments").sProjectName;
-          this.getView().byId("projectTitle").setTitle(`${sProjectName} / ${sTaskName}`);
           this.AppState = this.getOwnerComponent().getState("App");
           this.getView().setModel(this.AppState.getModel(), "AppState");
+          let sTaskID = oEvent.getParameter("arguments").sTaskID;
+          let sTaskName = decodeURIComponent(oEvent.getParameter("arguments").sTaskName);
+          let sPhaseName  = this.AppState.data.oSelectedTask.phase.name
+          let sAreaName  = this.AppState.data.oSelectedTask.area.name
+          let sProjectName = oEvent.getParameter("arguments").sProjectName;
+          this.getView().byId("projectTitle").setTitle(`${sProjectName} / ${sAreaName} / ${sPhaseName} / ${sTaskName}`);
           this.AppState.getModel().setSizeLimit(999999);
           this.AppState.data.showGlobalAddButton = true;
           this.AppState.data.showBackToRoadmapButton = true;
@@ -293,6 +295,8 @@ sap.ui.define(
             oView.byId("astart"),
             oView.byId("aend"),
             oView.byId("aowner"),
+            oView.byId("apctweight"),
+            
 
           ];
           aInputs.forEach(function (oInput) {
@@ -371,30 +375,44 @@ sap.ui.define(
           }
         },
         onChangeDate: function (oEvent) {
-        
           let oInput = oEvent.getSource(); // Get the input field
           let uservalue = oInput.getValue(); // Format: MM/DD/YY
-          let startDate = this.AppState.data.sTaskStartDate; 
-          let endDate = this.AppState.data.sTaskFinishDate
+          let startDate = this.AppState.data.sTaskStartDate;
+          let endDate = this.AppState.data.sTaskFinishDate;
+          
+          // New: Get planned start date from selected activity
+          let plannedStartDate = this.AppState.data.oSelectedActivity.planned_start;
       
           let startDateFormatted = (startDate.getMonth() + 1) + "/" + startDate.getDate() + "/" + (startDate.getFullYear() % 100);
           let endDateFormatted = (endDate.getMonth() + 1) + "/" + endDate.getDate() + "/" + (endDate.getFullYear() % 100);
-
-      
-          // Convert both to Date objects for comparison
+          
+          // Convert values to Date objects
           let userDate = new Date(uservalue);
           let systemStartDate = new Date(startDateFormatted);
           let systemEndDate = new Date(endDateFormatted);
+          let plannedStart = new Date(plannedStartDate); // Convert planned start date to Date object
       
+          // Check if userDate is outside system-defined start/end range
           if (userDate < systemStartDate || userDate > systemEndDate) {
               oInput.setValueState("Error");
               oInput.setValueStateText(`Enter date should be in range ${startDateFormatted} - ${endDateFormatted}`);
-              oInput.setValue("")
-          } else {
-              oInput.setValueState("None"); // Clear the error state when valid
-              oInput.setValueStateText(""); // Remove error message
+              oInput.setValue("");
+              return;
           }
-      },
+      
+          // New: Check if planned finish is before planned start
+          if (oInput.getId().includes("aend") && userDate < plannedStart) {
+              oInput.setValueState("Error");
+              oInput.setValueStateText("Planned Finish Date cannot be earlier than Planned Start Date.");
+              oInput.setValue("");
+              return;
+          }
+      
+          // If everything is fine, clear errors
+          oInput.setValueState("None");
+          oInput.setValueStateText("");
+      }
+      
     
       
       }

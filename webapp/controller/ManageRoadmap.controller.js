@@ -46,7 +46,6 @@ sap.ui.define(
         },
 
         onRouteMatched: function (oEvent) {
-
           this.AppState = this.getOwnerComponent().getState("App");
           let sRoadmapID = oEvent.getParameter("arguments").sRoadmapID;
           this.AppState.data.currentRoadmapID = sRoadmapID;
@@ -54,7 +53,10 @@ sap.ui.define(
           sRoadmapID = this.AppState.data.sSelectedProjectRoadmapID;
 
           let sProjectName = oEvent.getParameter("arguments").sProjectName;
-          this.getView().byId("manageRoadmapPage").setTitle(sProjectName);
+          if(sProjectName){
+          this.AppState.data.sSelectedProjectName = sProjectName;
+          }
+          this.getView().byId("manageRoadmapPage").setTitle(this.AppState.data.sSelectedProjectName);
 
           this.getView().setModel(this.AppState.getModel(), "AppState");
           this.AppState.getModel().setSizeLimit(999999);
@@ -208,16 +210,17 @@ sap.ui.define(
               addedTasks.forEach((taskAdded, index) => {
                 if (!taskAdded) {
                   var oNoTaskBox = new VBox({
-                    items: [new Text({ text: "No task exist" })],
-                  }).addStyleClass("sapUiTinyMargin");
-
-                  aGridLists[index].addItem(
-                    new GridListItem({
-                      content: [oNoTaskBox],
-                    })
-                  );
+                    // items: [new Text({ text: "No task exist" })],
+                  }).addStyleClass("noTaskText");
+              
+                  var oGridListItem = new GridListItem({
+                    content: [oNoTaskBox],
+                  }).addStyleClass("noTaskText"); // Apply background color to the entire item
+              
+                  aGridLists[index].addItem(oGridListItem);
                 }
               });
+              
             });
 
             // Add all GridLists to the panel (only for this area)
@@ -236,7 +239,6 @@ sap.ui.define(
 
           // Get full task object from `customData`
           let oTask = oEvent.getSource().getCustomData()[0].getValue();
-
           // Prepare payload
           let oSelectedPayload = {
             ID: oTask.ID,
@@ -261,6 +263,8 @@ sap.ui.define(
             contributeToMilestone_ID: oTask.contributeToMilestone_ID,
             actualStart: oTask.actualStart,
             actualFinish: oTask.actualFinish,
+            area: oTask.area,
+            phase: oTask.phase,
 
           };
 
@@ -366,6 +370,7 @@ sap.ui.define(
             oView.byId("idphase"),
             oView.byId("idarea"),
             oView.byId("idowner"),
+            oView.byId("weight"),
           ];
           aInputs.forEach(function (oInput) {
             if (!oInput.getValue()) {
@@ -438,7 +443,27 @@ sap.ui.define(
               },
             }
           );
-        }
+        },
+        onChangeDate: function (oEvent) {
+        
+          let oInput = oEvent.getSource(); // Get the input field
+          let uservalue = oInput.getValue(); // Format: MM/DD/YY
+          let startDate = this.AppState.data.oSelectedTask.planned_start; 
+          let userDate = new Date(uservalue);
+          let systemStartDate = new Date(startDate);
+          let startDateFormatted = (startDate.getMonth() + 1) + "/" + startDate.getDate() + "/" + (startDate.getFullYear() % 100);
+
+      
+          if (userDate < systemStartDate) {
+              oInput.setValueState("Error");
+              oInput.setValueStateText(`Enter date should not be less than ${startDateFormatted}`);
+              oInput.setValue("")
+          } else {
+              oInput.setValueState("None"); 
+              oInput.setValueStateText(""); 
+          }
+      },
+
       }
     );
   }

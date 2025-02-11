@@ -78,6 +78,7 @@ sap.ui.define(
             oGridListControl: {},
             sTaskStartDate:"",
             sTaskFinishDate:"",
+            sSelectedProjectName:"",
 
           };
 
@@ -313,7 +314,7 @@ sap.ui.define(
             this.AppService.updateActivity(oActivity).then(function (result) {
               MessageBox.success(`Activity Details Updated!`);
               that.updateProgress(that.data.currentTaskID);
-              that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
+              // that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
             });
           } else {
             oActivity.fore_act_start = oActivity.planned_start
@@ -377,11 +378,13 @@ sap.ui.define(
           debugger
           let that = this;
           if (oTask.ID) {
+            delete oTask.area;
+            delete oTask.phase;
            
             this.AppService.updateTask(oTask).then(function (result) {
               MessageBox.success(`Roadmap Template Details Updated!`);
               that.updateProjectProgress(that.data.currentRoadmapID);
-              that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
+              // that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
             });
           } else {
           oTask.planned_start = new Date(oTask.planned_start);
@@ -452,6 +455,7 @@ sap.ui.define(
           });
         },
         updateProjectProgress:function(sRoadmapId){
+          debugger
           let aPromises = [];
           aPromises.push(this.AppService.processProjectProgress(sRoadmapId));
           let that = this;
