@@ -1,0 +1,29 @@
+<core:FragmentDefinition 
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Dialog
+        id="loginDialog"
+        contentWidth="400px"
+        title="Login As"
+        
+        >
+        <content>
+            <form:SimpleForm >
+                <!-- <Label text="Login as" /> -->
+                <ComboBox id="loginComboBox">
+                    <items>
+                        <core:Item key="project" text="Project" />
+                        <core:Item key="task" text="Task" />
+                        <core:Item key="activity" text="Activity" />
+                    </items>
+                </ComboBox>
+            </form:SimpleForm>
+        </content>
+        <buttons>
+            <Button text="OK" press="onLogin" />
+            <Button text="Cancel" press="onCancelLoginDialog" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

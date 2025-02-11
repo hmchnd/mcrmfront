@@ -160,6 +160,7 @@ sap.ui.define(
       },
       onBackToRoadmap:function(){
        let sRoadmapID = this.AppState.data.sSelectedProjectRoadmapID;
+      //  this.AppState.data.sSelectedProjectName
        this.getOwnerComponent().getRouter().navTo("ManageRoadmap",{
           sRoadmapID:sRoadmapID
        });
@@ -169,7 +170,26 @@ sap.ui.define(
       },
       onPopoverCancel: function () {
         this._oPopover.close();
+      },
+      onSettingsPress: function (oEvent) {
+        // Load and display the create new product dialog
+      if (!this.oLoginDialog) {
+        Fragment.load({
+          id: this.getView().getId(),
+          name: "framsys.com.framsysfrontend.fragment.LoginDialog",
+          controller: this
+        }).then(oDialog => {
+          this.oLoginDialog = oDialog
+          this.getView().addDependent(oDialog)
+          oDialog.open()
+        })
+      } else {
+        this.oLoginDialog.open()
       }
+    },
+    onCancelLoginDialog: function () {
+      this.oLoginDialog.close()
+    },
     });
   }
 );

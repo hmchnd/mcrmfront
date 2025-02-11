@@ -134,8 +134,9 @@
                                         editable="false"
                                     />
 
-                                    <m:Label text="Progress Increment %" />
+                                    <m:Label text="Progress Increment %" required="true"/>
                                     <m:Input
+                                    id="apctweight"
                                         value="{AppState>/oSelectedActivity/pct_weight}"
                                         editable="true"
                                     />
