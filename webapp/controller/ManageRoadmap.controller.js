@@ -53,10 +53,12 @@ sap.ui.define(
           sRoadmapID = this.AppState.data.sSelectedProjectRoadmapID;
 
           let sProjectName = oEvent.getParameter("arguments").sProjectName;
-          if(sProjectName){
-          this.AppState.data.sSelectedProjectName = sProjectName;
+          if (sProjectName) {
+            this.AppState.data.sSelectedProjectName = sProjectName;
           }
-          this.getView().byId("manageRoadmapPage").setTitle(this.AppState.data.sSelectedProjectName);
+          this.getView()
+            .byId("manageRoadmapPage")
+            .setTitle(this.AppState.data.sSelectedProjectName);
 
           this.getView().setModel(this.AppState.getModel(), "AppState");
           this.AppState.getModel().setSizeLimit(999999);
@@ -83,6 +85,9 @@ sap.ui.define(
           var oVBox = oView.byId("panelContainer");
           oVBox.removeAllItems();
 
+          var aExpandedPanels = this.AppState.data.aExpandedPanels || [];
+          var oSelectedTask = this.AppState.data.oSelectedTask || null;
+
           // Create panels for all areas
           aAllAreas.forEach((oArea) => {
             // Calculate max tasks per phase in this specific area
@@ -97,19 +102,28 @@ sap.ui.define(
               1 // Ensure at least 1 GridList exists
             );
 
+            var bExpanded = aExpandedPanels.some(
+              (panel) => panel.areaID === oArea.ID && panel.expanded
+            );
+
             var oPanel = new Panel({
               expandable: true,
-              expanded: false,
+              expanded: bExpanded,
               headerText: oArea.name,
               enableScrolling: false,
             });
+            oPanel.data("areaID", oArea.ID);
 
             var oToolbar = new Toolbar({
               content: [
                 new ToolbarSpacer(),
                 new Title({ text: oArea.name, level: "H1" }),
                 new ToolbarSpacer(),
-                new Button({ icon: "sap-icon://edit", type: "Critical", press: this.onEditArea.bind(this) }),
+                new Button({
+                  icon: "sap-icon://edit",
+                  type: "Critical",
+                  press: this.onEditArea.bind(this),
+                }),
               ],
             });
             oPanel.setHeaderToolbar(oToolbar);
@@ -182,8 +196,8 @@ sap.ui.define(
                         text: `${task.planned_start
                           .toISOString()
                           .slice(0, 10)} - ${task.planned_finish
-                            .toISOString()
-                            .slice(0, 10)}`,
+                          .toISOString()
+                          .slice(0, 10)}`,
                       })
                     );
                   }
@@ -200,9 +214,20 @@ sap.ui.define(
                       }),
                     })
                   );
+                  //   var oGridItem = new GridListItem({
+                  //     content: [oTaskBox],
+                  //     press: this.onCardPress.bind(this),
+                  //     type: "Active",
+                  //     customData: new CustomData({ key: "taskData", value: task })
+                  // });
 
-                  // Mark this GridList as having a task
+                  //   aGridLists[index].addItem(oGridItem);
                   addedTasks[index] = true;
+
+                  // If this task was previously selected, simulate a click to open it
+                  //   if (oSelectedTask) {
+                  //     this.onCardPress({ getSource: () => oGridItem });
+                  // }
                 });
               }
 
@@ -212,15 +237,14 @@ sap.ui.define(
                   var oNoTaskBox = new VBox({
                     // items: [new Text({ text: "No task exist" })],
                   }).addStyleClass("noTaskText");
-              
+
                   var oGridListItem = new GridListItem({
                     content: [oNoTaskBox],
                   }).addStyleClass("noTaskText"); // Apply background color to the entire item
-              
+
                   aGridLists[index].addItem(oGridListItem);
                 }
               });
-              
             });
 
             // Add all GridLists to the panel (only for this area)
@@ -231,6 +255,19 @@ sap.ui.define(
         },
 
         onCardPress: function (oEvent) {
+          debugger;
+          var oView = this.getView();
+          var oVBox = oView.byId("panelContainer");
+          var aPanels = oVBox.getItems();
+
+          // Store expanded states in AppState
+          var aExpandedPanels = aPanels.map((oPanel) => ({
+            areaID: oPanel.data("areaID"),
+            expanded: oPanel.getExpanded(),
+          }));
+
+          this.AppState.data.aExpandedPanels = aExpandedPanels;
+
           this.AppState.data.oSelectedMilestone = {};
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = true;
@@ -265,7 +302,6 @@ sap.ui.define(
             actualFinish: oTask.actualFinish,
             area: oTask.area,
             phase: oTask.phase,
-
           };
 
           // Store in AppState
@@ -280,7 +316,6 @@ sap.ui.define(
           this.getModel("manageRoadmapLayoutView").refresh(true);
         },
         onEditArea: function (oEvent) {
-
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = true;
@@ -291,17 +326,21 @@ sap.ui.define(
 
           let oView = this.getView();
           let aAllAreas = oView.getModel("AppState").getProperty("/aArea");
-          let oSelectedArea = aAllAreas.find(area => area.name === sAreaName) || {};
+          let oSelectedArea =
+            aAllAreas.find((area) => area.name === sAreaName) || {};
 
           this.AppState.data.oSelectedArea = {
             name: oSelectedArea.name,
             responsible_ID: oSelectedArea.responsible_ID || null,
-            ID: oSelectedArea.ID || null
+            ID: oSelectedArea.ID || null,
           };
 
           // Change Layout
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
-          this.getModel("manageRoadmapLayoutView").setProperty("/layout", sLayout);
+          this.getModel("manageRoadmapLayoutView").setProperty(
+            "/layout",
+            sLayout
+          );
         },
         onSaveArea: function () {
           let oProjectAreaDetails = this.AppState.data.oSelectedArea;
@@ -314,26 +353,30 @@ sap.ui.define(
             .setProperty("/layout", sLayout);
         },
         onManageActivity: function () {
-
           let sTaskID = this.AppState.data.oSelectedTask.ID;
           this.AppState.data.currentTaskID = sTaskID;
           let sTaskName = this.AppState.data.oSelectedTask.name;
-          this.AppState.data.sTaskStartDate = this.AppState.data.oSelectedTask.planned_start;
-          this.AppState.data.sTaskFinishDate = this.AppState.data.oSelectedTask.planned_finish;
-          let sProjectName = this.getView().byId("manageRoadmapPage").getTitle();
-          this.getOwnerComponent().getRouter().navTo("ManageActivity", {
-            sTaskID: sTaskID,
-            sTaskName: encodeURIComponent(sTaskName),
-            sProjectName: sProjectName
-          });
+          this.AppState.data.sTaskStartDate =
+            this.AppState.data.oSelectedTask.planned_start;
+          this.AppState.data.sTaskFinishDate =
+            this.AppState.data.oSelectedTask.planned_finish;
+          let sProjectName = this.getView()
+            .byId("manageRoadmapPage")
+            .getTitle();
+          this.getOwnerComponent()
+            .getRouter()
+            .navTo("ManageActivity", {
+              sTaskID: sTaskID,
+              sTaskName: encodeURIComponent(sTaskName),
+              sProjectName: sProjectName,
+            });
         },
         onSaveTask: function () {
-
           if (!this._validateTaskForm()) {
             return;
           }
           var oTask = this.AppState.data.oSelectedTask;
-          debugger
+          debugger;
           this.AppState.data.Itemtype = "Task";
           this.AppState.data.currentItemID = oTask.ID;
           this.AppState.createNewTask(oTask);
@@ -426,44 +469,45 @@ sap.ui.define(
         },
         onDeleteTask: function () {
           var that = this;
-          MessageBox.warning(
-            "Are you sure you want to delete this Task?",
-            {
-              actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
-              onClose: function (sAction) {
-                if (sAction === MessageBox.Action.OK) {
-                  let oTaskDetails = that.AppState.data.oSelectedTask;
-                  if (oTaskDetails)
-                    that.AppState.deleteTaskEntry(oTaskDetails);
-                  var sLayout = LayoutType.OneColumn;
-                  that
-                    .getModel("manageRoadmapLayoutView")
-                    .setProperty("/layout", sLayout);
-                }
-              },
-            }
-          );
+          MessageBox.warning("Are you sure you want to delete this Task?", {
+            actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+            onClose: function (sAction) {
+              if (sAction === MessageBox.Action.OK) {
+                let oTaskDetails = that.AppState.data.oSelectedTask;
+                if (oTaskDetails) that.AppState.deleteTaskEntry(oTaskDetails);
+                var sLayout = LayoutType.OneColumn;
+                that
+                  .getModel("manageRoadmapLayoutView")
+                  .setProperty("/layout", sLayout);
+              }
+            },
+          });
         },
         onChangeDate: function (oEvent) {
-        
           let oInput = oEvent.getSource(); // Get the input field
           let uservalue = oInput.getValue(); // Format: MM/DD/YY
-          let startDate = this.AppState.data.oSelectedTask.planned_start; 
+          let startDate = this.AppState.data.oSelectedTask.planned_start;
           let userDate = new Date(uservalue);
           let systemStartDate = new Date(startDate);
-          let startDateFormatted = (startDate.getMonth() + 1) + "/" + startDate.getDate() + "/" + (startDate.getFullYear() % 100);
+          let startDateFormatted =
+            startDate.getMonth() +
+            1 +
+            "/" +
+            startDate.getDate() +
+            "/" +
+            (startDate.getFullYear() % 100);
 
-      
           if (userDate < systemStartDate) {
-              oInput.setValueState("Error");
-              oInput.setValueStateText(`Enter date should not be less than ${startDateFormatted}`);
-              oInput.setValue("")
+            oInput.setValueState("Error");
+            oInput.setValueStateText(
+              `Enter date should not be less than ${startDateFormatted}`
+            );
+            oInput.setValue("");
           } else {
-              oInput.setValueState("None"); 
-              oInput.setValueStateText(""); 
+            oInput.setValueState("None");
+            oInput.setValueStateText("");
           }
-      },
-
+        },
       }
     );
   }
