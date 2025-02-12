@@ -8,6 +8,7 @@ sap.ui.define([
 
   return Controller.extend("framsys.com.framsysfrontend.controller.RoadmapTemplate", {
     onInit() {
+      this._loadXLSXLibrary()
       let createAreaData = [{
         "area": ""
       },
@@ -274,7 +275,105 @@ sap.ui.define([
       this.getModel("roadmapTemplateLayoutView").setProperty("/layout", sLayout);
 
     },
+    _loadXLSXLibrary: function () {
+      var script = document.createElement("script");
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+      script.onload = function () {
+          console.log("XLSX library loaded!");
+      };
+      document.head.appendChild(script);
+  },
+  onUploadChange: function (oEvent) {
+    const file = oEvent.getParameter("files")[0];
 
+    if (file && window.FileReader) {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            const data = e.target.result;
+            const workbook = XLSX.read(data, { type: 'binary' });
+
+            // Assume the first sheet contains the data
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+
+            // Convert Excel data to JSON
+            const jsonData = XLSX.utils.sheet_to_json(sheet);
+
+            // Initialize structures
+            let areaStructure = {};
+            let phaseStructure = {};
+
+            jsonData.forEach(row => {
+                let area = row["Areas"];
+                let phase = row["Phases"];
+                let task = row["Task"];
+                let taskActivity = row["Task Activities"];
+
+                // Process Areas
+                if (area && task) {
+                    if (!areaStructure[area]) {
+                        areaStructure[area] = {};
+                    }
+                    if (!areaStructure[area][task]) {
+                        areaStructure[area][task] = [];
+                    }
+                    if (taskActivity) {
+                        areaStructure[area][task].push(taskActivity);
+                    }
+                }
+
+                // Process Phases
+                if (phase && task) {
+                    if (!phaseStructure[phase]) {
+                        phaseStructure[phase] = {};
+                    }
+                    if (!phaseStructure[phase][task]) {
+                        phaseStructure[phase][task] = [];
+                    }
+                    if (taskActivity) {
+                        phaseStructure[phase][task].push(taskActivity);
+                    }
+                }
+            });
+
+            // Convert structured data to the required format
+            let formattedJson = {
+                Area: Object.keys(areaStructure).map(area => ({
+                    [area]: Object.keys(areaStructure[area]).map(task => ({
+                        [task]: areaStructure[area][task]
+                    }))
+                })),
+                Phase: Object.keys(phaseStructure).map(phase => ({
+                    [phase]: Object.keys(phaseStructure[phase]).map(task => ({
+                        [task]: phaseStructure[phase][task]
+                    }))
+                }))
+            };
+
+            // Stringify the JSON data
+            let payload = { jsonData: JSON.stringify(formattedJson) };
+           
+            // Trigger the insertRoadmapData action
+            try {
+                const oModel = this.getView().getModel(); // Assuming your model is correctly configured
+                await oModel.callFunction("/insertRoadmapData", {
+                    method: "POST",
+                    urlParameters: payload,
+                    success: function () {
+                        sap.m.MessageToast.show("Data successfully inserted!");
+                    },
+                    error: function (err) {
+                        sap.m.MessageToast.show("Error inserting data.");
+                        console.error(err);
+                    }
+                });
+            } catch (error) {
+                console.error("Error in API call:", error);
+            }
+        };
+       reader.readAsBinaryString(file);
+    }
+}
 
   });
 });
