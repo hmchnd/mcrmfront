@@ -164,6 +164,7 @@ sap.ui.define(
        this.getOwnerComponent().getRouter().navTo("ManageRoadmap",{
           sRoadmapID:sRoadmapID
        });
+      
        let sLayout = LayoutType.OneColumn;
 
           this.getModel("manageRoadmapLayoutView").setProperty("/layout", sLayout);

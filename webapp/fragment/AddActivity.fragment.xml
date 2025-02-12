@@ -114,13 +114,13 @@
                                     <m:Label text="Forecasted Start" />
                                     <m:DatePicker
                                         value="{AppState>/oSelectedActivity/fore_act_start}"
-                                        editable="true"
+                                        editable="false"
                                     />
 
                                     <m:Label text="Forecasted Finish" />
                                     <m:DatePicker
                                         value="{AppState>/oSelectedActivity/fore_act_finish}"
-                                        editable="true"
+                                        editable="false"
                                     />
                                     <m:Label text="Actual Start" />
                                     <m:DatePicker

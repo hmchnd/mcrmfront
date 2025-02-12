@@ -79,6 +79,7 @@ sap.ui.define(
             sTaskStartDate:"",
             sTaskFinishDate:"",
             sSelectedProjectName:"",
+            aExpandedPanels:[],
 
           };
 
@@ -154,6 +155,7 @@ sap.ui.define(
               that.ViewController.resetColumnLayout();
             });
           }
+          that.ViewController.onCloseDetailPage();
           this.getMyProjectsList(this.data.oGridListControl);
         },
         deleteProjectEntry: function (oProject) {
