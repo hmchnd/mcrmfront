@@ -356,9 +356,8 @@ sap.ui.define([
             // Trigger the insertRoadmapData action
             try {
                 const oModel = this.getView().getModel(); // Assuming your model is correctly configured
-                await oModel.callFunction("/insertRoadmapData", {
-                    method: "POST",
-                    urlParameters: payload,
+                 oModel.create("/insertRoadmapData", payload,{
+            
                     success: function () {
                         sap.m.MessageToast.show("Data successfully inserted!");
                     },
