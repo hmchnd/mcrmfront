@@ -3,8 +3,8 @@
         <VBox>
             <RadioButtonGroup id="radioGroup">
                 <buttons>
-                    <RadioButton text="Create Milestone" selected="true"/>
-                    <RadioButton text="Create Task"/>
+                    <RadioButton text="Create Milestone" visible="{AppState>/oRoleBasesVisiblity/showCreateMilestoneBtnVisiblity}"/>
+                    <RadioButton text="Create Task"  visible="{AppState>/oRoleBasesVisiblity/showCreateTaskBtnVisiblity}"/>
                 </buttons>
             </RadioButtonGroup>
         </VBox>

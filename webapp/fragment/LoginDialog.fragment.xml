@@ -12,11 +12,13 @@
         <content>
             <form:SimpleForm >
                 <!-- <Label text="Login as" /> -->
-                <ComboBox id="loginComboBox">
+                
+                <ComboBox id="loginComboBox"
+                items="{/Employee}"
+                >
                     <items>
-                        <core:Item key="project" text="Project" />
-                        <core:Item key="task" text="Task" />
-                        <core:Item key="activity" text="Activity" />
+                        <core:Item key="{ID}" text="{role}" />
+                        
                     </items>
                 </ComboBox>
             </form:SimpleForm>

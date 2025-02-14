@@ -56,8 +56,8 @@
             <tnt:sideContent>
                 <tnt:SideNavigation expanded="true" selectedKey="{sideContentModel>/selectedKey}" itemSelect=".onSelect">
                     <tnt:NavigationList items="{path: 'sideContentModel>/navigation'}">
-                        <tnt:NavigationListItem text="{sideContentModel>title}" icon="{sideContentModel>icon}" enabled="{sideContentModel>enabled}" expanded="{sideContentModel>expanded}" items="{sideContentModel>items}" key="{sideContentModel>key}">
-                            <tnt:NavigationListItem text="{sideContentModel>title}" key="{sideContentModel>key}" icon="{sideContentModel>icon}" enabled="{sideContentModel>enabled}" />
+                        <tnt:NavigationListItem text="{sideContentModel>title}" icon="{sideContentModel>icon}" visible="{sideContentModel>visible}" enabled="{sideContentModel>enabled}" expanded="{sideContentModel>expanded}" items="{sideContentModel>items}" key="{sideContentModel>key}">
+                            <tnt:NavigationListItem text="{sideContentModel>title}"  key="{sideContentModel>key}" icon="{sideContentModel>icon}" enabled="{sideContentModel>enabled}" />
                         </tnt:NavigationListItem>
                     </tnt:NavigationList>
                     <tnt:fixedItem>

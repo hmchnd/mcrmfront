@@ -10,6 +10,7 @@ sap.ui.define(
           CoreService.call(this, model);
         },
         getProjects() {
+          
           return this.odata("/Project").get();
         },
         saveProject: function (oProject) {
