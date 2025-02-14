@@ -29,6 +29,7 @@
                         icon="sap-icon://save"
                         type="Critical"
                         press="onSaveProjectDetails"
+                        visible="{AppState>/oRoleBasesVisiblity/saveBtnVisiblity}"
                     />
                     <m:Button
                         icon="sap-icon://decline"
@@ -39,6 +40,9 @@
                         icon="sap-icon://delete"
                         type="Critical"
                         press="onDeleteActivity"
+                        visible="{= ${AppState>/oSelectedActivity/ID} &amp;&amp; ${AppState>/oRoleBasesVisiblity/saveBtnVisiblity} ? true : false }"
+
+
                     />
                 </actions>
             </ObjectPageDynamicHeaderTitle>

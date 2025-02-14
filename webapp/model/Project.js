@@ -22,6 +22,8 @@ sap.ui.define([
                 this.pct_complete = Number(data?.pct_complete || 0);
                 this.state = data?.state || "Not Started";
                 this.status = data?.status || "Not Started";
+                this.isRoadmapMapped = data?.isRoadmapMapped || null;
+                
                 this.planned_start = data?.planned_start?.toISOString()?.slice(0,10) || null;
                 this.planned_finish = data?.planned_finish?.toISOString()?.slice(0,10) || null;
                 this.actualStart = data?.actualStart?.toISOString()?.slice(0,10) || null;

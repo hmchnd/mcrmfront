@@ -265,7 +265,15 @@ sap.ui.define(
           let sProjectName = oEvent.getParameter("arguments").sProjectName;
           this.getView().byId("projectTitle").setTitle(`${sProjectName} / ${sAreaName} / ${sPhaseName} / ${sTaskName}`);
           this.AppState.getModel().setSizeLimit(999999);
-          this.AppState.data.showGlobalAddButton = true;
+          // this.AppState.data.showGlobalAddButton = true;
+          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Project Area Leader") {
+            this.AppState.data.showGlobalAddButton = false;       
+          }
+          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Task Responsible") {
+            this.AppState.data.showGlobalAddButton = true;   
+            this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = true;
+
+          }
           this.AppState.data.showBackToRoadmapButton = true;
           this.AppState.setViewController(this);
           this.AppState.data.currentPage = "manageActivity";

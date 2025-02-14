@@ -8,7 +8,9 @@ sap.ui.define(
     "../model/Task",
     "../model/Milestone",
     "../model/Phases",
-    "sap/m/MessageToast",
+    "sap/m/MessageToast"
+
+
   ],
   function (
     BaseObject,
@@ -63,10 +65,13 @@ sap.ui.define(
             showBackToRoadmapButton: false,
             sidePanelOpen: true,
             currentPage: "",
+            visible: true,
             currentPageLabel: "",
+
             makeTaskMilestoneVisiblity: {
               taskvisiblity: false,
               milestonevisiblity: false,
+              milestonevisiblity1: false,
               EditAreaVisiblity: false,
             },
             currentRoadmapID: "",
@@ -77,7 +82,24 @@ sap.ui.define(
             sTaskStartDate: "",
             sTaskFinishDate: "",
             sSelectedProjectName: "",
-            aExpandedPanels: [],
+            oRoleBasesVisiblity: {
+              "showMilestoneSave":true,
+              "isEditAreaVisible":true,
+              "areaResponsibleId": "",
+              "manageroadmapBtn": true,
+              "saveBtnVisiblity": true,
+              "deleteBtnVisiblity": true,
+              "manageActivityBtnVisiblity": true,
+              "showCreateMilestoneBtnVisiblity": true,
+              "showCreateTaskBtnVisiblity": true,
+              "areaLeaderSaveBtnVisiblity": false,
+
+              "portfolioVisiblity": true,
+              "roadmapVisiblity": true,
+              "kanbanVisiblity": true,
+              "sLoginPerson": ""
+            }
+
           };
 
           // Initialize base object.
@@ -96,6 +118,7 @@ sap.ui.define(
           return this.ResourceBundle;
         },
         getMyProjectsList: function (oGridListControl) {
+
           let aPromises = [];
           aPromises.push(this.AppService.getProjects());
           let that = this;
@@ -127,9 +150,17 @@ sap.ui.define(
             oProject.actualFinish = new Date(oProject.actualFinish);
 
             this.AppService.updateProject(oProject).then(function (result) {
+              let sRoadmapTemplateID = oProject.roadmapTemplate_ID;
+              let oCreatedProjectDetails = result.data;
+              if (oProject.roadmapTemplate_ID && !oProject.isRoadmapMapped) {
+                that.copyRoadmapTemplateToNewProject(sRoadmapTemplateID, oCreatedProjectDetails.ID);
+            }
+
               MessageBox.success(`Project Details Updated!`);
+
             });
           } else {
+
             oProject.planned_start = new Date(oProject.planned_start);
             oProject.planned_finish = new Date(oProject.planned_finish);
 
@@ -145,18 +176,22 @@ sap.ui.define(
             this.AppService.saveProject(oProject).then(function (result) {
               that.ViewController.getView().setBusy(false);
               let oCreatedProjectDetails = result.data;
-              that.copyRoadmapTemplateToNewProject(
-                sRoadmapTemplateID,
-                oCreatedProjectDetails.ID
-              );
+              if (oProject.roadmapTemplate_ID && !oProject.isRoadmapMapped) {
+                that.copyRoadmapTemplateToNewProject(sRoadmapTemplateID, oCreatedProjectDetails.ID);
+            }
               that.getMyProjectsList(oGridListControl);
               that.ViewController.resetColumnLayout();
             });
           }
+          debugger
+         
           that.ViewController.onCloseDetailPage();
+         
           this.getMyProjectsList(this.data.oGridListControl);
+          
         },
         deleteProjectEntry: function (oProject) {
+
           if (!oProject || !oProject.ID) {
             MessageBox.error(
               "Invalid Project: Cannot delete without a valid ID."
@@ -179,6 +214,7 @@ sap.ui.define(
         },
 
         getMyFrameworkList: function (oGridListControl) {
+
           let aPromises = [];
           // Add promises for fetching Framework and Class data
           aPromises.push(this.AppService.getFramework());
@@ -205,17 +241,21 @@ sap.ui.define(
         },
 
         createNewFrameworkEntry: function (oFramework) {
+
           if (oFramework.ID) {
+
             this.AppService.updateFramework(oFramework).then(function (result) {
               MessageBox.success(`Roadmap Template Details Updated!`);
             });
           } else {
+
             oFramework.templateAreas = oFramework.area;
             oFramework.templatePhases = oFramework.phase;
             oFramework.templateTasks = oFramework.task;
             delete oFramework.area;
             delete oFramework.phase;
             delete oFramework.task;
+
 
             this.AppService.saveFramework(oFramework).then(function (result) {
               MessageBox.success(`Roadmap Template Details Saved!`);
@@ -227,6 +267,7 @@ sap.ui.define(
         },
 
         deleteFrameworkEntry: function (oFramework) {
+
           if (!oFramework || !oFramework.ID) {
             MessageBox.error(
               "Invalid Framework: Cannot delete without a valid ID."
@@ -250,13 +291,16 @@ sap.ui.define(
         },
 
         getMyActivityList: function (sTaskID) {
+
           if (!sTaskID) {
             this.ViewController.getView().setBusy(true);
-          } else {
+          }
+          else {
             let aPromises = [];
             aPromises.push(this.AppService.getActivity(sTaskID));
             let that = this;
             Promise.all(aPromises).then(function (result) {
+
               let aActivityList = result[0]?.data?.results || [];
               aActivityList = aActivityList.map(function (item) {
                 return new Activity(item);
@@ -278,18 +322,22 @@ sap.ui.define(
             oActivity.planned_finish
           );
 
+
+
           if (oActivity.ID) {
             let ActivityID = oActivity.ID;
             if (oActivity.state == "NEW") {
-              oActivity.act_start = null;
-              oActivity.act_finish = null;
-            } else if (oActivity.state == "INPROGRESS") {
-              oActivity.act_start = new Date();
-            } else if (oActivity.state == "COMPLETED") {
+              oActivity.act_start = null
+              oActivity.act_finish = null
+            }
+            else if (oActivity.state == "INPROGRESS") {
+              oActivity.act_start = new Date()
+            }
+            else if (oActivity.state == "COMPLETED") {
               if (oActivity.act_start == null) {
-                oActivity.act_start = new Date();
+                oActivity.act_start = new Date()
               }
-              oActivity.act_finish = new Date();
+              oActivity.act_finish = new Date()
             }
 
             // oActivity.Classes=[];
@@ -303,8 +351,8 @@ sap.ui.define(
               // that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
             });
           } else {
-            oActivity.fore_act_start = oActivity.planned_start;
-            oActivity.fore_act_finish = oActivity.planned_finish;
+            oActivity.fore_act_start = oActivity.planned_start
+            oActivity.fore_act_finish = oActivity.planned_finish
             oActivity.pct_complete = 0;
             oActivity.state = "NEW";
             oActivity.parent_key_ID = that.data.oSelectedTask;
@@ -329,6 +377,7 @@ sap.ui.define(
           return null;
         },
         deleteActivityEntry: function (oActivity) {
+
           if (!oActivity || !oActivity.ID) {
             MessageBox.error(
               "Invalid Activity: Cannot delete without a valid ID."
@@ -352,17 +401,15 @@ sap.ui.define(
 
         updateProjectArea: function (oAreaDetails) {
           let that = this;
-          this.AppService.updateProjectArea(oAreaDetails).then(function (
-            result
-          ) {
+          this.AppService.updateProjectArea(oAreaDetails).then(function (result) {
             MessageBox.success(`Area Updated!`);
           });
           that.ViewController.onCloseDetailPage();
-          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID);
+          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
 
         createNewTask: function (oTask) {
-          debugger;
+          debugger
           let that = this;
           if (oTask.ID) {
             delete oTask.area;
@@ -389,11 +436,13 @@ sap.ui.define(
             });
           }
           that.ViewController.onCloseDetailPage();
-          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID);
+          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
         deleteTaskEntry: function (oTask) {
           if (!oTask || !oTask.ID) {
-            MessageBox.error("Invalid Task: Cannot delete without a valid ID.");
+            MessageBox.error(
+              "Invalid Task: Cannot delete without a valid ID."
+            );
             return;
           }
 
@@ -410,16 +459,15 @@ sap.ui.define(
               MessageBox.error(`Failed to delete task: ${oError.message}`);
             });
           that.ViewController.onCloseDetailPage();
-          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID);
+          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
         updatePlannedDates: function (Itemtype, currentItemID) {
+
           let aPromises = [];
-          aPromises.push(
-            this.AppService.processDateUpdate(Itemtype, currentItemID)
-          );
+          aPromises.push(this.AppService.processDateUpdate(Itemtype, currentItemID));
           let that = this;
           Promise.all(aPromises).then(function (result) {
-            MessageToast.show("Dates Updated!!");
+            MessageToast.show("Dates Updated!!")
             // that.updateProjectPlannedDates(that.data.currentRoadmapID);
           });
         },
@@ -436,17 +484,17 @@ sap.ui.define(
           aPromises.push(this.AppService.processTaskProgress(sTaskId));
           let that = this;
           Promise.all(aPromises).then(function (result) {
-            MessageToast.show("Task Progress Updated!!");
+            MessageToast.show("Task Progress Updated!!")
             that.updateProjectProgress(that.data.currentRoadmapID);
           });
         },
         updateProjectProgress: function (sRoadmapId) {
-          debugger;
+          debugger
           let aPromises = [];
           aPromises.push(this.AppService.processProjectProgress(sRoadmapId));
           let that = this;
           Promise.all(aPromises).then(function (result) {
-            MessageToast.show("Project Progress Updated!!");
+            MessageToast.show("Project Progress Updated!!")
           });
         },
         copyRoadmapTemplateToNewProject: function (sTemplateId, sProjectID) {
@@ -454,21 +502,19 @@ sap.ui.define(
           this.ViewController.getView().setBusy(true);
 
           aPromises.push(
-            this.AppService.CopyRoadmapTemplateForProject(
-              sTemplateId,
-              sProjectID
-            )
+            this.AppService.CopyRoadmapTemplateForProject(sTemplateId, sProjectID)
           );
           let that = this;
           Promise.all(aPromises).then(function (result) {
             that.ViewController.getView().setBusy(false);
 
-            MessageBox.success(
-              "Project Created and Template Details Configured Successfully In Project Roadmap!!"
-            );
+            // MessageBox.success(
+            //   "Project Created and Template Details Configured Successfully In Project Roadmap!!"
+            // );
           });
         },
         createMilestone: function (oMilestone) {
+
           let that = this;
           if (oMilestone.ID) {
             // delete oMilestone.targetAchievementDate;
@@ -485,9 +531,10 @@ sap.ui.define(
             });
           }
           that.ViewController.onCloseDetailPage();
-          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID);
+          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
         deleteMilestoneEntry: function (oMilestone) {
+
           if (!oMilestone || !oMilestone.ID) {
             MessageBox.error(
               "Invalid Milestone: Cannot delete without a valid ID."
@@ -508,9 +555,10 @@ sap.ui.define(
               MessageBox.error(`Failed to delete milestone: ${oError.message}`);
             });
           that.ViewController.onCloseDetailPage();
-          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID);
+          this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
         getProjectRoadmapById: function (sRoadmapID) {
+          debugger
           let that = this;
 
           // If Roadmap ID is null, open a dialog with project selection
@@ -523,38 +571,39 @@ sap.ui.define(
                 content: [
                   new sap.m.VBox({
                     items: [
-                      // new sap.m.Text({ text: "Please select a project:" }),
                       new sap.m.Select("projectDropdown", {
                         width: "100%",
                         items: {
-                          path: "/Project", // Update this with the actual model path
+                          path: "/Project",
                           template: new sap.ui.core.Item({
                             key: "{roadmapTemplate_ID}",
-                            text: "{name}",
-                          }),
-                        },
-                      }),
-                    ],
-                  }),
+                            text: "{name}"
+                          })
+                        }
+                      })
+                    ]
+                  })
                 ],
                 beginButton: new sap.m.Button({
                   text: "OK",
                   press: function () {
                     let oDropdown = sap.ui.getCore().byId("projectDropdown");
                     let sSelectedProjectID = oDropdown.getSelectedKey();
+
                     that.oProjectDialog.close();
                     that.data.sSelectedProjectRoadmapID = sSelectedProjectID;
-                    that.data.sSelectedProjectName = oDropdown
-                      .getSelectedItem()
-                      .getText();
-                    that.ViewController.getOwnerComponent()
-                      .getRouter()
-                      .navTo("ManageRoadmap", {
-                        sRoadmapID: sSelectedProjectID,
-                        sProjectName: that.data.sSelectedProjectName,
-                      });
-                    that.getProjectRoadmapById(sSelectedProjectID); // Re-call function with selected project ID
-                  },
+                    that.data.sSelectedProjectName = oDropdown.getSelectedItem().getText();
+
+                    that.ViewController.getOwnerComponent().getRouter().navTo("ManageRoadmap", {
+                      sRoadmapID: sSelectedProjectID,
+                      sProjectName: that.data.sSelectedProjectName
+                    });
+
+
+                    that.getProjectRoadmapById(sSelectedProjectID);
+
+
+                  }
                 }),
                 endButton: new sap.m.Button({
                   text: "Cancel",
@@ -562,8 +611,8 @@ sap.ui.define(
                     that.oProjectDialog.close();
                     that.ViewController.getView().setBusy(true);
                     MessageToast.show("Please select a project to proceed!");
-                  },
-                }),
+                  }
+                })
               });
 
               // Add dialog to the view
@@ -571,30 +620,53 @@ sap.ui.define(
             }
 
             this.oProjectDialog.open();
-            return;
+            // return;
           }
+          
+            // If Roadmap ID is provided, proceed with fetching the data
+            // this.ViewController.getView().setBusy(true);
+            let aPromises = [this.AppService.getProjectRoadmapByID(sRoadmapID)];
 
-          // If Roadmap ID is provided, proceed with fetching the data
-          this.ViewController.getView().setBusy(true);
-          let aPromises = [this.AppService.getProjectRoadmapByID(sRoadmapID)];
-
-          Promise.all(aPromises).then(function (result) {
-            let oFetchedProjectRoadmap = result[0].data || {};
-            that.data.aPhase =
-              oFetchedProjectRoadmap.projectPhase.results.map(
+            Promise.all(aPromises).then(function (result) {
+              let oFetchedProjectRoadmap = result[0].data || {};
+              that.data.aPhase = (oFetchedProjectRoadmap.projectPhase.results || []).map(
                 (item) => new Phases(item)
-              ) || [];
-            that.data.aArea = oFetchedProjectRoadmap.projectArea.results || [];
-            that.data.aTask = oFetchedProjectRoadmap.projectTask.results || [];
-            that.updateModel(true);
+              );
+              that.data.aArea = oFetchedProjectRoadmap.projectArea.results || [];
+              if (that.data.oRoleBasesVisiblity.sLoginPerson === "Project Area Leader") {
+                that.data.aArea = (oFetchedProjectRoadmap.projectArea.results || []).filter(area => area.responsible_ID === that.data.oRoleBasesVisiblity.areaResponsibleId);
+              }
 
-            if (that.data.currentPage === "ManageRoadmap") {
-              that.ViewController.createPanels();
+              that.data.aTask = oFetchedProjectRoadmap.projectTask.results || [];
+              debugger
+              if (that.data.oRoleBasesVisiblity.sLoginPerson === "Task Responsible") {
+                // Filter tasks based on responsible_ID
+                that.data.aTask = (oFetchedProjectRoadmap.projectTask.results || []).filter(
+                    task => task.responsible_ID === that.data.oRoleBasesVisiblity.areaResponsibleId
+                );
+            
+                // Extract unique area IDs from filtered tasks
+                const filteredAreaIds = new Set(that.data.aTask.map(task => task.area_ID));
+            
+                // Filter areas based on the extracted area IDs
+                that.data.aArea = (oFetchedProjectRoadmap.projectArea.results || []).filter(
+                    area => filteredAreaIds.has(area.ID)
+                );
             }
+            
+              that.updateModel(true);
 
-            that.ViewController.getView().setBusy(false);
-          });
-        },
+              if (that.data.currentPage === "ManageRoadmap") {
+                that.ViewController.createPanels();
+              }
+
+              that.ViewController.getView().setBusy(false);
+            });
+          
+        }
+        ,
+
+
       }
     );
     return AppState;

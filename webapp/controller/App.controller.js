@@ -58,14 +58,19 @@ sap.ui.define(
         );
       },
       onAddNewItem: function (oEvent) {
-       
+        if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Project Area Leader") {
+          this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = false
+                  this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
+                  this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
+        }
+
         this.AppState.data.sidePanelOpen = false;
 
         if (this.AppState.data.currentPage == "PROJECT") {
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
-          this.AppState.data.aPhase={}
-          this.AppState.data.aArea={}
-          this.AppState.data.aTask={}
+          this.AppState.data.aPhase = {}
+          this.AppState.data.aArea = {}
+          this.AppState.data.aTask = {}
 
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
           this.getModel("projectLayoutView").refresh(true);
@@ -150,7 +155,7 @@ sap.ui.define(
             "/layout",
             sLayout
           );
-         
+
           this.getModel("manageRoadmapLayoutView").refresh(true);
         }
 
@@ -158,39 +163,75 @@ sap.ui.define(
         // this.onSideNavButtonPress();
         // this.getModel("manageRoadmapLayoutView").setProperty("/layout", "TwoColumnsBeginExpanded");
       },
-      onBackToRoadmap:function(){
-       let sRoadmapID = this.AppState.data.sSelectedProjectRoadmapID;
-      //  this.AppState.data.sSelectedProjectName
-       this.getOwnerComponent().getRouter().navTo("ManageRoadmap",{
-          sRoadmapID:sRoadmapID
-       });
-      
-       let sLayout = LayoutType.OneColumn;
-
-          this.getModel("manageRoadmapLayoutView").setProperty("/layout", sLayout);
+      onBackToRoadmap: function () {
+        let sRoadmapID = this.AppState.data.sSelectedProjectRoadmapID;
+        //  this.AppState.data.sSelectedProjectName
+        this.getOwnerComponent().getRouter().navTo("ManageRoadmap", {
+          sRoadmapID: sRoadmapID
+        });
+        let sLayout = LayoutType.OneColumn;
+        
+        this.getModel("manageRoadmapLayoutView").setProperty("/layout", sLayout);
       },
       onPopoverCancel: function () {
         this._oPopover.close();
       },
       onSettingsPress: function (oEvent) {
         // Load and display the create new product dialog
-      if (!this.oLoginDialog) {
-        Fragment.load({
-          id: this.getView().getId(),
-          name: "framsys.com.framsysfrontend.fragment.LoginDialog",
-          controller: this
-        }).then(oDialog => {
-          this.oLoginDialog = oDialog
-          this.getView().addDependent(oDialog)
-          oDialog.open()
-        })
-      } else {
-        this.oLoginDialog.open()
+        if (!this.oLoginDialog) {
+          Fragment.load({
+            id: this.getView().getId(),
+            name: "framsys.com.framsysfrontend.fragment.LoginDialog",
+            controller: this
+          }).then(oDialog => {
+            this.oLoginDialog = oDialog
+            this.getView().addDependent(oDialog)
+            oDialog.open()
+          })
+        } else {
+          this.oLoginDialog.open()
+        }
+      },
+      onCancelLoginDialog: function () {
+        this.oLoginDialog.close()
+      },
+      onLogin: function () {
+        let loginPerson = this.getView().byId("loginComboBox").getSelectedItem().getText();
+        this.AppState.data.oRoleBasesVisiblity.sLoginPerson = loginPerson;
+        if (loginPerson == "Enterprise Portfolio Administrator") {
+          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = true;
+
+
+        } else if (loginPerson == "Project Manager") {
+          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = true;
+        }
+        else if (loginPerson == "Project Area Leader") { 
+          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = false;
+        }
+        else if (loginPerson == "Project Gate Keeper") {
+          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = false;
+         }
+        else if (loginPerson == "Task Responsible") {
+          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = false;
+         }
+        else if (loginPerson == "Activity Performer") {
+          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
+          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = true;
+        }
+        this.oLoginDialog.close()
+
       }
-    },
-    onCancelLoginDialog: function () {
-      this.oLoginDialog.close()
-    },
     });
   }
 );

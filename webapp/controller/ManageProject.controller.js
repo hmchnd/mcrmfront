@@ -14,16 +14,30 @@ sap.ui.define(
         onInit() {
           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
           oRouter.getRoute("manage_projects").attachPatternMatched(this.onRouteMatched, this);
+        
         },
         onRouteMatched: function (oEvent) {
           this.AppState = this.getOwnerComponent().getState("App");
           this.getView().setModel(this.AppState.getModel(), "AppState");
+          debugger
+          // let oComboBox = this.byId("idProjectManager");
+          // let oBinding = oComboBox.getBinding("items");
+      
+          // let sLoginRole = this.AppState.data.oRoleBasesVisiblity.sLoginPerson;
+          // let oFilter = new sap.ui.model.Filter("role", sap.ui.model.FilterOperator.EQ, sLoginRole);
+      
+          // oBinding.filter([oFilter]);
+
+
           this.AppState.getModel().setSizeLimit(999999);
-          this.AppState.data.showGlobalAddButton = true;
+          // this.AppState.data.showGlobalAddButton = true;
           this.AppState.data.showBackToRoadmapButton = false;
           this.AppState.setViewController(this);
           this.AppState.data.currentPage = "PROJECT";
           let oGridListControl = this.byId("gridList");
+          if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Enterprise Portfolio Administrator"){
+            this.AppState.data.showGlobalAddButton = true;
+          }
           this.AppState.data.oGridListControl = oGridListControl;
           this.AppState.getMyProjectsList(oGridListControl);
           this.AppState.data.currentPageLabel = "Manage Projects";
@@ -39,14 +53,22 @@ sap.ui.define(
         },
         onPress: function (oEvent) {
           debugger
+          
           this.AppState.data.sidePanelOpen = false;
           let oSelectedProjectObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
             {};
            
           this.AppState.data.oSelectedProject = oSelectedProjectObject;
+
           let sRoadmapID = oSelectedProjectObject.roadmapTemplate_ID
+          if (sRoadmapID) {
           this.AppState.getProjectRoadmapById(sRoadmapID); 
+
+          }
+          if (!sRoadmapID) {
+           this.getView().byId("manageRoadmap").setVisible(false);
+          }
 
        
           var sLayout = LayoutType.TwoColumnsBeginExpanded;
@@ -103,15 +125,15 @@ sap.ui.define(
           ];
       
           // Get both roadmapTemplate fields
-          var oRoadmapTemplate1 = oView.byId("roadmapTemplate");
-          var oRoadmapTemplate2 = oView.byId("roadmapTemplate1");
+          // var oRoadmapTemplate1 = oView.byId("roadmapTemplate");
+          // var oRoadmapTemplate2 = oView.byId("roadmapTemplate1");
       
           // Add only the visible roadmapTemplate field for validation
-          if (oRoadmapTemplate1 && oRoadmapTemplate1.getVisible()) {
-              aInputs.push(oRoadmapTemplate1);
-          } else if (oRoadmapTemplate2 && oRoadmapTemplate2.getVisible()) {
-              aInputs.push(oRoadmapTemplate2);
-          }
+          // if (oRoadmapTemplate1 && oRoadmapTemplate1.getVisible()) {
+          //     aInputs.push(oRoadmapTemplate1);
+          // } else if (oRoadmapTemplate2 && oRoadmapTemplate2.getVisible()) {
+          //     aInputs.push(oRoadmapTemplate2);
+          // }
       
           aInputs.forEach(function (oInput) {
               if (!oInput.getValue()) {
@@ -201,6 +223,17 @@ sap.ui.define(
           oInput.setValueStateText(""); 
       }
   },
+  formatEmployeeName: function(sName, sRole) {
+    debugger
+    var sLoginRole = this.AppState.data.oRoleBasesVisiblity.sLoginPerson;
+
+    if (sRole === sLoginRole) {
+        return sName + " (You)";
+    } else {
+        return sName; // Default case
+    }
+}
+
       }
     );
   }

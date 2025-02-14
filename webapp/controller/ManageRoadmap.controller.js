@@ -59,11 +59,22 @@ sap.ui.define(
           this.getView()
             .byId("manageRoadmapPage")
             .setTitle(this.AppState.data.sSelectedProjectName);
+            if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader"){
+              this.AppState.data.showGlobalAddButton = true;
+
+
+            }
+            if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible"){
+              this.AppState.data.showGlobalAddButton = false;
+              this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
+
+
+            }
 
           this.getView().setModel(this.AppState.getModel(), "AppState");
           this.AppState.getModel().setSizeLimit(999999);
           this.AppState.setViewController(this);
-          this.AppState.data.showGlobalAddButton = true;
+          // this.AppState.data.showGlobalAddButton = true;
           this.AppState.data.showBackToRoadmapButton = false;
           this.AppState.data.currentPage = "ManageRoadmap";
           this.AppState.getProjectRoadmapById(sRoadmapID);
@@ -122,6 +133,7 @@ sap.ui.define(
                 new Button({
                   icon: "sap-icon://edit",
                   type: "Critical",
+                  visible: this.AppState.data.oRoleBasesVisiblity.isEditAreaVisible,
                   press: this.onEditArea.bind(this),
                 }),
               ],
@@ -196,8 +208,8 @@ sap.ui.define(
                         text: `${task.planned_start
                           .toISOString()
                           .slice(0, 10)} - ${task.planned_finish
-                          .toISOString()
-                          .slice(0, 10)}`,
+                            .toISOString()
+                            .slice(0, 10)}`,
                       })
                     );
                   }
@@ -267,6 +279,12 @@ sap.ui.define(
           }));
 
           this.AppState.data.aExpandedPanels = aExpandedPanels;
+          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader") {
+            this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = false
+            this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
+            this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
+          }
+
 
           this.AppState.data.oSelectedMilestone = {};
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
@@ -392,7 +410,13 @@ sap.ui.define(
           this.AppState.data.oSelectedTask = {};
           this.AppState.data.sidePanelOpen = false;
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = true;
+          this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
+
+
+          this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true
+          this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
+          this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
           let oSelectedMilestoneObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
             {};
