@@ -15,11 +15,12 @@
                 <f:beginColumnPages>
                     <Page showHeader="false">
                         <content>
-                            <!-- <OverflowToolbar height="3rem">
-							<Title text="Projects(1)" class="sapUiLargeMarginBegin"/>
-							<ToolbarSpacer/>
+                            <OverflowToolbar height="3rem">
+                            <ToolbarSpacer/>
+							<Button text="Show Task" press="onShowTask" class="sapUiLargeMarginBegin"/>
+							<!-- <ToolbarSpacer/> -->
 
-						</OverflowToolbar> -->
+						</OverflowToolbar>
                             <ScrollContainer>
                                 <l:VerticalLayout
                                     class="sapUiContentPadding equalColumns"
@@ -248,7 +249,12 @@
                     />
                 </f:midColumnPages>
 
-                <f:endColumnPages />
+                <f:endColumnPages >
+                <core:Fragment
+                        fragmentName="framsys.com.framsysfrontend.fragment.AddTaskDialog"
+                        type="XML"
+                    />
+                </f:endColumnPages>
             </f:FlexibleColumnLayout>
         </content>
     </Page>

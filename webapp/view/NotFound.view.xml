@@ -1,0 +1,11 @@
+<mvc:View
+    controllerName="framsys.com.framsysfrontend.controller.NotFound"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+>
+    <MessagePage showHeader="false" icon="sap-icon://notification" text="Page Not Found" description="Please Select a Project First.">
+    	<buttons>
+			<Button text="Select Project" press="onBackToDashboard" type="Critical" />
+		</buttons>
+	</MessagePage>
+    </mvc:View>

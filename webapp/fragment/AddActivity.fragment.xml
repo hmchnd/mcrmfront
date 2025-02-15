@@ -21,6 +21,7 @@
                     <m:Title
                         text="{AppState>/oSelectedActivity/ID}"
                         wrapping="true"
+                        visible="false"
                     />
                 </expandedHeading>
                 <actions>
@@ -189,9 +190,13 @@
                                             text="{name}"
                                         />
                                     </m:ComboBox>
-                                    <!-- <m:RangeSlider showAdvancedTooltip="true" min="0" max="100" enableTickmarks="true" class="sapUiSmallMarginBottom">
-			<m:ResponsiveScale tickmarksBetweenLabels="5"/>
-		</m:RangeSlider> -->
+                                    <m:Label text="Percentage Completion"/>
+                                    <m:Input
+                                    id="apctcomplete"
+                                        value="{AppState>/oSelectedActivity/pct_complete}"
+                                        editable="true"
+                                    />
+                                    <!-- <m:RangeSlider showAdvancedTooltip="true" enableTickmarks="true" min="0" max="100" step="25" class="sapUiLargeMarginBottom"/> -->
                                 </form:content>
                             </form:SimpleForm>
                         </blocks>
