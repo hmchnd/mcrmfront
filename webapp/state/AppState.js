@@ -98,7 +98,8 @@ sap.ui.define(
               "roadmapVisiblity": true,
               "kanbanVisiblity": true,
               "sLoginPerson": ""
-            }
+            },
+            showTaskInActivity:""
 
           };
 

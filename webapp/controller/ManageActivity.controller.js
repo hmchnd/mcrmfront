@@ -424,15 +424,19 @@ sap.ui.define(
       },
       onShowTask : function(oEvent){  
         this.AppState.data.sidePanelOpen = false;
-        let oSelectedActivityObject =
-          oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
-          {};
-        this.AppState.data.oSelectedActivity = oSelectedActivityObject;
+        // let oSelectedActivityObject =
+        //   oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
+        //   {};
+        //this.AppState.data.oSelectedActivity = oSelectedActivityObject;
         // this.AppState.data.oSelectedActivity.planned_start = this.AppState.data.sTaskStartDate;
         // this.AppState.data.oSelectedActivity.planned_finish = this.AppState.data.sTaskFinishDate;
         var sLayout = LayoutType.ThreeColumnsMidExpanded;
         this.getModel("activityLayoutView").setProperty("/layout", sLayout);
       },
+      onCloseShowTaskInActivity:function(){
+        var sLayout = LayoutType.TwoColumnsBeginExpanded;
+        this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+      }
     
       
       }

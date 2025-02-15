@@ -251,7 +251,7 @@
 
                 <f:endColumnPages >
                 <core:Fragment
-                        fragmentName="framsys.com.framsysfrontend.fragment.AddTaskDialog"
+                        fragmentName="framsys.com.framsysfrontend.fragment.ShowTaskInActivity"
                         type="XML"
                     />
                 </f:endColumnPages>

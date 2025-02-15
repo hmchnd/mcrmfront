@@ -304,8 +304,8 @@
                                     />
                                     <m:CheckBox
                                     id="idCriticalToMilestone"
-                                        selected="{AppState>/oSelectedTask/isCriticalToMilestone}"
-                                        visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
+                                        selected=""
+                                        visible=""
                                     />
                                     <m:Label
                                         text="Contribute to Milestone"

@@ -335,6 +335,8 @@ sap.ui.define(
           // Store in AppState
           this.AppState.data.oSelectedTask = oSelectedPayload;
 
+          this.AppState.data.showTaskInActivity = oSelectedPayload;
+
           // Update layout
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("manageRoadmapLayoutView").setProperty(
