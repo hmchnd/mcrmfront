@@ -68,8 +68,6 @@ sap.ui.define(
             if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible"){
               this.AppState.data.showGlobalAddButton = false;
               this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
-
-
             }
 
           this.getView().setModel(this.AppState.getModel(), "AppState");
@@ -430,6 +428,9 @@ sap.ui.define(
               this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = true;
             }
             if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible"){
+              this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
+            }
+            if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Activity Performer"){
               this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
             }
           

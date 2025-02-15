@@ -141,7 +141,7 @@ sap.ui.define(
           let mParameters = {
             urlParameters: {
               $expand:
-                "projectPhase/milestone,projectArea,projectTask($expand=responsible,area,phase)",
+                "projectPhase/milestone,projectArea,projectTask($expand=responsible,area,phase,activities)",
             },
           };
           return this.odata(sObjectPath).get(mParameters);

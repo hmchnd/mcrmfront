@@ -42,8 +42,6 @@
                         type="Critical"
                         press="onDeleteActivity"
                         visible="{= ${AppState>/oSelectedActivity/ID} &amp;&amp; ${AppState>/oRoleBasesVisiblity/saveBtnVisiblity} ? true : false }"
-
-
                     />
                 </actions>
             </ObjectPageDynamicHeaderTitle>
@@ -139,9 +137,12 @@
                                         editable="false"
                                     />
 
-                                    <m:Label text="Progress Increment %" required="true"/>
+                                    <m:Label
+                                        text="Progress Increment %"
+                                        required="true"
+                                    />
                                     <m:Input
-                                    id="apctweight"
+                                        id="apctweight"
                                         value="{AppState>/oSelectedActivity/pct_weight}"
                                         editable="true"
                                     />
@@ -190,9 +191,9 @@
                                             text="{name}"
                                         />
                                     </m:ComboBox>
-                                    <m:Label text="Percentage Completion"/>
+                                    <m:Label text="Percentage Completion" />
                                     <m:Input
-                                    id="apctcomplete"
+                                        id="apctcomplete"
                                         value="{AppState>/oSelectedActivity/pct_complete}"
                                         editable="true"
                                     />

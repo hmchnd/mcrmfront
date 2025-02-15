@@ -40,6 +40,7 @@ sap.ui.define(
             "Enterprise Portfolio Administrator"
           ) {
             this.AppState.data.showGlobalAddButton = true;
+            this.AppState.data.oRoleBasesVisiblity.showRoadmap = true;
           }
           if (
             this.AppState.data.oRoleBasesVisiblity.sLoginPerson ==
