@@ -250,10 +250,10 @@
                 </f:midColumnPages>
 
                 <f:endColumnPages >
-                <core:Fragment
+                <!-- <core:Fragment
                         fragmentName="framsys.com.framsysfrontend.fragment.ShowTaskInActivity"
                         type="XML"
-                    />
+                    /> -->
                 </f:endColumnPages>
             </f:FlexibleColumnLayout>
         </content>

@@ -3,29 +3,40 @@
     xmlns="sap.m"
     xmlns:form="sap.ui.layout.form"
     xmlns:core="sap.ui.core">
+    
     <Dialog
         id="loginDialog"
         contentWidth="400px"
-        title="Login As"
+        title="Login As">
         
-        >
         <content>
-            <form:SimpleForm >
-                <!-- <Label text="Login as" /> -->
+            <form:SimpleForm>
                 
+                <Label text="Login as" />
                 <ComboBox id="loginComboBox"
-                items="{/Employee}"
-                >
+                    items="{/Employee}"
+                    selectionChange=".onLoginRoleChange">
                     <items>
                         <core:Item key="{ID}" text="{role}" />
-                        
                     </items>
                 </ComboBox>
+
+                <!-- Additional dropdown for Project Area selection -->
+                <Label id="projectAreaLabel" text="Responsible" visible="false"/>
+                <ComboBox id="projectAreaComboBox" visible="false"
+                    items="{/Employee}">
+                    <items>
+                        <core:Item key="{ID}" text="{name}" />
+                    </items>
+                </ComboBox>
+                
             </form:SimpleForm>
         </content>
+        
         <buttons>
             <Button text="OK" press="onLogin" />
             <Button text="Cancel" press="onCancelLoginDialog" />
         </buttons>
+        
     </Dialog>
 </core:FragmentDefinition>

@@ -93,6 +93,8 @@ sap.ui.define(
 
         },
         attachDragAndDrop: function () {
+          debugger
+          
           var aGridIds = ["NEW", "INPROGRESS", "COMPLETED"];
           var oView = this.getView();
 
@@ -423,19 +425,36 @@ sap.ui.define(
           oInput.setValueStateText("");
       },
       onShowTask : function(oEvent){  
-        this.AppState.data.sidePanelOpen = false;
+        // this.AppState.data.sidePanelOpen = false;
         // let oSelectedActivityObject =
         //   oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
         //   {};
         //this.AppState.data.oSelectedActivity = oSelectedActivityObject;
         // this.AppState.data.oSelectedActivity.planned_start = this.AppState.data.sTaskStartDate;
         // this.AppState.data.oSelectedActivity.planned_finish = this.AppState.data.sTaskFinishDate;
-        var sLayout = LayoutType.ThreeColumnsMidExpanded;
-        this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+        // var sLayout = LayoutType.ThreeColumnsMidExpanded;
+        // this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+
+        if (!this.oShowTaskInActivity) {
+          Fragment.load({
+            id: this.getView().getId(),
+            name: "framsys.com.framsysfrontend.fragment.ShowTaskInActivity",
+            controller: this
+          }).then(oDialog => {
+            this.oShowTaskInActivity = oDialog
+            this.getView().addDependent(oDialog)
+            oDialog.open()
+          })
+        } else {
+          this.oShowTaskInActivity.open()
+        }
+      
       },
       onCloseShowTaskInActivity:function(){
-        var sLayout = LayoutType.TwoColumnsBeginExpanded;
-        this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+        this.oShowTaskInActivity.close()
+
+        // var sLayout = LayoutType.TwoColumnsBeginExpanded;
+        // this.getModel("activityLayoutView").setProperty("/layout", sLayout);
       }
     
       

@@ -26,7 +26,7 @@
                 </expandedHeading>
                 <actions>
                     <m:Button
-                    id="saveProjectDetails"
+                        id="saveProjectDetails"
                         text="Save"
                         icon="sap-icon://save"
                         type="Critical"
@@ -98,7 +98,7 @@
 
                                     <m:Label text="Description" />
                                     <m:TextArea
-                                    id="pdesc"
+                                        id="pdesc"
                                         value="{AppState>/oSelectedProject/description}"
                                     />
 
@@ -122,25 +122,16 @@
                                     <m:Label text="Currency" />
                                     <!-- <m:Input value="{AppState>/oSelectedProject/currency}" /> -->
                                     <m:ComboBox
-                                    id="currency"
+                                        id="currency"
                                         showSecondaryValues="true"
                                         selectedKey="{AppState>/oSelectedProject/currency}"
+                                        items="{
+                                            path: '/Currency'
+                                        }"
                                     >
                                         <core:ListItem
-                                            key="USD"
-                                            text="USD"
-                                        />
-                                        <core:ListItem
-                                            key="AED"
-                                            text="AED"
-                                        />
-                                        <core:ListItem
-                                            key="EURO"
-                                            text="EURO"
-                                        />
-                                        <core:ListItem
-                                            key="INR"
-                                            text="INR"
+                                            key="{CurrencyKey}"
+                                            text="{CurrencyKey}"
                                         />
                                     </m:ComboBox>
 
@@ -166,7 +157,7 @@
                                     <m:Label text="Project Gatekeeper" />
                                     <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
                                     <m:ComboBox
-                                    id="idProjectGateKeeper"
+                                        id="idProjectGateKeeper"
                                         showSecondaryValues="true"
                                         selectedKey="{AppState>/oSelectedProject/projectGateKeeper_ID}"
                                         items="{
@@ -203,11 +194,11 @@
                                 <form:content>
                                     <m:Label
                                         text="Roadmap"
-                                        visible="{= ${AppState>/oSelectedProject/isRoadmapMapped} ? false : true}"
+                                        visible="{= ${AppState>/oRoleBasesVisiblity/showRoadmap} || ${AppState>/oSelectedProject/isRoadmapMapped} ? false : true}"
                                     />
                                     <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
                                     <m:ComboBox
-                                        visible="{= ${AppState>/oSelectedProject/isRoadmapMapped} ? false : true}"
+                                        visible="{= ${AppState>/oRoleBasesVisiblity/showRoadmap} || ${AppState>/oSelectedProject/isRoadmapMapped} ? false : true}"
                                         showSecondaryValues="true"
                                         id="roadmapTemplate"
                                         selectedKey="{AppState>/oSelectedProject/roadmapTemplate_ID}"
@@ -242,38 +233,38 @@
                                     </m:ComboBox>
                                     <m:Label text="Initial Budget" />
                                     <m:Input
-                                    id="initialBudget"
+                                        id="initialBudget"
                                         value="{path: 'AppState>/oSelectedProject/initialBudget'}"
                                         change="onBudgetChange"
                                     />
 
                                     <m:Label text="Forecasted Start Date" />
                                     <m:DatePicker
-                                    id="fore_act_start"
+                                        id="fore_act_start"
                                         editable="true"
                                         value="{AppState>/oSelectedProject/fore_act_start}"
                                     />
 
                                     <m:Label text="Forecasted Finish Date" />
                                     <m:DatePicker
-                                    id="fore_act_finish"
+                                        id="fore_act_finish"
                                         editable="true"
                                         value="{AppState>/oSelectedProject/fore_act_finish}"
                                     />
                                     <m:Label text="Actual Start Date" />
                                     <m:DatePicker
-                                    id="actualStart"
+                                        id="actualStart"
                                         editable="true"
                                         value="{AppState>/oSelectedProject/actualStart}"
                                     />
                                     <m:Label text="Actual Finish Date" />
                                     <m:DatePicker
-                                    id="actualFinish"
+                                        id="actualFinish"
                                         editable="true"
                                         value="{AppState>/oSelectedProject/actualFinish}"
                                     />
                                     <m:Label text="Percentage of Completion" />
-                                    <m:Input                                    
+                                    <m:Input
                                         value="{path: 'AppState>/oSelectedProject/pct_complete', formatter: '.formatPercentage'}"
                                         editable="false"
                                     />
@@ -317,13 +308,13 @@
                                 <form:content>
                                     <m:Label text="Purpose" />
                                     <m:TextArea
-                                    id="purpose"
+                                        id="purpose"
                                         value="{AppState>/oSelectedProject/purpose}"
                                         editable="true"
                                     />
                                     <m:Label text="Result" />
                                     <m:TextArea
-                                    id="result"
+                                        id="result"
                                         value="{AppState>/oSelectedProject/result}"
                                         editable="true"
                                     />

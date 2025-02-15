@@ -142,11 +142,11 @@ sap.ui.define(
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = false;
           this.AppState.data.oSelectedMilestone = {};
-          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
-            this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true
-                    this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
-                    this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
-          }
+          // if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
+          //   this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true
+          //           this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
+          //           this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
+          // }
 
           this.getModel("manageRoadmapLayoutView").setProperty(
             "/layout",
@@ -158,11 +158,11 @@ sap.ui.define(
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = true;
           this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = false;
-          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
-            this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = false
-                    this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
-                    this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
-          }
+          // if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
+          //   this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = false
+          //           this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
+          //           this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
+          // }
 
           this.getModel("manageRoadmapLayoutView").setProperty(
             "/layout",

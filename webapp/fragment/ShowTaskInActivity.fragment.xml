@@ -1,310 +1,223 @@
 <core:FragmentDefinition
-    xmlns="sap.uxap"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns:m="sap.m"
+    xmlns="sap.m"
     xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
     xmlns:form="sap.ui.layout.form"
 >
-    <ObjectPageLayout
-        id="ObjectPageLayout"
-        showTitleInHeaderContent="true"
-        alwaysShowContentHeader="false"
-        preserveHeaderStateOnScroll="false"
-        headerContentPinnable="true"
-        isChildPage="true"
-        upperCaseAnchorBar="false"
-    >
-        <headerTitle>
-            <ObjectPageDynamicHeaderTitle>
-                <expandedHeading>
-                    <m:Title
-                        text="{= ${AppState>/showTaskInActivity/ID} ? ${AppState>/showTaskInActivity/ID} : ${AppState>/oSelectedMilestone/ID} }"
-                        wrapping="true"
-                        visible="false"                        
-                    />
-                </expandedHeading>
-                <actions>
-                  
-                    <m:Button
-                        icon="sap-icon://decline"
-                        type="Critical"
-                        press="onCloseShowTaskInActivity"
-                    />
-                  
-                </actions>
-            </ObjectPageDynamicHeaderTitle>
-        </headerTitle>
-        <headerContent>
-            <m:FlexBox
-                wrap="Wrap"
-                fitContainer="true"
-                alignItems="Stretch"
-            />
-        </headerContent>
-        <sections>
-            <ObjectPageSection
-                title="Task Details"
+    <Dialog>
+        <content>
+            <form:SimpleForm
+                id="simpleformShowTaskDetail"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                title=""
+                labelSpanXL="3"
+                labelSpanL="3"
+                labelSpanM="3"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="4"
+                emptySpanL="4"
+                emptySpanM="4"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
             >
-                <subSections>
-                    <ObjectPageSubSection>
-                        <blocks>
-                            <form:SimpleForm
-                                id="simpleformShowTaskDetail"
-                                editable="true"
-                                layout="ResponsiveGridLayout"
-                                title=""
-                                labelSpanXL="3"
-                                labelSpanL="3"
-                                labelSpanM="3"
-                                labelSpanS="12"
-                                adjustLabelSpan="false"
-                                emptySpanXL="4"
-                                emptySpanL="4"
-                                emptySpanM="4"
-                                emptySpanS="0"
-                                columnsXL="1"
-                                columnsL="1"
-                                columnsM="1"
-                                singleContainerFullSize="false"
-                            >
-                                <form:content>
-                                    <m:Label
-                                        text="Task Name"
-                                      
-                                        required="true"
-                                    />
-                                    <m:Input
-                                        id="name"
-                                        value="{AppState>/showTaskInActivity/name}"
-                                        editable="false"
-                                    />
-                                    <m:Label
-                                        text="Description"
-                                      
-                                    />
-                                    <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
-                                    <m:TextArea
-                                    id="description"
-                                        value="{AppState>/showTaskInActivity/description}"
-                                       editable="false"
-                                    />
-                                    <m:Label
-                                        text="Planned Start Date"
-                                      
-                                        required="true"
-                                    />
-                                    <m:DatePicker
-                                        id="tstart"
-                                        value="{path:'AppState>/showTaskInActivity/planned_start', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
-                                       editable="false"
-                                    />
-                                    <m:Label
-                                        text="Planned Finish Date"
-                                      
-                                        required="true"
-                                    />
-                                    <m:DatePicker
-                                        id="tend"
-                                       editable="false"
-                                        change="onChangeDate"
-                                        value="{path:'AppState>/showTaskInActivity/planned_finish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
-                                    />
-                                    <m:Label
-                                        text="Preceding Task"
-                                      
-                                    />
-                                    <m:ComboBox
-                                        id="idPrecedingTask"
-                                        showSecondaryValues="true"
-                                       editable="false"
-                                        selectedKey="{AppState>/showTaskInActivity/precedingTaskID}"
-                                        items="{
+                <form:content>
+                    <Label
+                        text="Task Name"
+                        required="true"
+                    />
+                    <Input
+                        id="name"
+                        value="{AppState>/showTaskInActivity/name}"
+                        editable="false"
+                    />
+                    <Label text="Description" />
+                    <!-- <Input value="Framsys Roadmap" editable="false"/> -->
+                    <TextArea
+                        id="description"
+                        value="{AppState>/showTaskInActivity/description}"
+                        editable="false"
+                    />
+                    <Label
+                        text="Planned Start Date"
+                        required="true"
+                    />
+                    <DatePicker
+                        id="tstart"
+                        value="{path:'AppState>/showTaskInActivity/planned_start', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
+                        editable="false"
+                    />
+                    <Label
+                        text="Planned Finish Date"
+                        required="true"
+                    />
+                    <DatePicker
+                        id="tend"
+                        editable="false"
+                        change="onChangeDate"
+                        value="{path:'AppState>/showTaskInActivity/planned_finish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
+                    />
+                    <Label text="Preceding Task" />
+                    <ComboBox
+                        id="idPrecedingTask"
+                        showSecondaryValues="true"
+                        editable="false"
+                        selectedKey="{AppState>/showTaskInActivity/precedingTaskID}"
+                        items="{
     path: 'AppState>/aTask'
 }"
-                                    >
-                                        <core:ListItem
-                                            key="{AppState>ID}"
-                                            text="{AppState>name}"
-                                        />
-                                    </m:ComboBox>
-                                    <m:Label
-                                        text="Outcome Description"
-                                      
-                                    />
-                                    <m:TextArea
-                                        id="outcomeDesc"
-                                       editable="false"
-                                    />
-                                    <m:Label
-                                        text="Phase"
-                                      
-                                        required="true"
-                                    />
-                                    <m:ComboBox
-                                        id="idphase"
-                                        showSecondaryValues="true"
-                                       editable="false"
-                                        selectedKey="{AppState>/showTaskInActivity/phase_ID}"
-                                        items="{
+                    >
+                        <core:ListItem
+                            key="{AppState>ID}"
+                            text="{AppState>name}"
+                        />
+                    </ComboBox>
+                    <Label text="Outcome Description" />
+                    <TextArea
+                        id="outcomeDesc"
+                        editable="false"
+                    />
+                    <Label
+                        text="Phase"
+                        required="true"
+                    />
+                    <ComboBox
+                        id="idphase"
+                        showSecondaryValues="true"
+                        editable="false"
+                        selectedKey="{AppState>/showTaskInActivity/phase_ID}"
+                        items="{
                                             path: 'AppState>/aPhase'
                                         }"
-                                    >
-                                        <core:ListItem
-                                            key="{AppState>ID}"
-                                            text="{AppState>name}"
-                                        />
-                                    </m:ComboBox>
-                                    <m:Label
-                                        text="Area"
-                                      
-                                        required="true"
-                                    />
-                                    <m:ComboBox
-                                        id="idarea"
-                                        showSecondaryValues="true"
-                                        selectedKey="{AppState>/showTaskInActivity/area_ID}"
-                                       editable="false"
-                                        items="{
+                    >
+                        <core:ListItem
+                            key="{AppState>ID}"
+                            text="{AppState>name}"
+                        />
+                    </ComboBox>
+                    <Label
+                        text="Area"
+                        required="true"
+                    />
+                    <ComboBox
+                        id="idarea"
+                        showSecondaryValues="true"
+                        selectedKey="{AppState>/showTaskInActivity/area_ID}"
+                        editable="false"
+                        items="{
                                             path: 'AppState>/aArea'
                                         }"
-                                    >
-                                        <core:ListItem
-                                            key="{AppState>ID}"
-                                            text="{AppState>name}"
-                                        />
-                                    </m:ComboBox>
-                                    <m:Label
-                                        text="Weight"
-                                        required="true"
-                                      
-                                    />
-                                    <m:Input
-                                        id="weight"
-                                        value="{AppState>/showTaskInActivity/pct_weight}"
-                                       editable="false"
-                                    />
-                                    <m:Label
-                                        text="Forecasted Start Date"
-                                      
-                                    />
-                                    <m:DatePicker
-                                    id="idforecastedstart"
-                                        editable="false"
-                                      
-                                        value="{path:'AppState>/showTaskInActivity/fore_act_start', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
-                                    />
-                                    <m:Label
-                                        text="Forecasted Finish Date"
-                                      
-                                    />
-                                    <m:DatePicker
-                                    id="idforecastedfinish"
-                                        editable="false"
-                                      
-                                        value="{path:'AppState>/showTaskInActivity/fore_act_finish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
-                                    />
-                                    <m:Label
-                                        text="Actual Start Date"
-                                      
-                                    />
-                                    <m:DatePicker
-                                        editable="false"
-                                      
-                                        value="{path:'AppState>/showTaskInActivity/actualStart', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
-                                    />
-                                    <m:Label
-                                        text="Actual Finish Date"
-                                      
-                                    />
-                                    <m:DatePicker
-                                        editable="false"
-                                      
-                                        value="{path:'AppState>/showTaskInActivity/actualFinish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
-                                    />
-                                    <m:Label
-                                        text="Percentage of Completion"
-                                      
-                                    />
-                                    <m:Input
-                                        value="{path: 'AppState>/showTaskInActivity/pct_complete', formatter: '.formatPercentage'}"
-                                      
-                                        editable="false"
-                                    />
+                    >
+                        <core:ListItem
+                            key="{AppState>ID}"
+                            text="{AppState>name}"
+                        />
+                    </ComboBox>
+                    <Label
+                        text="Weight"
+                        required="true"
+                    />
+                    <Input
+                        id="weight"
+                        value="{AppState>/showTaskInActivity/pct_weight}"
+                        editable="false"
+                    />
+                    <Label text="Forecasted Start Date" />
+                    <DatePicker
+                        id="idforecastedstart"
+                        editable="false"
+                        value="{path:'AppState>/showTaskInActivity/fore_act_start', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
+                    />
+                    <Label text="Forecasted Finish Date" />
+                    <DatePicker
+                        id="idforecastedfinish"
+                        editable="false"
+                        value="{path:'AppState>/showTaskInActivity/fore_act_finish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
+                    />
+                    <Label text="Actual Start Date" />
+                    <DatePicker
+                        editable="false"
+                        value="{path:'AppState>/showTaskInActivity/actualStart', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
+                    />
+                    <Label text="Actual Finish Date" />
+                    <DatePicker
+                        editable="false"
+                        value="{path:'AppState>/showTaskInActivity/actualFinish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
+                    />
+                    <Label text="Percentage of Completion" />
+                    <Input
+                        value="{path: 'AppState>/showTaskInActivity/pct_complete', formatter: '.formatPercentage'}"
+                        editable="false"
+                    />
 
-                                    <m:Label
-                                        text="Responsible"
-                                      
-                                        required="true"
-                                    />
-                                    <m:ComboBox
-                                        id="idowner"
-                                        showSecondaryValues="true"
-                                        selectedKey="{AppState>/showTaskInActivity/responsible_ID}"
-                                       editable="false"
-                                        items="{
+                    <Label
+                        text="Responsible"
+                        required="true"
+                    />
+                    <ComboBox
+                        id="idowner"
+                        showSecondaryValues="true"
+                        selectedKey="{AppState>/showTaskInActivity/responsible_ID}"
+                        editable="false"
+                        items="{
                                             path: '/Employee'
                                         }"
-                                    >
-                                        <core:ListItem
-                                            key="{ID}"
-                                            text="{name}"
-                                        />
-                                    </m:ComboBox>
-                                    <m:Label
-                                        text="Is Critical to Milestone"
-                                      
-                                    />
-                                    <m:CheckBox
-                                    id="idCriticalToMilestone"
-                                        selected="{AppState>/showTaskInActivity/isCriticalToMilestone}"
-                                       editable="false"
-                                    />
-                                    <m:Label
-                                        text="Contribute to Milestone"
-                                        visible="{= ${AppState>/showTaskInActivity/isCriticalToMilestone} ? true : false}"
-                                        required="true"
-                                    />
-                                    <m:ComboBox
-                                        id="idMilestone"
-                                        showSecondaryValues="true"
-                                        selectedKey="{AppState>/showTaskInActivity/contributeToMilestone_ID}"
-                                        editable="false"
-                                        items="{
+                    >
+                        <core:ListItem
+                            key="{ID}"
+                            text="{name}"
+                        />
+                    </ComboBox>
+                    <Label text="Is Critical to Milestone" />
+                    <CheckBox
+                        id="idCriticalToMilestone"
+                        editable="false"
+                    />
+                    <Label
+                        text="Contribute to Milestone"
+                        visible="{= ${AppState>/showTaskInActivity/isCriticalToMilestone} ? true : false}"
+                        required="true"
+                    />
+                    <ComboBox
+                        id="idMilestone"
+                        showSecondaryValues="true"
+                        selectedKey="{AppState>/showTaskInActivity/contributeToMilestone_ID}"
+                        editable="false"
+                        items="{
                                             path: '/Milestone'
                                         }"
-                                    >
-                                        <core:ListItem
-                                            key="{ID}"
-                                            text="{name}"
-                                        />
-                                    </m:ComboBox>
-                                    <m:Label
-                                        text="State"
-                                       
-                                    />
-                                    <m:Input
-                                        value="{AppState>/showTaskInActivity/state}"
-                                      
-                                        editable="false"
-                                    />
-                                    <m:Label
-                                        text="Status"
-                                       
-                                    />
-                                    <m:Input
-                                        value="{AppState>/showTaskInActivity/status}"
-                                     
-                                        editable="false"
-                                    />
-
-                                  
-                                </form:content>
-                            </form:SimpleForm>
-                        </blocks>
-                    </ObjectPageSubSection>
-                </subSections>
-            </ObjectPageSection>
-        </sections>
-    </ObjectPageLayout>
+                    >
+                        <core:ListItem
+                            key="{ID}"
+                            text="{name}"
+                        />
+                    </ComboBox>
+                    <Label text="State" />
+                    <Input
+                        value="{AppState>/showTaskInActivity/state}"
+                        editable="false"
+                    />
+                    <Label text="Status" />
+                    <Input
+                        value="{AppState>/showTaskInActivity/status}"
+                        editable="false"
+                    />
+                </form:content>
+            </form:SimpleForm>
+        </content>
+        <beginButton>
+            
+        </beginButton>
+        <endButton>
+            <Button
+                text="Cancel"
+                press="onCloseShowTaskInActivity"
+            />
+        </endButton>
+    </Dialog>
 </core:FragmentDefinition>
