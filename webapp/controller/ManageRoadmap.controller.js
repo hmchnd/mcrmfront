@@ -61,8 +61,9 @@ sap.ui.define(
             .setTitle(this.AppState.data.sSelectedProjectName);
             if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader"){
               this.AppState.data.showGlobalAddButton = true;
-
-
+            }
+            if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Gate Keeper"){
+              this.AppState.data.showGlobalAddButton = true;
             }
             if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible"){
               this.AppState.data.showGlobalAddButton = false;
@@ -188,15 +189,17 @@ sap.ui.define(
 
                   // Add Progress Indicator
                   if (task.pct_complete !== null) {
+                    let roundedValue = this.formatPercentage(task.pct_complete); // Apply formatter
+                
                     oTaskBox.addItem(
-                      new ProgressIndicator({
-                        percentValue: task.pct_complete,
-                        displayValue: `${task.pct_complete}%`,
-                        state: "Success",
-                        height: "1.5rem",
-                      })
+                        new ProgressIndicator({
+                            percentValue: roundedValue,
+                            displayValue: `${roundedValue}%`, // Display formatted value with '%'
+                            state: "Success",
+                            height: "1.5rem",
+                        })
                     );
-                  }
+                }
 
                   // Add Dates if available
                   if (task.planned_start && task.planned_finish) {
@@ -268,6 +271,8 @@ sap.ui.define(
 
         onCardPress: function (oEvent) {
           debugger;
+          let sLoginPerson = this.AppState.data.oRoleBasesVisiblity.sLoginPerson;
+            this.AppState.fieldAccessToAdministrator(sLoginPerson);
           var oView = this.getView();
           var oVBox = oView.byId("panelContainer");
           var aPanels = oVBox.getItems();
@@ -291,6 +296,11 @@ sap.ui.define(
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = true;
           this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = false;
           this.AppState.data.sidePanelOpen = false;
+          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
+            this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true
+                    this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
+                    this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
+          }
 
           // Get full task object from `customData`
           let oTask = oEvent.getSource().getCustomData()[0].getValue();
@@ -337,6 +347,11 @@ sap.ui.define(
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = true;
+          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
+            this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true
+                    this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
+                    this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
+          }
 
           // Retrieve the selected panel area details
           let oPanel = oEvent.getSource().getParent().getParent(); // Get the Panel
@@ -407,26 +422,35 @@ sap.ui.define(
           this.AppState.createMilestone(oSelectedMilestone);
         },
         onClickMilestone: function (oEvent) {
-          this.AppState.data.oSelectedTask = {};
-          this.AppState.data.sidePanelOpen = false;
-          this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = true;
-          this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = false;
-          this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
-
-
-          this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true
-          this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
-          this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
-          let oSelectedMilestoneObject =
-            oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
-            {};
-          this.AppState.data.oSelectedMilestone = oSelectedMilestoneObject;
-          var sLayout = LayoutType.TwoColumnsBeginExpanded;
-          this.getModel("manageRoadmapLayoutView").setProperty(
-            "/layout",
-            sLayout
-          );
-        },
+          let sLoginPerson = this.AppState.data.oRoleBasesVisiblity.sLoginPerson;
+            this.AppState.fieldAccessToAdministrator(sLoginPerson);
+            if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Gate Keeper"){
+              this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = true;
+            }
+            if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible"){
+              this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
+            }
+          
+            this.AppState.data.oSelectedTask = {};
+            this.AppState.data.sidePanelOpen = false;
+            this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = true;
+            this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = false;
+            this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
+   
+   
+            this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true
+            this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
+            this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
+            let oSelectedMilestoneObject =
+              oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
+              {};
+            this.AppState.data.oSelectedMilestone = oSelectedMilestoneObject;
+            var sLayout = LayoutType.TwoColumnsBeginExpanded;
+            this.getModel("manageRoadmapLayoutView").setProperty(
+              "/layout",
+              sLayout
+            );
+          },
         _validateTaskForm: function () {
           var bValid = true;
           var oView = this.getView();
@@ -532,6 +556,11 @@ sap.ui.define(
             oInput.setValueStateText("");
           }
         },
+        formatPercentage: function (value) {
+          if (value !== undefined && value !== null) {
+              return Math.round(value)
+          }
+      }
       }
     );
   }

@@ -609,7 +609,8 @@ sap.ui.define(
                   text: "Cancel",
                   press: function () {
                     that.oProjectDialog.close();
-                    that.ViewController.getView().setBusy(true);
+                    that.ViewController.getOwnerComponent().getRouter().navTo("NotFound");
+                    // that.ViewController.getView().setBusy(true);
                     MessageToast.show("Please select a project to proceed!");
                   }
                 })
@@ -663,8 +664,180 @@ sap.ui.define(
               that.ViewController.getView().setBusy(false);
             });
           
+        },
+        fieldAccessToAdministrator: function (sLoginPerson) {
+          if (sLoginPerson === "Enterprise Portfolio Administrator") {
+            this.ViewController.getView().byId("initialBudget").setEditable(false);
+            this.ViewController.getView().byId("fore_act_start").setEditable(false);
+            this.ViewController.getView().byId("fore_act_finish").setEditable(false);
+            this.ViewController.getView().byId("actualStart").setEditable(false);
+            this.ViewController.getView().byId("actualFinish").setEditable(false);
+            this.ViewController.getView().byId("purpose").setEditable(false);
+            this.ViewController.getView().byId("result").setEditable(false);
+          }
+          if (sLoginPerson === "Project Manager") {
+            if(this.data.currentPage === "PROJECT"){
+            // this.ViewController.getView().byId("initialBudget").setEditable(false);
+            // this.ViewController.getView().byId("fore_act_start").setEditable(false);
+            // this.ViewController.getView().byId("fore_act_finish").setEditable(false);
+            // this.ViewController.getView().byId("actualStart").setEditable(false);
+            // this.ViewController.getView().byId("actualFinish").setEditable(false);
+            }
+
+            if(this.data.currentPage === "ManageRoadmap"){
+            this.ViewController.getView().byId("name").setEditable(false);
+            this.ViewController.getView().byId("description").setEditable(false);
+            this.ViewController.getView().byId("tstart").setEditable(false);
+            this.ViewController.getView().byId("tend").setEditable(false);
+            this.ViewController.getView().byId("idPrecedingTask").setEditable(false);
+            this.ViewController.getView().byId("outcomeDesc").setEditable(false);
+            this.ViewController.getView().byId("idphase").setEditable(false);
+            this.ViewController.getView().byId("idarea").setEditable(false);
+            this.ViewController.getView().byId("weight").setEditable(false);
+            this.ViewController.getView().byId("idowner").setEditable(false);
+            this.ViewController.getView().byId("idCriticalToMilestone").setEditable(false);
+            this.ViewController.getView().byId("idMilestone").setEditable(false);
+
+
+            this.ViewController.getView().byId("idmilestonename").setEditable(false);
+            this.ViewController.getView().byId("idmilestonedesc").setEditable(false);
+            this.ViewController.getView().byId("idmilestonephase").setEditable(false);
+            this.ViewController.getView().byId("idmilestonetargetDate").setEditable(false);
+            this.ViewController.getView().byId("idmilestoneforecastedDate").setEditable(false);
+          
+          }
+          if(this.data.currentPage === "manageActivity"){
+            this.ViewController.getView().byId("aname").setEditable(false);
+            this.ViewController.getView().byId("adesc").setEditable(false);
+            this.ViewController.getView().byId("astart").setEditable(false);
+            this.ViewController.getView().byId("aend").setEditable(false);
+            this.ViewController.getView().byId("apctweight").setEditable(false);
+            this.ViewController.getView().byId("aPActivity").setEditable(false);
+            this.ViewController.getView().byId("aowner").setEditable(false);
+            this.ViewController.getView().byId("apctcomplete").setEditable(false);
+          }
+          }
+          if (sLoginPerson === "Project Area Leader") {
+            if(this.data.currentPage === "PROJECT"){
+            this.ViewController.getView().byId("saveProjectDetails").setVisible(false);
+            this.ViewController.getView().byId("pname").setEditable(false);
+            this.ViewController.getView().byId("pdesc").setEditable(false);
+            this.ViewController.getView().byId("pstart").setEditable(false);
+            this.ViewController.getView().byId("pend").setEditable(false);
+            this.ViewController.getView().byId("currency").setEditable(false);
+            this.ViewController.getView().byId("idProjectManager").setEditable(false);
+            this.ViewController.getView().byId("idProjectGateKeeper").setEditable(false);
+            this.ViewController.getView().byId("initialBudget").setEditable(false);
+            this.ViewController.getView().byId("fore_act_start").setEditable(false);
+            this.ViewController.getView().byId("fore_act_finish").setEditable(false);
+            this.ViewController.getView().byId("actualStart").setEditable(false);
+            this.ViewController.getView().byId("actualFinish").setEditable(false);
+            this.ViewController.getView().byId("purpose").setEditable(false);
+            this.ViewController.getView().byId("result").setEditable(false);
+            }
+            if(this.data.currentPage === "ManageRoadmap"){
+             
+              this.ViewController.getView().byId("idmilestonename").setEditable(false);
+              this.ViewController.getView().byId("idmilestonedesc").setEditable(false);
+              this.ViewController.getView().byId("idmilestonephase").setEditable(false);
+              this.ViewController.getView().byId("idmilestonetargetDate").setEditable(false);
+              this.ViewController.getView().byId("idmilestoneforecastedDate").setEditable(false);
+            
+            }
+            if(this.data.currentPage === "manageActivity"){
+              this.ViewController.getView().byId("aname").setEditable(false);
+              this.ViewController.getView().byId("adesc").setEditable(false);
+              this.ViewController.getView().byId("astart").setEditable(false);
+              this.ViewController.getView().byId("aend").setEditable(false);
+              this.ViewController.getView().byId("apctweight").setEditable(false);
+              this.ViewController.getView().byId("aPActivity").setEditable(false);
+              this.ViewController.getView().byId("aowner").setEditable(false);
+            this.ViewController.getView().byId("apctcomplete").setEditable(false);
+            }
+          }
+          if (sLoginPerson === "Project Gate Keeper") {
+            if(this.data.currentPage === "PROJECT"){
+            this.ViewController.getView().byId("saveProjectDetails").setVisible(false);
+            this.ViewController.getView().byId("pname").setEditable(false);
+            this.ViewController.getView().byId("pdesc").setEditable(false);
+            this.ViewController.getView().byId("pstart").setEditable(false);
+            this.ViewController.getView().byId("pend").setEditable(false);
+            this.ViewController.getView().byId("currency").setEditable(false);
+            this.ViewController.getView().byId("idProjectManager").setEditable(false);
+            this.ViewController.getView().byId("idProjectGateKeeper").setEditable(false);
+            this.ViewController.getView().byId("initialBudget").setEditable(false);
+            this.ViewController.getView().byId("fore_act_start").setEditable(false);
+            this.ViewController.getView().byId("fore_act_finish").setEditable(false);
+            this.ViewController.getView().byId("actualStart").setEditable(false);
+            this.ViewController.getView().byId("actualFinish").setEditable(false);
+            this.ViewController.getView().byId("purpose").setEditable(false);
+            this.ViewController.getView().byId("result").setEditable(false);
+            }  
+            if(this.data.currentPage === "ManageRoadmap"){
+              this.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
+              this.ViewController.getView().byId("name").setEditable(false);
+              this.ViewController.getView().byId("description").setEditable(false);
+              this.ViewController.getView().byId("tstart").setEditable(false);
+              this.ViewController.getView().byId("tend").setEditable(false);
+              this.ViewController.getView().byId("idPrecedingTask").setEditable(false);
+              this.ViewController.getView().byId("outcomeDesc").setEditable(false);
+              this.ViewController.getView().byId("idphase").setEditable(false);
+              this.ViewController.getView().byId("idarea").setEditable(false);
+              this.ViewController.getView().byId("weight").setEditable(false);
+              this.ViewController.getView().byId("idowner").setEditable(false);
+              this.ViewController.getView().byId("idCriticalToMilestone").setEditable(false);
+              this.ViewController.getView().byId("idMilestone").setEditable(false);  
+            
+            }                  
+          }
+          if (sLoginPerson === "Task Responsible") {
+            if(this.data.currentPage === "PROJECT"){
+            this.ViewController.getView().byId("saveProjectDetails").setVisible(false);
+            this.ViewController.getView().byId("pname").setEditable(false);
+            this.ViewController.getView().byId("pdesc").setEditable(false);
+            this.ViewController.getView().byId("pstart").setEditable(false);
+            this.ViewController.getView().byId("pend").setEditable(false);
+            this.ViewController.getView().byId("currency").setEditable(false);
+            this.ViewController.getView().byId("idProjectManager").setEditable(false);
+            this.ViewController.getView().byId("idProjectGateKeeper").setEditable(false);
+            this.ViewController.getView().byId("initialBudget").setEditable(false);
+            this.ViewController.getView().byId("fore_act_start").setEditable(false);
+            this.ViewController.getView().byId("fore_act_finish").setEditable(false);
+            this.ViewController.getView().byId("actualStart").setEditable(false);
+            this.ViewController.getView().byId("actualFinish").setEditable(false);
+            this.ViewController.getView().byId("purpose").setEditable(false);
+            this.ViewController.getView().byId("result").setEditable(false);
+            }  
+            if(this.data.currentPage === "ManageRoadmap"){
+              this.data.oRoleBasesVisiblity.saveBtnVisiblity = true;
+              this.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true;
+              this.data.oRoleBasesVisiblity.showMilestoneSave = true;
+              this.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true;
+              this.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
+              // this.ViewController.getView().byId("name").setEditable(false);
+              // this.ViewController.getView().byId("description").setEditable(false);
+              // this.ViewController.getView().byId("tstart").setEditable(false);
+              // this.ViewController.getView().byId("tend").setEditable(false);
+              // this.ViewController.getView().byId("idPrecedingTask").setEditable(false);
+              // this.ViewController.getView().byId("outcomeDesc").setEditable(false);
+              // this.ViewController.getView().byId("idphase").setEditable(false);
+              // this.ViewController.getView().byId("idarea").setEditable(false);
+              // this.ViewController.getView().byId("weight").setEditable(false);
+              // this.ViewController.getView().byId("idowner").setEditable(false);
+              // this.ViewController.getView().byId("idCriticalToMilestone").setEditable(false);
+              // this.ViewController.getView().byId("idMilestone").setEditable(false);
+  
+  
+              this.ViewController.getView().byId("idmilestonename").setEditable(false);
+              this.ViewController.getView().byId("idmilestonedesc").setEditable(false);
+              this.ViewController.getView().byId("idmilestonephase").setEditable(false);
+              this.ViewController.getView().byId("idmilestonetargetDate").setEditable(false);
+              this.ViewController.getView().byId("idmilestoneforecastedDate").setEditable(false);
+            
+            }         
+          }
+
         }
-        ,
 
 
       }

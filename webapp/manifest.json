@@ -148,6 +148,11 @@
           "name": "RoadmapTemplate",
           "pattern": "RoadmapTemplate",
           "target":"RoadmapTemplate"
+        },
+        {
+          "name": "NotFound",
+          "pattern": "NotFound",
+          "target":"NotFound"
         }
       ],
       "targets": {
@@ -182,6 +187,10 @@
         "RoadmapTemplate":{
            "id": "RoadmapTemplate",
           "name": "RoadmapTemplate"
+        },
+        "NotFound":{
+          "id": "NotFound",
+          "name": "NotFound"
         }
       }
     },
