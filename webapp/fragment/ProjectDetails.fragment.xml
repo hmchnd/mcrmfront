@@ -241,26 +241,26 @@
                                     <m:Label text="Forecasted Start Date" />
                                     <m:DatePicker
                                         id="fore_act_start"
-                                        editable="true"
+                                        editable="false"
                                         value="{AppState>/oSelectedProject/fore_act_start}"
                                     />
 
                                     <m:Label text="Forecasted Finish Date" />
                                     <m:DatePicker
                                         id="fore_act_finish"
-                                        editable="true"
+                                        editable="false"
                                         value="{AppState>/oSelectedProject/fore_act_finish}"
                                     />
                                     <m:Label text="Actual Start Date" />
                                     <m:DatePicker
                                         id="actualStart"
-                                        editable="true"
+                                        editable="false"
                                         value="{AppState>/oSelectedProject/actualStart}"
                                     />
                                     <m:Label text="Actual Finish Date" />
                                     <m:DatePicker
                                         id="actualFinish"
-                                        editable="true"
+                                        editable="false"
                                         value="{AppState>/oSelectedProject/actualFinish}"
                                     />
                                     <m:Label text="Percentage of Completion" />

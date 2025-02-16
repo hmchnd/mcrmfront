@@ -61,7 +61,7 @@ sap.ui.define(
             this.getRouter().navTo("Dashboard");
             setTimeout(() => {
                 this.openLoginDialog();
-            }, 2000);
+            }, 2500);
 
       },
 
