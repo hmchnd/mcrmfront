@@ -25,7 +25,7 @@ sap.ui.define(["./BaseObject"], function (BaseObject) {
         this.precedingTaskID = data?.precedingTaskID || "";
         this.parent_key_ID = data?.parent_key_ID || "";
         this.contributeToMilestone_ID = data?.contributeToMilestone_ID || "";
-        this.isCriticalToMilestone = data?.isCriticalToMilestone || null;
+        this.isCriticalToMilestone = data?.isCriticalToMilestone || false;
       }
     },
   });

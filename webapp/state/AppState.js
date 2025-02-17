@@ -383,7 +383,7 @@ debugger
             });
           }
 
-          that.getMyActivityList(that.data.oSelectedTask);
+          that.getMyActivityList(that.data.currentTaskID);
           that.ViewController.onCloseDetailPage();
         },
 
@@ -943,6 +943,7 @@ debugger
               this.ViewController.getView().byId("aforestart").setEditable(true);
               this.ViewController.getView().byId("astart").setEditable(false);
               this.ViewController.getView().byId("aend").setEditable(false);
+              this.ViewController.getView().byId("apctweight").setEditable(false);
             }
              
           }

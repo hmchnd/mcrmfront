@@ -118,7 +118,7 @@ sap.ui.define(
 
             var oPanel = new Panel({
               expandable: true,
-              expanded: bExpanded,
+              expanded: true,
               headerText: oArea.name,
               enableScrolling: false,
             });
