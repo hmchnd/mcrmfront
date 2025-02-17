@@ -116,12 +116,14 @@
 
                                     <m:Label text="Forecasted Start" />
                                     <m:DatePicker
+                                    id="aforestart"
                                         value="{AppState>/oSelectedActivity/fore_act_start}"
                                         editable="false"
                                     />
 
                                     <m:Label text="Forecasted Finish" />
                                     <m:DatePicker
+                                    id="aforefinish"
                                         value="{AppState>/oSelectedActivity/fore_act_finish}"
                                         editable="false"
                                     />
@@ -196,6 +198,11 @@
                                         id="apctcomplete"
                                         value="{AppState>/oSelectedActivity/pct_complete}"
                                         editable="true"
+                                    />
+                                     <m:Label text="Comment" />
+                                    <m:Input
+                                        id="acomment"
+                                        value="{AppState>/oSelectedActivity/comment}"
                                     />
                                     <!-- <m:RangeSlider showAdvancedTooltip="true" enableTickmarks="true" min="0" max="100" step="25" class="sapUiLargeMarginBottom"/> -->
                                 </form:content>

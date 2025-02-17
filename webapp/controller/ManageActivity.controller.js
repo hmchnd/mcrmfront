@@ -8,6 +8,7 @@ sap.ui.define(
     "sap/ui/core/Fragment",
     "sap/f/LayoutType",
     "sap/m/MessageBox",
+    "sap/m/MessageToast",
   ],
   (
     Controller,
@@ -17,7 +18,8 @@ sap.ui.define(
     coreLibrary,
     Fragment,
     LayoutType,
-    MessageBox
+    MessageBox,
+    MessageToast
   ) => {
     "use strict";
     // Shortcuts for drag-and-drop constants
@@ -160,18 +162,27 @@ sap.ui.define(
           }
 
           // Update the GridID of the dragged item to reflect the new grid
-          oDraggedData.state = sNewGridID;
-          if (oDraggedData.state == "COMPLETED") {
-            oDraggedData.pct_complete = "100"
-          }
-          if (oDraggedData.state == "NEW") {
-            oDraggedData.pct_complete = "0"
-          }
+        //   oDraggedData.state = sNewGridID;
+        //   switch (oDraggedData.state) {
+        //     case "COMPLETED":
+        //         oDraggedData.pct_complete = "100";
+        //         break;
+        //     case "NEW":
+        //         oDraggedData.pct_complete = "0";
+        //         break;
+        //     case "INPROGRESS":
+        //         oDraggedData.pct_complete = "25";
+        //         break;
+        //     default:
+        //         oDraggedData.pct_complete = ""; // Handle any unexpected state
+        // }
           let oActivityDetails = oDraggedData;// Update the GridID in the model
 
           // Call OData update to update the GridID in the backend
           this.AppState.createNewActivityEntry(oActivityDetails);
           // this.getView().getModel("AppState").refresh(true);
+          oDragModel.refresh(true);
+          oDropModel.refresh(true);
 
         },
         onAddActivity: function () {
@@ -263,11 +274,15 @@ sap.ui.define(
           this.AppState = this.getOwnerComponent().getState("App");
           this.getView().setModel(this.AppState.getModel(), "AppState");
           let sTaskID = oEvent.getParameter("arguments").sTaskID;
-          let sTaskName = decodeURIComponent(oEvent.getParameter("arguments").sTaskName);
+          if (sTaskID) {
+            let sTaskName = decodeURIComponent(oEvent.getParameter("arguments").sTaskName);
+          
           let sPhaseName  = this.AppState.data.oSelectedTask.phase.name
           let sAreaName  = this.AppState.data.oSelectedTask.area.name
           let sProjectName = oEvent.getParameter("arguments").sProjectName;
           this.getView().byId("projectTitle").setTitle(`${sProjectName} / ${sAreaName} / ${sPhaseName} / ${sTaskName}`);
+          }
+          
           this.AppState.getModel().setSizeLimit(999999);
           // this.AppState.data.showGlobalAddButton = true;
           if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Project Area Leader") {
@@ -455,7 +470,115 @@ sap.ui.define(
 
         // var sLayout = LayoutType.TwoColumnsBeginExpanded;
         // this.getModel("activityLayoutView").setProperty("/layout", sLayout);
-      }
+      },
+      onShowDirectKanban:function(){
+        if (!this.directKanban) {
+          Fragment.load({
+            id: this.getView().getId(),
+            name: "framsys.com.framsysfrontend.fragment.DirectKanban",
+            controller: this
+          }).then(oDialog => {
+            this.directKanban = oDialog
+            this.getView().addDependent(oDialog)
+            oDialog.open()
+          })
+        } else {
+          this.directKanban.open()
+        }
+
+      },
+      onCancel:function(){
+        this.directKanban.close()
+        this.getView().byId("project").setSelectedKey("")
+        this.getView().byId("areaCombo").setSelectedKey("")
+        this.getView().byId("taskCombo").setSelectedKey("")
+        this.getOwnerComponent().getRouter().navTo("NotFound")
+        this.AppState.data.notFoundBtnVisiblityRoadmap=false;
+        this.AppState.data.notFoundBtnVisiblityKanban=true;
+       
+      },
+      onProjectChange:function(oEvent){
+        debugger
+        let oSelectedItem = oEvent.getSource().getSelectedItem();
+        let sRoadmapID = oSelectedItem.getKey();
+        this.AppState.data.sSelectedProjectRoadmapID = sRoadmapID;
+        this.AppState.getProjectRoadmapById(sRoadmapID);
+        this.getView().byId("areaLabel").setVisible(true)
+        this.getView().byId("areaCombo").setVisible(true)
+        this.getView().byId("taskLabel").setVisible(true)
+        this.getView().byId("taskCombo").setVisible(true)
+
+      },
+      onTaskChange:function(oEvent){
+        debugger
+        let oSelectedItem = oEvent.getSource().getSelectedItem();
+        let sTaskID = oSelectedItem.getKey();
+        // this.AppState.data.oSelectedRoadmap = sRoadmapID;
+        this.AppState.data.sTaskID=sTaskID;
+
+      },
+     onAreaChange: function (oEvent) {
+    debugger;
+    // Get the selected area ID
+    let oSelectedItem = oEvent.getSource().getSelectedItem();
+    let sAreaID = oSelectedItem.getKey();
+
+    // Filter tasks based on the selected area ID
+    let aFilteredTasks = this.AppState.data.aTask.filter(function (task) {
+        return task.area_ID === sAreaID;  // Assuming each task has an area_ID property
+    });
+
+    // Log the filtered tasks (optional)
+    console.log(aFilteredTasks);
+
+    // Optionally update a model or UI element to reflect the filtered tasks
+    // For example, you can bind this filtered tasks array to a task dropdown:
+    // let oTaskDropdown = sap.ui.getCore().byId("task");
+    // oTaskDropdown.getBinding("items").filter(new sap.ui.model.Filter("area_ID", sap.ui.model.FilterOperator.EQ, sAreaID));
+
+    // You can also update the AppState data with the filtered tasks if needed
+    this.AppState.data.filteredTasks = aFilteredTasks;
+},
+
+      onSubmit:function(){
+        
+        if(!this._validateDirectKanbanForm()){
+
+          MessageToast.show("Please fill mandatory fields");
+          // this.onCancel();
+          return;
+        }
+        this.AppState.getMyActivityList(this.AppState.data.sTaskID);
+        
+        this.directKanban.close()
+        this.getView().byId("project").setSelectedKey("")
+        this.getView().byId("areaCombo").setSelectedKey("")
+        this.getView().byId("taskCombo").setSelectedKey("")
+
+      },
+      _validateDirectKanbanForm: function () {
+        var bValid = true;
+        var oView = this.getView();
+        var aInputs = [
+          oView.byId("project"),
+          oView.byId("taskCombo"),
+          
+          
+
+        ];
+        aInputs.forEach(function (oInput) {
+          if (!oInput.getValue()) {
+            oInput.setValueState("Error");
+            oInput.setValueStateText("This field is mandatory");
+            bValid = false;
+          } else {
+            oInput.setValueState("None");
+          }
+        });
+
+        return bValid;
+      },
+        
     
       
       }

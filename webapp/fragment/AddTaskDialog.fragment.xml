@@ -222,7 +222,7 @@
                                         />
                                     </m:ComboBox>
                                     <m:Label
-                                        text="Weight"
+                                        text="Value"
                                         required="true"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
@@ -304,8 +304,8 @@
                                     />
                                     <m:CheckBox
                                     id="idCriticalToMilestone"
-                                        selected=""
-                                        visible=""
+                                        selected="{AppState>/oSelectedTask/isCriticalToMilestone}"
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:Label
                                         text="Contribute to Milestone"

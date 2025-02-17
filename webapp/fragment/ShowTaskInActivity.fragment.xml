@@ -177,6 +177,7 @@
                     <CheckBox
                         id="idCriticalToMilestone"
                         editable="false"
+                        selected="{AppState>/showTaskInActivity/isCriticalToMilestone}"
                     />
                     <Label
                         text="Contribute to Milestone"

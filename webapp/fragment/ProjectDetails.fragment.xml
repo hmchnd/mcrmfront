@@ -234,7 +234,7 @@
                                     <m:Label text="Initial Budget" />
                                     <m:Input
                                         id="initialBudget"
-                                        value="{path: 'AppState>/oSelectedProject/initialBudget'}"
+                                        value="{path: 'AppState>/oSelectedProject/initialBudget', formatter: '.formatCurrency'}"
                                         change="onBudgetChange"
                                     />
 
