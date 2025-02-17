@@ -85,7 +85,7 @@ sap.ui.define(
             this.getView().byId("manageRoadmap").setVisible(false);
           }
           let sLoginPerson = this.AppState.data.oRoleBasesVisiblity.sLoginPerson;
-            this.AppState.fieldAccessToAdministrator(sLoginPerson);
+          this.AppState.fieldAccessToAdministrator(sLoginPerson);
 
           var sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
@@ -186,25 +186,31 @@ sap.ui.define(
           return totalMonths + " months";
         },
         onBudgetChange: function (oEvent) {
-          // let oProjectDetails = this.AppState.data.oSelectedProject;
-          // let sBudget = oEvent.getSource().getValue();
-          // oProjectDetails.budget = sBudget;
           var oInput = oEvent.getSource();
           var sValue = oInput.getValue();
 
-          // Regular expression for integers (positive or negative)
-          var integerRegex = /^[\d,.]+$/;
+          // Remove any non-numeric characters except digits and decimal separator
+          var cleanValue = sValue.replace(/[^0-9]/g, "");
 
-          if (!integerRegex.test(sValue)) {
-            // Set value state to Error and show error message
-            oInput.setValueStateText("Please enter a valid integer.");
+          // Convert to number
+          var fValue = parseFloat(cleanValue);
+
+          if (isNaN(fValue)) {
+            oInput.setValueStateText("Please enter a valid number.");
             oInput.setValueState("Error");
           } else {
-            // Clear error state if the input is valid
             oInput.setValueState("None");
+
+            // Format the value and update input field
+            var formattedValue = this.formatCurrency(fValue);
+            oInput.setValue(formattedValue);
           }
-          // this.currencyFormatter(sValue);
-        },
+        }
+
+
+
+        ,
+
         //   currencyFormatter: function (value) {
         //     debugger
         //     if (isNaN(value)) {
@@ -248,9 +254,21 @@ sap.ui.define(
         },
         formatPercentage: function (value) {
           if (value !== undefined && value !== null) {
-              return Math.round(value)
+            return Math.round(value)
           }
-      }
+        },
+        formatCurrency: function (value) {
+          debugger
+          if (isNaN(value)) {
+            return "";
+          }
+
+          // Use Intl.NumberFormat for European-style formatting
+          return new Intl.NumberFormat('de-DE', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }).format(value);
+        },
       }
     );
   }

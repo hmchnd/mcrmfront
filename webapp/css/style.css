@@ -7,3 +7,9 @@
     border: none !important;
     box-shadow: none !important; 
 }
+.stickyPanel {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensures it stays above other content */
+    background: transparent; /* Prevent overlap issues */
+}

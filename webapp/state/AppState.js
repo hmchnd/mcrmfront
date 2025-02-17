@@ -53,6 +53,7 @@ sap.ui.define(
             aMilestone: [],
             aPhase: [],
             aArea: [],
+            filteredTasks: [],
             oSelectedMilestone: {},
             oSelectedActivity: {},
             oSelectedProject: {},
@@ -60,6 +61,8 @@ sap.ui.define(
             oSelectedArea: {},
             oSelectedTaskActivity: "",
             sSelectedProjectRoadmapID: "",
+            notFoundBtnVisiblityRoadmap: true,
+            notFoundBtnVisiblityKanban: false,
             oSelectedFramework: {},
             showGlobalAddButton: false,
             showBackToRoadmapButton: false,
@@ -67,6 +70,7 @@ sap.ui.define(
             currentPage: "",
             visible: true,
             currentPageLabel: "",
+            sTaskID: "",
 
             makeTaskMilestoneVisiblity: {
               taskvisiblity: false,
@@ -293,9 +297,16 @@ sap.ui.define(
         },
 
         getMyActivityList: function (sTaskID) {
-
+debugger
           if (!sTaskID) {
-            this.ViewController.getView().setBusy(true);
+            // this.ViewController.getView().setBusy(true);
+
+            // dialog
+            if(this.data.oRoleBasesVisiblity.sLoginPerson){
+            this.ViewController.onShowDirectKanban()
+            }
+
+            
           }
           else {
             let aPromises = [];
@@ -331,14 +342,20 @@ sap.ui.define(
           if (oActivity.ID) {
             let ActivityID = oActivity.ID;
             if (oActivity.state == "NEW") {
+              oActivity.pct_complete = "0";
+
               oActivity.act_start = null
               oActivity.act_finish = null
             }
             else if (oActivity.state == "INPROGRESS") {
+              oActivity.pct_complete = "25";
+
               oActivity.act_start = new Date()
             }
             else if (oActivity.state == "COMPLETED") {
               if (oActivity.act_start == null) {
+                oActivity.pct_complete = "100";
+
                 oActivity.act_start = new Date()
               }
               oActivity.act_finish = new Date()
@@ -613,6 +630,8 @@ sap.ui.define(
                   text: "Cancel",
                   press: function () {
                     that.oProjectDialog.close();
+                    that.data.notFoundBtnVisiblityRoadmap=true;
+                    that.data.notFoundBtnVisiblityKanban=false;
                     that.ViewController.getOwnerComponent().getRouter().navTo("NotFound");
                     // that.ViewController.getView().setBusy(true);
                     MessageToast.show("Please select a project to proceed!");
@@ -639,6 +658,7 @@ sap.ui.define(
               );
               that.data.aArea = oFetchedProjectRoadmap.projectArea.results || [];              
               that.data.aTask = oFetchedProjectRoadmap.projectTask.results || [];
+              that.data.filteredTasks = that.data.aTask;
 
               if (that.data.oRoleBasesVisiblity.sLoginPerson === "Project Area Leader") {
                 that.data.aArea = (oFetchedProjectRoadmap.projectArea.results || []).filter(area => area.responsible_ID === that.data.oRoleBasesVisiblity.areaResponsibleId);
@@ -746,6 +766,8 @@ sap.ui.define(
             this.ViewController.getView().byId("aPActivity").setEditable(false);
             this.ViewController.getView().byId("aowner").setEditable(false);
             this.ViewController.getView().byId("apctcomplete").setEditable(false);
+            this.ViewController.getView().byId("acomment").setEditable(false);
+ 
           }
           }
           if (sLoginPerson === "Project Area Leader") {
@@ -784,6 +806,8 @@ sap.ui.define(
               this.ViewController.getView().byId("aPActivity").setEditable(false);
               this.ViewController.getView().byId("aowner").setEditable(false);
             this.ViewController.getView().byId("apctcomplete").setEditable(false);
+            this.ViewController.getView().byId("acomment").setEditable(false);
+ 
             }
           }
           if (sLoginPerson === "Project Gate Keeper") {
@@ -915,6 +939,10 @@ sap.ui.define(
             }     
             if(this.data.currentPage === "manageActivity"){
               this.data.oRoleBasesVisiblity.saveBtnVisiblity = true;
+              this.ViewController.getView().byId("aforefinish").setEditable(true);
+              this.ViewController.getView().byId("aforestart").setEditable(true);
+              this.ViewController.getView().byId("astart").setEditable(false);
+              this.ViewController.getView().byId("aend").setEditable(false);
             }
              
           }

@@ -4,8 +4,9 @@
     xmlns="sap.m"
 >
     <MessagePage showHeader="false" icon="sap-icon://notification" text="Page Not Found" description="Please Select a Project First.">
-    	<buttons>
-			<Button text="Select Project" press="onBackToDashboard" type="Critical" />
-		</buttons>
-	</MessagePage>
+        <buttons>
+            <Button id="roadmapButton" text="Go to Roadmap" press="onBackToDashboard" type="Critical" visible="{AppState>/notFoundBtnVisiblityRoadmap}" />
+            <Button id="kanbanButton" text="Go to Kanban" press="onBackToKanban" type="Critical" visible="{AppState>/notFoundBtnVisiblityKanban}" />
+        </buttons>
+    </MessagePage>
     </mvc:View>

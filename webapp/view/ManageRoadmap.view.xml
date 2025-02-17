@@ -15,6 +15,7 @@
                 <f:beginColumnPages>
                 <Page showHeader="false">
                         <content>
+                        <VBox class="stickyPanel">
             <Panel>
                 <f:GridList items="{AppState>/aPhase}">
 
@@ -37,6 +38,7 @@
                   
                 </f:GridList>
             </Panel>
+            </VBox>
 
             <VBox id="panelContainer" class="sapUiTinyMargin"/>
                  </content>

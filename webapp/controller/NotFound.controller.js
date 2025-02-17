@@ -9,7 +9,11 @@ sap.ui.define([
         },
         onBackToDashboard:function(){
             this.getOwnerComponent().getRouter().navTo("ManageRoadmap");
-        }
+        },
+        onBackToKanban:function(){  
+            this.getOwnerComponent().getRouter().navTo("ManageActivity")
+            
+                  }
 
         
     });

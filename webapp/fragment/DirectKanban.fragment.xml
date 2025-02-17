@@ -1,0 +1,49 @@
+<core:FragmentDefinition xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Dialog id="simpleDialog" title="">
+        <content>
+            <form:SimpleForm id="simpleForm" layout="ResponsiveGridLayout" editable="true">
+                <Label text="Projects" required="true" />
+                <ComboBox id="project"
+                    items="{/Project}"
+                    selectionChange=".onProjectChange">
+                    <items>
+                        <core:Item key="{roadmapTemplate_ID}" text="{name}" />
+                    </items>
+                </ComboBox>
+                <Label text="Area" visible="false" id="areaLabel" />
+                <ComboBox id="areaCombo"
+                    items="{AppState>/aArea}"
+                    visible="false" 
+                    selectionChange=".onAreaChange">
+                    <items>
+                        <core:Item key="{AppState>ID}" text="{AppState>name}" />
+                    </items>
+                </ComboBox>
+                <!-- <Label text="Phase" />
+                <ComboBox id="phase"
+                    items="{AppState>/aPhase}"
+                    selectionChange=".onPhaseChange">
+                    <items>
+                        <core:Item key="{AppState>ID}" text="{AppState>name}" />
+                    </items>
+                </ComboBox> -->
+                <Label text="Task" visible="false" required="true" id="taskLabel" />
+                <ComboBox id="taskCombo"
+                visible="false" 
+                    items="{AppState>/filteredTasks}"
+                    selectionChange=".onTaskChange">
+                    <items>
+                        <core:Item key="{AppState>ID}" text="{AppState>name}" />
+                    </items>
+                </ComboBox>
+               
+            </form:SimpleForm>
+        </content>
+        <beginButton>
+            <Button text="Submit" press="onSubmit"  />
+        </beginButton>
+        <endButton>
+            <Button text="Cancel" press="onCancel" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>
