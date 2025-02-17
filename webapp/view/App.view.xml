@@ -65,7 +65,7 @@
                             <tnt:NavigationListItem text="{sideContentModel>title}" icon="{sideContentModel>icon}" />
                         </tnt:NavigationList>
                          <tnt:NavigationList>
-                <tnt:NavigationListItem icon="sap-icon://customer" select=".onSettingsPress"/>
+                <!-- <tnt:NavigationListItem icon="sap-icon://customer" select=".onSettingsPress"/> -->
             </tnt:NavigationList>
                     </tnt:fixedItem>
                 </tnt:SideNavigation>

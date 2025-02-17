@@ -96,7 +96,7 @@ sap.ui.define(
         },
         attachDragAndDrop: function () {
           debugger
-          
+
           var aGridIds = ["NEW", "INPROGRESS", "COMPLETED"];
           var oView = this.getView();
 
@@ -129,7 +129,7 @@ sap.ui.define(
         },
 
         onDrop: function (oInfo) {
-         
+
           var oDragged = oInfo.getParameter("draggedControl"),
             oDropped = oInfo.getParameter("droppedControl"),
             sInsertPosition = oInfo.getParameter("dropPosition"),
@@ -162,20 +162,20 @@ sap.ui.define(
           }
 
           // Update the GridID of the dragged item to reflect the new grid
-        //   oDraggedData.state = sNewGridID;
-        //   switch (oDraggedData.state) {
-        //     case "COMPLETED":
-        //         oDraggedData.pct_complete = "100";
-        //         break;
-        //     case "NEW":
-        //         oDraggedData.pct_complete = "0";
-        //         break;
-        //     case "INPROGRESS":
-        //         oDraggedData.pct_complete = "25";
-        //         break;
-        //     default:
-        //         oDraggedData.pct_complete = ""; // Handle any unexpected state
-        // }
+          oDraggedData.state = sNewGridID;
+          //   switch (oDraggedData.state) {
+          //     case "COMPLETED":
+          //         oDraggedData.pct_complete = "100";
+          //         break;
+          //     case "NEW":
+          //         oDraggedData.pct_complete = "0";
+          //         break;
+          //     case "INPROGRESS":
+          //         oDraggedData.pct_complete = "25";
+          //         break;
+          //     default:
+          //         oDraggedData.pct_complete = ""; // Handle any unexpected state
+          // }
           let oActivityDetails = oDraggedData;// Update the GridID in the model
 
           // Call OData update to update the GridID in the backend
@@ -255,7 +255,7 @@ sap.ui.define(
         },
         onCardPress: function (oEvent) {
           let sLoginPerson = this.AppState.data.oRoleBasesVisiblity.sLoginPerson;
-            this.AppState.fieldAccessToAdministrator(sLoginPerson);
+          this.AppState.fieldAccessToAdministrator(sLoginPerson);
           this.AppState.data.sidePanelOpen = false;
           let oSelectedActivityObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
@@ -276,20 +276,20 @@ sap.ui.define(
           let sTaskID = oEvent.getParameter("arguments").sTaskID;
           if (sTaskID) {
             let sTaskName = decodeURIComponent(oEvent.getParameter("arguments").sTaskName);
-          
-          let sPhaseName  = this.AppState.data.oSelectedTask.phase.name
-          let sAreaName  = this.AppState.data.oSelectedTask.area.name
-          let sProjectName = oEvent.getParameter("arguments").sProjectName;
-          this.getView().byId("projectTitle").setTitle(`${sProjectName} / ${sAreaName} / ${sPhaseName} / ${sTaskName}`);
+
+            let sPhaseName = this.AppState.data.oSelectedTask.phase.name
+            let sAreaName = this.AppState.data.oSelectedTask.area.name
+            let sProjectName = oEvent.getParameter("arguments").sProjectName;
+            this.getView().byId("projectTitle").setTitle(`${sProjectName} / ${sAreaName} / ${sPhaseName} / ${sTaskName}`);
           }
-          
+
           this.AppState.getModel().setSizeLimit(999999);
           // this.AppState.data.showGlobalAddButton = true;
-          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Project Area Leader") {
-            this.AppState.data.showGlobalAddButton = false;       
+          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader") {
+            this.AppState.data.showGlobalAddButton = false;
           }
-          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Task Responsible") {
-            this.AppState.data.showGlobalAddButton = true;   
+          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible") {
+            this.AppState.data.showGlobalAddButton = true;
             this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = true;
 
           }
@@ -297,8 +297,8 @@ sap.ui.define(
           this.AppState.setViewController(this);
           this.AppState.data.currentPage = "manageActivity";
           // let oGridListControl = this.byId("gridList");
-          this.AppState.data.oSelectedTask = sTaskID;
-          this.AppState.getMyActivityList(this.AppState.data.oSelectedTask);
+          this.AppState.data.currentTaskID = sTaskID;
+          this.AppState.getMyActivityList(this.AppState.data.currentTaskID);
           this.AppState.data.currentPageLabel = "Manage Activity";
           this.AppState.getModel().refresh(true);
         },
@@ -307,7 +307,7 @@ sap.ui.define(
             return;
           }
           let oActivityDetails = this.AppState.data.oSelectedActivity;
-          this.AppState.data.Itemtype = "Activity"; 
+          this.AppState.data.Itemtype = "Activity";
           this.AppState.data.currentItemID = oActivityDetails.ID;
 
           // oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
@@ -323,7 +323,7 @@ sap.ui.define(
             oView.byId("aend"),
             oView.byId("aowner"),
             oView.byId("apctweight"),
-            
+
 
           ];
           aInputs.forEach(function (oInput) {
@@ -340,7 +340,7 @@ sap.ui.define(
         },
 
         calculateActivityCounts: function () {
-        
+
           let oModel = this.getView().getModel("AppState");
           let aActivities = oModel.getProperty("/aActivity") || [];
 
@@ -406,181 +406,189 @@ sap.ui.define(
           let uservalue = oInput.getValue(); // Format: MM/DD/YY
           let startDate = this.AppState.data.sTaskStartDate;
           let endDate = this.AppState.data.sTaskFinishDate;
-          
+
           // New: Get planned start date from selected activity
           let plannedStartDate = this.AppState.data.oSelectedActivity.planned_start;
-      
+
           let startDateFormatted = (startDate.getMonth() + 1) + "/" + startDate.getDate() + "/" + (startDate.getFullYear() % 100);
           let endDateFormatted = (endDate.getMonth() + 1) + "/" + endDate.getDate() + "/" + (endDate.getFullYear() % 100);
-          
+
           // Convert values to Date objects
           let userDate = new Date(uservalue);
           let systemStartDate = new Date(startDateFormatted);
           let systemEndDate = new Date(endDateFormatted);
           let plannedStart = new Date(plannedStartDate); // Convert planned start date to Date object
-      
+
           // Check if userDate is outside system-defined start/end range
           if (userDate < systemStartDate || userDate > systemEndDate) {
-              oInput.setValueState("Error");
-              oInput.setValueStateText(`Enter date should be in range ${startDateFormatted} - ${endDateFormatted}`);
-              oInput.setValue("");
-              return;
+            oInput.setValueState("Error");
+            oInput.setValueStateText(`Enter date should be in range ${startDateFormatted} - ${endDateFormatted}`);
+            oInput.setValue("");
+            return;
           }
-      
+
           // New: Check if planned finish is before planned start
           if (oInput.getId().includes("aend") && userDate < plannedStart) {
-              oInput.setValueState("Error");
-              oInput.setValueStateText("Planned Finish Date cannot be earlier than Planned Start Date.");
-              oInput.setValue("");
-              return;
+            oInput.setValueState("Error");
+            oInput.setValueStateText("Planned Finish Date cannot be earlier than Planned Start Date.");
+            oInput.setValue("");
+            return;
           }
-      
+
           // If everything is fine, clear errors
           oInput.setValueState("None");
           oInput.setValueStateText("");
-      },
-      onShowTask : function(oEvent){  
-        // this.AppState.data.sidePanelOpen = false;
-        // let oSelectedActivityObject =
-        //   oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
-        //   {};
-        //this.AppState.data.oSelectedActivity = oSelectedActivityObject;
-        // this.AppState.data.oSelectedActivity.planned_start = this.AppState.data.sTaskStartDate;
-        // this.AppState.data.oSelectedActivity.planned_finish = this.AppState.data.sTaskFinishDate;
-        // var sLayout = LayoutType.ThreeColumnsMidExpanded;
-        // this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+        },
+        onShowTask: function (oEvent) {
+          // this.AppState.data.sidePanelOpen = false;
+          // let oSelectedActivityObject =
+          //   oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
+          //   {};
+          //this.AppState.data.oSelectedActivity = oSelectedActivityObject;
+          // this.AppState.data.oSelectedActivity.planned_start = this.AppState.data.sTaskStartDate;
+          // this.AppState.data.oSelectedActivity.planned_finish = this.AppState.data.sTaskFinishDate;
+          // var sLayout = LayoutType.ThreeColumnsMidExpanded;
+          // this.getModel("activityLayoutView").setProperty("/layout", sLayout);
 
-        if (!this.oShowTaskInActivity) {
-          Fragment.load({
-            id: this.getView().getId(),
-            name: "framsys.com.framsysfrontend.fragment.ShowTaskInActivity",
-            controller: this
-          }).then(oDialog => {
-            this.oShowTaskInActivity = oDialog
-            this.getView().addDependent(oDialog)
-            oDialog.open()
-          })
-        } else {
-          this.oShowTaskInActivity.open()
-        }
-      
-      },
-      onCloseShowTaskInActivity:function(){
-        this.oShowTaskInActivity.close()
-
-        // var sLayout = LayoutType.TwoColumnsBeginExpanded;
-        // this.getModel("activityLayoutView").setProperty("/layout", sLayout);
-      },
-      onShowDirectKanban:function(){
-        if (!this.directKanban) {
-          Fragment.load({
-            id: this.getView().getId(),
-            name: "framsys.com.framsysfrontend.fragment.DirectKanban",
-            controller: this
-          }).then(oDialog => {
-            this.directKanban = oDialog
-            this.getView().addDependent(oDialog)
-            oDialog.open()
-          })
-        } else {
-          this.directKanban.open()
-        }
-
-      },
-      onCancel:function(){
-        this.directKanban.close()
-        this.getView().byId("project").setSelectedKey("")
-        this.getView().byId("areaCombo").setSelectedKey("")
-        this.getView().byId("taskCombo").setSelectedKey("")
-        this.getOwnerComponent().getRouter().navTo("NotFound")
-        this.AppState.data.notFoundBtnVisiblityRoadmap=false;
-        this.AppState.data.notFoundBtnVisiblityKanban=true;
-       
-      },
-      onProjectChange:function(oEvent){
-        debugger
-        let oSelectedItem = oEvent.getSource().getSelectedItem();
-        let sRoadmapID = oSelectedItem.getKey();
-        this.AppState.data.sSelectedProjectRoadmapID = sRoadmapID;
-        this.AppState.getProjectRoadmapById(sRoadmapID);
-        this.getView().byId("areaLabel").setVisible(true)
-        this.getView().byId("areaCombo").setVisible(true)
-        this.getView().byId("taskLabel").setVisible(true)
-        this.getView().byId("taskCombo").setVisible(true)
-
-      },
-      onTaskChange:function(oEvent){
-        debugger
-        let oSelectedItem = oEvent.getSource().getSelectedItem();
-        let sTaskID = oSelectedItem.getKey();
-        // this.AppState.data.oSelectedRoadmap = sRoadmapID;
-        this.AppState.data.sTaskID=sTaskID;
-
-      },
-     onAreaChange: function (oEvent) {
-    debugger;
-    // Get the selected area ID
-    let oSelectedItem = oEvent.getSource().getSelectedItem();
-    let sAreaID = oSelectedItem.getKey();
-
-    // Filter tasks based on the selected area ID
-    let aFilteredTasks = this.AppState.data.aTask.filter(function (task) {
-        return task.area_ID === sAreaID;  // Assuming each task has an area_ID property
-    });
-
-    // Log the filtered tasks (optional)
-    console.log(aFilteredTasks);
-
-    // Optionally update a model or UI element to reflect the filtered tasks
-    // For example, you can bind this filtered tasks array to a task dropdown:
-    // let oTaskDropdown = sap.ui.getCore().byId("task");
-    // oTaskDropdown.getBinding("items").filter(new sap.ui.model.Filter("area_ID", sap.ui.model.FilterOperator.EQ, sAreaID));
-
-    // You can also update the AppState data with the filtered tasks if needed
-    this.AppState.data.filteredTasks = aFilteredTasks;
-},
-
-      onSubmit:function(){
-        
-        if(!this._validateDirectKanbanForm()){
-
-          MessageToast.show("Please fill mandatory fields");
-          // this.onCancel();
-          return;
-        }
-        this.AppState.getMyActivityList(this.AppState.data.sTaskID);
-        
-        this.directKanban.close()
-        this.getView().byId("project").setSelectedKey("")
-        this.getView().byId("areaCombo").setSelectedKey("")
-        this.getView().byId("taskCombo").setSelectedKey("")
-
-      },
-      _validateDirectKanbanForm: function () {
-        var bValid = true;
-        var oView = this.getView();
-        var aInputs = [
-          oView.byId("project"),
-          oView.byId("taskCombo"),
-          
-          
-
-        ];
-        aInputs.forEach(function (oInput) {
-          if (!oInput.getValue()) {
-            oInput.setValueState("Error");
-            oInput.setValueStateText("This field is mandatory");
-            bValid = false;
+          if (!this.oShowTaskInActivity) {
+            Fragment.load({
+              id: this.getView().getId(),
+              name: "framsys.com.framsysfrontend.fragment.ShowTaskInActivity",
+              controller: this
+            }).then(oDialog => {
+              this.oShowTaskInActivity = oDialog
+              this.getView().addDependent(oDialog)
+              oDialog.open()
+            })
           } else {
-            oInput.setValueState("None");
+            this.oShowTaskInActivity.open()
           }
-        });
 
-        return bValid;
-      },
-        
-    
-      
+        },
+        onCloseShowTaskInActivity: function () {
+          this.oShowTaskInActivity.close()
+
+          // var sLayout = LayoutType.TwoColumnsBeginExpanded;
+          // this.getModel("activityLayoutView").setProperty("/layout", sLayout);
+        },
+        onShowDirectKanban: function () {
+          if (!this.directKanban) {
+            Fragment.load({
+              id: this.getView().getId(),
+              name: "framsys.com.framsysfrontend.fragment.DirectKanban",
+              controller: this
+            }).then(oDialog => {
+              this.directKanban = oDialog
+              this.getView().addDependent(oDialog)
+              oDialog.open()
+            })
+          } else {
+            this.directKanban.open()
+          }
+
+        },
+        onCancel: function () {
+          this.directKanban.close()
+          this.getView().byId("project").setSelectedKey("")
+          this.getView().byId("areaCombo").setSelectedKey("")
+          this.getView().byId("taskCombo").setSelectedKey("")
+          this.getOwnerComponent().getRouter().navTo("NotFound")
+          this.AppState.data.notFoundBtnVisiblityRoadmap = false;
+          this.AppState.data.notFoundBtnVisiblityKanban = true;
+
+        },
+        onProjectChange: function (oEvent) {
+          debugger
+          let oSelectedItem = oEvent.getSource().getSelectedItem();
+          let sRoadmapID = oSelectedItem.getKey();
+          this.AppState.data.sSelectedProjectRoadmapID = sRoadmapID;
+          this.AppState.getProjectRoadmapById(sRoadmapID);
+          this.getView().byId("areaLabel").setVisible(true)
+          this.getView().byId("areaCombo").setVisible(true)
+          this.getView().byId("taskLabel").setVisible(true)
+          this.getView().byId("taskCombo").setVisible(true)
+
+        },
+        onTaskChange: function (oEvent) {
+          debugger
+          let oSelectedItem = oEvent.getSource().getSelectedItem();
+          let sSelectedKey = oSelectedItem.getKey();
+          let oModel = this.getView().getModel("AppState");
+          let aTasks = oModel.getProperty("/filteredTasks"); // Assuming tasks are stored at this path
+
+          // Find the selected task based on its ID
+          let oSelectedTask = aTasks.find(task => task.ID === sSelectedKey);
+          this.AppState.data.showTaskInActivity = oSelectedTask;
+          console.log(oSelectedTask);
+          
+          // this.AppState.data.oSelectedRoadmap = sRoadmapID;
+          this.AppState.data.currentTaskID = sSelectedKey;
+
+        },
+        onAreaChange: function (oEvent) {
+          debugger;
+          // Get the selected area ID
+          let oSelectedItem = oEvent.getSource().getSelectedItem();
+          let sAreaID = oSelectedItem.getKey();
+
+          // Filter tasks based on the selected area ID
+          let aFilteredTasks = this.AppState.data.aTask.filter(function (task) {
+            return task.area_ID === sAreaID;  // Assuming each task has an area_ID property
+          });
+
+          // Log the filtered tasks (optional)
+          console.log(aFilteredTasks);
+
+          // Optionally update a model or UI element to reflect the filtered tasks
+          // For example, you can bind this filtered tasks array to a task dropdown:
+          // let oTaskDropdown = sap.ui.getCore().byId("task");
+          // oTaskDropdown.getBinding("items").filter(new sap.ui.model.Filter("area_ID", sap.ui.model.FilterOperator.EQ, sAreaID));
+
+          // You can also update the AppState data with the filtered tasks if needed
+          this.AppState.data.filteredTasks = aFilteredTasks;
+        },
+
+        onSubmit: function () {
+
+          if (!this._validateDirectKanbanForm()) {
+
+            MessageToast.show("Please fill mandatory fields");
+            // this.onCancel();
+            return;
+          }
+          this.AppState.getMyActivityList(this.AppState.data.currentTaskID);
+
+          this.directKanban.close()
+          this.getView().byId("project").setSelectedKey("")
+          this.getView().byId("areaCombo").setSelectedKey("")
+          this.getView().byId("taskCombo").setSelectedKey("")
+
+        },
+        _validateDirectKanbanForm: function () {
+          var bValid = true;
+          var oView = this.getView();
+          var aInputs = [
+            oView.byId("project"),
+            oView.byId("taskCombo"),
+
+
+
+          ];
+          aInputs.forEach(function (oInput) {
+            if (!oInput.getValue()) {
+              oInput.setValueState("Error");
+              oInput.setValueStateText("This field is mandatory");
+              bValid = false;
+            } else {
+              oInput.setValueState("None");
+            }
+          });
+
+          return bValid;
+        },
+
+
+
       }
     );
   }
