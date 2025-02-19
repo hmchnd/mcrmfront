@@ -71,6 +71,7 @@ sap.ui.define(
             visible: true,
             currentPageLabel: "",
             sTaskID: "",
+            scurrentProjectID:"",
 
             makeTaskMilestoneVisiblity: {
               taskvisiblity: false,
@@ -709,10 +710,20 @@ sap.ui.define(
             if (that.data.currentPage === "ManageRoadmap") {
               that.ViewController.createPanels();
             }
+            that.phaseDurationCalc(sRoadmapID,that.data.scurrentProjectID);
 
             that.ViewController.getView().setBusy(false);
           });
 
+        },
+        phaseDurationCalc: function (sRoadmapID,sProjectID) {
+          let aPromises = [];
+          aPromises.push(this.AppService.phaseDurationCalc(sRoadmapID,sProjectID));
+          let that = this;
+          Promise.all(aPromises).then(function (result) {
+            MessageToast.show("phase calc")
+            
+          });
         },
         fieldAccessToAdministrator: function (sLoginPerson) {
           if (sLoginPerson === "Enterprise Portfolio Administrator") {
