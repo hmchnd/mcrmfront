@@ -65,13 +65,14 @@ sap.ui.define(
         },
         onPress: function (oEvent) {
           debugger;
-
           this.AppState.data.sidePanelOpen = false;
           let oSelectedProjectObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
             {};
 
           this.AppState.data.oSelectedProject = oSelectedProjectObject;
+        this.AppState.data.scurrentProjectID= oSelectedProjectObject.ID
+
 
           let sRoadmapID = oSelectedProjectObject.roadmapTemplate_ID;
           if (sRoadmapID) {

@@ -155,6 +155,14 @@ sap.ui.define(
         getProjectArea() {
           return this.odata("/ProjectArea").get();
         },
+        phaseDurationCalc:function(sRoadmapId,sProjectID){
+
+          return this.odata("/updateProjectPhases").post({
+            parent_key_ID : sRoadmapId,
+            project_ID: sProjectID
+            
+          })
+        },
       }
     );
     return AppService;
