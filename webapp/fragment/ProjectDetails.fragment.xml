@@ -38,7 +38,6 @@
                         icon="sap-icon://heatmap-chart"
                         type="Critical"
                         press="onManageRoadmap"
-                        visible="{= ${AppState>/oSelectedProject/ID} &amp;&amp; ${AppState>/oRoleBasesVisiblity/manageroadmapBtn} ? true : false }"
                     />
                     <m:Button
                         icon="sap-icon://decline"
@@ -46,10 +45,12 @@
                         press="onCloseDetailPage"
                     />
                     <m:Button
+                    id="deleteProject"
                         icon="sap-icon://delete"
                         type="Critical"
+                        visible="false"
+
                         press="onDeleteProject"
-                        visible="{= ${AppState>/oRoleBasesVisiblity/deleteBtnVisiblity} ? true : false }"
                     />
                 </actions>
             </ObjectPageDynamicHeaderTitle>
@@ -254,13 +255,13 @@
                                     <m:Label text="Actual Start Date" />
                                     <m:DatePicker
                                         id="actualStart"
-                                        editable="false"
+                                        editable="true"
                                         value="{AppState>/oSelectedProject/actualStart}"
                                     />
                                     <m:Label text="Actual Finish Date" />
                                     <m:DatePicker
                                         id="actualFinish"
-                                        editable="false"
+                                        editable="true"
                                         value="{AppState>/oSelectedProject/actualFinish}"
                                     />
                                     <m:Label text="Percentage of Completion" />

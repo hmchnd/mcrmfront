@@ -59,15 +59,24 @@ sap.ui.define(
           this.getView()
             .byId("manageRoadmapPage")
             .setTitle(this.AppState.data.sSelectedProjectName);
+            if (
+              this.AppState.data.oRoleBasesVisiblity.sLoginPerson ==
+              "Enterprise Portfolio Administrator"
+            ) {
+              this.AppState.data.showGlobalAddButton = true;
+            }
+            if (
+              this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Manager") {
+              this.AppState.data.showGlobalAddButton = true;
+            }
             if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader"){
               this.AppState.data.showGlobalAddButton = true;
             }
             if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Gate Keeper"){
               this.AppState.data.showGlobalAddButton = true;
             }
-            if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible"){
+            if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Activity Performer"){
               this.AppState.data.showGlobalAddButton = false;
-              this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
             }
 
           this.getView().setModel(this.AppState.getModel(), "AppState");
@@ -281,23 +290,37 @@ sap.ui.define(
             expanded: oPanel.getExpanded(),
           }));
 
-          this.AppState.data.aExpandedPanels = aExpandedPanels;
-          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader") {
-            this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = false
-            this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
-            this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
-          }
-
+          this.AppState.data.aExpandedPanels = aExpandedPanels;          
 
           this.AppState.data.oSelectedMilestone = {};
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = true;
           this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = false;
           this.AppState.data.sidePanelOpen = false;
-          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
-            this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true
-                    this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
-                    this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
+
+          if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Enterprise Portfolio Administrator" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Manager" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader"){
+          this.getView().byId("idEditBtn").setVisible(true);
+          this.getView().byId("idEditSaveTaskBtn").setVisible(true);
+          this.getView().byId("idEditSaveMilestoneBtn").setVisible(false);
+          // this.getView().byId("idEditDeleteBtn").setVisible(false);
+          // this.getView().byId("idEditDeleteTaskBtn").setVisible(true);
+          this.getView().byId("idEditSaveAreaBtn").setVisible(false);
+          }
+          if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Gate Keeper" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Activity Performer"){
+          this.getView().byId("idEditBtn").setVisible(true);
+          this.getView().byId("idEditSaveTaskBtn").setVisible(false);
+          this.getView().byId("idEditSaveMilestoneBtn").setVisible(false);
+          // this.getView().byId("idEditDeleteBtn").setVisible(false);
+          // this.getView().byId("idEditDeleteTaskBtn").setVisible(true);
+          this.getView().byId("idEditSaveAreaBtn").setVisible(false);
+          }
+          if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible"){
+          this.getView().byId("idEditBtn").setVisible(true);
+          this.getView().byId("idEditSaveTaskBtn").setVisible(true);
+          this.getView().byId("idEditSaveMilestoneBtn").setVisible(false);
+          // this.getView().byId("idEditDeleteBtn").setVisible(false);
+          // this.getView().byId("idEditDeleteTaskBtn").setVisible(false);
+          this.getView().byId("idEditSaveAreaBtn").setVisible(false);
           }
 
           // Get full task object from `customData`
@@ -344,14 +367,18 @@ sap.ui.define(
           this.getModel("manageRoadmapLayoutView").refresh(true);
         },
         onEditArea: function (oEvent) {
+        if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Enterprise Portfolio Administrator" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Manager"){
+          this.getView().byId("idEditBtn").setVisible(false);
+          this.getView().byId("idEditSaveTaskBtn").setVisible(false);
+          this.getView().byId("idEditSaveMilestoneBtn").setVisible(false);
+          // this.getView().byId("idEditDeleteBtn").setVisible(false);
+          // this.getView().byId("idEditDeleteTaskBtn").setVisible(false);
+          this.getView().byId("idEditSaveAreaBtn").setVisible(true);
+        }
+
+          this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = true;
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
-          this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = true;
-          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
-            this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true
-                    this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
-                    this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
-          }
 
           // Retrieve the selected panel area details
           let oPanel = oEvent.getSource().getParent().getParent(); // Get the Panel
@@ -422,17 +449,27 @@ sap.ui.define(
           this.AppState.createMilestone(oSelectedMilestone);
         },
         onClickMilestone: function (oEvent) {
+          if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Enterprise Portfolio Administrator" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Gate Keeper"){
+          this.getView().byId("idEditBtn").setVisible(false);
+          this.getView().byId("idEditSaveTaskBtn").setVisible(false);
+          this.getView().byId("idEditSaveMilestoneBtn").setVisible(true);
+          // this.getView().byId("idEditDeleteBtn").setVisible(true);
+          // this.getView().byId("idEditDeleteTaskBtn").setVisible(false);
+          this.getView().byId("idEditSaveAreaBtn").setVisible(false);
+          }
+          if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Manager" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Activity Performer"){
+          this.getView().byId("idEditBtn").setVisible(false);
+          this.getView().byId("idEditSaveTaskBtn").setVisible(false);
+          this.getView().byId("idEditSaveMilestoneBtn").setVisible(false);
+          // this.getView().byId("idEditDeleteBtn").setVisible(true);
+          // this.getView().byId("idEditDeleteTaskBtn").setVisible(false);
+          this.getView().byId("idEditSaveAreaBtn").setVisible(false);
+          }        
+
+
+
           let sLoginPerson = this.AppState.data.oRoleBasesVisiblity.sLoginPerson;
-            this.AppState.fieldAccessToAdministrator(sLoginPerson);
-            if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Gate Keeper"){
-              this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = true;
-            }
-            if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible"){
-              this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
-            }
-            if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Activity Performer"){
-              this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
-            }
+            this.AppState.fieldAccessToAdministrator(sLoginPerson);           
           
             this.AppState.data.oSelectedTask = {};
             this.AppState.data.sidePanelOpen = false;

@@ -40,20 +40,16 @@ sap.ui.define(
             "Enterprise Portfolio Administrator"
           ) {
             this.AppState.data.showGlobalAddButton = true;
-            this.AppState.data.oRoleBasesVisiblity.showRoadmap = true;
+            // this.AppState.data.oRoleBasesVisiblity.showRoadmap = true;
           }
           if (
-            this.AppState.data.oRoleBasesVisiblity.sLoginPerson ==
-            "Project Area Leader"
-          ) {
-            this.AppState.data.showGlobalAddButton = false;
+            this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Manager") {
+            this.AppState.data.showGlobalAddButton = true;
           }
           if (
-            this.AppState.data.oRoleBasesVisiblity.sLoginPerson ==
-            "Project Gate Keeper"
-          ) {
+            this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Gate Keeper" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Activity Performer") {
             this.AppState.data.showGlobalAddButton = false;
-          }
+          }        
           this.AppState.data.oGridListControl = oGridListControl;
           this.AppState.getMyProjectsList(oGridListControl);
           this.AppState.data.currentPageLabel = "Manage Projects";
