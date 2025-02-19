@@ -26,11 +26,11 @@
                 </expandedHeading>
                 <actions>
                     <m:Button
+                        id="saveActivity"
                         text="Save"
                         icon="sap-icon://save"
                         type="Critical"
                         press="onSaveProjectDetails"
-                        visible="{AppState>/oRoleBasesVisiblity/saveBtnVisiblity}"
                     />
                     <m:Button
                         icon="sap-icon://decline"
@@ -38,10 +38,11 @@
                         press="onCloseDetailPage"
                     />
                     <m:Button
+                        id="deleteActivity"
                         icon="sap-icon://delete"
                         type="Critical"
+                        visible="false"
                         press="onDeleteActivity"
-                        visible="{= ${AppState>/oSelectedActivity/ID} &amp;&amp; ${AppState>/oRoleBasesVisiblity/saveBtnVisiblity} ? true : false }"
                     />
                 </actions>
             </ObjectPageDynamicHeaderTitle>
@@ -116,27 +117,29 @@
 
                                     <m:Label text="Forecasted Start" />
                                     <m:DatePicker
-                                    id="aforestart"
+                                        id="aforestart"
                                         value="{AppState>/oSelectedActivity/fore_act_start}"
                                         editable="false"
                                     />
 
                                     <m:Label text="Forecasted Finish" />
                                     <m:DatePicker
-                                    id="aforefinish"
+                                        id="aforefinish"
                                         value="{AppState>/oSelectedActivity/fore_act_finish}"
                                         editable="false"
                                     />
                                     <m:Label text="Actual Start" />
                                     <m:DatePicker
                                         value="{AppState>/oSelectedActivity/act_start}"
-                                        editable="false"
+                                        editable="true"
+                                        id="aactstart"
                                     />
 
                                     <m:Label text="Actual Finish" />
                                     <m:DatePicker
                                         value="{AppState>/oSelectedActivity/act_finish}"
-                                        editable="false"
+                                        editable="true"
+                                        id="aactfinish"
                                     />
 
                                     <m:Label
@@ -199,7 +202,7 @@
                                         value="{AppState>/oSelectedActivity/pct_complete}"
                                         editable="true"
                                     />
-                                     <m:Label text="Comment" />
+                                    <m:Label text="Comment" />
                                     <m:Input
                                         id="acomment"
                                         value="{AppState>/oSelectedActivity/comment}"

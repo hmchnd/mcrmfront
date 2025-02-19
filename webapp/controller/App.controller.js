@@ -58,20 +58,26 @@ sap.ui.define(
         );
       },
       onAddNewItem: function (oEvent) {
-        if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Project Area Leader") {
-          this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = false
-                  this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
-                  this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
-        }
-       
-
         this.AppState.data.sidePanelOpen = false;
 
         if (this.AppState.data.currentPage == "PROJECT") {
+          let oViewProjectDetail = sap.ui.core.UIComponent.getRouterFor(
+            this
+          ).getView("framsys.com.framsysfrontend.view.ManageProject");
+          if (
+            this.AppState.data.oRoleBasesVisiblity.sLoginPerson ==
+              "Enterprise Portfolio Administrator" ||
+            this.AppState.data.oRoleBasesVisiblity.sLoginPerson ==
+              "Project Manager"
+          ) {
+            oViewProjectDetail.byId("manageRoadmap").setVisible(false);
+            oViewProjectDetail.byId("deleteProject").setVisible(false);
+          }
+
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
-          this.AppState.data.aPhase = {}
-          this.AppState.data.aArea = {}
-          this.AppState.data.aTask = {}
+          this.AppState.data.aPhase = {};
+          this.AppState.data.aArea = {};
+          this.AppState.data.aTask = {};
 
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
           this.getModel("projectLayoutView").refresh(true);
@@ -110,6 +116,19 @@ sap.ui.define(
           // this.getModel("manageRoadmapLayoutView").refresh(true);
           this.AppState.data.oSelectedTask = new Activity();
         } else if (this.AppState.data.currentPage == "manageActivity") {
+          let oViewActivityDetail = sap.ui.core.UIComponent.getRouterFor(
+            this
+          ).getView("framsys.com.framsysfrontend.view.ManageActivity");
+          if (
+            this.AppState.data.oRoleBasesVisiblity.sLoginPerson ==
+              "Enterprise Portfolio Administrator" ||
+            this.AppState.data.oRoleBasesVisiblity.sLoginPerson ==
+              "Project Area Leader" ||
+            this.AppState.data.oRoleBasesVisiblity.sLoginPerson ==
+              "Task Responsible"
+          ) {
+            oViewActivityDetail.byId("deleteActivity").setVisible(false);
+          }
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("activityLayoutView").setProperty("/layout", sLayout);
           this.getModel("activityLayoutView").refresh(true);
@@ -134,19 +153,22 @@ sap.ui.define(
         console.log("Selected Index: ", iSelectedIndex);
 
         let sLayout = LayoutType.TwoColumnsBeginExpanded;
-        // this.AppState.data.aa = sLayout;
-        debugger;
+        var oView = sap.ui.core.UIComponent.getRouterFor(this).getView(
+          "framsys.com.framsysfrontend.view.ManageRoadmap"
+        );
         if (iSelectedIndex === 0) {
           this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = true;
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = true;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = false;
           this.AppState.data.oSelectedMilestone = {};
-          // if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
-          //   this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true
-          //           this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
-          //           this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
-          // }
+
+          oView.byId("idEditBtn").setVisible(false);
+          oView.byId("idEditSaveTaskBtn").setVisible(false);
+          oView.byId("idEditSaveMilestoneBtn").setVisible(true);
+          oView.byId("idEditDeleteBtn").setVisible(false);
+          oView.byId("idEditDeleteTaskBtn").setVisible(false);
+          oView.byId("idEditSaveAreaBtn").setVisible(false);
 
           this.getModel("manageRoadmapLayoutView").setProperty(
             "/layout",
@@ -158,11 +180,13 @@ sap.ui.define(
           this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity = false;
           this.AppState.data.makeTaskMilestoneVisiblity.taskvisiblity = true;
           this.AppState.data.makeTaskMilestoneVisiblity.EditAreaVisiblity = false;
-          // if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
-          //   this.AppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = false
-          //           this.AppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true
-          //           this.AppState.data.oRoleBasesVisiblity.showMilestoneSave = true
-          // }
+
+          oView.byId("idEditBtn").setVisible(false);
+          oView.byId("idEditSaveTaskBtn").setVisible(true);
+          oView.byId("idEditSaveMilestoneBtn").setVisible(false);
+          oView.byId("idEditDeleteBtn").setVisible(false);
+          oView.byId("idEditDeleteTaskBtn").setVisible(false);
+          oView.byId("idEditSaveAreaBtn").setVisible(false);
 
           this.getModel("manageRoadmapLayoutView").setProperty(
             "/layout",
@@ -173,18 +197,19 @@ sap.ui.define(
         }
 
         this._oPopover.close();
-        // this.onSideNavButtonPress();
-        // this.getModel("manageRoadmapLayoutView").setProperty("/layout", "TwoColumnsBeginExpanded");
       },
       onBackToRoadmap: function () {
         let sRoadmapID = this.AppState.data.sSelectedProjectRoadmapID;
         //  this.AppState.data.sSelectedProjectName
         this.getOwnerComponent().getRouter().navTo("ManageRoadmap", {
-          sRoadmapID: sRoadmapID
+          sRoadmapID: sRoadmapID,
         });
         let sLayout = LayoutType.OneColumn;
-        
-        this.getModel("manageRoadmapLayoutView").setProperty("/layout", sLayout);
+
+        this.getModel("manageRoadmapLayoutView").setProperty(
+          "/layout",
+          sLayout
+        );
       },
       onPopoverCancel: function () {
         this._oPopover.close();
@@ -195,56 +220,34 @@ sap.ui.define(
           Fragment.load({
             id: this.getView().getId(),
             name: "framsys.com.framsysfrontend.fragment.LoginDialog",
-            controller: this
-          }).then(oDialog => {
-            this.oLoginDialog = oDialog
-            this.getView().addDependent(oDialog)
-            oDialog.open()
-          })
+            controller: this,
+          }).then((oDialog) => {
+            this.oLoginDialog = oDialog;
+            this.getView().addDependent(oDialog);
+            oDialog.open();
+          });
         } else {
-          this.oLoginDialog.open()
+          this.oLoginDialog.open();
         }
       },
       onCancelLoginDialog: function () {
-        this.oLoginDialog.close()
+        this.oLoginDialog.close();
       },
       onLogin: function () {
-        let loginPerson = this.getView().byId("loginComboBox").getSelectedItem().getText();
+        let loginPerson = this.getView()
+          .byId("loginComboBox")
+          .getSelectedItem()
+          .getText();
         this.AppState.data.oRoleBasesVisiblity.sLoginPerson = loginPerson;
         if (loginPerson == "Enterprise Portfolio Administrator") {
-          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = true;
-
-
         } else if (loginPerson == "Project Manager") {
-          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = true;
+        } else if (loginPerson == "Project Area Leader") {
+        } else if (loginPerson == "Project Gate Keeper") {
+        } else if (loginPerson == "Task Responsible") {
+        } else if (loginPerson == "Activity Performer") {
         }
-        else if (loginPerson == "Project Area Leader") { 
-          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = false;
-        }
-        else if (loginPerson == "Project Gate Keeper") {
-          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = false;
-         }
-        else if (loginPerson == "Task Responsible") {
-          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = false;
-         }
-        else if (loginPerson == "Activity Performer") {
-          this.AppState.data.oRoleBasesVisiblity.portfolioVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.roadmapVisiblity = true;
-          this.AppState.data.oRoleBasesVisiblity.kanbanVisiblity = true;
-        }
-        this.oLoginDialog.close()
-
-      }
+        this.oLoginDialog.close();
+      },
     });
   }
 );

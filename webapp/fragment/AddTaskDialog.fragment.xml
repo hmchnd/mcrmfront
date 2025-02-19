@@ -21,63 +21,66 @@
                     <m:Title
                         text="{= ${AppState>/oSelectedTask/ID} ? ${AppState>/oSelectedTask/ID} : ${AppState>/oSelectedMilestone/ID} }"
                         wrapping="true"
-                        visible="false"                        
+                        visible="false"
                     />
                 </expandedHeading>
                 <actions>
                     <m:Button
+                        id="idEditBtn"
                         text="Manage Activities"
                         type="Critical"
                         icon="sap-icon://activity-2"
                         press="onManageActivity"
-                        visible="{= ${AppState>/oSelectedTask/name} &amp;&amp; ${AppState>/oRoleBasesVisiblity/manageActivityBtnVisiblity} ? true : false }"
                     />
                     <m:Button
-                    id="idEditSave"
+                        id="idEditSaveTaskBtn"
                         text="Save"
                         icon="sap-icon://save"
                         type="Critical"
                         press="onSaveTask"
-                        visible="{= ${AppState>/oSelectedTask/ID} &amp;&amp; ${AppState>/oRoleBasesVisiblity/saveBtnVisiblity} ? true : false }"
                     />
-                    <m:Button
+                    <!-- <m:Button
                         text="Save"
                         icon="sap-icon://save"
                         type="Critical"
                         press="onSaveTask"
-                        visible="{=${AppState>/makeTaskMilestoneVisiblity/milestonevisiblity1} &amp;&amp; ${AppState>/oRoleBasesVisiblity/areaLeaderSaveBtnVisiblity} &amp;&amp; ${AppState>/oRoleBasesVisiblity/showMilestoneSave} ? false : true }"
-                    />
-                    
+                    /> -->
+
                     <m:Button
+                        id="idEditSaveMilestoneBtn"
                         text="Save"
                         icon="sap-icon://save"
                         type="Critical"
                         press="onSaveMilestone"
-                        visible="{=${AppState>/makeTaskMilestoneVisiblity/milestonevisiblity} &amp;&amp; ${AppState>/oRoleBasesVisiblity/saveBtnVisiblity} ? true : false }"
                     />
                     <m:Button
+                        id="idEditSaveAreaBtn"
                         text="Save"
                         icon="sap-icon://save"
                         type="Critical"
                         press="onSaveArea"
-                        visible="{AppState>/makeTaskMilestoneVisiblity/EditAreaVisiblity}"
                     />
                     <m:Button
+                        id="idEditCloseBtn"
                         icon="sap-icon://decline"
                         type="Critical"
                         press="onCloseDetailPage"
                     />
                     <m:Button
+                        id="idEditDeleteBtn"
                         icon="sap-icon://delete"
                         type="Critical"
+                        visible="false"
+
                         press="onDeleteMilestone"
-                        visible="{=${AppState>/makeTaskMilestoneVisiblity/milestonevisiblity} &amp;&amp; ${AppState>/oRoleBasesVisiblity/saveBtnVisiblity} ? true : false }"
                     />
                     <m:Button
+                        id="idEditDeleteTaskBtn"
                         icon="sap-icon://delete"
                         type="Critical"
+                        visible="false"
+
                         press="onDeleteTask"
-                        visible="{= ${AppState>/oSelectedTask/ID} &amp;&amp; ${AppState>/oRoleBasesVisiblity/deleteBtnVisiblity} ? true : false }"
                     />
                 </actions>
             </ObjectPageDynamicHeaderTitle>
@@ -132,7 +135,7 @@
                                     />
                                     <!-- <m:Input value="Framsys Roadmap" editable="false"/> -->
                                     <m:TextArea
-                                    id="description"
+                                        id="description"
                                         value="{AppState>/oSelectedTask/description}"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
@@ -236,7 +239,7 @@
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:DatePicker
-                                    id="idforecastedstart"
+                                        id="idforecastedstart"
                                         editable="false"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                         value="{path:'AppState>/oSelectedTask/fore_act_start', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
@@ -246,17 +249,19 @@
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:DatePicker
-                                    id="idforecastedfinish"
+                                        id="idforecastedfinish"
                                         editable="false"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                         value="{path:'AppState>/oSelectedTask/fore_act_finish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
                                     />
                                     <m:Label
                                         text="Actual Start Date"
+                                        
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:DatePicker
-                                        editable="false"
+                                        editable="true"
+                                        id="idactualstart"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                         value="{path:'AppState>/oSelectedTask/actualStart', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
                                     />
@@ -265,7 +270,8 @@
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:DatePicker
-                                        editable="false"
+                                        editable="true"
+                                        id="idactualfinish"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                         value="{path:'AppState>/oSelectedTask/actualFinish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
                                     />
@@ -303,7 +309,7 @@
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:CheckBox
-                                    id="idCriticalToMilestone"
+                                        id="idCriticalToMilestone"
                                         selected="{AppState>/oSelectedTask/isCriticalToMilestone}"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
@@ -400,7 +406,7 @@
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
                                     />
                                     <m:DatePicker
-                                    id="idmilestoneforecastedDate"
+                                        id="idmilestoneforecastedDate"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
                                         value="{path:'AppState>/oSelectedMilestone/fore_act_achievement_date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
                                         editable="true"

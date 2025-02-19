@@ -29,66 +29,7 @@ sap.ui.define(
     return Controller.extend(
       "framsys.com.framsysfrontend.controller.ManageActivity",
       {
-        onInit() {
-          //   var oData = {
-          //     grid1: [
-          //       {
-          //         title:
-          //           "Create an Innovation Strategy and a High-Level Road Map",
-          //         subtitle:
-          //           "Create an Innovation Strategy and a High-Level Road Map",
-          //         iconSrc: "sap-icon://bus-public-transport",
-          //         task: "Strategic Planning",
-          //         owner: "John Doe",
-          //         deadline: "2024-01-10",
-          //         value: "0",
-          //       },
-          //     ],
-          //     grid2: [
-          //       {
-          //         title: "Run an Innovation Discovery and Design Workshop",
-          //         subtitle: "Run an Innovation Discovery and Design Workshop",
-          //         iconSrc: "sap-icon://presentation",
-          //         task: "Strategic Planning",
-          //         owner: "Emily Davis",
-          //         deadline: "2024-01-25",
-          //         value: "30",
-          //       },
-          //       {
-          //         title: "Create a 360-Degree View on Security",
-          //         subtitle: "Create a 360-Degree View on Security",
-          //         iconSrc: "sap-icon://group",
-          //         task: "Strategic Planning",
-          //         owner: "Alex Martinez",
-          //         deadline: "2024-02-10",
-          //         value: "40",
-          //       },
-          //     ],
-          //     grid3: [
-          //       {
-          //         title: "Define the Analytics Architecture",
-          //         subtitle: "Define the Analytics Architecture",
-          //         iconSrc: "sap-icon://presentation",
-          //         task: "Strategic Planning",
-          //         owner: "Emily Davis",
-          //         deadline: "2024-01-25",
-          //         value: "100",
-          //       },
-          //       {
-          //         title: "Define Clean Core Success Plan",
-          //         subtitle: "Define Clean Core Success Plan",
-          //         iconSrc: "sap-icon://group",
-          //         task: "Strategic Planning",
-          //         owner: "Alex Martinez",
-          //         deadline: "2024-02-10",
-          //         value: "100",
-          //       },
-          //     ],
-          //   };
-
-          //   var oModel = new JSONModel(oData);
-          //   this.getView().setModel(oModel);
-
+        onInit() {          
           //   this.attachDragAndDrop();
           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
           oRouter.getRoute("ManageActivity").attachPatternMatched(this.onRouteMatched, this);
@@ -285,14 +226,23 @@ sap.ui.define(
 
           this.AppState.getModel().setSizeLimit(999999);
           // this.AppState.data.showGlobalAddButton = true;
-          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader") {
+          if (
+            this.AppState.data.oRoleBasesVisiblity.sLoginPerson ==
+            "Enterprise Portfolio Administrator"
+          ) {
+            this.AppState.data.showGlobalAddButton = true;
+          }
+          if (
+            this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Manager" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Activity Performer" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Gate Keeper") {
             this.AppState.data.showGlobalAddButton = false;
+          }
+          if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader") {
+            this.AppState.data.showGlobalAddButton = true;
           }
           if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible") {
             this.AppState.data.showGlobalAddButton = true;
-            this.AppState.data.oRoleBasesVisiblity.saveBtnVisiblity = true;
 
-          }
+          }        
           this.AppState.data.showBackToRoadmapButton = true;
           this.AppState.setViewController(this);
           this.AppState.data.currentPage = "manageActivity";

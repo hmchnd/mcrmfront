@@ -58,11 +58,10 @@ sap.ui.define(
         this.openLoginDialog();
         // Enable routing
         this.getRouter().initialize();
-            this.getRouter().navTo("Dashboard");
-            setTimeout(() => {
-                this.openLoginDialog();
-            }, 2500);
-
+        this.getRouter().navTo("Dashboard");
+        setTimeout(() => {
+          this.openLoginDialog();
+        }, 2500);
       },
 
       getService_: function (sService) {
@@ -94,30 +93,39 @@ sap.ui.define(
         MessageToast.show("Login cancelled please select a role to login");
         this.getRouter().navTo("Dashboard");
         setTimeout(() => {
-            this.openLoginDialog();
+          this.openLoginDialog();
         }, 1000);
       },
 
       onLogin: function () {
         debugger;
-        let oComboBox = sap.ui.core.Fragment.byId(this.getId() + "LoginDialog", "loginComboBox");
-        let oComboBoxArea = sap.ui.core.Fragment.byId(this.getId() + "LoginDialog", "projectAreaComboBox");
-       
+        let oComboBox = sap.ui.core.Fragment.byId(
+          this.getId() + "LoginDialog",
+          "loginComboBox"
+        );
+        let oComboBoxArea = sap.ui.core.Fragment.byId(
+          this.getId() + "LoginDialog",
+          "projectAreaComboBox"
+        );
+
         if (!oComboBox || !oComboBox.getSelectedItem()) {
-            sap.m.MessageBox.error("Please select a valid login role.");
-            return;
+          sap.m.MessageBox.error("Please select a valid login role.");
+          return;
         }
-   
+
         let loginPerson = oComboBox.getSelectedItem().getText();
 
-
         let areaResponsibleId = null;
-        if (loginPerson === "Project Area Leader" || loginPerson === "Task Responsible"|| loginPerson === "Activity Performer") {
-            if (!oComboBoxArea || !oComboBoxArea.getSelectedItem()) {
-                sap.m.MessageBox.error("Please select a valid project area.");
-                return;
-            }
-            areaResponsibleId = oComboBoxArea.getSelectedItem().getKey();
+        if (
+          loginPerson === "Project Area Leader" ||
+          loginPerson === "Task Responsible" ||
+          loginPerson === "Activity Performer"
+        ) {
+          if (!oComboBoxArea || !oComboBoxArea.getSelectedItem()) {
+            sap.m.MessageBox.error("Please select a valid project area.");
+            return;
+          }
+          areaResponsibleId = oComboBoxArea.getSelectedItem().getKey();
         }
 
         let oRoleVisibility = this._oAppState.data.oRoleBasesVisiblity;
@@ -125,120 +133,63 @@ sap.ui.define(
         let model = this.getModel("sideContentModel");
         let modelData = model.getData();
         let views = modelData.navigation;
-       
+
         switch (loginPerson) {
           // 0-dashboard
           // 1-portfolio
           // 2-roadmapTemplateViewLayoutModel
           // 3-manageRoadmap
           // 4-kanban
-          case "Enterprise Portfolio Administrator":
-            debugger;
-
-            views[2].visible = false;
-            views[3].visible = false;
-            views[4].visible = false;
-
-            model.setData(modelData);
-            model.refresh(true);
-            this._oAppState.data.oRoleBasesVisiblity.manageroadmapBtn = false;
+          case "Enterprise Portfolio Administrator":           
             this._oAppState.data.showGlobalAddButton = true;
 
-            // this.getRouter().navTo("manage_projects");
-
             break;
-          case "Project Manager":
-            // views[2].visible = false;
-            // views[4].visible = false;
-
-            model.setData(modelData);
-            model.refresh(true);
-            this._oAppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
-            this._oAppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true;
-            this._oAppState.data.oRoleBasesVisiblity.deleteBtnVisiblity = false;
-            this._oAppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true;
-            this._oAppState.data.showGlobalAddButton = false;
-
+          case "Project Manager":           
+            this._oAppState.data.showGlobalAddButton = true;
+            this._oAppState.data.oRoleBasesVisiblity.showCreateMilestoneBtnVisiblity = false;          
             break;
 
           case "Project Area Leader":
             this._oAppState.data.oRoleBasesVisiblity.areaResponsibleId =
               areaResponsibleId;
             this._oAppState.data.oRoleBasesVisiblity.showCreateMilestoneBtnVisiblity = false;
-            this._oAppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = false;
-            this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;
-            this._oAppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
-            this._oAppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true;
-            this._oAppState.data.oRoleBasesVisiblity.deleteBtnVisiblity = false;
-
-            this._oAppState.data.showGlobalAddButton = true;
-
-            // views[1].visible = false;
+            this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;           
             views[2].visible = false;
 
             model.setData(modelData);
             model.refresh(true);
-            //   this.getRouter().navTo("ManageRoadmap");
             break;
           case "Project Gate Keeper":
-            // this._oAppState.data.oRoleBasesVisiblity.areaResponsibleId = areaResponsibleId;
             this._oAppState.data.oRoleBasesVisiblity.showCreateTaskBtnVisiblity = false;
-            this._oAppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = true;
-            this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;
-            this._oAppState.data.oRoleBasesVisiblity.manageActivityBtnVisiblity = false;
-            this._oAppState.data.oRoleBasesVisiblity.deleteBtnVisiblity = false;
-            this._oAppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true;
-
-            this._oAppState.data.showGlobalAddButton = true;
-
-            // views[1].visible = false;
+            this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;            
             views[2].visible = false;
-            views[4].visible = false;
 
             model.setData(modelData);
             model.refresh(true);
-            //   this.getRouter().navTo("ManageRoadmap");
             break;
           case "Task Responsible":
-           
             this._oAppState.data.oRoleBasesVisiblity.areaResponsibleId =
               areaResponsibleId;
             this._oAppState.data.oRoleBasesVisiblity.showCreateMilestoneBtnVisiblity = false;
-            this._oAppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = false;
             this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;
-            this._oAppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
-            this._oAppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true;
-            this._oAppState.data.oRoleBasesVisiblity.deleteBtnVisiblity = false;
 
-            // views[1].visible = false;
             views[2].visible = false;
 
             model.setData(modelData);
             model.refresh(true);
-            //   this.getRouter().navTo("ManageRoadmap");
             break;
 
           case "Activity Performer":
-           
-            // oRoleVisibility.portfolioVisiblity = true;
-            // oRoleVisibility.roadmapVisiblity = true;
-            // oRoleVisibility.kanbanVisiblity = true;
-
             this._oAppState.data.oRoleBasesVisiblity.areaResponsibleId =
               areaResponsibleId;
             this._oAppState.data.oRoleBasesVisiblity.showCreateMilestoneBtnVisiblity = false;
-            this._oAppState.data.oRoleBasesVisiblity.areaLeaderSaveBtnVisiblity = false;
             this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;
-            this._oAppState.data.oRoleBasesVisiblity.saveBtnVisiblity = false;
-            this._oAppState.data.makeTaskMilestoneVisiblity.milestonevisiblity1 = true;
-            this._oAppState.data.oRoleBasesVisiblity.deleteBtnVisiblity = false;
 
             // views[1].visible = false;
             views[2].visible = false;
 
             model.setData(modelData);
             model.refresh(true);
-            //   this.getRouter().navTo("ManageRoadmap");
             break;
 
           default:
@@ -252,21 +203,29 @@ sap.ui.define(
         }
       },
       onLoginRoleChange: function (oEvent) {
-       
-        // Get the ComboBox reference
-        let oComboBox = sap.ui.core.Fragment.byId(this.getId() + "LoginDialog", "loginComboBox");
+        let oComboBox = sap.ui.core.Fragment.byId(
+          this.getId() + "LoginDialog",
+          "loginComboBox"
+        );
         let sSelectedRole = oComboBox?.getSelectedItem()?.getText();
-   
-        // Get the Label & ComboBox for project area
-        let oProjectAreaLabel = sap.ui.core.Fragment.byId(this.getId() + "LoginDialog", "projectAreaLabel");
-        let oProjectAreaComboBox = sap.ui.core.Fragment.byId(this.getId() + "LoginDialog", "projectAreaComboBox");
-   
+        let oProjectAreaLabel = sap.ui.core.Fragment.byId(
+          this.getId() + "LoginDialog",
+          "projectAreaLabel"
+        );
+        let oProjectAreaComboBox = sap.ui.core.Fragment.byId(
+          this.getId() + "LoginDialog",
+          "projectAreaComboBox"
+        );
+
         if (oProjectAreaLabel && oProjectAreaComboBox) {
-            let bVisible = (sSelectedRole === "Project Area Leader" || sSelectedRole === "Task Responsible"|| sSelectedRole === "Activity Performer");
-            oProjectAreaLabel.setVisible(bVisible);
-            oProjectAreaComboBox.setVisible(bVisible);
+          let bVisible =
+            sSelectedRole === "Project Area Leader" ||
+            sSelectedRole === "Task Responsible" ||
+            sSelectedRole === "Activity Performer";
+          oProjectAreaLabel.setVisible(bVisible);
+          oProjectAreaComboBox.setVisible(bVisible);
         }
-    }
+      },
     });
   }
 );
