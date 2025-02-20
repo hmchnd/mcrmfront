@@ -163,6 +163,15 @@ sap.ui.define(
             
           })
         },
+        updateEarnedValue:function(taskID){
+          debugger
+
+          return this.odata("/updateEarnedValue").post({
+            task_ID : taskID,
+            
+            
+          })
+        }
       }
     );
     return AppService;

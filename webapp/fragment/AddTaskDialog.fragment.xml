@@ -235,6 +235,16 @@
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:Label
+                                        text="Earned Value"
+                                        required="false"
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
+                                    />
+                                    <m:Input
+                                        id="earnedvalue"
+                                        value="{AppState>/oSelectedTask/earned_value}"
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
+                                    />
+                                    <m:Label
                                         text="Forecasted Start Date"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />

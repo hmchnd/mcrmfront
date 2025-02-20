@@ -104,19 +104,19 @@ sap.ui.define(
 
           // Update the GridID of the dragged item to reflect the new grid
           oDraggedData.state = sNewGridID;
-          //   switch (oDraggedData.state) {
-          //     case "COMPLETED":
-          //         oDraggedData.pct_complete = "100";
-          //         break;
-          //     case "NEW":
-          //         oDraggedData.pct_complete = "0";
-          //         break;
-          //     case "INPROGRESS":
-          //         oDraggedData.pct_complete = "25";
-          //         break;
-          //     default:
-          //         oDraggedData.pct_complete = ""; // Handle any unexpected state
-          // }
+            switch (oDraggedData.state) {
+              case "COMPLETED":
+                  oDraggedData.pct_complete = "100";
+                  break;
+              case "NEW":
+                  oDraggedData.pct_complete = "0";
+                  break;
+              case "INPROGRESS":
+                  oDraggedData.pct_complete = "25";
+                  break;
+              default:
+                  oDraggedData.pct_complete = ""; // Handle any unexpected state
+          }
           let oActivityDetails = oDraggedData;// Update the GridID in the model
 
           // Call OData update to update the GridID in the backend
