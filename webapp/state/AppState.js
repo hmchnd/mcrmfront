@@ -341,19 +341,19 @@ sap.ui.define(
           if (oActivity.ID) {
             let ActivityID = oActivity.ID;
             if (oActivity.state == "NEW") {
-              oActivity.pct_complete = "0";
+              // oActivity.pct_complete = "0";
 
               oActivity.act_start = null
               oActivity.act_finish = null
             }
             else if (oActivity.state == "INPROGRESS") {
-              oActivity.pct_complete = "25";
+              // oActivity.pct_complete = "25";
 
               oActivity.act_start = new Date()
             }
             else if (oActivity.state == "COMPLETED") {
               if (oActivity.act_start == null) {
-                oActivity.pct_complete = "100";
+                // oActivity.pct_complete = "100";
 
                 oActivity.act_start = new Date()
               }
@@ -708,9 +708,16 @@ sap.ui.define(
             that.updateModel(true);
 
             if (that.data.currentPage === "ManageRoadmap") {
+             
               that.ViewController.createPanels();
+             
+              if(that.data.showTaskInActivity){
+                
+              that.updateEarnedValue(that.data.showTaskInActivity.ID);
+              }
             }
             that.phaseDurationCalc(sRoadmapID,that.data.scurrentProjectID);
+           
 
             that.ViewController.getView().setBusy(false);
           });
@@ -722,6 +729,15 @@ sap.ui.define(
           let that = this;
           Promise.all(aPromises).then(function (result) {
             MessageToast.show("phase calc")
+            
+          });
+        },
+        updateEarnedValue: function (taskID) {
+          let aPromises = [];
+          aPromises.push(this.AppService.updateEarnedValue(taskID));
+          let that = this;
+          Promise.all(aPromises).then(function (result) {
+            // MessageToast.show("phase calc")
             
           });
         },

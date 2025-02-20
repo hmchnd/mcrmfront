@@ -17,6 +17,7 @@ sap.ui.define(["./BaseObject"], function (BaseObject) {
         this.actualStart = data?.actualStart?.toISOString()?.slice(0, 10) || null;
         this.actualFinish = data?.actualFinish?.toISOString()?.slice(0, 10) || null;
         this.pct_weight = Number(data?.pct_weight || 0);
+        this.earned_value = Number(data?.earned_value || 0);
         this.pct_complete = Number(data?.pct_complete || 0);
         this.state = data?.state || "";
         this.status = data?.status || "";
