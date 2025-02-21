@@ -9,6 +9,7 @@ sap.ui.define([
             if (data) {
                 this.ID = data?.ID || "";
                 this.name = data?.name || "";
+                this.description = data?.description || "";
                 this.displaySequence = data?.displaySequence;
                 this.milestone = data?.milestone.results || [];
                 this.planned_start = data?.planned_start || [];

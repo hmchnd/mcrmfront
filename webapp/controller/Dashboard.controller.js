@@ -1,39 +1,69 @@
 sap.ui.define([
-    "./BaseController",
-    "sap/ui/model/json/JSONModel",
+  "./BaseController",
+  "sap/ui/model/json/JSONModel",
 ], (Controller, JSONModel) => {
-    "use strict";
+  "use strict";
 
-    return Controller.extend("framsys.com.framsysfrontend.controller.Dashboard", {
-      onInit:function(){
-         // Sample Data
-         var oData = {
-            salesData: [
-                { month: "Jan", revenue: 120000 },
-                { month: "Feb", revenue: 135000 },
-                { month: "Mar", revenue: 145000 },
-                { month: "Apr", revenue: 160000 }
-            ],
-            customerData: [
-                { month: "Jan", newCustomers: 100 },
-                { month: "Feb", newCustomers: 120 },
-                { month: "Mar", newCustomers: 150 },
-                { month: "Apr", newCustomers: 200 }
-            ]
-        };
+  return Controller.extend("framsys.com.framsysfrontend.controller.Dashboard", {
+    onInit:function(){
 
-        var oModel = new JSONModel(oData);
-        this.getView().setModel(oModel, "chartData");
-      },
-      onAfterRendering: async function () {
-       
-        var oChart = this.getView().byId("salesChart");
-        var asyncChartUpdate = function () {
-          oChart.setVizProperties({ title: { text: 'Projects Budget Allocation' } });
-        };
-        setTimeout(asyncChartUpdate, 0);
+       // Sample Data
+    //    var oData = {
+    //       salesData: [
+    //           { month: "Jan", revenue: 120000 },
+    //           { month: "Feb", revenue: 135000 },
+    //           { month: "Mar", revenue: 145000 },
+    //           { month: "Apr", revenue: 160000 }
+    //       ],
+    //       customerData: [
+    //           { month: "Jan", newCustomers: 100 },
+    //           { month: "Feb", newCustomers: 120 },
+    //           { month: "Mar", newCustomers: 150 },
+    //           { month: "Apr", newCustomers: 200 }
+    //       ]
+    //   };
 
-       
-      },
-    });
+    //   var oModel = new JSONModel(oData);
+    //   this.getView().setModel(oModel, "chartData");
+    // },
+    // onAfterRendering: async function () {
+     
+    //   var oChart = this.getView().byId("salesChart");
+    //   var asyncChartUpdate = function () {
+    //     oChart.setVizProperties({ title: { text: 'Projects Budget Allocation' } });
+    //   };
+    //   setTimeout(asyncChartUpdate, 0);
+    var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+          oRouter
+            .getRoute("Dashboard")
+            .attachPatternMatched(this.onRouteMatched, this);
+
+     
+    },
+    onRouteMatched: function (oEvent) {
+      debugger
+      this.AppState = this.getOwnerComponent().getState("App");
+      
+      this.getView().setModel(this.AppState.getModel(), "AppState");
+      this.AppState.getModel().setSizeLimit(999999);
+      this.AppState.setViewController(this);
+      if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Task Responsible" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
+        debugger
+        this.getView().byId("myTask").setVisible(true);
+        this.getView().byId("myActivity").setVisible(true);
+      }
+      // this.AppState.data.showGlobalAddButton = true;
+     
+      this.AppState.getModel().refresh(true);
+    },
+    onNavToProject: function(){
+      this.getOwnerComponent().getRouter().navTo("manage_projects")
+    },
+    onNavToTask: function(){
+      this.getOwnerComponent().getRouter().navTo("ManageRoadmap")
+    },
+    onNavToActivity: function(){
+      this.getOwnerComponent().getRouter().navTo("ManageActivity")
+    },
+  });
 });

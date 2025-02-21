@@ -15,32 +15,32 @@
         </landmarkInfo>
         <Image src="../media/FRAMSYS.png" width="100%" height="30%"/>
         <layout:VerticalLayout>
-            <Title titleStyle="H3" text="Quick Controls" class="sapUiTinyMarginBegin"/>
+            <!-- <Title titleStyle="H3" text="Quick Controls" class="sapUiTinyMarginBegin"/> -->
             <layout:HorizontalLayout allowWrapping="true">
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Active Projects" subheader="Active Project Details" press="onNavToProcessFlow">
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="My Project"  press="onNavToProject">
                     <tileContent>
                         <TileContent>
-                            <content>
-                                <NumericContent scale="" value="3" valueColor="Good" indicator="Up" withMargin="false" />
-                            </content>
+                            <!-- <content>
+                                <NumericContent scale=""  valueColor="Good" indicator="Up" withMargin="false" />
+                            </content> -->
                         </TileContent>
                     </tileContent>
                 </GenericTile>
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Most Used Templates" press="onNavToAriba">
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="My Task" visible="{AppState>/taskTileVisible}" id="myTask" press="onNavToTask">
                     <tileContent>
                         <TileContent>
-                            <content>
-                                <NumericContent scale="" value="6" valueColor="Critical" indicator="Up" withMargin="false" />
-                            </content>
+                            <!-- <content>
+                                <NumericContent scale=""  valueColor="Critical" indicator="Up" withMargin="false" />
+                            </content> -->
                         </TileContent>
                     </tileContent>
                 </GenericTile>
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="High Priority Tasks" subheader="Details of Hight Priority Items" press="onNavToERP">
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="My Activity" visible="{AppState>/activityTileVisible}" id="myActivity"  press="onNavToActivity">
                     <tileContent>
                         <TileContent>
-                            <content>
-                                <NumericContent scale="" value="12" valueColor="Error" indicator="Up" withMargin="false" />
-                            </content>
+                            <!-- <content>
+                                <NumericContent scale="" valueColor="Error" indicator="Up" withMargin="false" />
+                            </content> -->
                         </TileContent>
                     </tileContent>
                 </GenericTile>
@@ -49,7 +49,7 @@
             </layout:HorizontalLayout>
       
       </layout:VerticalLayout>
-            <Title titleStyle="H3" text="Analytics" class="sapUiTinyMarginBegin"/>
+            <!-- <Title titleStyle="H3" text="Analytics" class="sapUiTinyMarginBegin"/>
             <Toolbar>
                 <Button icon="sap-icon://filter" text="{i18n>Filters}" press="onFilterPress"/>
             </Toolbar>
@@ -76,7 +76,7 @@
                         <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
                         <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Budget (In USD)" />
                     </viz:feeds>
-                </viz:VizFrame>
+                </viz:VizFrame> -->
    
       
     </Page>

@@ -172,6 +172,8 @@ sap.ui.define(
               areaResponsibleId;
             this._oAppState.data.oRoleBasesVisiblity.showCreateMilestoneBtnVisiblity = false;
             this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;
+            this._oAppState.data.taskTileVisible = true;
+            this._oAppState.data.activityTileVisible = true;
 
             views[2].visible = false;
 
@@ -184,6 +186,8 @@ sap.ui.define(
               areaResponsibleId;
             this._oAppState.data.oRoleBasesVisiblity.showCreateMilestoneBtnVisiblity = false;
             this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;
+            this._oAppState.data.taskTileVisible = true;
+            this._oAppState.data.activityTileVisible = true;
 
             // views[1].visible = false;
             views[2].visible = false;

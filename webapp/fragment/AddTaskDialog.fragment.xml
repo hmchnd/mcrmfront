@@ -71,7 +71,6 @@
                         icon="sap-icon://delete"
                         type="Critical"
                         visible="false"
-
                         press="onDeleteMilestone"
                     />
                     <m:Button
@@ -79,7 +78,6 @@
                         icon="sap-icon://delete"
                         type="Critical"
                         visible="false"
-
                         press="onDeleteTask"
                     />
                 </actions>
@@ -241,7 +239,7 @@
                                     />
                                     <m:Input
                                         id="earnedvalue"
-                                        value="{AppState>/oSelectedTask/earned_value}"
+                                        value="{path: 'AppState>/oSelectedTask/earned_value', formatter: '.formatPercentage'}"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:Label
@@ -266,7 +264,6 @@
                                     />
                                     <m:Label
                                         text="Actual Start Date"
-                                        
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
                                     />
                                     <m:DatePicker
@@ -470,6 +467,16 @@
                                             text="{name}"
                                         />
                                     </m:ComboBox>
+                                    <m:Label
+                                        text="Description"
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/EditAreaVisiblity}"
+                                    />
+                                    <m:TextArea
+                                        visible="{AppState>/makeTaskMilestoneVisiblity/EditAreaVisiblity}"
+                                        editable="false"
+                                        rows="10"
+                                        value="{AppState>/oSelectedArea/Description}"
+                                    />
                                 </form:content>
                             </form:SimpleForm>
                         </blocks>
