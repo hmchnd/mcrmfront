@@ -17,9 +17,9 @@
                         <content>
                         <VBox class="stickyPanel">
             <Panel>
-                <f:GridList items="{AppState>/aPhase}">
+                <f:GridList items="{AppState>/aPhase}" >
 
-                    <f:GridListItem press="onCardPress" type="Active">
+                    <f:GridListItem press="onCardPress" tooltip="{AppState>description}" type="Active">
                         <VBox class="sapUiTinyMargin">
                             <Title text="{AppState>name}" wrapping="true" />
                             <Label text="{path:'AppState>planned_start', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd MMM yyyy' }}-{path:'AppState>planned_finish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd MMM yyyy' }}" wrapping="true" />

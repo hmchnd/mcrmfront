@@ -136,8 +136,9 @@ sap.ui.define(
             var oToolbar = new Toolbar({
               content: [
                 new ToolbarSpacer(),
-                new Title({ text: oArea.name, level: "H1" }),
+              new Title({ text: oArea.name, level: "H1",tooltip: oArea.Description }),
                 new ToolbarSpacer(),
+
                 new Button({
                   icon: "sap-icon://edit",
                   type: "Critical",
@@ -368,6 +369,8 @@ sap.ui.define(
           this.getModel("manageRoadmapLayoutView").refresh(true);
         },
         onEditArea: function (oEvent) {
+          // let aaa= oEvent.getSource().getParent().getParent().getHeaderToolbar().getBindingContext("AppState").getObject().ID;
+          debugger
         if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Enterprise Portfolio Administrator" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Manager"){
           this.getView().byId("idEditBtn").setVisible(false);
           this.getView().byId("idEditSaveTaskBtn").setVisible(false);
@@ -392,6 +395,7 @@ sap.ui.define(
 
           this.AppState.data.oSelectedArea = {
             name: oSelectedArea.name,
+            Description: oSelectedArea.Description,
             responsible_ID: oSelectedArea.responsible_ID || null,
             ID: oSelectedArea.ID || null,
           };

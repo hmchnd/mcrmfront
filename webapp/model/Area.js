@@ -9,6 +9,7 @@ sap.ui.define([
             if (data) {
                 this.ID = data?.ID || "";
                 this.name = data?.name || "";
+                this.Description = data?.Description || "";
                 this.responsible_ID = data?.responsible_ID || "";
                 this.ProjectType = data?.ProjectType || "";
  

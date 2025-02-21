@@ -72,6 +72,8 @@ sap.ui.define(
             currentPageLabel: "",
             sTaskID: "",
             scurrentProjectID:"",
+            taskTileVisible: false,
+            activityTileVisible: false,
 
             makeTaskMilestoneVisiblity: {
               taskvisiblity: false,
@@ -318,6 +320,12 @@ sap.ui.define(
                 return new Activity(item);
               });
               that.data.aActivity = aActivityList;
+              if(that.data.oRoleBasesVisiblity.sLoginPerson == "Activity Performer"){
+                that.data.aActivity = aActivityList.filter(activity => 
+                  activity.responsible_ID === that.data.oRoleBasesVisiblity.areaResponsibleId
+                  
+              );
+              }
               if (that.data.oRoleBasesVisiblity.sLoginPerson == "Task Responsible" || that.data.oRoleBasesVisiblity.sLoginPerson == "Activity Performer" || that.data.oRoleBasesVisiblity.sLoginPerson == "Project Area Leader" || that.data.oRoleBasesVisiblity.sLoginPerson == "Enterprise Portfolio Administrator") {
                 that.ViewController.attachDragAndDrop();
               }
@@ -347,7 +355,7 @@ sap.ui.define(
               oActivity.act_finish = null
             }
             else if (oActivity.state == "INPROGRESS") {
-              // oActivity.pct_complete = "25";
+              oActivity.pct_complete = "10";
 
               oActivity.act_start = new Date()
             }
@@ -683,6 +691,7 @@ sap.ui.define(
               const filteredActivities = (oFetchedProjectRoadmap.projectTask.results || [])
                 .flatMap(task => task.activities.results || [])
                 .filter(activity => activity.responsible_ID === that.data.oRoleBasesVisiblity.areaResponsibleId);
+                // that.data.aActivity = filteredActivities;
 
               // Step 2: Get task IDs from filtered activities (parent_key is the task ID)
               const filteredTaskIds = new Set(filteredActivities.map(activity => activity.parent_key_ID));
@@ -716,8 +725,9 @@ sap.ui.define(
               that.updateEarnedValue(that.data.showTaskInActivity.ID);
               }
             }
+            if(sRoadmapID){
             that.phaseDurationCalc(sRoadmapID,that.data.scurrentProjectID);
-           
+            }
 
             that.ViewController.getView().setBusy(false);
           });
