@@ -41,14 +41,14 @@ sap.ui.define([
      
     },
     onRouteMatched: function (oEvent) {
-      debugger
+     
       this.AppState = this.getOwnerComponent().getState("App");
       
       this.getView().setModel(this.AppState.getModel(), "AppState");
       this.AppState.getModel().setSizeLimit(999999);
       this.AppState.setViewController(this);
       if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Task Responsible" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
-        debugger
+      
         this.getView().byId("myTask").setVisible(true);
         this.getView().byId("myActivity").setVisible(true);
       }

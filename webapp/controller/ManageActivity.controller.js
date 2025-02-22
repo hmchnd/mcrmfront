@@ -36,7 +36,7 @@ sap.ui.define(
 
         },
         attachDragAndDrop: function () {
-          debugger
+       
 
           var aGridIds = ["NEW", "INPROGRESS", "COMPLETED"];
           var oView = this.getView();
@@ -448,7 +448,7 @@ sap.ui.define(
 
         },
         onProjectChange: function (oEvent) {
-          debugger
+       
           let oSelectedItem = oEvent.getSource().getSelectedItem();
           let sRoadmapID = oSelectedItem.getKey();
           this.AppState.data.sSelectedProjectRoadmapID = sRoadmapID;
@@ -460,7 +460,7 @@ sap.ui.define(
 
         },
         onTaskChange: function (oEvent) {
-          debugger
+        
           let oSelectedItem = oEvent.getSource().getSelectedItem();
           let sSelectedKey = oSelectedItem.getKey();
           let oModel = this.getView().getModel("AppState");
@@ -476,7 +476,7 @@ sap.ui.define(
 
         },
         onAreaChange: function (oEvent) {
-          debugger;
+         
           // Get the selected area ID
           let oSelectedItem = oEvent.getSource().getSelectedItem();
           let sAreaID = oSelectedItem.getKey();

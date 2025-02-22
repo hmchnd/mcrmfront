@@ -278,7 +278,7 @@ sap.ui.define(
         },
 
         onCardPress: function (oEvent) {
-          debugger;
+      
           let sLoginPerson = this.AppState.data.oRoleBasesVisiblity.sLoginPerson;
             this.AppState.fieldAccessToAdministrator(sLoginPerson);
           var oView = this.getView();
@@ -370,7 +370,7 @@ sap.ui.define(
         },
         onEditArea: function (oEvent) {
           // let aaa= oEvent.getSource().getParent().getParent().getHeaderToolbar().getBindingContext("AppState").getObject().ID;
-          debugger
+ 
         if(this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Enterprise Portfolio Administrator" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson == "Project Manager"){
           this.getView().byId("idEditBtn").setVisible(false);
           this.getView().byId("idEditSaveTaskBtn").setVisible(false);
@@ -441,7 +441,7 @@ sap.ui.define(
             return;
           }
           var oTask = this.AppState.data.oSelectedTask;
-          debugger;
+       
           this.AppState.data.Itemtype = "Task";
           this.AppState.data.currentItemID = oTask.ID;
           this.AppState.createNewTask(oTask);

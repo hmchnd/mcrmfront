@@ -171,6 +171,8 @@ sap.ui.define(
 
             oProject.fore_act_start = new Date(oProject.planned_start);
             oProject.fore_act_finish = new Date(oProject.planned_finish);
+            oProject.actualStart = new Date(oProject.actualStart);
+            oProject.actualFinish = new Date(oProject.actualFinish);
             oProject.status = "Not Started";
             oProject.state = "Not Started";
 
@@ -190,7 +192,7 @@ sap.ui.define(
 
             });
           }
-          debugger
+        
 
           that.ViewController.onCloseDetailPage();
 
@@ -298,7 +300,7 @@ sap.ui.define(
         },
 
         getMyActivityList: function (sTaskID) {
-          debugger
+        
           if (!sTaskID) {
             // this.ViewController.getView().setBusy(true);
 
@@ -335,7 +337,7 @@ sap.ui.define(
           }
         },
         createNewActivityEntry: function (oActivity) {
-          debugger;
+       
           var that = this;
           oActivity.planned_start = this._formatODataDate(
             oActivity.planned_start
@@ -437,7 +439,7 @@ sap.ui.define(
         },
 
         createNewTask: function (oTask) {
-          debugger
+       
           let that = this;
           if (oTask.ID) {
             delete oTask.area;
@@ -517,7 +519,7 @@ sap.ui.define(
           });
         },
         updateProjectProgress: function (sRoadmapId) {
-          debugger
+      
           let aPromises = [];
           aPromises.push(this.AppService.processProjectProgress(sRoadmapId));
           let that = this;
@@ -586,7 +588,7 @@ sap.ui.define(
           this.getProjectRoadmapById(this.data.sSelectedProjectRoadmapID)
         },
         getProjectRoadmapById: function (sRoadmapID) {
-          debugger
+        
           let that = this;
 
           // If Roadmap ID is null, open a dialog with project selection
@@ -685,7 +687,7 @@ sap.ui.define(
                 area => filteredAreaIds.has(area.ID)
               );
             }
-            debugger
+        
             if (that.data.oRoleBasesVisiblity.sLoginPerson === "Activity Performer") {
               // Step 1: Filter activities based on responsible_ID
               const filteredActivities = (oFetchedProjectRoadmap.projectTask.results || [])

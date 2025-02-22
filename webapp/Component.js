@@ -98,7 +98,7 @@ sap.ui.define(
       },
 
       onLogin: function () {
-        debugger;
+      
         let oComboBox = sap.ui.core.Fragment.byId(
           this.getId() + "LoginDialog",
           "loginComboBox"

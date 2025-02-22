@@ -20,7 +20,7 @@ sap.ui.define(
         onRouteMatched: function (oEvent) {
           this.AppState = this.getOwnerComponent().getState("App");
           this.getView().setModel(this.AppState.getModel(), "AppState");
-          debugger;
+        
           // let oComboBox = this.byId("idProjectManager");
           // let oBinding = oComboBox.getBinding("items");
 
@@ -64,7 +64,7 @@ sap.ui.define(
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
         },
         onPress: function (oEvent) {
-          debugger;
+        
           this.AppState.data.sidePanelOpen = false;
           let oSelectedProjectObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
@@ -208,18 +208,7 @@ sap.ui.define(
 
         ,
 
-        //   currencyFormatter: function (value) {
-        //     debugger
-        //     if (isNaN(value)) {
-        //         return "";
-        //     }
-
-        //     // Use Intl.NumberFormat for European-style formatting
-        //     return new Intl.NumberFormat('de-DE', {
-        //         minimumFractionDigits: 2,
-        //         maximumFractionDigits: 2
-        //     }).format(value);
-        // },
+       
 
         onChangeDate: function (oEvent) {
           let oInput = oEvent.getSource(); // Get the input field
@@ -240,7 +229,7 @@ sap.ui.define(
           }
         },
         formatEmployeeName: function (sName, sRole) {
-          debugger;
+        
           var sLoginRole = this.AppState.data.oRoleBasesVisiblity.sLoginPerson;
 
           if (sRole === sLoginRole) {
@@ -255,7 +244,7 @@ sap.ui.define(
           }
         },
         formatCurrency: function (value) {
-          debugger
+        
           if (isNaN(value)) {
             return "";
           }
