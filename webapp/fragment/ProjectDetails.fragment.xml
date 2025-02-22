@@ -235,7 +235,8 @@
                                     <m:Label text="Initial Budget" />
                                     <m:Input
                                         id="initialBudget"
-                                        value="{path: 'AppState>/oSelectedProject/initialBudget', formatter: '.formatCurrency'}"
+                                        value="{path: 'AppState>/oSelectedProject/initialBudget',type: 'sap.ui.model.type.Float', formatOptions: { groupingEnabled: true, minFractionDigits: 0, maxFractionDigits: 0 }}"
+                                        
                                         change="onBudgetChange"
                                     />
 

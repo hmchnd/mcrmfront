@@ -337,7 +337,7 @@ sap.ui.define(
           }
         },
         createNewActivityEntry: function (oActivity) {
-       
+       debugger
           var that = this;
           oActivity.planned_start = this._formatODataDate(
             oActivity.planned_start
@@ -402,8 +402,8 @@ sap.ui.define(
             oActivity.fore_act_start = oActivity.planned_start
             oActivity.fore_act_finish = oActivity.planned_finish
             oActivity.pct_complete = 0;
-            oActivity.state = "NEW";
-            oActivity.parent_key_ID = that.data.oSelectedTask;
+            oActivity.state = "NOT STARTED";
+            oActivity.parent_key_ID = that.data.oSelectedTask.ID;
 
             this.AppService.saveActivity(oActivity).then(function (result) {
               MessageBox.success(`Activity Details Saved!`);
@@ -679,6 +679,7 @@ sap.ui.define(
           let aPromises = [this.AppService.getProjectRoadmapByID(sRoadmapID)];
 
           Promise.all(aPromises).then(function (result) {
+            debugger
             let oFetchedProjectRoadmap = result[0].data || {};
             that.data.aPhase = (oFetchedProjectRoadmap.projectPhase.results || []).map(
               (item) => new Phases(item)
@@ -743,7 +744,9 @@ sap.ui.define(
               if(that.data.showTaskInActivity){
                 
               that.updateEarnedValue(that.data.showTaskInActivity.ID);
+
               }
+
             }
             if(sRoadmapID){
             that.phaseDurationCalc(sRoadmapID,that.data.scurrentProjectID);
@@ -768,6 +771,8 @@ sap.ui.define(
           aPromises.push(this.AppService.updateEarnedValue(taskID));
           let that = this;
           Promise.all(aPromises).then(function (result) {
+            that.updateModel(true);
+
             // MessageToast.show("phase calc")
             
           });
