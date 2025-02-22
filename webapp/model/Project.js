@@ -28,6 +28,7 @@ sap.ui.define([
                 this.planned_finish = data?.planned_finish?.toISOString()?.slice(0,10) || null;
                 this.actualStart = data?.actualStart || null;
                 this.actualFinish = data?.actualFinish || null;
+                this.createdAt = data?.createdAt || null;
             }
         },
         convertMSDate:function(msDate) {

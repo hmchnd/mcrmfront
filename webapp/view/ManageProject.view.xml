@@ -31,7 +31,10 @@
                                 growing="true"
                                 growingDirection="Downwards"
                                 growingScrollToLoad="true"
-                                items="{AppState>/aProjects}"
+                                items="{
+        path: 'AppState>/aProjects',
+        sorter: { path: 'createdAt', descending: true }
+    }"
                                 selectionChange="onSelectionChange"
                                 delete="onDelete"
                                 class="sapUiResponsiveContentPadding"

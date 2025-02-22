@@ -13,3 +13,7 @@
     z-index: 1000; /* Ensures it stays above other content */
     background: transparent; /* Prevent overlap issues */
 }
+
+.customGridItem {
+    background-color: #f0ffff ;
+}

@@ -482,6 +482,33 @@
                             </form:SimpleForm>
                         </blocks>
                     </ObjectPageSubSection>
+
+                        <ObjectPageSubSection>
+                        <blocks>
+
+                              <m:Table
+                               visible="{AppState>/makeTaskMilestoneVisiblity/milestonevisiblity}"
+                                id="MileStoneTaskTable"
+                                inset="false"
+                                width="100%"
+                                items="{AppState>/aTask}"
+                            >
+                                <m:columns>
+                                    <m:Column>
+                                        <m:Label text="Task Linked To This MileStone" />
+                                    </m:Column>
+                                </m:columns>
+                                <!-- Bind the items -->
+                                <m:items>
+                                    <m:ColumnListItem>
+                                        <m:cells>
+                                            <m:Text text="{AppState>name}" />
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                        </blocks>
+                        </ObjectPageSubSection>
                 </subSections>
             </ObjectPageSection>
         </sections>

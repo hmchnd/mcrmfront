@@ -89,8 +89,36 @@ sap.ui.define(
           this.AppState.data.currentPageLabel = "Manage Roadmap";
           this.AppState.getModel().refresh(true);
           this.AppState.getProjectRoadmapById(sRoadmapID);
-
+          this._applyMilestoneFilter(this.AppState.data.aPhase);
         },
+        _applyMilestoneFilter: function(aPhases) {
+          var oComboBox = this.getView().byId("idMilestone");
+          var oBinding = oComboBox.getBinding("items");
+      
+          if (oBinding) {
+            var aParentKeys = aPhases.map((item)=>item.ID); // Array of parent_key_IDs
+
+            var aFilters = aParentKeys.map(function(sKey) {
+                return new sap.ui.model.Filter("parent_key_ID", sap.ui.model.FilterOperator.EQ, sKey);
+            });
+    
+            // Apply OR filter condition
+            var oFinalFilter = new sap.ui.model.Filter({
+                filters: aFilters,
+                and: false // OR condition
+            });
+    
+            oBinding.filter([oFinalFilter]);
+          }
+      },
+      _applyFilterToMileStoneTask:function(sMileStoneID){
+        var oMilestoneTaskTable  = this.getView().byId("MileStoneTaskTable");
+        var oBinding = oMilestoneTaskTable.getBinding("items");
+        if (oBinding) {
+         let oFilter = new sap.ui.model.Filter("contributeToMilestone_ID", sap.ui.model.FilterOperator.EQ, sMileStoneID);
+          oBinding.filter([oFilter]);
+        }
+      },
 
         createPanels: function () {
           var oView = this.getView();
@@ -492,6 +520,7 @@ sap.ui.define(
               oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
               {};
             this.AppState.data.oSelectedMilestone = oSelectedMilestoneObject;
+            this._applyFilterToMileStoneTask(oSelectedMilestoneObject.ID);
             var sLayout = LayoutType.TwoColumnsBeginExpanded;
             this.getModel("manageRoadmapLayoutView").setProperty(
               "/layout",
