@@ -337,7 +337,7 @@ sap.ui.define(
           }
         },
         createNewActivityEntry: function (oActivity) {
-       debugger
+     
           var that = this;
           oActivity.planned_start = this._formatODataDate(
             oActivity.planned_start
@@ -395,7 +395,9 @@ sap.ui.define(
 
             this.AppService.updateActivity(oActivity).then(function (result) {
               MessageBox.success(`Activity Details Updated!`);
+            
               that.updateProgress(that.data.currentTaskID);
+              that.updateEarnedValue(result.data.parent_key_ID)
               // that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
             });
           } else {
@@ -679,7 +681,7 @@ sap.ui.define(
           let aPromises = [this.AppService.getProjectRoadmapByID(sRoadmapID)];
 
           Promise.all(aPromises).then(function (result) {
-            debugger
+          
             let oFetchedProjectRoadmap = result[0].data || {};
             that.data.aPhase = (oFetchedProjectRoadmap.projectPhase.results || []).map(
               (item) => new Phases(item)

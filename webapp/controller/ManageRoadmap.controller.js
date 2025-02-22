@@ -52,7 +52,7 @@ sap.ui.define(
           this.AppState.data.currentRoadmapID = sRoadmapID;
           this.AppState.data.sSelectedProjectRoadmapID = sRoadmapID;
           sRoadmapID = this.AppState.data.sSelectedProjectRoadmapID;
-
+          this.AppState.updateModel(true);
           let sProjectName = oEvent.getParameter("arguments").sProjectName;
           if (sProjectName) {
             this.AppState.data.sSelectedProjectName = sProjectName;

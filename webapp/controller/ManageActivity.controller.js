@@ -263,6 +263,7 @@ sap.ui.define(
           // oProjectDetails.planned_start = new Date(oProjectDetails.planned_start);
           // oProjectDetails.planned_finish = new Date(oProjectDetails.planned_finish);
           this.AppState.createNewActivityEntry(oActivityDetails);
+         
         },
         _validateActivityForm: function () {
           var bValid = true;

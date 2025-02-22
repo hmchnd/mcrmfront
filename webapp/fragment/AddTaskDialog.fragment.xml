@@ -241,6 +241,7 @@
                                         id="earnedvalue"
                                         value="{path: 'AppState>/oSelectedTask/earned_value', formatter: '.formatPercentage'}"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
+                                        editable="false"
                                     />
                                     <m:Label
                                         text="Forecasted Start Date"
