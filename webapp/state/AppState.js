@@ -346,19 +346,32 @@ sap.ui.define(
             oActivity.planned_finish
           );
 
+          if(oActivity.pct_complete==100){
+            oActivity.state = "COMPLETED"
+           
+            oActivity.act_finish = new Date()
+          }
+
+
+          if(oActivity.pct_complete>0 && oActivity.pct_complete<100){
+            oActivity.state = "INPROGRESS"
+            if(!oActivity.act_start){
+              oActivity.act_start = new Date()
+            }
+            
+          }
+
 
 
           if (oActivity.ID) {
             let ActivityID = oActivity.ID;
-            if (oActivity.state == "NEW") {
+            if (oActivity.state == "NOT STARTED") {
               // oActivity.pct_complete = "0";
 
               oActivity.act_start = null
               oActivity.act_finish = null
             }
             else if (oActivity.state == "INPROGRESS") {
-              oActivity.pct_complete = "10";
-
               oActivity.act_start = new Date()
             }
             else if (oActivity.state == "COMPLETED") {
@@ -375,6 +388,11 @@ sap.ui.define(
             // oActivity.areas=[];
             delete oActivity.responsible;
             oActivity.ID = ActivityID;
+
+          
+
+
+
             this.AppService.updateActivity(oActivity).then(function (result) {
               MessageBox.success(`Activity Details Updated!`);
               that.updateProgress(that.data.currentTaskID);
@@ -716,7 +734,7 @@ sap.ui.define(
             }
 
 
-            that.updateModel(true);
+           
 
             if (that.data.currentPage === "ManageRoadmap") {
              
@@ -729,8 +747,10 @@ sap.ui.define(
             }
             if(sRoadmapID){
             that.phaseDurationCalc(sRoadmapID,that.data.scurrentProjectID);
+            that.updateModel(true)
             }
 
+            that.updateModel(true);
             that.ViewController.getView().setBusy(false);
           });
 
@@ -740,7 +760,6 @@ sap.ui.define(
           aPromises.push(this.AppService.phaseDurationCalc(sRoadmapID,sProjectID));
           let that = this;
           Promise.all(aPromises).then(function (result) {
-            MessageToast.show("phase calc")
             
           });
         },

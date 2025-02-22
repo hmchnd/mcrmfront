@@ -39,7 +39,7 @@
                                                 snapToRow="true"
                                                 items="{
         path: 'AppState>/aActivity',
-        filters: [{ path: 'state', operator: 'EQ', value1: 'NEW' }]
+        filters: [{ path: 'state', operator: 'EQ', value1: 'NOT STARTED' }]
     }"
                                             >
                                                 <f:layout>

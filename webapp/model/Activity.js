@@ -22,6 +22,7 @@ sap.ui.define([
                 this.responsible_ID = data?.responsible_ID || "";
                 this.responsible = data?.responsible || "";
                 this.precedingActivityID = data?.precedingActivityID || "";
+                this.comment = data?.comment || ""
                
             }
         },
