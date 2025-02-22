@@ -46,7 +46,7 @@ sap.ui.define(
         },
 
         onRouteMatched: function (oEvent) {
-          debugger
+     
           this.AppState = this.getOwnerComponent().getState("App");
           let sRoadmapID = oEvent.getParameter("arguments").sRoadmapID;
           this.AppState.data.currentRoadmapID = sRoadmapID;

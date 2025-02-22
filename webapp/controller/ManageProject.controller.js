@@ -96,7 +96,7 @@ sap.ui.define(
             return;
           }
           let oProjectDetails = this.AppState.data.oSelectedProject;
-          debugger
+       
           this.AppState.createNewProjectEntry(oProjectDetails);
         },
         onManageRoadmap: function (oEvent) {
@@ -184,7 +184,7 @@ sap.ui.define(
           return totalMonths + " months";
         },
         onBudgetChange: function (oEvent) {
-          debugger
+       
           var oInput = oEvent.getSource();
           var sValue = oInput.getValue();
 
@@ -245,19 +245,7 @@ sap.ui.define(
             return Math.round(value)
           }
         },
-        // formatCurrency: function (value) {
-        //   debugger
-        
-        //   if (isNaN(value)) {
-        //     return "";
-        //   }
-
-        //   // Use Intl.NumberFormat for European-style formatting
-        //   return new Intl.NumberFormat('de-DE', {
-        //     minimumFractionDigits: 2,
-        //     maximumFractionDigits: 2
-        //   }).format(value);
-        // },
+       
       }
     );
   }
