@@ -96,6 +96,7 @@ sap.ui.define(
             return;
           }
           let oProjectDetails = this.AppState.data.oSelectedProject;
+          debugger
           this.AppState.createNewProjectEntry(oProjectDetails);
         },
         onManageRoadmap: function (oEvent) {
@@ -183,6 +184,7 @@ sap.ui.define(
           return totalMonths + " months";
         },
         onBudgetChange: function (oEvent) {
+          debugger
           var oInput = oEvent.getSource();
           var sValue = oInput.getValue();
 
@@ -193,14 +195,14 @@ sap.ui.define(
           var fValue = parseFloat(cleanValue);
 
           if (isNaN(fValue)) {
-            oInput.setValueStateText("Please enter a valid number.");
+            oInput.setValueStateText("Please enter a valid amount.");
             oInput.setValueState("Error");
           } else {
             oInput.setValueState("None");
 
             // Format the value and update input field
-            var formattedValue = this.formatCurrency(fValue);
-            oInput.setValue(formattedValue);
+            // var formattedValue = this.formatCurrency(fValue);
+            oInput.setValue(fValue);
           }
         }
 
@@ -243,18 +245,19 @@ sap.ui.define(
             return Math.round(value)
           }
         },
-        formatCurrency: function (value) {
+        // formatCurrency: function (value) {
+        //   debugger
         
-          if (isNaN(value)) {
-            return "";
-          }
+        //   if (isNaN(value)) {
+        //     return "";
+        //   }
 
-          // Use Intl.NumberFormat for European-style formatting
-          return new Intl.NumberFormat('de-DE', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }).format(value);
-        },
+        //   // Use Intl.NumberFormat for European-style formatting
+        //   return new Intl.NumberFormat('de-DE', {
+        //     minimumFractionDigits: 2,
+        //     maximumFractionDigits: 2
+        //   }).format(value);
+        // },
       }
     );
   }

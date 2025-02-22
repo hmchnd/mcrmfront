@@ -46,6 +46,7 @@ sap.ui.define(
         },
 
         onRouteMatched: function (oEvent) {
+          debugger
           this.AppState = this.getOwnerComponent().getState("App");
           let sRoadmapID = oEvent.getParameter("arguments").sRoadmapID;
           this.AppState.data.currentRoadmapID = sRoadmapID;
@@ -85,9 +86,10 @@ sap.ui.define(
           // this.AppState.data.showGlobalAddButton = true;
           this.AppState.data.showBackToRoadmapButton = false;
           this.AppState.data.currentPage = "ManageRoadmap";
-          this.AppState.getProjectRoadmapById(sRoadmapID);
           this.AppState.data.currentPageLabel = "Manage Roadmap";
           this.AppState.getModel().refresh(true);
+          this.AppState.getProjectRoadmapById(sRoadmapID);
+
         },
 
         createPanels: function () {
