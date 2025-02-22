@@ -13,9 +13,8 @@
         <landmarkInfo>
             <PageAccessibleLandmarkInfo rootRole="Region" rootLabel="{i18n>Home_rootLabel}" contentRole="Main" contentLabel="{i18n>Home_contentLabel}"/>
         </landmarkInfo>
-        <Image src="../media/FRAMSYS.png" width="100%" height="30%"/>
         <layout:VerticalLayout>
-            <!-- <Title titleStyle="H3" text="Quick Controls" class="sapUiTinyMarginBegin"/> -->
+            <Title titleStyle="H3" text="Quick Controls" class="sapUiTinyMargin"/>
             <layout:HorizontalLayout allowWrapping="true">
                 <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="My Project"  press="onNavToProject">
                     <tileContent>

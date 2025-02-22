@@ -11,7 +11,7 @@
                             <OverflowToolbarLayoutData priority="NeverOverflow"/>
                         </layoutData>
                     </Button>
-                    <Image src="../media/framsys_log.png" height="30px" decorative="false" press="onLogoPressed" tooltip="SAP Logo">
+                    <Image src="{imageModel>/logo}" height="30px" decorative="false" press="onLogoPressed" tooltip="SAP Logo">
                         <layoutData>
                             <OverflowToolbarLayoutData priority="NeverOverflow"/>
                         </layoutData>

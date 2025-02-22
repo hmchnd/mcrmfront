@@ -21,6 +21,9 @@ sap.ui.define(
 
     return BaseController.extend("framsys.com.framsysfrontend.controller.App", {
       onInit() {
+        var sImagePath = sap.ui.require.toUrl("framsys/com/framsysfrontend/media") + "/framsys_log.png"; 
+    var oImageModel = new sap.ui.model.json.JSONModel({ logo: sImagePath });
+    this.getView().setModel(oImageModel, "imageModel");
         if (sap?.ushell?.Container?.getRenderer("fiori2")) {
           sap?.ushell?.Container?.getRenderer("fiori2")?.setHeaderVisibility(
             false,
