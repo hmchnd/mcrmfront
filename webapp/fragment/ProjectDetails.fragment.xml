@@ -127,7 +127,8 @@
                                         showSecondaryValues="true"
                                         selectedKey="{AppState>/oSelectedProject/currency}"
                                         items="{
-                                            path: '/Currency'
+                                            path: '/Currency',
+                                            length:'500'
                                         }"
                                     >
                                         <core:ListItem
