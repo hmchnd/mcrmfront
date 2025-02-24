@@ -89,7 +89,7 @@ sap.ui.define(
           this.AppState.data.currentPageLabel = "Manage Roadmap";
           this.AppState.getModel().refresh(true);
           this.AppState.getProjectRoadmapById(sRoadmapID);
-          this._applyMilestoneFilter(this.AppState.data.aPhase);
+         // this._applyMilestoneFilter(this.AppState.data.aPhase);
         },
         _applyMilestoneFilter: function(aPhases) {
           var oComboBox = this.getView().byId("idMilestone");

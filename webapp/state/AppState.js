@@ -610,7 +610,7 @@ sap.ui.define(
         getProjectRoadmapById: function (sRoadmapID) {
         
           let that = this;
-
+          that.ViewController.getView().setBusy(true);
           // If Roadmap ID is null, open a dialog with project selection
           if (!sRoadmapID) {
             if (!this.oProjectDialog) {
@@ -756,7 +756,9 @@ sap.ui.define(
             }
 
             that.updateModel(true);
+          
             that.ViewController.getView().setBusy(false);
+            that.ViewController._applyMilestoneFilter(that.data.aPhase)
           });
 
         },
