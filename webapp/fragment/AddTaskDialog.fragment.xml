@@ -483,7 +483,7 @@
                         </blocks>
                     </ObjectPageSubSection>
 
-                        <ObjectPageSubSection>
+                        <ObjectPageSubSection visible="{= ${AppState>/oSelectedMilestone/ID} ? true : false}" >
                         <blocks>
 
                               <m:Table
