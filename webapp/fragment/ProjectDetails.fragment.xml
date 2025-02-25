@@ -257,12 +257,16 @@
                                     <m:Label text="Actual Start Date" />
                                     <m:DatePicker
                                         id="actualStart"
+                                        displayFormat="MMM dd, yyyy"
+                                         valueFormat="yyyy-MM-dd"
                                         editable="true"
                                         value="{AppState>/oSelectedProject/actualStart}"
                                     />
                                     <m:Label text="Actual Finish Date" />
                                     <m:DatePicker
                                         id="actualFinish"
+                                        displayFormat="MMM dd, yyyy"
+                                         valueFormat="yyyy-MM-dd"
                                         editable="true"
                                         value="{AppState>/oSelectedProject/actualFinish}"
                                     />

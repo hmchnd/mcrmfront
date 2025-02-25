@@ -71,7 +71,17 @@ sap.ui.define(
             {};
 
           this.AppState.data.oSelectedProject = oSelectedProjectObject;
-        this.AppState.data.scurrentProjectID= oSelectedProjectObject.ID
+          if(oSelectedProjectObject?.actualStart){
+            oSelectedProjectObject.actualStart = oSelectedProjectObject.actualStart.toISOString().slice(0,10)
+          }
+
+          if(oSelectedProjectObject?.actualFinish){
+            oSelectedProjectObject.actualFinish = '2025-07-30'
+            //oSelectedProjectObject.actualFinish.toISOString().slice(0,10)
+
+          }
+         
+                 this.AppState.data.scurrentProjectID= oSelectedProjectObject.ID
 
 
           let sRoadmapID = oSelectedProjectObject.roadmapTemplate_ID;
