@@ -138,67 +138,74 @@ sap.ui.define(
             oGridListControl.setBusy(false);
           });
         },
-        createNewProjectEntry: function (oProject) {
+        createNewProjectEntry: async function (oProject) {
+          debugger
           let that = this;
           let oGridListControl = this.ViewController.getView().byId("gridList");
+      
           if (oProject.ID) {
-            delete oProject.fore_act_start;
-            delete oProject.fore_act_finish;
-            delete oProject.pct_complete;
-
-            oProject.planned_start = new Date(oProject.planned_start);
-            oProject.planned_finish = new Date(oProject.planned_finish);
-
-            oProject.fore_act_start = new Date(oProject.planned_start);
-            oProject.fore_act_finish = new Date(oProject.planned_finish);
-            oProject.actualStart = new Date(oProject.actualStart);
-            oProject.actualFinish = new Date(oProject.actualFinish);
-
-            this.AppService.updateProject(oProject).then(function (result) {
-              let sRoadmapTemplateID = oProject.roadmapTemplate_ID;
-              let oCreatedProjectDetails = result.data;
-              if (oProject.roadmapTemplate_ID && !oProject.isRoadmapMapped) {
-                that.copyRoadmapTemplateToNewProject(sRoadmapTemplateID, oCreatedProjectDetails.ID);
+              delete oProject.fore_act_start;
+              delete oProject.fore_act_finish;
+              delete oProject.pct_complete;
+      
+              oProject.planned_start = that._parseDateUTC(new Date(oProject.planned_start));
+              oProject.planned_finish = that._parseDateUTC(new Date(oProject.planned_finish));
+              oProject.fore_act_start = oProject.planned_start;
+              oProject.fore_act_finish = new Date(oProject.planned_finish);
+              oProject.actualStart = that._parseDateUTC(new Date(oProject.actualStart));
+              oProject.actualFinish = that._parseDateUTC(new Date(oProject.actualFinish));
+      
+              try {
+                  let result = await this.AppService.updateProject(oProject);
+                  let sRoadmapTemplateID = oProject.roadmapTemplate_ID;
+                  let oCreatedProjectDetails = result.data;
+      
+                  if (oProject.roadmapTemplate_ID && !oProject.isRoadmapMapped) {
+                      await that.copyRoadmapTemplateToNewProject(sRoadmapTemplateID, oCreatedProjectDetails.ID);
+                  }
+      
+                  MessageBox.success(`Project Details Updated!`);
+              } catch (error) {
+                  MessageBox.error("Failed to update project: " + error.message);
               }
-
-              MessageBox.success(`Project Details Updated!`);
-
-            });
+      
           } else {
-
-            oProject.planned_start = new Date(oProject.planned_start);
-            oProject.planned_finish = new Date(oProject.planned_finish);
-
-            oProject.fore_act_start = new Date(oProject.planned_start);
-            oProject.fore_act_finish = new Date(oProject.planned_finish);
-            oProject.actualStart = new Date(oProject.actualStart);
-            oProject.actualFinish = new Date(oProject.actualFinish);
-            oProject.status = "Not Started";
-            oProject.state = "Not Started";
-
-            let sRoadmapTemplateID = oProject.roadmapTemplate_ID;
-
-            this.ViewController.getView().setBusy(true);
-
-            this.AppService.saveProject(oProject).then(function (result) {
-              that.ViewController.getView().setBusy(false);
-              let oCreatedProjectDetails = result.data;
-              if (oProject.roadmapTemplate_ID && !oProject.isRoadmapMapped) {
-                that.copyRoadmapTemplateToNewProject(sRoadmapTemplateID, oCreatedProjectDetails.ID);
+              oProject.planned_start = that._parseDateUTC(new Date(oProject.planned_start));
+              oProject.planned_finish = that._parseDateUTC(new Date(oProject.planned_finish));
+              oProject.fore_act_start = oProject.planned_start;
+              oProject.fore_act_finish = new Date(oProject.planned_finish);
+              oProject.actualStart = that._parseDateUTC(new Date(oProject.actualStart));
+              oProject.actualFinish = that._parseDateUTC(new Date(oProject.actualFinish));
+              oProject.status = "Not Started";
+              oProject.state = "Not Started";
+      
+              let sRoadmapTemplateID = oProject.roadmapTemplate_ID;
+      
+              this.ViewController.getView().setBusy(true);
+      
+              try {
+                  let result = await this.AppService.saveProject(oProject);
+                  this.ViewController.getView().setBusy(false);
+      
+                  let oCreatedProjectDetails = result.data;
+      
+                  if (oProject.roadmapTemplate_ID && !oProject.isRoadmapMapped) {
+                      await that.copyRoadmapTemplateToNewProject(sRoadmapTemplateID, oCreatedProjectDetails.ID);
+                  }
+      
+                  that.getMyProjectsList(oGridListControl);
+                  that.ViewController.resetColumnLayout();
+                  MessageBox.success(`Project Created Successfully!`);
+      
+              } catch (error) {
+                  this.ViewController.getView().setBusy(false);
+                  MessageBox.error("Failed to create project: " + error.message);
               }
-              that.getMyProjectsList(oGridListControl);
-              that.ViewController.resetColumnLayout();
-              MessageBox.success(`Project Created Successfully!`);
-
-            });
           }
-        
-
+      
           that.ViewController.onCloseDetailPage();
-
           this.getMyProjectsList(this.data.oGridListControl);
-
-        },
+      },      
         deleteProjectEntry: function (oProject) {
 
           if (!oProject || !oProject.ID) {
@@ -221,7 +228,14 @@ sap.ui.define(
               MessageBox.error(`Failed to delete Project: ${oError.message}`);
             });
         },
-
+        _parseDateUTC: function (dateString) {
+          debugger;
+          if (!dateString || isNaN(Date.parse(dateString))) {
+              return null;
+          }
+          let date = new Date(dateString);
+          return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+      },      
         getMyFrameworkList: function (oGridListControl) {
 
           let aPromises = [];
@@ -337,14 +351,23 @@ sap.ui.define(
           }
         },
         createNewActivityEntry: function (oActivity) {
+          debugger
      
           var that = this;
-          oActivity.planned_start = this._formatODataDate(
-            oActivity.planned_start
+          oActivity.planned_start = that._parseDateUTC(new Date(
+            oActivity.planned_start)
           );
-          oActivity.planned_finish = this._formatODataDate(
-            oActivity.planned_finish
+          oActivity.planned_finish = that._parseDateUTC(new Date(
+            oActivity.planned_finish)
           );
+          oActivity.act_start = that._parseDateUTC(new Date(
+            oActivity.act_start
+          ));
+          oActivity.act_finish = that._parseDateUTC(new Date(
+            oActivity.act_finish)
+          );
+          oActivity.fore_act_start = oActivity.planned_start
+          oActivity.fore_act_finish = oActivity.planned_finish
 
           if(oActivity.pct_complete==100){
             oActivity.state = "COMPLETED"
@@ -401,8 +424,7 @@ sap.ui.define(
               // that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
             });
           } else {
-            oActivity.fore_act_start = oActivity.planned_start
-            oActivity.fore_act_finish = oActivity.planned_finish
+           
             oActivity.pct_complete = 0;
             oActivity.state = "NOT STARTED";
             oActivity.parent_key_ID = that.data.oSelectedTask.ID;
@@ -461,6 +483,13 @@ sap.ui.define(
         createNewTask: function (oTask) {
        
           let that = this;
+          oTask.planned_start = that._parseDateUTC(new Date(oTask.planned_start));
+          oTask.planned_finish = that._parseDateUTC(new Date(oTask.planned_finish));
+          oTask.actualStart = that._parseDateUTC(new Date(oTask.actualStart));
+          oTask.actualFinish = that._parseDateUTC(new Date(oTask.actualFinish));
+          oTask.parent_key_ID = that.data.currentRoadmapID;
+          oTask.fore_act_start = new Date(oTask.planned_start);
+          oTask.fore_act_finish = new Date(oTask.planned_finish);
           if (oTask.ID) {
             delete oTask.area;
             delete oTask.phase;
@@ -471,13 +500,7 @@ sap.ui.define(
               // that.updatePlannedDates(that.data.Itemtype, that.data.currentItemID);
             });
           } else {
-            oTask.planned_start = new Date(oTask.planned_start);
-            oTask.planned_finish = new Date(oTask.planned_finish);
-            oTask.actualStart = new Date(oTask.actualStart);
-            oTask.actualFinish = new Date(oTask.actualFinish);
-            oTask.parent_key_ID = that.data.currentRoadmapID;
-            oTask.fore_act_start = new Date(oTask.planned_start);
-            oTask.fore_act_finish = new Date(oTask.planned_finish);
+           
             oTask.status = "Not Started";
             oTask.state = "NEW";
             oTask.pct_complete = 0;
@@ -548,24 +571,28 @@ sap.ui.define(
           });
         },
         copyRoadmapTemplateToNewProject: function (sTemplateId, sProjectID) {
-          let aPromises = [];
-          this.ViewController.getView().setBusy(true);
-
-          aPromises.push(
-            this.AppService.CopyRoadmapTemplateForProject(sTemplateId, sProjectID)
-          );
           let that = this;
-          Promise.all(aPromises).then(function (result) {
-            that.ViewController.getView().setBusy(false);
-
-            // MessageBox.success(
-            //   "Project Created and Template Details Configured Successfully In Project Roadmap!!"
-            // );
-          });
-        },
+          this.ViewController.getView().setBusy(true);
+      
+          return this.AppService.CopyRoadmapTemplateForProject(sTemplateId, sProjectID)
+              .then(function (result) {
+                  that.ViewController.getView().setBusy(false);
+                  return result; // Ensure the promise resolves with the result
+              })
+              .catch(function (error) {
+                  that.ViewController.getView().setBusy(false);
+                  MessageBox.error("Failed to copy roadmap template: " + error.message);
+                  throw error; // Propagate the error
+              });
+      },      
         createMilestone: function (oMilestone) {
 
           let that = this;
+          oMilestone.targetAchievementDate = that._parseDateUTC(new Date(
+            oMilestone.targetAchievementDate
+          ));
+          oMilestone.fore_act_achievement_date = that._parseDateUTC(new Date(
+            oMilestone.fore_act_achievement_date));
           if (oMilestone.ID) {
             // delete oMilestone.targetAchievementDate;
 
@@ -573,9 +600,7 @@ sap.ui.define(
               MessageBox.success(`Milestone Details Updated!`);
             });
           } else {
-            oMilestone.targetAchievementDate = new Date(
-              oMilestone.targetAchievementDate
-            );
+           
             this.AppService.createMilestone(oMilestone).then(function (result) {
               MessageBox.success(`New Milestone created!`);
             });

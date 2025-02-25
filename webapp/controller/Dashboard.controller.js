@@ -52,7 +52,7 @@ sap.ui.define([
         this.getView().byId("myTask").setVisible(true);
         this.getView().byId("myActivity").setVisible(true);
       }
-      // this.AppState.data.showGlobalAddButton = true;
+      this.AppState.data.showGlobalAddButton = false;
      
       this.AppState.getModel().refresh(true);
     },

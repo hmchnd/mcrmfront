@@ -64,7 +64,7 @@ sap.ui.define(
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
         },
         onPress: function (oEvent) {
-        
+        debugger
           this.AppState.data.sidePanelOpen = false;
           let oSelectedProjectObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
@@ -76,7 +76,7 @@ sap.ui.define(
           }
 
           if(oSelectedProjectObject?.actualFinish){
-            oSelectedProjectObject.actualFinish = '2025-07-30'
+            oSelectedProjectObject.actualFinish = oSelectedProjectObject.actualFinish.toISOString().slice(0,10)
             //oSelectedProjectObject.actualFinish.toISOString().slice(0,10)
 
           }
