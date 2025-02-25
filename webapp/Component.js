@@ -141,11 +141,11 @@ sap.ui.define(
           // 3-manageRoadmap
           // 4-kanban
           case "Enterprise Portfolio Administrator":           
-            this._oAppState.data.showGlobalAddButton = true;
+            
 
             break;
           case "Project Manager":           
-            this._oAppState.data.showGlobalAddButton = true;
+            
             this._oAppState.data.oRoleBasesVisiblity.showCreateMilestoneBtnVisiblity = false;          
             break;
 
@@ -153,7 +153,9 @@ sap.ui.define(
             this._oAppState.data.oRoleBasesVisiblity.areaResponsibleId =
               areaResponsibleId;
             this._oAppState.data.oRoleBasesVisiblity.showCreateMilestoneBtnVisiblity = false;
-            this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;           
+            this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;  
+            
+
             views[2].visible = false;
 
             model.setData(modelData);
@@ -161,7 +163,9 @@ sap.ui.define(
             break;
           case "Project Gate Keeper":
             this._oAppState.data.oRoleBasesVisiblity.showCreateTaskBtnVisiblity = false;
-            this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;            
+            this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;  
+            
+
             views[2].visible = false;
 
             model.setData(modelData);
@@ -174,6 +178,8 @@ sap.ui.define(
             this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;
             this._oAppState.data.taskTileVisible = true;
             this._oAppState.data.activityTileVisible = true;
+            
+
 
             views[2].visible = false;
 
@@ -188,6 +194,8 @@ sap.ui.define(
             this._oAppState.data.oRoleBasesVisiblity.isEditAreaVisible = false;
             this._oAppState.data.taskTileVisible = true;
             this._oAppState.data.activityTileVisible = true;
+            
+
 
             // views[1].visible = false;
             views[2].visible = false;
