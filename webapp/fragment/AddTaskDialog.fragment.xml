@@ -271,7 +271,7 @@
                                         editable="true"
                                         id="idactualstart"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
-                                        value="{path:'AppState>/oSelectedTask/actualStart', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
+                                        value=""
                                     />
                                     <m:Label
                                         text="Actual Finish Date"
@@ -281,7 +281,7 @@
                                         editable="true"
                                         id="idactualfinish"
                                         visible="{AppState>/makeTaskMilestoneVisiblity/taskvisiblity}"
-                                        value="{path:'AppState>/oSelectedTask/actualFinish', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'MMM dd, yyyy' }}"
+                                        value=""
                                     />
                                     <m:Label
                                         text="Percentage of Completion"

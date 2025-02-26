@@ -130,14 +130,14 @@
                                     />
                                     <m:Label text="Actual Start" />
                                     <m:DatePicker
-                                        value="{AppState>/oSelectedActivity/act_start}"
+                                        value=""
                                         editable="true"
                                         id="aactstart"
                                     />
 
                                     <m:Label text="Actual Finish" />
                                     <m:DatePicker
-                                        value="{AppState>/oSelectedActivity/act_finish}"
+                                        value=""
                                         editable="true"
                                         id="aactfinish"
                                     />

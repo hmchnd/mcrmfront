@@ -260,7 +260,7 @@
                                         displayFormat="MMM dd, yyyy"
                                          valueFormat="yyyy-MM-dd"
                                         editable="true"
-                                        value="{AppState>/oSelectedProject/actualStart}"
+                                        value=""
                                     />
                                     <m:Label text="Actual Finish Date" />
                                     <m:DatePicker
@@ -268,7 +268,7 @@
                                         displayFormat="MMM dd, yyyy"
                                          valueFormat="yyyy-MM-dd"
                                         editable="true"
-                                        value="{AppState>/oSelectedProject/actualFinish}"
+                                        value=""
                                     />
                                     <m:Label text="Percentage of Completion" />
                                     <m:Input
