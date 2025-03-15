@@ -113,85 +113,24 @@
           "target":"Dashboard"
         },
         {
-          "name": "manage_projects",
-          "pattern": "manage_projects",
+          "name": "manage_customers",
+          "pattern": "manage_customers",
           "target": [
-            "manage_projects"
+            "manage_customers"
           ]
-        },
-        {
-          "name": "ManageRoadmap",
-          "pattern": "ManageRoadmap/:sRoadmapID:/:sProjectName:",
-          "target":"ManageRoadmap"
-        },
-        {
-          "name": "ManageTask",
-          "pattern": "ManageTask",
-          "target":["ManageTask"]
-        },
-        {
-          "name": "ManageActivity",
-          "pattern": "ManageActivity/:sTaskID:/:sTaskName:/:sProjectName:",
-          "target":["ManageActivity"]
-        },
-        {
-          "name": "ManageRoadmap2",
-          "pattern": "ManageRoadmap2",
-          "target":"ManageRoadmap2"
-        },
-        {
-          "name": "ManageRoadmap3",
-          "pattern": "ManageRoadmap3",
-          "target":"ManageRoadmap3"
-        },
-        {
-          "name": "RoadmapTemplate",
-          "pattern": "RoadmapTemplate",
-          "target":"RoadmapTemplate"
-        },
-        {
-          "name": "NotFound",
-          "pattern": "NotFound",
-          "target":"NotFound"
         }
+        
       ],
       "targets": {
         "Dashboard":{
           "id":"Dashboard",
           "name": "Dashboard"
         },
-        "manage_projects": {
-          "id": "manage_projects",
-          "name": "ManageProject"
-        },
-        "ManageRoadmap":{
-          "id": "ManageRoadmap",
-          "name": "ManageRoadmap"
-        },
-        "ManageTask":{
-          "id": "ManageTask",
-          "name": "ManageTask"
-        },
-        "ManageActivity":{
-          "id": "ManageActivity",
-          "name": "ManageActivity"
-        },
-        "ManageRoadmap2":{
-          "id": "ManageRoadmap2",
-          "name": "ManageRoadmap2"
-        },
-        "ManageRoadmap3":{
-          "id": "ManageRoadmap3",
-          "name": "ManageRoadmap3"
-        },
-        "RoadmapTemplate":{
-           "id": "RoadmapTemplate",
-          "name": "RoadmapTemplate"
-        },
-        "NotFound":{
-          "id": "NotFound",
-          "name": "NotFound"
+        "manage_customers": {
+          "id": "manage_customers",
+          "name": "ManageCustomer"
         }
+       
       }
     },
     "rootView": {
