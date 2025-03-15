@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="framsys.com.framsysfrontend.controller.ManageProject"
+    controllerName="micro.crm.frontend.controller.ManageProject"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:l="sap.ui.layout"
@@ -164,7 +164,7 @@
 
                 <f:midColumnPages>
                     <core:Fragment
-                        fragmentName="framsys.com.framsysfrontend.fragment.ProjectDetails"
+                        fragmentName="micro.crm.frontend.fragment.ProjectDetails"
                         type="XML"
                     />
                 </f:midColumnPages>

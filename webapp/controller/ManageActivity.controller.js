@@ -27,7 +27,7 @@ sap.ui.define(
     var DropLayout = coreLibrary.dnd.DropLayout;
 
     return Controller.extend(
-      "framsys.com.framsysfrontend.controller.ManageActivity",
+      "micro.crm.frontend.controller.ManageActivity",
       {
         onInit() {          
           //   this.attachDragAndDrop();
@@ -130,7 +130,7 @@ sap.ui.define(
           if (!this.oAddDialog) {
             Fragment.load({
               id: this.getView().getId(),
-              name: "framsys.com.framsysfrontend.fragment.AddActivity",
+              name: "micro.crm.frontend.fragment.AddActivity",
               controller: this,
             }).then((oDialog) => {
               this.oAddDialog = oDialog;
@@ -176,7 +176,7 @@ sap.ui.define(
         //     if (!this.oEditDialog) {
         //         Fragment.load({
         //             id: this.getView().getId(),
-        //             name: "framsys.com.framsysfrontend.fragment.EditActivity",
+        //             name: "micro.crm.frontend.fragment.EditActivity",
         //             controller: this,
         //         }).then((oDialog) => {
         //             this.oEditDialog = oDialog;
@@ -404,7 +404,7 @@ sap.ui.define(
           if (!this.oShowTaskInActivity) {
             Fragment.load({
               id: this.getView().getId(),
-              name: "framsys.com.framsysfrontend.fragment.ShowTaskInActivity",
+              name: "micro.crm.frontend.fragment.ShowTaskInActivity",
               controller: this
             }).then(oDialog => {
               this.oShowTaskInActivity = oDialog
@@ -426,7 +426,7 @@ sap.ui.define(
           if (!this.directKanban) {
             Fragment.load({
               id: this.getView().getId(),
-              name: "framsys.com.framsysfrontend.fragment.DirectKanban",
+              name: "micro.crm.frontend.fragment.DirectKanban",
               controller: this
             }).then(oDialog => {
               this.directKanban = oDialog

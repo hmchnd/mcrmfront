@@ -9,7 +9,7 @@ sap.ui.define(
     "use strict";
 
     return Controller.extend(
-      "framsys.com.framsysfrontend.controller.ManageProject",
+      "micro.crm.frontend.controller.ManageProject",
       {
         onInit() {
           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);

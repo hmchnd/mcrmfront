@@ -1,25 +1,29 @@
-# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
-
-specVersion: "3.1"
+specVersion: "3.0"
 metadata:
   name: project1
 type: application
+framework:
+  name: OpenUI5
+  version: "1.88.0"
+
+resources:
+  configuration:
+    paths:
+      webapp: "webapp"
+
 server:
+
   customMiddleware:
+
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
-        ui5:
-          path:
-            - /resources
-            - /test-resources
-          url: https://ui5.sap.com
-        backend:
-          - scp: true
-            path: /odata
-            url: https://terralink-technologies-mena-dmcc-development-and-test-k7f4d54b9.cfapps.eu10-004.hana.ondemand.com
-            destination: PM_DEST
+       backend:
+       - path: "/backend"
+         url: "http://localhost:5000/"
+        
+         headers:
+          tenant-id: "b570c207-76fc-4dbb-b932-cbd4b1d12df5"
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -31,3 +35,4 @@ server:
       configuration:
         component: project1
         ui5Theme: sap_horizon
+

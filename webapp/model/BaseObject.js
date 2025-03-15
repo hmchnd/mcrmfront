@@ -4,7 +4,7 @@
     "sap/ui/model/json/JSONModel"
 ], function (Object, JSONModel) {
     "use strict";
-    return Object.extend("framsys.com.framsysfrontend.model.BaseObject", {
+    return Object.extend("micro.crm.frontend.model.BaseObject", {
 
         constructor: function (data) {
             var that = this;

@@ -14,7 +14,7 @@ sap.ui.define([
 			// start the app UI component
 			this.iStartMyUIComponent({
 				componentConfig: {
-					name: "framsys.com.framsysfrontend",
+					name: "micro.crm.frontend",
 					async: true
 				},
 				hash: oOptions.hash,

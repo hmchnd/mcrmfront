@@ -4,7 +4,7 @@ sap.ui.define([
 ], (Controller, JSONModel) => {
   "use strict";
 
-  return Controller.extend("framsys.com.framsysfrontend.controller.Dashboard", {
+  return Controller.extend("micro.crm.frontend.controller.Dashboard", {
     onInit:function(){
 
        // Sample Data

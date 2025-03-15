@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="framsys.com.framsysfrontend.controller.ManageActivity"
+    controllerName="micro.crm.frontend.controller.ManageActivity"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.f"
@@ -244,14 +244,14 @@
 
                 <f:midColumnPages>
                     <core:Fragment
-                        fragmentName="framsys.com.framsysfrontend.fragment.AddActivity"
+                        fragmentName="micro.crm.frontend.fragment.AddActivity"
                         type="XML"
                     />
                 </f:midColumnPages>
 
                 <f:endColumnPages >
                 <!-- <core:Fragment
-                        fragmentName="framsys.com.framsysfrontend.fragment.ShowTaskInActivity"
+                        fragmentName="micro.crm.frontend.fragment.ShowTaskInActivity"
                         type="XML"
                     /> -->
                 </f:endColumnPages>

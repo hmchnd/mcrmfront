@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="framsys.com.framsysfrontend.controller.NotFound"
+    controllerName="micro.crm.frontend.controller.NotFound"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
 >

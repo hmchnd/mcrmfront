@@ -4,7 +4,7 @@ sap.ui.define([
 ], function(Controller, UIComponent) {
 	"use strict";
 
-	return Controller.extend("framsys.com.framsysfrontend.controller.BaseController", {
+	return Controller.extend("micro.crm.frontend.controller.BaseController", {
 
 		/**
 		 * Convenience method for accessing the router.

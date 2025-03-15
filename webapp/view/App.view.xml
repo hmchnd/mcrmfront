@@ -1,4 +1,4 @@
-<mvc:View controllerName="framsys.com.framsysfrontend.controller.App" displayBlock="true"
+<mvc:View controllerName="micro.crm.frontend.controller.App" displayBlock="true"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:tnt="sap.tnt">

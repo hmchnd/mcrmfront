@@ -1,4 +1,4 @@
-<mvc:View controllerName="framsys.com.framsysfrontend.controller.ManageRoadmap" displayBlock="true"
+<mvc:View controllerName="micro.crm.frontend.controller.ManageRoadmap" displayBlock="true"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:pf="sap.suite.ui.commons"
     xmlns="sap.m"
@@ -47,7 +47,7 @@
 
                 <f:midColumnPages>
                     <core:Fragment
-                        fragmentName="framsys.com.framsysfrontend.fragment.AddTaskDialog"
+                        fragmentName="micro.crm.frontend.fragment.AddTaskDialog"
                         type="XML"
                     />
                 </f:midColumnPages>

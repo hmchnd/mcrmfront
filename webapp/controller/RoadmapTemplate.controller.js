@@ -6,7 +6,7 @@ sap.ui.define([
 ], (Controller, JSONModel, LayoutType) => {
   "use strict";
 
-  return Controller.extend("framsys.com.framsysfrontend.controller.RoadmapTemplate", {
+  return Controller.extend("micro.crm.frontend.controller.RoadmapTemplate", {
     onInit() {
       this._loadXLSXLibrary()
       let createAreaData = [{

@@ -11,7 +11,7 @@ sap.ui.define([
     // Shortcuts for drag-and-drop constants
    
 
-    return Controller.extend("framsys.com.framsysfrontend.controller.ManageTask", {
+    return Controller.extend("micro.crm.frontend.controller.ManageTask", {
         onInit() {
             
         },

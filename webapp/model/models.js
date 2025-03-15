@@ -29,28 +29,46 @@ function (JSONModel, Device) {
                         "enabled":true,
                     },
                     {
-                        "title":"Portfolio",
-                        "icon":"sap-icon://folder-blank",
-                        "key":"manage_projects",
+                        "title":"Customers",
+                        "icon":"sap-icon://customer",
+                        "key":"manage_customers",
                         "expanded": true,
                         "enabled":true
                     },
                     {
-                        "title":"Roadmap Templates",
-                        "key":"RoadmapTemplate",
-                        "icon":"sap-icon://table-view",
+                        "title":"Leads",
+                        "key":"manage_leads",
+                        "icon":"sap-icon://leads",
                         "enabled":true
                     },
                     {
-                        "title":"Roadmap",
-                        "key":"ManageRoadmap",
-                        "icon":"sap-icon://table-view",
+                        "title":"Projects",
+                        "key":"manage_projects",
+                        "icon":"sap-icon://capital-projects",
                         "enabled":true
                     },
                     {
-                        "title":"Kanban",
-                        "key":"ManageActivity",
-                        "icon":"sap-icon://filter-facets",
+                        "title":"Tasks",
+                        "key":"manage_tasks",
+                        "icon":"sap-icon://activities",
+                        "enabled":true
+                    },
+                    {
+                        "title":"Invoices",
+                        "key":"manage_invoice",
+                        "icon":"sap-icon://my-sales-order",
+                        "enabled":true
+                    },
+                    {
+                        "title":"My Team",
+                        "key":"manage_team",
+                        "icon":"sap-icon://people-connected",
+                        "enabled":true
+                    },
+                    {
+                        "title":"Tickets",
+                        "key":"manage_ticket",
+                        "icon":"sap-icon://feedback",
                         "enabled":true
                     }
                    

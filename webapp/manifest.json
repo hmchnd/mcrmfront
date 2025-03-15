@@ -1,7 +1,7 @@
 {
   "_version": "1.65.0",
   "sap.app": {
-    "id": "framsys.com.framsysfrontend",
+    "id": "micro.crm.frontend",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -75,7 +75,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "framsys.com.framsysfrontend.i18n.i18n"
+          "bundleName": "micro.crm.frontend.i18n.i18n"
         }
       },
       "": {
@@ -102,9 +102,9 @@
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
-        "path": "framsys.com.framsysfrontend.view",
+        "path": "micro.crm.frontend.view",
         "async": true,
-        "viewPath": "framsys.com.framsysfrontend.view"
+        "viewPath": "micro.crm.frontend.view"
       },
       "routes": [
         {
@@ -195,7 +195,7 @@
       }
     },
     "rootView": {
-      "viewName": "framsys.com.framsysfrontend.view.App",
+      "viewName": "micro.crm.frontend.view.App",
       "type": "XML",
       "id": "App"
     }

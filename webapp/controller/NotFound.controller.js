@@ -3,7 +3,7 @@ sap.ui.define([
 ], function (Controller) {
     "use strict";
 
-    return Controller.extend("framsys.com.framsysfrontend.controller.NotFound", {
+    return Controller.extend("micro.crm.frontend.controller.NotFound", {
         onInit: function () {
             // Initialization code
         },

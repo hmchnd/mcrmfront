@@ -36,7 +36,7 @@ sap.ui.define(
     "use strict";
 
     return BaseController.extend(
-      "framsys.com.framsysfrontend.controller.ManageRoadmap",
+      "micro.crm.frontend.controller.ManageRoadmap",
       {
         onInit: function () {
           var oRouter = sap.ui.core.UIComponent.getRouterFor(this);

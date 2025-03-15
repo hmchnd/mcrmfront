@@ -1,7 +1,7 @@
 sap.ui.define(
   [
     "sap/ui/core/UIComponent",
-    "framsys/com/framsysfrontend/model/models",
+    "micro/crm/frontend/model/models",
     "./service/AppService",
     "./state/AppState",
     "sap/m/MessageBox",

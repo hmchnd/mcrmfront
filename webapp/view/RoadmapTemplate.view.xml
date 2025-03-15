@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="framsys.com.framsysfrontend.controller.RoadmapTemplate"
+    controllerName="micro.crm.frontend.controller.RoadmapTemplate"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:l="sap.ui.layout"
@@ -145,14 +145,14 @@
                 <f:midColumnPages>
                    
                      <core:Fragment
-                        fragmentName="framsys.com.framsysfrontend.fragment.EditFramework"
+                        fragmentName="micro.crm.frontend.fragment.EditFramework"
                         type="XML"
                     />
                 </f:midColumnPages>
 
                 <f:endColumnPages >
                  <core:Fragment
-                        fragmentName="framsys.com.framsysfrontend.fragment.CreateFramework"
+                        fragmentName="micro.crm.frontend.fragment.CreateFramework"
                         type="XML"
                     />
                 </f:endColumnPages>

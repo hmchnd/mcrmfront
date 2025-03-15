@@ -5,7 +5,7 @@
 ], function (Object) {
 	"use strict";
 
-	return Object.extend("framsys.com.framsysfrontend.service.CoreService", {
+	return Object.extend("micro.crm.frontend.service.CoreService", {
 		constructor: function (model) {
 			Object.call(this);
 			if (model) {
