@@ -45,8 +45,8 @@
                     
                   <Label text="{AppState>/currentPageLabel}" class="sapUiLargeMarginBegin"/>
                     <ToolbarSpacer/>
-                    <Button text="Back to Roadmap" class="sapUiTinyMargin" type="Critical" press="onBackToRoadmap"  visible="{AppState>/showBackToRoadmapButton}"/>
-                    <Button icon="sap-icon://add" class="sapUiTinyMargin" type="Critical" press="onAddNewItem" id="GlobalAddButton" visible="{AppState>/showGlobalAddButton}"/>
+                    <!-- <Button text="Back to Roadmap" class="sapUiTinyMargin" type="Critical" press="onBackToRoadmap"  visible="{AppState>/showBackToRoadmapButton}"/>
+                    <Button icon="sap-icon://add" class="sapUiTinyMargin" type="Critical" press="onAddNewItem" id="GlobalAddButton" visible="{AppState>/showGlobalAddButton}"/> -->
                     <!-- <Button type="Critical"  icon="sap-icon://add-filter" class="sapUiTinyMargin"/> -->
                    
 
