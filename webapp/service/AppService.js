@@ -9,9 +9,17 @@ sap.ui.define(
        getcrmuser:function(){
           return this.http("/backend/crmusers").get()
 
+       },
+       getclients:function(){
+        return this.http("/backend/clients").get()
+
        }
+      ,
+      saveClientDetails:function(oClient){
+        return this.http("/backend/clients").post("",oClient)
       }
-    );
+
+  });
     return AppService;
   }
 );

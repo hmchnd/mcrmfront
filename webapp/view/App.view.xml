@@ -45,8 +45,9 @@
                     
                   <Label text="{AppState>/currentPageLabel}" class="sapUiLargeMarginBegin"/>
                     <ToolbarSpacer/>
+                      <Button icon="sap-icon://add" class="sapUiTinyMargin" text="Create" type="Critical" press="onAddNewItem" id="GlobalAddButton" visible="{AppState>/showGlobalAddButton}"/>
                     <!-- <Button text="Back to Roadmap" class="sapUiTinyMargin" type="Critical" press="onBackToRoadmap"  visible="{AppState>/showBackToRoadmapButton}"/>
-                    <Button icon="sap-icon://add" class="sapUiTinyMargin" type="Critical" press="onAddNewItem" id="GlobalAddButton" visible="{AppState>/showGlobalAddButton}"/> -->
+                   -->
                     <!-- <Button type="Critical"  icon="sap-icon://add-filter" class="sapUiTinyMargin"/> -->
                    
 
@@ -61,12 +62,11 @@
                         </tnt:NavigationListItem>
                     </tnt:NavigationList>
                     <tnt:fixedItem>
-                        <tnt:NavigationList items="{path: 'sideContentModel>/fixedNavigation'}">
-                            <tnt:NavigationListItem text="{sideContentModel>title}" icon="{sideContentModel>icon}" />
+                        <tnt:NavigationList >
+                         <tnt:NavigationListItem text="Settings" icon="sap-icon://action-settings" select=".onSettingsPress" />
+                            <tnt:NavigationListItem icon="sap-icon://customer" select=".onSettingsPress" text="{AppState>/user/name}"/>
                         </tnt:NavigationList>
-                         <tnt:NavigationList>
-                <!-- <tnt:NavigationListItem icon="sap-icon://customer" select=".onSettingsPress"/> -->
-            </tnt:NavigationList>
+                       
                     </tnt:fixedItem>
                 </tnt:SideNavigation>
             </tnt:sideContent>

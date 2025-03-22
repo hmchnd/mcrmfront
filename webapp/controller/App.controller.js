@@ -4,12 +4,14 @@ sap.ui.define(
     "sap/f/LayoutType",
    
     "sap/ui/core/Fragment",
+    "micro/crm/frontend/model/Client"
   ],
   (
     BaseController,
     LayoutType,
   
-    Fragment
+    Fragment,
+    Client
   ) => {
     "use strict";
 
@@ -46,6 +48,18 @@ sap.ui.define(
           "/selectedKey",
           oEvent.getParameter("name")
         );
+      },
+      onAddNewItem:function(){
+
+        if(this.AppState.currentPage === "manage_customers"){
+          this.AppState.data.oSelectedClientObject = new Client();
+          let sLayout = LayoutType.TwoColumnsBeginExpanded;
+          this.getModel("projectLayoutView").setProperty("/layout", sLayout);
+          this.getModel("projectLayoutView").refresh(true);
+
+        }
+
+
       }
     
     });

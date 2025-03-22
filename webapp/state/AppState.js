@@ -38,7 +38,10 @@ sap.ui.define(
           that.ViewController = null; // View controller instance.
 
           this.data = {
-           
+           user:{},
+            clients:[],
+            currentPage:"",
+            oSelectedClientObject:{}
 
           };
 
@@ -60,12 +63,27 @@ sap.ui.define(
 
         getUser:function(){
           this.AppService.getcrmuser().then(function(data){
-            this.data.user = data;
+            this.data.user = JSON.parse(data)[0];
             this.updateModel();
           }.bind(this)).catch((error)=>{
               console.log('Error occured')
           });
-        }
+        },
+        getClients:function(){
+          this.AppService.getclients().then(function(data){
+            this.data.clients = JSON.parse(data);
+            this.updateModel();
+          }.bind(this)).catch((error)=>{
+              console.log('Error occured')
+          });
+        },
+        saveClientDetails:function(oClient){
+          this.AppService.saveClientDetails(oClient).then(function(data){
+            MessageToast.show("Client details saved successfully");
+          }.bind(this)).catch((error)=>{
+            console.log('Error occured')
+          });
+        },
 
     
 

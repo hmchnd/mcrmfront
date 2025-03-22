@@ -29,7 +29,14 @@ function (JSONModel, Device) {
                         "enabled":true,
                     },
                     {
-                        "title":"Customers",
+                        "title":"My Product/Service",
+                        "icon":"sap-icon://product",
+                        "key":"Catalog",
+                        "expanded": true,
+                        "enabled":true,
+                    },
+                    {
+                        "title":"My Clients",
                         "icon":"sap-icon://customer",
                         "key":"manage_customers",
                         "expanded": true,
@@ -42,7 +49,7 @@ function (JSONModel, Device) {
                         "enabled":true
                     },
                     {
-                        "title":"Projects",
+                        "title":"My Projects",
                         "key":"manage_projects",
                         "icon":"sap-icon://capital-projects",
                         "enabled":true
@@ -73,6 +80,14 @@ function (JSONModel, Device) {
                     }
                    
                     
+                ],
+                "fixedNavigation": [
+                    {
+                        "title":"Settings",
+                        "icon":"sap-icon://action-settings",
+                       
+                       
+                    },
                 ]
             });
             return oModel;

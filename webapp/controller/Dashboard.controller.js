@@ -47,14 +47,7 @@ sap.ui.define([
       this.getView().setModel(this.AppState.getModel(), "AppState");
       this.AppState.getModel().setSizeLimit(999999);
       this.AppState.setViewController(this);
-      if (this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Task Responsible" || this.AppState.data.oRoleBasesVisiblity.sLoginPerson=="Activity Performer") {
       
-        this.getView().byId("myTask").setVisible(true);
-        this.getView().byId("myActivity").setVisible(true);
-      }
-      this.AppState.data.showGlobalAddButton = false;
-     
-      this.AppState.getModel().refresh(true);
     },
     onNavToProject: function(){
       this.getOwnerComponent().getRouter().navTo("manage_projects")
