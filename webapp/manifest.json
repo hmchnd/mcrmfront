@@ -91,6 +91,12 @@
       "css": [
         {
           "uri": "css/style.css"
+        },
+        {
+          "uri": "css/sapIllus-Fills.css"
+        },
+        {
+          "uri": "css/sapIllus-Layout.css"
         }
       ]
     },

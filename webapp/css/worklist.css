@@ -1,0 +1,11 @@
+.iconTabShowDesc .sapMITBHead .sapMITBItem.sapMITBVertical.sapMITBAll .sapMITBContentArrow{
+    height: 2rem;
+}
+
+.iconTabShowDesc .sapMITBHead .sapMITBItem.sapMITBVertical.sapMITBFilter {
+	height: 100%;
+}
+.iconTabShowDesc .sapMITBHead .sapMITBItem.sapMITBVertical.sapMITBFilter .sapMITBText{
+	white-space: pre-wrap;
+	height: 2rem;
+}

@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:tnt="sap.tnt">
     <Page showHeader="false">
-        <tnt:ToolPage id="toolpage" class="sapUiDemoToolPage" sideExpanded="{AppState>/sidePanelOpen}">
+        <tnt:ToolPage id="toolpage" class="sapUiDemoToolPage backgorund" sideExpanded="{AppState>/sidePanelOpen}">
             <tnt:header>
                 <tnt:ToolHeader>
                     <Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress" tooltip="{i18n>collpaseMenuButtonText}" >

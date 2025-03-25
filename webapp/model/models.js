@@ -111,7 +111,11 @@ function (JSONModel, Device) {
         manageRoadmapViewLayoutModel:function(data){
             let oModel = new JSONModel(data);
             return oModel;
-        }
+        },
+        createModel: function(oData){
+			return new JSONModel(oData);
+
+		},
     };
 
 });
