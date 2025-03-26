@@ -7,6 +7,8 @@ sap.ui.define(
     "sap/m/MessageBox",
     "sap/ui/core/Fragment",
     "sap/m/MessageToast",
+    "sap/m/IllustrationPool",
+	  "micro/crm/frontend/css/fioriMoment",
   ],
   (
     UIComponent,
@@ -15,7 +17,9 @@ sap.ui.define(
     AppState,
     MessageBox,
     Fragment,
-    MessageToast
+    MessageToast,
+    IllustrationPool,
+	  FioriMoment
   ) => {
     "use strict";
 
@@ -48,6 +52,8 @@ sap.ui.define(
           models.manageRoadmapViewLayoutModel(),
           "manageRoadmapLayoutView"
         );
+        this.setModel(models.createModel(), "oFiori");
+        this.getModel("oFiori").setData(this._buildMomentsIcons());
 
         // Instantiating services and states
         this._oAppService = new AppService(this.getModel());
@@ -62,6 +68,76 @@ sap.ui.define(
         setTimeout(() => {
           this.openLoginDialog();
         }, 2500);
+      },
+
+      _buildMomentsIcons: function () {
+        const tnt = "tnt";
+        const oTntSet = {
+          setFamily: tnt,
+          setURI: sap.ui.require.toUrl("sap/tnt/themes/base/illustrations")
+        };
+        // register tnt illustration set
+        const dialog = "Dialog";
+        const sapIllus = "sapIllus";
+        const services = "Services";
+        const components = "Components";
+        const spot = "Spot";
+        const scene = "Scene";
+        const ext = "ext";
+        const faceID = "FaceID";
+        IllustrationPool.registerIllustrationSet(oTntSet, false);
+        return {
+          noActivities: new FioriMoment(sapIllus, dialog, "NoActivities").getFioriMoments(),
+          noTasks: new FioriMoment(sapIllus, dialog, "NoTasks").getFioriMoments(),
+          noBookmarks: new FioriMoment(sapIllus, dialog, "NoSavedItems").getFioriMoments(),
+          services: new FioriMoment(tnt, dialog, services).getFioriMoments(),
+          sServices: new FioriMoment(tnt, spot, services).getFioriMoments(),
+          results: new FioriMoment(tnt, scene, "Mission").getFioriMoments(),
+          issues: new FioriMoment(sapIllus, dialog, "UnableToLoad-Alt2").getFioriMoments(),
+          radar: new FioriMoment(tnt, dialog, "Radar").getFioriMoments(),
+          external: new FioriMoment(tnt, dialog, "Company").getFioriMoments(),
+          mission: new FioriMoment(tnt, dialog, "Mission").getFioriMoments(),
+          systems: new FioriMoment(tnt, dialog, "Systems").getFioriMoments(),
+          blocks: new FioriMoment(tnt, dialog, components).getFioriMoments(),
+          sBlocks: new FioriMoment(tnt, spot, components).getFioriMoments(),
+          lBlocks: new FioriMoment(tnt, scene, components).getFioriMoments(),
+          teams: new FioriMoment(tnt, dialog, "Teams").getFioriMoments(),
+          tools: new FioriMoment(tnt, dialog, "Tools").getFioriMoments(),
+          flow: new FioriMoment(tnt, dialog, "ChartBPMNFlow").getFioriMoments(),
+          user2: new FioriMoment(tnt, dialog, "User2").getFioriMoments(),
+          balloon: new FioriMoment(sapIllus, spot, "SuccessCheckMark-Alt").getFioriMoments(),
+          session: new FioriMoment(tnt, scene, "SessionExpiring").getFioriMoments(),
+          lUser2: new FioriMoment(tnt, scene, "User2").getFioriMoments(),
+          oCompany: new FioriMoment(tnt, scene, "Company").getFioriMoments(),
+          tRobot: new FioriMoment(tnt, spot, faceID).getFioriMoments(),
+          lRobot: new FioriMoment(tnt, scene, faceID).getFioriMoments(),
+          mRobot: new FioriMoment(tnt, dialog, faceID).getFioriMoments(),
+          mFingerprint: new FioriMoment(tnt, dialog, "Secrets").getFioriMoments(),
+          oOrg: new FioriMoment(tnt, dialog, "ChartOrg").getFioriMoments(),
+          noReport: new FioriMoment(tnt, scene, "NoFlows").getFioriMoments(),
+          hi5: new FioriMoment(sapIllus, dialog, "SuccessHighFive").getFioriMoments(),
+          extLink: new FioriMoment(tnt, spot, "ExternalLink").getFioriMoments(),
+          document: new FioriMoment(sapIllus, dialog, "NoData").getFioriMoments(),
+          analytics: new FioriMoment(tnt, dialog, "ChartBullet").getFioriMoments(),
+          iamTrial: new FioriMoment(sapIllus, spot, "UnableToUpload").getFioriMoments(),
+          helloNew: new FioriMoment(ext, ext, ext).getHello(),
+          unauth: new FioriMoment(ext, ext, ext).getUnauth(),
+          maintenance: new FioriMoment(ext, ext, ext).getMaintenance(),
+          grafana: new FioriMoment(tnt, spot, "Grafana").getGrafanaIcon(),
+          success: new FioriMoment(tnt, dialog, "Success").getFioriMoments(),
+                  miniServices: new FioriMoment(tnt, scene, services).getFioriMoments(true),
+                  miniSuccess: new FioriMoment(tnt, scene, "Success").getFioriMoments(true),
+                  miniRadar: new FioriMoment(tnt, scene, "Radar").getFioriMoments(true),
+                  miniTeams: new FioriMoment(tnt, scene, "Teams").getFioriMoments(true),
+                  miniTools: new FioriMoment(tnt, scene, "Tools").getFioriMoments(true),
+                  miniUser2: new FioriMoment(tnt, scene, "User2").getFioriMoments(true),
+                  miniMRobot: new FioriMoment(tnt, scene, faceID).getFioriMoments(true),
+                  miniMFingerprint: new FioriMoment(tnt, scene, "Secrets").getFioriMoments(true),
+                  miniOOrg: new FioriMoment(tnt, scene, "ChartOrg").getFioriMoments(true),
+                  miniHi5: new FioriMoment(sapIllus, dialog, "SuccessHighFive").getFioriMoments(true),
+                  miniAnalytics: new FioriMoment(tnt, scene, "ChartBullet").getFioriMoments(true),
+                  miniNoUsers: new FioriMoment(tnt, scene, "NoUsers").getFioriMoments(true)
+        };
       },
 
       getService_: function (sService) {

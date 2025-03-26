@@ -1,82 +1,251 @@
-<mvc:View controllerName="micro.crm.frontend.controller.Dashboard"
-    xmlns="sap.m"
-    xmlns:layout="sap.ui.layout"
-    xmlns:core="sap.ui.core"
-    xmlns:t="sap.ui.table"
-   xmlns:viz="sap.viz.ui5.controls" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"  xmlns:viz.data="sap.viz.ui5.data" 
-    xmlns:microchart="sap.suite.ui.microchart"
-    xmlns:p="sap.ui.comp.smartmicrochart"
-    xmlns:mc="sap.suite.ui.microchart"
-    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
-    xmlns:mvc="sap.ui.core.mvc">
-    <Page showHeader="false">
-        <landmarkInfo>
-            <PageAccessibleLandmarkInfo rootRole="Region" rootLabel="{i18n>Home_rootLabel}" contentRole="Main" contentLabel="{i18n>Home_contentLabel}"/>
-        </landmarkInfo>
-        <layout:VerticalLayout>
-            <Title titleStyle="H3" text="Quick Controls" class="sapUiTinyMargin"/>
-            <layout:HorizontalLayout allowWrapping="true">
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="My Project"  press="onNavToProject">
-                    <tileContent>
-                        <TileContent>
-                            <!-- <content>
-                                <NumericContent scale=""  valueColor="Good" indicator="Up" withMargin="false" />
-                            </content> -->
-                        </TileContent>
-                    </tileContent>
-                </GenericTile>
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="My Task" visible="{AppState>/taskTileVisible}" id="myTask" press="onNavToTask">
-                    <tileContent>
-                        <TileContent>
-                            <!-- <content>
-                                <NumericContent scale=""  valueColor="Critical" indicator="Up" withMargin="false" />
-                            </content> -->
-                        </TileContent>
-                    </tileContent>
-                </GenericTile>
-                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="My Lead" visible="{AppState>/activityTileVisible}" id="myActivity"  press="onNavToActivity">
-                    <tileContent>
-                        <TileContent>
-                            <!-- <content>
-                                <NumericContent scale="" valueColor="Error" indicator="Up" withMargin="false" />
-                            </content> -->
-                        </TileContent>
-                    </tileContent>
-                </GenericTile>
+<mvc:View controllerName="micro.crm.frontend.controller.Dashboard" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:grid="sap.ui.layout.cssgrid" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui.layout" xmlns:ux="sap.uxap">
+    <f:DynamicPage class="sapUiNoContentPadding" backgroundDesign="List">
+        <f:content>
+            <l:BlockLayout>
+                <l:BlockLayoutRow id="block1">
+                    <l:BlockLayoutCell class="content sapUiNoContentPadding sapUiSmallMarginBottom">
+                        <HBox>
+                                <VBox height="272px">
+                                    <IllustratedMessage illustrationSize="Scene" illustrationType="tnt-User2" />
+                                </VBox>
+                                <VBox class="sapUiSmallMarginBegin sapUiLargeMarginTop slideInLeft" wrap="Wrap">
+                                    <HBox>
+                                        <Title text="Hello ADMIN!" level="H1" titleStyle="H1" wrapping="true" />
+                                        <Title id="userWelcome" level="H1" titleStyle="H1" wrapping="true" class="sapUiTinyMarginBegin boldTitle" />
+                                    </HBox>
+                                    <Title text="Welcome to Micro CRM Solutions" level="H1" titleStyle="H1" wrapping="true" class="sapUiTinyMarginTop" />
+                                    <Title text="Where do you want to go today?" level="H3" titleStyle="H3" class="slideInLeft" wrapping="true" />
+                                </VBox>
+                            </HBox>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+                <l:BlockLayoutRow id="block2">
+                    <l:BlockLayoutCell class="sapUiNoContentPadding">
+                         <VBox class="sapUiMediumMarginTop sapUiSmallMarginBegin sapUiLargeMarginEnd">
+                            <!-- <HBox>
+                                <VBox height="250px">
+                                    <f:IllustratedMessage illustrationSize="Scene" illustrationType="tnt-User2" />
+                                </VBox>
+                                <VBox class="sapUiSmallMarginBegin sapUiLargeMarginTop slideInLeft" wrap="Wrap">
+                                    <HBox>
+                                        <Title text="Hello SFADMIN!" level="H1" titleStyle="H1" wrapping="true" />
+                                        <Title id="userWelcome" level="H1" titleStyle="H1" wrapping="true" class="sapUiTinyMarginBegin boldTitle" />
+                                    </HBox>
+                                    <Title text="Welcome to Intelligent Service Delivery" level="H1" titleStyle="H1" wrapping="true" class="sapUiTinyMarginTop" />
+                                    <Title text="Where do you want to go today?" level="H3" titleStyle="H3" class="slideInLeft" wrapping="true" />
+                                </VBox>
+                            </HBox> -->
+                            <!-- <f:GridList id="gridList" class="sapUiLargeMarginTop sapUiSmallMarginBeginEnd">
+                                <f:customLayout>
+                                    <grid:ResponsiveColumnLayout />
+                                </f:customLayout>
+                                <f:GridListItem id="AnalticsCard" class="special round" type="Active" press="navToAnalytics">
+                                    <f:layoutData>
+                                        <grid:ResponsiveColumnItemLayoutData columns="6" rows="1" />
+                                    </f:layoutData>
+                                    <core:Fragment fragmentName="dominos.order.ordertracking.worklist.fragments.Analytics" type="XML" />
+                                </f:GridListItem>
+                                <f:GridListItem id="TicketsCard" class="special round" type="Active" press="navToTickets">
+                                    <f:layoutData>
+                                        <grid:ResponsiveColumnItemLayoutData columns="6" rows="1" />
+                                    </f:layoutData>
+                                    <core:Fragment fragmentName="dominos.order.ordertracking.worklist.fragments.Tickets" type="XML" />
+                                </f:GridListItem>
+                                <f:GridListItem id="admin" class="special round" type="Active" press="navToAdmin">
+                                    <f:layoutData>
+                                        <grid:ResponsiveColumnItemLayoutData columns="6" rows="1" />
+                                    </f:layoutData>
+                                    <core:Fragment fragmentName="dominos.order.ordertracking.worklist.fragments.Adminstration" type="XML" />
+                                </f:GridListItem>
+                            </f:GridList> -->
+                            <Title text="Quick Actions" titleStyle="H3" class="boldTitle sapUiMediumMarginBeginEnd sapUiMediumMarginTop" />
+                            <f:GridList id="gridList" class="sapUiMediumMarginBeginEnd sapUiSmallMarginTop slideInDown">
+                                <f:customLayout>
+                                    <grid:ResponsiveColumnLayout />
+                                </f:customLayout>
+                               
+                                <f:GridListItem id="project" class="special round" type="Active" press="navToTickets" visible="true">
+                                    <f:layoutData>
+                                        <grid:ResponsiveColumnItemLayoutData columns="4" rows="1" />
+                                    </f:layoutData>
+                                    <HBox class="sapUiTinyMarginBottom">
+                                        <core:HTML content='{oFiori>/miniTools}' />
+                                        <VBox width="100%" class="sapUiTinyMarginTop">
+                                            <Title text="My Project" level="H4" titleStyle="H4" class="sapUiTinyMargin" wrapping="true" wrappingType="Normal" />
+                                            <Text text="Check all the Project and their status, category, and actions needed" class="sapUiTinyMarginBegin" />
+                                            <layoutData>
+                                                <FlexItemData growFactor="2" />
+                                            </layoutData>
+                                        </VBox>
+                                    </HBox>
+                                </f:GridListItem>
+                                
+                                 <f:GridListItem id="task" class="special round" type="Active" press="navToSolution" visible="true">
+                                    <f:layoutData>
+                                        <grid:ResponsiveColumnItemLayoutData columns="4" rows="1" />
+                                    </f:layoutData>
+                                    <HBox class="sapUiTinyMarginBottom">
+                                        <core:HTML content='{oFiori>/miniTeams}' />
+                                        <VBox width="100%" class="sapUiTinyMarginTop">
+                                            <Title text="My Tasks" level="H4" titleStyle="H4" class="sapUiTinyMargin" wrapping="true" wrappingType="Normal" />
+                                            <Text text="Here you can search all Available Projects Details and other knowledge base article from entire system." class="sapUiTinyMarginBegin" />
+                                            <layoutData>
+                                                <FlexItemData growFactor="2" />
+                                            </layoutData>
+                                        </VBox>
+                                    </HBox>
+                                </f:GridListItem>
+                                
 
-
-            </layout:HorizontalLayout>
-      
-      </layout:VerticalLayout>
-            <!-- <Title titleStyle="H3" text="Analytics" class="sapUiTinyMarginBegin"/>
-            <Toolbar>
-                <Button icon="sap-icon://filter" text="{i18n>Filters}" press="onFilterPress"/>
-            </Toolbar>
-      
-                <viz:VizFrame 
-                    id="salesChart" 
-                    height="400px" 
-                    width="100%" 
-                  
-                    uiConfig="{applicationSet:'fiori'}" 
-                    vizType="column">
-                    <viz:dataset>
-                        <viz.data:FlattenedDataset   data="{chartData>/salesData}">
-                            <viz.data:dimensions>
-                                <viz.data:DimensionDefinition name="Month" value="{chartData>month}" />
-                            </viz.data:dimensions>
-                            <viz.data:measures>
-                                <viz.data:MeasureDefinition name="Budget (In USD)" value="{chartData>revenue}" />
-                            </viz.data:measures>
-                           
-                        </viz.data:FlattenedDataset>
-                    </viz:dataset>
-                    <viz:feeds>
-                        <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Month" />
-                        <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Budget (In USD)" />
-                    </viz:feeds>
-                </viz:VizFrame> -->
-   
-      
-    </Page>
+                                 <f:GridListItem id="leads" class="special round" type="Active" press=".navTo('manage_overview')" visible="true">
+                                    <f:layoutData>
+                                        <grid:ResponsiveColumnItemLayoutData columns="4" rows="1" />
+                                    </f:layoutData>
+                                    <HBox class="sapUiTinyMarginBottom">
+                                        <core:HTML content='{oFiori>/miniServices}'/>
+                                        <VBox width="100%" class="sapUiTinyMarginTop">
+                                            <Title text="My Leads" level="H4" titleStyle="H4" class="sapUiTinyMargin" wrapping="true" wrappingType="Normal" />
+                                            <Text text="Checkout all the leads details here" class="sapUiTinyMarginBegin" />
+                                            <layoutData>
+                                                <FlexItemData growFactor="2" />
+                                            </layoutData>
+                                        </VBox>
+                                    </HBox>
+                                </f:GridListItem>
+                                <f:GridListItem id="adminstration" class="special round" type="Active" press=".navTo('manage_overview')" visible="true">
+                                    <f:layoutData>
+                                        <grid:ResponsiveColumnItemLayoutData columns="4" rows="1" />
+                                    </f:layoutData>
+                                    <HBox class="sapUiTinyMarginBottom">
+                                        <core:HTML content='{oFiori>/miniServices}'/>
+                                        <VBox width="100%" class="sapUiTinyMarginTop">
+                                            <Title text="Adminstration" level="H4" titleStyle="H4" class="sapUiTinyMargin" wrapping="true" wrappingType="Normal" />
+                                            <Text text="All admin funnctions can be access from here." class="sapUiTinyMarginBegin" />
+                                            <layoutData>
+                                                <FlexItemData growFactor="2" />
+                                            </layoutData>
+                                        </VBox>
+                                    </HBox>
+                                </f:GridListItem>
+                                <f:GridListItem id="analytics" class="special round" type="Active" press="navToAnalytics">
+                                    <f:layoutData>
+                                        <grid:ResponsiveColumnItemLayoutData columns="4" rows="1" />
+                                    </f:layoutData>
+                                    <HBox class="sapUiTinyMarginBottom">
+                                        <core:HTML content='{oFiori>/miniAnalytics}' />
+                                        <VBox width="100%" class="sapUiTinyMarginTop">
+                                            <Title text="Analytics" level="H4" titleStyle="H4" class="sapUiTinyMargin" wrapping="true" wrappingType="Normal" />
+                                            <Text text="Get an insight on your Projects  and with the help of charts and graph." class="sapUiTinyMarginBegin" />
+                                            <layoutData>
+                                                <FlexItemData growFactor="2" />
+                                            </layoutData>
+                                        </VBox>
+                                    </HBox>
+                                </f:GridListItem>
+                               
+                            </f:GridList>
+                        </VBox>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+                <l:BlockLayoutRow id="block3">
+                    <l:BlockLayoutCell class="content sapUiNoContentPadding">
+                        <VBox class="sapUiMediumMarginTop sapUiLargeMarginBeginEnd">
+                            <Title titleStyle="H3" class="boldTitle" text="Shortcuts" />
+                            <IconTabBar id="isdMenubar" headerMode="Inline" expanded="true" expandable="false" applyContentPadding="false" backgroundDesign="Solid" class="isdMenubar">
+                                <items>
+                                <IconTabFilter text="Quick Links" key="quickLinks" class="boldTitle">
+                                        <f:GridListItem id="quickLinks" class="round sapUiSmallMarginTop" type="Inactive">
+                                            <HBox class="sapUiSmallMargin" wrap="Wrap">
+                                                <HBox alignItems="Center" width="15rem" class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                                                    <Avatar id="iam_isd" class="sapUiTinyMargin avSpecial" displaySize="S" displayShape="Square" tooltip="Portal" src="sap-icon://quality-issue" backgroundColor="Accent1" press="openQuickLink('iam')" />
+                                                    <Link id="idPortal" text="Portal" class="sapUiTinyMargin  boldTitle noUnderline" wrapping="true" press="openQuickLink('iam')" subtle="true" />
+                                                </HBox>
+                                                <HBox alignItems="Center" width="15rem" class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                                                    <Avatar id="sam_isd" class="sapUiTinyMargin avSpecial" displaySize="S" displayShape="Square" tooltip="Config Module" src="sap-icon://crm-service-manager" backgroundColor="Accent2" press="openQuickLink('sam')" />
+                                                    <Link id="idConfig" text="Link 1" class="sapUiTinyMargin  boldTitle noUnderline" wrapping="true" press="openQuickLink('sam_isd')" subtle="true" />
+                                                </HBox>
+                                                <HBox alignItems="Center" width="15rem" class="sapUiLargeMarginEnd sapUiSmallMarginBottom" visible="false">
+                                                    <Avatar id="sca" class="sapUiTinyMargin avSpecial" displaySize="S" displayShape="Square" tooltip="Provising" src="sap-icon://write-new" backgroundColor="Accent3" press="openQuickLink('sca')" />
+                                                    <Link id="idProv" text="Link 2" class="sapUiTinyMargin  boldTitle noUnderline" wrapping="true" press="openQuickLink('sca')" subtle="true" />
+                                                </HBox>
+                                                <HBox alignItems="Center" width="15rem" class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                                                    <Avatar id="icp" class="sapUiTinyMargin avSpecial" displaySize="S" displayShape="Square" tooltip="Benefit Life Event" src="sap-icon://SAP-icons-TNT/systemabap" backgroundColor="Accent4" press="openQuickLink('icp')" />
+                                                    <Link id="idBenefit" text="Link 3" class="sapUiTinyMargin boldTitle noUnderline" wrapping="true" press="openQuickLink('icp')" subtle="true" />
+                                                </HBox>
+                                                <HBox alignItems="Center" width="15rem" class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                                                    <Avatar id="oneSup" class="sapUiTinyMargin avSpecial" displaySize="S" displayShape="Square" tooltip="Support" src="sap-icon://headset" backgroundColor="Accent5" press="openQuickLink('oneSup')" />
+                                                    <Link id="idSupport" text="Link 4" class="sapUiTinyMargin  boldTitle noUnderline " wrapping="true" press="openQuickLink('oneSup')" subtle="true" />
+                                                </HBox>
+                                                <HBox alignItems="Center" width="15rem" class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                                                    <Avatar id="itsm" class="sapUiTinyMargin avSpecial" displaySize="S" displayShape="Square" tooltip="Document Management" src="sap-icon://customer" backgroundColor="Accent6" press="openQuickLink('itsm')" />
+                                                    <Link id="idDocument" text="Link 5" class="sapUiTinyMargin  boldTitle noUnderline" wrapping="true" press="openQuickLink('itsm')" subtle="true" />
+                                                </HBox>
+                                                <HBox alignItems="Center" width="15rem" class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                                                    <Avatar id="catsxt" class="sapUiTinyMargin avSpecial" displaySize="S" displayShape="Square" tooltip="Counter" src="sap-icon://appointment" backgroundColor="Accent7" press="openQuickLink('catsxt')" />
+                                                    <Link id="idCounter" text="Link 6" class="sapUiTinyMargin  boldTitle noUnderline" wrapping="true" press="openQuickLink('catsxt')" subtle="true" />
+                                                </HBox>
+                                            </HBox>
+                                        </f:GridListItem>
+                                    </IconTabFilter>
+                                    <IconTabFilter text="Recently Viewed" key="recent">
+                                        <core:Fragment fragmentName="micro.crm.frontend.fragment.LastView" type="XML" class="sapUiSmallMarginTop" />
+                                    </IconTabFilter>
+                                    <IconTabFilter text="Favourites" key="favorites">
+                                        <core:Fragment fragmentName="micro.crm.frontend.fragment.Favourate" type="XML" class="sapUiSmallMarginTop" />
+                                    </IconTabFilter>
+                                    
+                                </items>
+                            </IconTabBar>
+                            <Title titleStyle="H3" class="boldTitle sapUiMediumMarginTop" text="To Dos" />
+                            <IconTabBar id="todos" headerMode="Inline" expanded="true" expandable="false" applyContentPadding="false" backgroundDesign="Transparent" class="isdMenubar">
+                                <items>
+                                    <IconTabFilter text="Task" key="tasks">
+                                        <VBox>
+                                            <f:GridList items="{oTasks>/}" class="sapUiSmallMarginTop " visible="true">
+                                                <f:customLayout>
+                                                    <grid:GridBoxLayout boxWidth="15rem" />
+                                                </f:customLayout>
+                                                <f:items>
+                                                    <f:GridListItem class="round special sapUiTinyMargin" type="Active" press="onTaskPress($event.getSource().getBindingContext('oTasks').getObject())">
+                                                        <VBox class="sapUiTinyMargin" justifyContent="SpaceBetween" height="100%">
+                                                            <VBox>
+                                                                <Title text="{oTasks>short_text}" wrapping="true" class="boldTitle" />
+                                                                <GenericTag text="{path:'oTasks>priority_v2',formatter:'.formatter.getPriorityText'} {i18n>issues.priority}" design="StatusIconHidden" status="{path:'oTasks>priority_v2',formatter:'.formatter.getHighlightII'}" />
+                                                                <ObjectStatus title="{i18n>note.createdBy}" text="{oTasks>custom_field8}" class="sapUiTinyMarginTop" />
+                                                                <ObjectStatus inverted='true' state="Error" text="{i18n>dash.overdue}" class="sapUiTinyMarginTop" visible="{path: 'oTasks>due_date', formatter:'.formatter.isOverdue'}" />
+                                                            </VBox>
+                                                            <Text class="sapUiSmallMarginTopBottom" text="{path:'oTasks>created_timestamp',formatter:'.formatter.timeSince'}" />
+                                                        </VBox>
+                                                    </f:GridListItem>
+                                                </f:items>
+                                            </f:GridList>
+                                            <IllustratedMessage illustrationSize="Dialog" illustrationType="sapIllus-NoTasks_v1" visible="{= ${oTasks>/}.length === 0}" />
+                                        </VBox>
+                                    </IconTabFilter>
+                                    <IconTabFilter text="Reviews" key="close">
+                                        <f:GridList items="{oReviews>/}" class="sapUiSmallMarginTop " visible="{= ${oReviews>/}.length !== 0}">
+                                            <f:customLayout>
+                                                <grid:GridBoxLayout boxWidth="15rem" />
+                                            </f:customLayout>
+                                            <f:items>
+                                                <f:GridListItem class="round special sapUiTinyMargin" type="Active" press="navToSR($event.getSource().getBindingContext('oReviews').getObject())">
+                                                    <VBox class="sapUiTinyMargin">
+                                                        <Title text="{oReviews>serviceOrderNo}-{oReviews>serviceName}" wrapping="true" class="boldTitle" />
+                                                        <ObjectStatus text="{oReviews>serviceTeam}" state="Information" icon="sap-icon://meeting-room" class="sapUiTinyMarginTop" />
+                                                        <ObjectStatus title="{i18n>serOver.table.serviceDescription}" text="{oReviews>productDescription} ({oReviews>itemNumber})" class="sapUiSmallMarginTop" />
+                                                    </VBox>
+                                                </f:GridListItem>
+                                            </f:items>
+                                        </f:GridList>
+                                        <IllustratedMessage illustrationSize="Dialog" illustrationType="sapIllus-EmptyList" visible="{= ${oReviews>/}.length === 0}" />
+                                    </IconTabFilter>
+                                </items>
+                            </IconTabBar>
+                        </VBox>
+                        <l:Grid id="cardsGrid" defaultSpan="XL5 L6 M12 S12"></l:Grid>
+                    </l:BlockLayoutCell>
+                </l:BlockLayoutRow>
+            </l:BlockLayout>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>

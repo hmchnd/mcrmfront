@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m"  xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:commons="sap.suite.ui.commons" xmlns:l="sap.ui.layout">
+    <f:GridListItem id="bookmarks" class="round sapUiSmallMarginTop" type="Inactive">
+        <VBox>
+            <HBox class="sapUiSmallMargin" wrap="Wrap" items="{oBookmarks>/}" visible="{= ${oBookmarks>/}.length !== 0}">
+                <HBox alignItems="Start" width="13.5rem" class="sapUiMediumMarginEnd sapUiSmallMarginBottom">
+                    <Avatar class="sapUiTinyMargin avSpecial" displaySize="S" displayShape="Square" src="{path:'oBookmarks>variantInfo',formatter:'.formatter.getBookmarkIcon'}" backgroundColor="{path:'oBookmarks>variantInfo',formatter:'.formatter.getAccent'}" press="openBookmark( $event.getSource().getBindingContext('oBookmarks').getObject().variantInfo )" />
+                    <VBox class="sapUiTinyMargin">
+                        <Link text="{oBookmarks>variantInfo_ext2}" class="boldTitle noUnderline" press="openBookmark( $event.getSource().getBindingContext('oBookmarks').getObject().variantInfo )" subtle="true" wrapping="true" />
+                        <Link text="{oBookmarks>variantInfo_ext1}" class="noUnderline" press="openBookmark( $event.getSource().getBindingContext('oBookmarks').getObject().variantInfo )" subtle="true" wrapping="true" />
+                        <ObjectStatus state="Information" text="{path:'oBookmarks>variantInfo',formatter:'.formatter.getBookmark'}" />
+                    </VBox>
+                </HBox>
+            </HBox>
+            <IllustratedMessage illustrationSize="Dialog" illustrationType="sapIllus-NoSavedItems_v1" visible="true" />
+        </VBox>
+    </f:GridListItem>
+
+</core:FragmentDefinition>

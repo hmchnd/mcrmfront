@@ -1,19 +1,184 @@
-.sapMTitle {
+@import 'wizard.css';
+@import 'interfaceRequest.css';
+@import 'questionnaire.css';
+@import 'colors.css';
+@import 'worklist.css';
+@import 'genericHeader.css';
 
-    font: revert;
-}
-.noTaskText{
-    background-color: transparent; /* Change to your desired color */
-    border: none !important;
-    box-shadow: none !important; 
-}
-.stickyPanel {
-    position: sticky;
-    top: 0;
-    z-index: 1000; /* Ensures it stays above other content */
-    background: transparent; /* Prevent overlap issues */
+.whiteBackground {
+    background: white;
 }
 
-.customGridItem {
-    background-color: #f0ffff ;
+.center {
+    text-align: center;
+}
+
+.backgorund {
+    background-color: #d5dadc !important
+}
+
+.marginProcessFlow {
+    margin-top: -20px !important;
+    position: absolute;
+    z-index: 3;
+
+}
+
+.objectStatusHeader {
+    width: 80px !important;
+    text-align: end;
+}
+
+.roundedCorners {
+    border-radius: 5px;
+    border: 2px solid gainsboro;
+}
+
+.marginList {
+    margin-left: -16px;
+    margin-bottom: 5px;
+}
+
+.marginChangeList {
+    margin-left: -16px;
+    margin-bottom: 5px;
+
+}
+
+.grid {
+    margin-left: -10px;
+    padding-top: 9px;
+    text-align: center;
+
+}
+
+.smallMarginBegin {
+    margin-left: 3px
+}
+
+.requestPanel {
+    margin-top: -20px;
+}
+
+.headerPanel {
+    margin-top: -15px;
+}
+
+.infoLabel {
+    border: 1px solid transparent !important;
+    color: #d5dadc !important;
+    background-color: #d5dadc !important
+}
+
+.decisionToolbar {
+    height: 70px !important;
+}
+
+.redBorder {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #BB0000 !important;
+}
+
+.tableNoBorderRight .sapUiTableCell {
+    border-right: none;
+}
+
+.heightAdjustment {
+    height: 100px !important;
+}
+
+.blackFont {
+    color: #111111 !important;
+}
+
+.widthAdjustment {
+    width: 40% !important;
+}
+
+.colorSchemeGreen {
+    border: 1px solid transparent !important;
+    color: #4cba6b !important;
+    background-color: #4cba6b !important
+}
+
+.grayedText {
+    color: #6a6d70 !important;
+}
+
+.iconSize {
+	font-size : 0.7rem;
+}
+
+.link {
+    color: #1071D2 !important;
+}
+
+.titleSize {
+	font-size : 1.5rem !important;
+}
+.bold {
+    font-weight: bold !important;
+}
+
+.illustratedMessageDescription {
+    margin-top: -170px !important;
+    margin-left: 35% !important;
+    text-align: center !important;
+    position: absolute;
+    z-index: 3;
+    font-size: 1rem !important;
+    color: #74777A !important;
+}
+
+.orangeBorder {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #DF6E06 !important;
+}
+
+.largeLabelPadding {
+    margin-top: -10px;
+}
+
+.tileClass {
+    background-color: powderblue !important;
+    /*color: #fff;*/
+    /*margin: 1rem;*/
+    margin-left: 3.5rem;
+    margin-bottom: 2rem;
+    margin-top: 1.2rem;
+}
+
+.newHover:hover {
+    border: 3px solid red;
+   
+  }
+
+.tileImageClass {
+    padding-right: 1rem;
+}
+
+.tileHboxClass {
+    margin-top: 1rem;
+}
+
+.tileContentClass {
+    color: #fff;
+}
+.tileFooterClass {
+    font-size: 1rem;
+}
+.slideInDown {
+    animation: 1s ease-out 0s 1 slideInFromDown;
+}
+.special {
+    border-radius: 0rem !important;
+    transition: transform 0.4s;
+}
+.special:hover {
+    transform: scale(1.02);
+}
+.round {
+    border-radius: 1rem !important;
 }

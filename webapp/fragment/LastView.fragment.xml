@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:plugins="sap.m.plugins" xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:commons="sap.suite.ui.commons" xmlns:l="sap.ui.layout">
+    <f:GridListItem id="recentList" class="round sapUiSmallMarginTop" type="Inactive">
+        <VBox>
+            <HBox class="sapUiSmallMarginTop sapUiSmallMarginBeginEnd" wrap="Wrap" items="{oRecent>/}" visible="{= ${oRecent>/}.length !== 0}">
+                <HBox alignItems="Start" width="13.5rem" class="sapUiMediumMarginEnd sapUiTinyMarginBottom">
+                    <Avatar class="sapUiTinyMargin avSpecial" displaySize="S" displayShape="Square" src="sap-icon://my-sales-order" backgroundColor="{path:'oRecent>serviceOrder',formatter:'.formatter.getAccent'}" press="openBookmark( $event.getSource().getBindingContext('oRecent').getObject().url )" />
+                    <VBox class="sapUiTinyMargin">
+                        <Link text="{oRecent>customerName}" class="boldTitle noUnderline" press="openBookmark( $event.getSource().getBindingContext('oRecent').getObject().url )" subtle="true" wrapping="true" />
+                        <Link text="{oRecent>serviceOrder}" class="noUnderline" press="openBookmark( $event.getSource().getBindingContext('oRecent').getObject().url )" subtle="true" wrapping="true" />
+                    </VBox>
+                </HBox>
+            </HBox>
+            <OverflowToolbar class="noBottomBorder" visible="{= ${oRecent>/}.length !== 0}">
+                <ToolbarSpacer />
+                <Button text="Clear" type="Transparent" press="clearLocalStorage" />
+            </OverflowToolbar>
+            <IllustratedMessage illustrationSize="Dialog" illustrationType="sapIllus-EmptyList" visible="true" />
+        </VBox>
+    </f:GridListItem>
+</core:FragmentDefinition>
