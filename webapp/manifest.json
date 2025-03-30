@@ -131,6 +131,13 @@
           "target": [
             "manage_products"
           ]
+        },
+        {
+          "name": "manage_leads",
+          "pattern": "manage_leads",
+          "target": [
+            "manage_leads"
+          ]
         }
         
       ],
@@ -146,6 +153,10 @@
         "manage_products": {
           "id": "manage_products",
           "name": "ManageProducts"
+        },
+        "manage_leads": {
+          "id": "manage_leads",
+          "name": "ManageLeads"
         }
        
       }

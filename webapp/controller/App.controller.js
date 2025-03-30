@@ -2,16 +2,16 @@ sap.ui.define(
   [
     "./BaseController",
     "sap/f/LayoutType",
-   
     "sap/ui/core/Fragment",
-    "micro/crm/frontend/model/Client"
+    "micro/crm/frontend/model/Client",
+    "micro/crm/frontend/model/Leads"
   ],
   (
     BaseController,
     LayoutType,
-  
     Fragment,
-    Client
+    Client,
+    Leads
   ) => {
     "use strict";
 
@@ -64,6 +64,14 @@ sap.ui.define(
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("productLayoutView").setProperty("/layout", sLayout);
           this.getModel("productLayoutView").refresh(true);
+
+        }
+
+        if(this.AppState.currentPage === "manage_leads"){
+          this.AppState.data.oSelectedLeadObject = new Leads();
+          let sLayout = LayoutType.TwoColumnsBeginExpanded;
+          this.getModel("productLayoutViewLeadView").setProperty("/layout", sLayout);
+          this.getModel("productLayoutViewLeadView").refresh(true);
 
         }
 
