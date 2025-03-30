@@ -23,7 +23,7 @@ sap.ui.define(
   ) => {
     "use strict";
 
-    return UIComponent.extend("framsys.com.framsysfrontend.Component", {
+    return UIComponent.extend("micro.crm.frontend.Component", {
       metadata: {
         manifest: "json",
         interfaces: ["sap.ui.core.IAsyncContentCreation"],
@@ -37,19 +37,19 @@ sap.ui.define(
         this.setModel(models.createDeviceModel(), "device");
         this.setModel(models.createLocalJsonModel(), "sideContentModel");
         this.setModel(
-          models.createProjectViewLayoutModel(),
+          models.createViewLayoutModel(),
           "projectLayoutView"
         );
         this.setModel(
-          models.manageActivityViewLayoutModel(),
-          "activityLayoutView"
+          models.createViewLayoutModel(),
+          "productLayoutView"
         );
         this.setModel(
-          models.roadmapTemplateViewLayoutModel(),
+          models.createViewLayoutModel(),
           "roadmapTemplateLayoutView"
         );
         this.setModel(
-          models.manageRoadmapViewLayoutModel(),
+          models.createViewLayoutModel(),
           "manageRoadmapLayoutView"
         );
         this.setModel(models.createModel(), "oFiori");

@@ -59,6 +59,14 @@ sap.ui.define(
 
         }
 
+        if(this.AppState.currentPage === "manage_products"){
+          this.AppState.data.oSelectedClientObject = new Client();
+          let sLayout = LayoutType.TwoColumnsBeginExpanded;
+          this.getModel("productLayoutView").setProperty("/layout", sLayout);
+          this.getModel("productLayoutView").refresh(true);
+
+        }
+
 
       }
     

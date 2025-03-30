@@ -13,7 +13,7 @@
 		showNavButton="false">
 
 		 <content>
-            <f:FlexibleColumnLayout layout="{projectLayoutView>/layout}">
+            <f:FlexibleColumnLayout layout="{productLayoutView>/layout}">
                 <f:beginColumnPages>
                     <Page showHeader="false">
                         <content>
@@ -29,12 +29,12 @@
                            
                             press=".onProductPress">
                             <HBox justifyContent="SpaceBetween">
-                                <Title text="Product 1" level="H3" class="sapUiTinyMarginBottom"/>
+                                <Title text="Service 1" level="H3" class="sapUiTinyMarginBottom"/>
                                 <!-- <ObjectStatus
                                     text="{= ${stockquantity} > 0 ? 'In Stock' : 'Out of Stock' }"
                                     state="{= ${stockquantity} > 0 ? 'Success' : 'Error' }"/> -->
                             </HBox>
-                            <Text text="This is my product" class="sapUiTinyMarginBottom"/>
+                            <Text text="This is my Service Details" class="sapUiTinyMarginBottom"/>
                             <!-- <ProgressIndicator
                                 percentValue="{= Math.min(100, ${stockquantity} * 10) }"
                                 displayValue="{stockquantity} in stock"
@@ -77,10 +77,10 @@
                 </f:beginColumnPages>
 
                 <f:midColumnPages>
-                    <!-- <core:Fragment
-                        fragmentName="micro.crm.frontend.fragment.AddClientDetails"
+                    <core:Fragment
+                        fragmentName="micro.crm.frontend.fragment.AddProductDetails"
                         type="XML"
-                    /> -->
+                    />
                 </f:midColumnPages>
 
                 <f:endColumnPages />

@@ -1,24 +1,25 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "sap/m/MessageBox",
-    "sap/m/MessageToast",
-    "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator",
-    "sap/ui/model/json/JSONModel"
-], function(Controller, MessageBox, MessageToast, Filter, FilterOperator, JSONModel) {
+    "./BaseController",
+	"sap/f/LayoutType",
+], function(BaseController,LayoutType) {
     "use strict";
 
-    return Controller.extend("micro.crm.frontend.controller.ManageProducts", {
+    return BaseController.extend("micro.crm.frontend.controller.ManageProducts", {
         onInit: function() {
-            // Initialize models
-           // this._initModels();
-            
-            // Load initial data
-          //  this._loadInitialData();
-            
-            // Set up table binding
-          //  this._bindTable();
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter
+			  .getRoute("manage_products")
+			  .attachPatternMatched(this.onRouteMatched, this);
         },
+        onRouteMatched: function(oEvent) {
+			var oArgs, oView;
+			oArgs = oEvent.getParameter("arguments");
+			this.AppState = this.getOwnerComponent().getState("App");
+			this.getView().setModel(this.AppState.getModel(), "AppState");
+			this.AppState.getModel().setSizeLimit(999999);
+			this.AppState.currentPage = "manage_products";
+			this.AppState.getClients();
+		},
         
         _initModels: function() {
             // Product model for dialog

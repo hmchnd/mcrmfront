@@ -29,7 +29,7 @@ function (JSONModel, Device) {
                         "enabled":true,
                     },
                     {
-                        "title":"My Product/Service",
+                        "title":"My Services",
                         "icon":"sap-icon://product",
                         "key":"manage_products",
                         "expanded": true,
@@ -43,7 +43,7 @@ function (JSONModel, Device) {
                         "enabled":true
                     },
                     {
-                        "title":"Leads",
+                        "title":"My Leads",
                         "key":"manage_leads",
                         "icon":"sap-icon://leads",
                         "enabled":true
@@ -55,13 +55,13 @@ function (JSONModel, Device) {
                         "enabled":true
                     },
                     {
-                        "title":"Tasks",
+                        "title":"My Tasks",
                         "key":"manage_tasks",
                         "icon":"sap-icon://activities",
                         "enabled":true
                     },
                     {
-                        "title":"Invoices",
+                        "title":"Client Invoices",
                         "key":"manage_invoice",
                         "icon":"sap-icon://my-sales-order",
                         "enabled":true
@@ -73,7 +73,7 @@ function (JSONModel, Device) {
                         "enabled":true
                     },
                     {
-                        "title":"Tickets",
+                        "title":"Client Issues",
                         "key":"manage_ticket",
                         "icon":"sap-icon://feedback",
                         "enabled":true
@@ -92,24 +92,8 @@ function (JSONModel, Device) {
             });
             return oModel;
         },
-        createProjectViewLayoutModel:function(){
+        createViewLayoutModel:function(){
             let oModel = new JSONModel();
-            return oModel;
-        },
-        currentAppStateModel:function(data){
-            let oModel = new JSONModel(data);
-            return oModel;
-        },
-        manageActivityViewLayoutModel:function(data){
-            let oModel = new JSONModel(data);
-            return oModel;
-        },
-        roadmapTemplateViewLayoutModel:function(data){
-            let oModel = new JSONModel(data);
-            return oModel;
-        },
-        manageRoadmapViewLayoutModel:function(data){
-            let oModel = new JSONModel(data);
             return oModel;
         },
         createModel: function(oData){
