@@ -36,11 +36,11 @@ sap.ui.define([
 			this.getModel("productLayoutViewLeadView").setProperty("/layout", sLayout);
 
 		},
-		onSaveClientDetails:function(){
+		onSaveLeadDetails:function(){
 			let oClient = this.AppState.data.oSelectedLeadObject;
-			this.AppState.saveClientDetails(oClient);
+			this.AppState.saveLeadDetails(oClient);
 		},
-		onDeleteProject:function(oEvent){
+		onDeleteLead:function(oEvent){
 			let oSelectedLeadObject =
 			this.AppState.data.oSelectedLeadObject ||
 			{};

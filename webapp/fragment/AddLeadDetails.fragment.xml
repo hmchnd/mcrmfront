@@ -11,10 +11,10 @@
                     <m:Title text="{AppState>/oSelectedLeadObject/id}" wrapping="true" visible="false" />
                 </expandedHeading>
                 <actions>
-                    <m:Button id="saveClientDetails" text="Save" icon="sap-icon://save" type="Critical" press="onSaveClientDetails" />
+                    <m:Button id="saveClientDetails" text="Save" icon="sap-icon://save" type="Critical" press="onSaveLeadDetails" />
 
                     <m:Button icon="sap-icon://decline" type="Critical" press="onCloseDetailPage" />
-                    <m:Button id="deleteProject" icon="sap-icon://delete" type="Critical" press="onDeleteProject" />
+                    <m:Button id="deleteProject" icon="sap-icon://delete" type="Critical" press="onDeleteLead" />
                 </actions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>

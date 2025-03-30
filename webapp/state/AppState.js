@@ -87,28 +87,45 @@ sap.ui.define(
               console.log('Error occured')
           });
         },
-        saveClientDetails:function(oClient){
+        saveClientDetails:function(oLead){
 
-          if(oClient.id){
-            this.AppService.updateClientDetails(oClient).then(function(data){
+          if(oLead.id){
+            this.AppService.updateClientDetails(oLead).then(function(data){
               this.getClients();
-              MessageToast.show("Client details updated successfully");
+              MessageToast.show("Lead details updated successfully");
             }.bind(this)).catch((Message)=>{
-              
             });
           }else{
-            this.AppService.saveClientDetails(oClient).then(function(data){
+            this.AppService.saveClientDetails(oLead).then(function(data){
               this.getClients();
-              MessageToast.show("Client details saved successfully");
+              MessageToast.show("Lead details saved successfully");
+            }.bind(this)).catch((Message)=>{
+              this.getClients();
+              MessageToast.show("Lead details saved successfully");
+            });
+
+          }
+        },
+
+        saveLeadDetails:function(oLead){
+          if(oLead.id){
+            this.AppService.updateLeadDetails(oLead).then(function(data){
+              this.getLeads();
+              MessageToast.show("Lead details updated successfully");
+            }.bind(this)).catch((Message)=>{
+            });
+          }else{
+            this.AppService.saveLeadDetails(oLead).then(function(data){
+              this.getLeads();
+              MessageToast.show("Lead details saved successfully");
             }.bind(this)).catch((Message)=>{
               this.getClients();
               MessageToast.show("Client details saved successfully");
             });
 
           }
-
-        
         },
+
         deleteClient:function(oClient){
           this.AppService.deleteClient(oClient).then(function(data){
             this.getClients();
