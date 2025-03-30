@@ -11,7 +11,7 @@
                     <m:Title text="{AppState>/oSelectedClientObject/id}" wrapping="true" visible="false" />
                 </expandedHeading>
                 <actions>
-                    <m:Button id="saveClientDetails" text="Save" icon="sap-icon://save" type="Critical" press="onSaveClientDetails" />
+                    <m:Button id="saveLeadDetails" text="Save" icon="sap-icon://save" type="Critical" press="onSaveClientDetails" />
 
                     <m:Button icon="sap-icon://decline" type="Critical" press="onCloseDetailPage" />
                     <m:Button id="deleteProject" icon="sap-icon://delete" type="Critical" press="onDeleteProject" />
