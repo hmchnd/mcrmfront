@@ -4,16 +4,16 @@ sap.ui.define(
 
     "sap/m/MessageBox",
    
-    "sap/m/MessageToast"
+    "sap/m/MessageToast",
+	"sap/ui/commons/Message"
 
 
   ],
   function (
     BaseObject,
-   
-    MessageBox,
-  
-    MessageToast
+	MessageBox,
+	MessageToast,
+	Message
   ) {
     "use strict";
     var AppState = BaseObject.extend(
@@ -78,12 +78,36 @@ sap.ui.define(
           });
         },
         saveClientDetails:function(oClient){
-          this.AppService.saveClientDetails(oClient).then(function(data){
-            MessageToast.show("Client details saved successfully");
-          }.bind(this)).catch((error)=>{
-            console.log('Error occured')
-          });
+
+          if(oClient.id){
+            this.AppService.updateClientDetails(oClient).then(function(data){
+              this.getClients();
+              MessageToast.show("Client details updated successfully");
+            }.bind(this)).catch((Message)=>{
+              
+            });
+          }else{
+            this.AppService.saveClientDetails(oClient).then(function(data){
+              this.getClients();
+              MessageToast.show("Client details saved successfully");
+            }.bind(this)).catch((Message)=>{
+              this.getClients();
+              MessageToast.show("Client details saved successfully");
+            });
+
+          }
+
+        
         },
+        deleteClient:function(oClient){
+          this.AppService.deleteClient(oClient).then(function(data){
+            this.getClients();
+            MessageToast.show("Client deleted successfully");
+          }.bind(this)).catch((Message)=>{
+            this.getClients();
+            MessageToast.show("Client deleted successfully");
+          });
+        }
 
     
 

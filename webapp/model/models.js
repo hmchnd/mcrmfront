@@ -31,7 +31,7 @@ function (JSONModel, Device) {
                     {
                         "title":"My Product/Service",
                         "icon":"sap-icon://product",
-                        "key":"Catalog",
+                        "key":"manage_products",
                         "expanded": true,
                         "enabled":true,
                     },

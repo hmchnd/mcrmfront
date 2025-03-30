@@ -20,6 +20,9 @@ sap.ui.define([
                 this.company = data?.company || "";
                 this.website = data?.website || "";
                 this.notes = data?.notes || "";
+                this.country = data?.country || "";
+                this.city = data?.city || "";
+                this.currecy = data?.currency || "INR";
                 this.tenantid = data?.tenantid || "b570c207-76fc-4dbb-b932-cbd4b1d12df5";
  
             }

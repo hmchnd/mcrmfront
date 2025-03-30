@@ -39,6 +39,12 @@ sap.ui.define([
 		onSaveClientDetails:function(){
 			let oClient = this.AppState.data.oSelectedClientObject;
 			this.AppState.saveClientDetails(oClient);
+		},
+		onDeleteProject:function(oEvent){
+			let oSelectedClientObject =
+			this.AppState.data.oSelectedClientObject ||
+			{};
+			this.AppState.deleteClient(oSelectedClientObject);
 		}
 
 		

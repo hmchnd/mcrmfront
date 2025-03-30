@@ -182,3 +182,29 @@
 .round {
     border-radius: 1rem !important;
 }
+
+.productCard {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.productCard:hover {
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.75rem 0 rgba(0, 0, 0, 0.15);
+}
+
+.sapMObjectStatusError .sapMObjectStatusText {
+    color: #bb0000 !important;
+}
+
+.sapMObjectStatusWarning .sapMObjectStatusText {
+    color: #df6e0c !important;
+}
+
+.sapMObjectStatusSuccess .sapMObjectStatusText {
+    color: #256f3a !important;
+}

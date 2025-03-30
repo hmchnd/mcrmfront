@@ -23,7 +23,7 @@ server:
          url: "http://localhost:5000/"
         
          headers:
-          tenant-id: "f247ce53-8a65-4f78-b1df-76470b3fb698"
+          tenant-id: "b570c207-76fc-4dbb-b932-cbd4b1d12df5"
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

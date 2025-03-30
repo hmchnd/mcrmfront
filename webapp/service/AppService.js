@@ -17,7 +17,12 @@ sap.ui.define(
       ,
       saveClientDetails:function(oClient){
         return this.http("/backend/clients").post("",oClient)
-      }
+      },updateClientDetails:function(oClient){
+        return this.http(`/backend/clients/${oClient.id}`).put("",oClient)
+      },
+      deleteClient:function(oClient){
+        return this.http(`/backend/clients/${oClient.id}`).delete()
+      },
 
   });
     return AppService;

@@ -1,0 +1,90 @@
+<mvc:View
+    controllerName="micro.crm.frontend.controller.ManageProducts"
+    xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+   
+    xmlns:card="sap.f.cards"
+    displayBlock="true"
+    height="100%">
+   <Page showHeader="false" enableScrolling="true" class="sapUiContentPadding"
+		showNavButton="false">
+
+		 <content>
+            <f:FlexibleColumnLayout layout="{projectLayoutView>/layout}">
+                <f:beginColumnPages>
+                    <Page showHeader="false">
+                        <content>
+                       <l:Grid
+                        id="productsGrid"
+                        defaultSpan="XL3 L4 M6 S12"
+                        class="sapUiSmallMargin">
+                       
+                        
+                        <!-- Product Cards -->
+                        <VBox
+                            class="sapUiSmallMargin productCard"
+                           
+                            press=".onProductPress">
+                            <HBox justifyContent="SpaceBetween">
+                                <Title text="Product 1" level="H3" class="sapUiTinyMarginBottom"/>
+                                <!-- <ObjectStatus
+                                    text="{= ${stockquantity} > 0 ? 'In Stock' : 'Out of Stock' }"
+                                    state="{= ${stockquantity} > 0 ? 'Success' : 'Error' }"/> -->
+                            </HBox>
+                            <Text text="This is my product" class="sapUiTinyMarginBottom"/>
+                            <!-- <ProgressIndicator
+                                percentValue="{= Math.min(100, ${stockquantity} * 10) }"
+                                displayValue="{stockquantity} in stock"
+                                showValue="true"
+                                state="{= ${stockquantity} > 5 ? 'Success' : ${stockquantity} > 0 ? 'Warning' : 'Error' }"
+                                height="0.75rem"
+                                class="sapUiSmallMarginBottom"/> -->
+                            <ObjectNumber
+                                number="{
+                                    parts: [
+                                        {path: 'price'},
+                                        {path: 'currency'}
+                                    ],
+                                    type: 'sap.ui.model.type.Currency',
+                                    formatOptions: {
+                                        showMeasure: true
+                                    }
+                                }"
+                                unit="{currency}"
+                                state="Success"
+                                class="sapUiSmallMarginBottom"/>
+                            <HBox justifyContent="End">
+                                <Button
+                                    icon="sap-icon://edit"
+                                    tooltip="Edit"
+                                    press=".onEditProduct"
+                                    type="Transparent"
+                                    class="sapUiTinyMarginEnd"/>
+                                <Button
+                                    icon="sap-icon://delete"
+                                    tooltip="Delete"
+                                    press=".onDeleteProduct"
+                                    type="Transparent"/>
+                            </HBox>
+                        </VBox>
+                    </l:Grid>      
+                         
+                        </content>
+                    </Page>
+                </f:beginColumnPages>
+
+                <f:midColumnPages>
+                    <!-- <core:Fragment
+                        fragmentName="micro.crm.frontend.fragment.AddClientDetails"
+                        type="XML"
+                    /> -->
+                </f:midColumnPages>
+
+                <f:endColumnPages />
+            </f:FlexibleColumnLayout>
+        </content>
+	</Page>
+</mvc:View>

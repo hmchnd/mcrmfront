@@ -124,6 +124,13 @@
           "target": [
             "manage_customers"
           ]
+        },
+        {
+          "name": "manage_products",
+          "pattern": "manage_products",
+          "target": [
+            "manage_products"
+          ]
         }
         
       ],
@@ -135,6 +142,10 @@
         "manage_customers": {
           "id": "manage_customers",
           "name": "ManageCustomer"
+        },
+        "manage_products": {
+          "id": "manage_products",
+          "name": "ManageProducts"
         }
        
       }
