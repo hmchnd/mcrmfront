@@ -19,16 +19,7 @@
                     <ToolbarSpacer/>
                     <Title text="{i18n>appTitle}" level="H2"/>
                     <ToolbarSpacer/>
-                    <Button id="errorButton" icon="sap-icon://message-popup" visible="{= ${alerts>/alerts/errors}.length === 0 ? false : true }" type="Transparent" press=".onMessagePopoverPress" tooltip="{i18n>Error/Warnings}">
-                        <layoutData>
-                            <OverflowToolbarLayoutData closeOverflowOnInteraction="false"/>
-                        </layoutData>
-                    </Button>
-                    <Button id="notificationButton" icon="sap-icon://bell-2" visible="{= ${alerts>/alerts/notifications}.length === 0 ? false : true }" type="Transparent" press=".onNotificationPress" tooltip="{i18n>Notifications}">
-                        <layoutData>
-                            <OverflowToolbarLayoutData closeOverflowOnInteraction="false"/>
-                        </layoutData>
-                    </Button>
+                   
 
                 </tnt:ToolHeader>
 
@@ -38,7 +29,15 @@
             <tnt:subHeader>
                 <tnt:ToolHeader>
 
+    <ToolbarSpacer/>
+    <ToolbarSpacer/>
 
+ <SearchField  placeholder="Search Anything" width="30%" id="idGlobalSearchField"  liveChange="onGlobalSearchFieldLiveChange">
+
+ <layoutData>
+                            <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                        </layoutData>
+                    </SearchField>
                     <!-- <Button type="Accept" text="Kanban" class="sapUiLargeMarginBegin"/>
                     <Button type="Critical" text="" icon="sap-icon://add" class="sapUiTinyMargin"/> -->
                     <ToolbarSpacer/>
