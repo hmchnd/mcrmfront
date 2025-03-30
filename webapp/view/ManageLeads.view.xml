@@ -1,0 +1,197 @@
+<mvc:View
+	height="100%"
+	controllerName="micro.crm.frontend.controller.ManageLeads"
+	xmlns:mvc="sap.ui.core.mvc"
+	 xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+	xmlns="sap.m"   xmlns:l="sap.ui.layout"  xmlns:grid="sap.ui.layout.cssgrid">
+
+	<Page showHeader="false" enableScrolling="true" class="sapUiContentPadding"
+		showNavButton="false">
+
+		 <content>
+            <f:FlexibleColumnLayout layout="{productLayoutViewLeadView>/layout}">
+                <f:beginColumnPages>
+                    <Page showHeader="false">
+                        <content>
+                            
+                            <f:GridList
+                                id="gridList"
+                                mode="None"
+                                growingThreshold="10"
+                                growing="true"
+                                growingDirection="Downwards"
+                                growingScrollToLoad="true"
+                                items="{
+        path: 'AppState>/clients',
+        sorter: { path: 'createdat', descending: true }
+    }"
+                                selectionChange="onSelectionChange"
+                                delete="onDelete"
+                                class="sapUiResponsiveContentPadding"
+                            >
+                                <f:customLayout>
+                                    <grid:GridBasicLayout
+                                        gridAutoRows="repeat(auto-fit)"
+                                        gridGap="0.5rem"
+                                    />
+                                </f:customLayout>
+
+                                <f:GridListItem
+                                    detailPress="onDetailPress"
+                                    press="onPress"
+                                    highlight="Success"
+                                    type="Active"
+                                >
+                                    <l:VerticalLayout
+                                        class="sapUiContentPadding equalColumns"
+                                        width="100%"
+                                    >
+                                        <FlexBox class="columns">
+                                            <Title
+                                                text="{AppState>name}"
+                                                wrapping="true"
+                                            >
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </Title>
+
+                                            <ObjectAttribute
+                                                title="Team"
+                                                text="{AppState>team}"
+                                            >
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </ObjectAttribute>
+
+                                            <ObjectAttribute
+                                                title="Name"
+                                                text="{AppState>name}"
+                                            >
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </ObjectAttribute>
+
+											<ObjectAttribute
+                                                title="Email"
+                                                text="{AppState>email}"
+                                            >
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </ObjectAttribute>
+
+                                            <ObjectStatus
+                                                title="Phone Number"
+                                                text="{AppState>phone}"
+                                                state="Warning"
+                                            >
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </ObjectStatus>
+
+                                            <VBox>
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                               <ObjectAttribute
+                                                title="Status"
+												text="{AppState>status}"
+                                               
+                                            >
+                                                <layoutData>
+                                                    <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </ObjectAttribute>
+                                              
+											   <ObjectAttribute
+												title="Source"
+												text="{AppState>source}"
+											   >
+											    <layoutData>
+											   <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </ObjectAttribute>
+
+                                            <ObjectAttribute
+												title="Notes"
+												text="{AppState>notes}"
+											   >
+											    <layoutData>
+											   <FlexItemData
+                                                        growFactor="1"
+                                                        baseSize="0"
+                                                        backgroundDesign="Transparent"
+                                                        styleClass="sapUiTinyMargin"
+                                                    />
+                                                </layoutData>
+                                            </ObjectAttribute>
+
+
+                                            </VBox>
+
+                                            
+                                        </FlexBox>
+                                    </l:VerticalLayout>
+                                </f:GridListItem>
+                            </f:GridList>
+                        </content>
+                    </Page>
+                </f:beginColumnPages>
+
+                <f:midColumnPages>
+                    <core:Fragment
+                        fragmentName="micro.crm.frontend.fragment.AddLeadDetails"
+                        type="XML"
+                    />
+                </f:midColumnPages>
+
+                <f:endColumnPages />
+            </f:FlexibleColumnLayout>
+        </content>
+	</Page>
+</mvc:View>
