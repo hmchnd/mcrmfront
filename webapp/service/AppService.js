@@ -12,7 +12,9 @@ sap.ui.define(
        },
        getclients:function(){
         return this.http("/backend/clients").get()
-
+       },
+       getleads:function(){
+        return this.http("/backend/leads").get()
        }
       ,
       saveClientDetails:function(oClient){
@@ -22,6 +24,9 @@ sap.ui.define(
       },
       deleteClient:function(oClient){
         return this.http(`/backend/clients/${oClient.id}`).delete()
+      },
+      deleteLeads:function(oLeads){
+        return this.http(`/backend/leads/${oLeads.id}`).delete()
       },
 
   });

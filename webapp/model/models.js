@@ -46,7 +46,8 @@ function (JSONModel, Device) {
                         "title":"My Leads",
                         "key":"manage_leads",
                         "icon":"sap-icon://leads",
-                        "enabled":true
+                        "enabled":true,
+                        "expanded": true
                     },
                     {
                         "title":"My Projects",
@@ -93,6 +94,10 @@ function (JSONModel, Device) {
             return oModel;
         },
         createViewLayoutModel:function(){
+            let oModel = new JSONModel();
+            return oModel;
+        },
+        createLeadViewModel:function(){
             let oModel = new JSONModel();
             return oModel;
         },

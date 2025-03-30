@@ -41,7 +41,8 @@ sap.ui.define(
            user:{},
             clients:[],
             currentPage:"",
-            oSelectedClientObject:{}
+            oSelectedClientObject:{},
+            oSelectedLeadObject: {}
 
           };
 
@@ -77,6 +78,15 @@ sap.ui.define(
               console.log('Error occured')
           });
         },
+
+        getLeads:function(){
+          this.AppService.getleads().then(function(data){
+            this.data.clients = JSON.parse(data);
+            this.updateModel();
+          }.bind(this)).catch((error)=>{
+              console.log('Error occured')
+          });
+        },
         saveClientDetails:function(oClient){
 
           if(oClient.id){
@@ -106,6 +116,15 @@ sap.ui.define(
           }.bind(this)).catch((Message)=>{
             this.getClients();
             MessageToast.show("Client deleted successfully");
+          });
+        },
+        deleteLeads:function(oLead){
+          this.AppService.deleteLeads(oLead).then(function(data){
+            this.getLeads();
+            MessageToast.show("Leads deleted successfully");
+          }.bind(this)).catch((Message)=>{
+            this.getLeads();
+            MessageToast.show("Leads deleted successfully");
           });
         }
 

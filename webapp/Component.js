@@ -45,6 +45,10 @@ sap.ui.define(
           "productLayoutView"
         );
         this.setModel(
+          models.createLeadViewModel(),
+          "productLayoutViewLeadView"
+        );
+        this.setModel(
           models.createViewLayoutModel(),
           "roadmapTemplateLayoutView"
         );
