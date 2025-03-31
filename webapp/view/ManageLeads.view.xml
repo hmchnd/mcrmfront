@@ -23,7 +23,7 @@
                                 growingDirection="Downwards"
                                 growingScrollToLoad="true"
                                 items="{
-        path: 'AppState>/clients',
+        path: 'AppState>/leads',
         sorter: { path: 'createdat', descending: true }
     }"
                                 selectionChange="onSelectionChange"

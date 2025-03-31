@@ -48,14 +48,7 @@ sap.ui.define(
           models.createLeadViewModel(),
           "productLayoutViewLeadView"
         );
-        this.setModel(
-          models.createViewLayoutModel(),
-          "roadmapTemplateLayoutView"
-        );
-        this.setModel(
-          models.createViewLayoutModel(),
-          "manageRoadmapLayoutView"
-        );
+      
         this.setModel(models.createModel(), "oFiori");
         this.getModel("oFiori").setData(this._buildMomentsIcons());
 

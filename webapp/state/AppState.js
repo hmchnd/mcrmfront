@@ -40,6 +40,7 @@ sap.ui.define(
           this.data = {
            user:{},
             clients:[],
+            leads:[],
             currentPage:"",
             oSelectedClientObject:{},
             oSelectedLeadObject: {}
@@ -81,7 +82,7 @@ sap.ui.define(
 
         getLeads:function(){
           this.AppService.getleads().then(function(data){
-            this.data.clients = JSON.parse(data);
+            this.data.leads = JSON.parse(data);
             this.updateModel();
           }.bind(this)).catch((error)=>{
               console.log('Error occured')
