@@ -4,14 +4,16 @@ sap.ui.define(
     "sap/f/LayoutType",
     "sap/ui/core/Fragment",
     "micro/crm/frontend/model/Client",
-    "micro/crm/frontend/model/Leads"
+    "micro/crm/frontend/model/Leads",
+    "micro/crm/frontend/model/Service",
   ],
   (
     BaseController,
     LayoutType,
     Fragment,
     Client,
-    Leads
+    Leads,
+    Service
   ) => {
     "use strict";
 
@@ -60,7 +62,7 @@ sap.ui.define(
         }
 
         if(this.AppState.currentPage === "manage_products"){
-          this.AppState.data.oSelectedClientObject = new Client();
+          this.AppState.data.oSelectedClientObject = new Service();
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("productLayoutView").setProperty("/layout", sLayout);
           this.getModel("productLayoutView").refresh(true);

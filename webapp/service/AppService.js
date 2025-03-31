@@ -37,6 +37,18 @@ sap.ui.define(
       deleteLeads:function(oLeads){
         return this.http(`/backend/leads/${oLeads.id}`).delete()
       },
+      saveServiceDetails:function(oService){
+        return this.http("/backend/services").post("",oService)
+      },
+      updateServiceDetails:function(oService){
+        return this.http(`/backend/services/${oService.id}`).put("",oService)
+      },
+      deleteService:function(oService){
+        return this.http(`/backend/services/${oService.id}`).delete()
+      },
+      getServices:function(){
+        return this.http("/backend/services").get()
+      },
 
   });
     return AppService;

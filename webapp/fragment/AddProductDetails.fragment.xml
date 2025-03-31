@@ -8,7 +8,7 @@
         <headerTitle>
             <ObjectPageDynamicHeaderTitle>
                 <expandedHeading>
-                    <m:Title text="{AppState>/oSelectedProduct/id}" wrapping="true" visible="false" />
+                    <m:Title text="{AppState>/oSelectedServiceObject/id}" wrapping="true" visible="false" />
                 </expandedHeading>
                 <actions>
                     <m:Button id="saveClientDetails" text="Save" icon="sap-icon://save" type="Critical" press="onSaveProductDetails" />
@@ -31,11 +31,11 @@
                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
                                 <form:content>
                                     <m:Label text="Service Name" required="true"/>
-                                    <m:Input value="{serviceModel>/name}" maxLength="100"/>
+                                    <m:Input value="{AppState>/oSelectedServiceObject/name}" maxLength="100"/>
                                     
                                     <m:Label text="Category" required="true"/>
                                     <m:ComboBox
-                                        selectedKey="{serviceModel>/categoryid}"
+                                        selectedKey="{AppState>/oSelectedServiceObject/categoryid}"
                                         items="{
                                             path: '/ServiceCategories',
                                             sorter: { path: 'name' }
@@ -44,7 +44,7 @@
                                     </m:ComboBox>
                                     
                                     <m:Label text="Description"/>
-                                    <m:TextArea value="{serviceModel>/description}" rows="3" growing="true"/>
+                                    <m:TextArea value="{AppState>/oSelectedServiceObject/description}" rows="3" growing="true"/>
                                 </form:content>
                             </form:SimpleForm>
 
@@ -57,7 +57,7 @@
                                 <form:content>
                                     <m:Label text="Rate Type" required="true"/>
                                     <m:Select
-                                        selectedKey="{serviceModel>/rate_type}"
+                                        selectedKey="{AppState>/oSelectedServiceObject/rate_type}"
                                         forceSelection="false">
                                         <core:Item key="hourly" text="Hourly"/>
                                         <core:Item key="daily" text="Daily"/>
@@ -69,12 +69,12 @@
                                     <m:Label text="Rate" required="true"/>
                                     <m:HBox>
                                         <m:Input 
-                                            value="{serviceModel>/rate}" 
+                                            value="{AppState>/oSelectedServiceObject/rate}" 
                                             type="Number"
                                             width="10rem"
                                             class="sapUiSmallMarginEnd"/>
                                         <m:ComboBox
-                                            selectedKey="{serviceModel>/currency}"
+                                            selectedKey="{AppState>/oSelectedServiceObject/currency}"
                                             items="{
                                                 path: 'supportedCurrencies>/'
                                             }"
@@ -84,15 +84,15 @@
                                     </m:HBox>
                                     
                                     <m:Label 
-                                        text="{= ${serviceModel>/rate_type} === 'project' ? 'Estimated Hours' : 'Minimum Hours' }"
-                                        visible="{= ${serviceModel>/rate_type} === 'project' || ${serviceModel>/rate_type} === 'hourly' }"/>
+                                        text="{= ${AppState>/oSelectedServiceObject/rate_type} === 'project' ? 'Estimated Hours' : 'Minimum Hours' }"
+                                        visible="{= ${AppState>/oSelectedServiceObject/rate_type} === 'project' || ${AppState>/oSelectedServiceObject/rate_type} === 'hourly' }"/>
                                     <m:StepInput
-                                        value="{serviceModel>/estimated_hours}"
+                                        value="{AppState>/oSelectedServiceObject/estimated_hours}"
                                         min="1"
                                         max="1000"
                                         step="1"
                                         width="10rem"
-                                        visible="{= ${serviceModel>/rate_type} === 'project' || ${serviceModel>/rate_type} === 'hourly' }"/>
+                                        visible="{= ${AppState>/oSelectedServiceObject/rate_type} === 'project' || ${AppState>/oSelectedServiceObject/rate_type} === 'hourly' }"/>
                                 </form:content>
                             </form:SimpleForm>
                         </blocks>
@@ -104,13 +104,13 @@
                                 <form:content>
                                     <m:Label text="Active Status"/>
                                     <m:Switch 
-                                        state="{serviceModel>/is_active}"
+                                        state="{AppState>/oSelectedServiceObject/is_active}"
                                         customTextOn="Active"
                                         customTextOff="Inactive"/>
                                     
                                     <m:Label text="Lead Time" tooltip="Time required before starting this service"/>
                                     <m:Input 
-                                        value="{serviceModel>/lead_time}"
+                                        value="{AppState>/oSelectedServiceObject/lead_time}"
                                         placeholder="e.g., 2 weeks, 3 days"
                                         width="12rem"/>
                                 </form:content>

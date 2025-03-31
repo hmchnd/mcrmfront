@@ -19,6 +19,10 @@
                         <content>
                        <l:Grid
                         id="productsGrid"
+                         content="{
+                                path: 'AppState>/services',
+                                templateShareable: false
+                            }"
                         defaultSpan="XL3 L4 M6 S12"
                         class="sapUiSmallMargin">
                        
@@ -29,12 +33,12 @@
                            
                             press=".onProductPress">
                             <HBox justifyContent="SpaceBetween">
-                                <Title text="Service 1" level="H3" class="sapUiTinyMarginBottom"/>
+                                <Title text="{AppState>name}" level="H3" class="sapUiTinyMarginBottom"/>
                                 <!-- <ObjectStatus
                                     text="{= ${stockquantity} > 0 ? 'In Stock' : 'Out of Stock' }"
                                     state="{= ${stockquantity} > 0 ? 'Success' : 'Error' }"/> -->
                             </HBox>
-                            <Text text="This is my Service Details" class="sapUiTinyMarginBottom"/>
+                            <Text text="{AppState>description}" class="sapUiTinyMarginBottom"/>
                             <!-- <ProgressIndicator
                                 percentValue="{= Math.min(100, ${stockquantity} * 10) }"
                                 displayValue="{stockquantity} in stock"

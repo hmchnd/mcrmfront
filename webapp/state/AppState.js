@@ -41,10 +41,16 @@ sap.ui.define(
            user:{},
             clients:[],
             leads:[],
+            services:[],
+            categories:[],
+            projects:[],
+            tasks:[],
+            invoices:[],
+            payments:[],
             currentPage:"",
             oSelectedClientObject:{},
-            oSelectedLeadObject: {}
-
+            oSelectedLeadObject: {},
+            oSelectedServiceObject: {},
           };
 
           // Initialize base object.
@@ -144,7 +150,44 @@ sap.ui.define(
             this.getLeads();
             MessageToast.show("Leads deleted successfully");
           });
-        }
+        },
+        saveServiceDetails:function(oService){
+          if(oService.id){
+              oService.userid = '1316dd7b-53b7-4e91-a1d4-8a171efc3481'
+            this.AppService.updateServiceDetails(oService).then(function(data){
+              this.getServices();
+              MessageToast.show("Service details updated successfully");
+            }.bind(this)).catch((Message)=>{
+            });
+          }else{
+            oService.userid = '1316dd7b-53b7-4e91-a1d4-8a171efc3481'
+            this.AppService.saveServiceDetails(oService).then(function(data){
+              this.getServices();
+              MessageToast.show("Service details saved successfully");
+            }.bind(this)).catch((Message)=>{
+              this.getServices();
+              MessageToast.show("Service details saved successfully");
+            });
+
+          }
+        },
+        deleteService:function(oService){
+          this.AppService.deleteService(oService).then(function(data){
+            this.getServices();
+            MessageToast.show("Service deleted successfully");
+          }.bind(this)).catch((Message)=>{
+            this.getServices();
+            MessageToast.show("Service deleted successfully");
+          });
+        },
+        getServices:function(){
+          this.AppService.getServices().then(function(data){
+            this.data.services = JSON.parse(data);
+            this.updateModel();
+          }.bind(this)).catch((error)=>{
+              console.log('Error occured')
+          });
+        },
 
     
 
