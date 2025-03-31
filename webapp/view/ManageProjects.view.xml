@@ -1,16 +1,20 @@
 <mvc:View
-	height="100%"
-	controllerName="micro.crm.frontend.controller.ManageCustomer"
+	controllerName="micro.crm.frontend.controller.ManageProjects"
 	xmlns:mvc="sap.ui.core.mvc"
 	 xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
-	xmlns="sap.m"   xmlns:l="sap.ui.layout"  xmlns:grid="sap.ui.layout.cssgrid">
+	xmlns="sap.m"   xmlns:l="sap.ui.layout"  xmlns:grid="sap.ui.layout.cssgrid"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+
 
 	<Page showHeader="false" enableScrolling="true" class="sapUiContentPadding"
 		showNavButton="false">
 
 		 <content>
-            <f:FlexibleColumnLayout layout="{customerLayoutView>/layout}">
+            <f:FlexibleColumnLayout layout="{projectLayoutView>/layout}">
                 <f:beginColumnPages>
                     <Page showHeader="false">
                         <content>
@@ -23,7 +27,7 @@
                                 growingDirection="Downwards"
                                 growingScrollToLoad="true"
                                 items="{
-        path: 'AppState>/clients',
+        path: 'AppState>/projects',
         sorter: { path: 'createdat', descending: true }
     }"
                                 selectionChange="onSelectionChange"
@@ -63,8 +67,8 @@
                                             </Title>
 
                                             <ObjectAttribute
-                                                title="Profession"
-                                                text="{AppState>profession}"
+                                                title="Description"
+                                                text="{AppState>description}"
                                             >
                                                 <layoutData>
                                                     <FlexItemData
@@ -77,8 +81,8 @@
                                             </ObjectAttribute>
 
                                             <ObjectAttribute
-                                                title="Company/Work"
-                                                text="{AppState>company}"
+                                                title="Client"
+                                                text="{AppState>client}"
                                             >
                                                 <layoutData>
                                                     <FlexItemData
@@ -91,8 +95,8 @@
                                             </ObjectAttribute>
 
 											<ObjectAttribute
-                                                title="Client Budget"
-                                                text="{AppState>budgetrange} INR"
+                                                title="Start Date"
+                                                text="{AppState>startdate}"
                                             >
                                                 <layoutData>
                                                     <FlexItemData
@@ -105,8 +109,8 @@
                                             </ObjectAttribute>
 
                                             <ObjectStatus
-                                                title="Client Address"
-                                                text="{AppState>address}"
+                                                title="End Date"
+                                                text="{AppState>enddate}"
                                                 state="Warning"
                                             >
                                                 <layoutData>
@@ -129,8 +133,8 @@
                                                     />
                                                 </layoutData>
                                                <ObjectAttribute
-                                                title="Client Email"
-												text="{AppState>email}"
+                                                title="Status"
+												text="{AppState>status}"
                                                
                                             >
                                                 <layoutData>
@@ -143,19 +147,7 @@
                                                 </layoutData>
                                             </ObjectAttribute>
                                               
-											   <ObjectAttribute
-												title="Client Phone"
-												text="{AppState>phone}"
-											   >
-											    <layoutData>
-											   <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectAttribute>
+											 
 
 
                                             </VBox>
@@ -171,7 +163,7 @@
 
                 <f:midColumnPages>
                     <core:Fragment
-                        fragmentName="micro.crm.frontend.fragment.AddClientDetails"
+                        fragmentName="micro.crm.frontend.fragment.AddProjectDetails"
                         type="XML"
                     />
                 </f:midColumnPages>

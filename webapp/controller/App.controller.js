@@ -6,6 +6,7 @@ sap.ui.define(
     "micro/crm/frontend/model/Client",
     "micro/crm/frontend/model/Leads",
     "micro/crm/frontend/model/Service",
+    "micro/crm/frontend/model/Project",
   ],
   (
     BaseController,
@@ -13,7 +14,8 @@ sap.ui.define(
     Fragment,
     Client,
     Leads,
-    Service
+    Service,
+    Project
   ) => {
     "use strict";
 
@@ -56,8 +58,8 @@ sap.ui.define(
         if(this.AppState.currentPage === "manage_customers"){
           this.AppState.data.oSelectedClientObject = new Client();
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
-          this.getModel("projectLayoutView").setProperty("/layout", sLayout);
-          this.getModel("projectLayoutView").refresh(true);
+          this.getModel("customerLayoutView").setProperty("/layout", sLayout);
+          this.getModel("customerLayoutView").refresh(true);
 
         }
 
@@ -74,6 +76,22 @@ sap.ui.define(
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("productLayoutViewLeadView").setProperty("/layout", sLayout);
           this.getModel("productLayoutViewLeadView").refresh(true);
+
+        }
+
+        if(this.AppState.currentPage === "manage_projects"){
+          this.AppState.data.oSelectedLeadObject = new Project();
+          let sLayout = LayoutType.TwoColumnsBeginExpanded;
+          this.getModel("projectLayoutView").setProperty("/layout", sLayout);
+          this.getModel("projectLayoutView").refresh(true);
+
+        }
+
+        if(this.AppState.currentPage === "manage_tasks"){
+          this.AppState.data.oSelectedLeadObject = new Leads();
+          let sLayout = LayoutType.TwoColumnsBeginExpanded;
+          this.getModel("TaskLayoutView").setProperty("/layout", sLayout);
+          this.getModel("TaskLayoutView").refresh(true);
 
         }
 

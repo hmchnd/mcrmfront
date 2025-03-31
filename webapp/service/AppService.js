@@ -49,6 +49,21 @@ sap.ui.define(
       getServices:function(){
         return this.http("/backend/services").get()
       },
+      getServiceCategories:function(){
+        return this.http("/backend/service-categories").get()
+      },
+      getProjects:function(){
+        return this.http("/backend/projects").get()
+      },
+      saveProjectDetails:function(oProject){
+        return this.http("/backend/projects").post("",oProject)
+      },
+      updateProjectDetails:function(oProject){
+        return this.http(`/backend/projects/${oProject.id}`).put("",oProject)
+      },
+      deleteProject:function(oProject){
+        return this.http(`/backend/projects/${oProject.id}`).delete()
+      },
 
   });
     return AppService;

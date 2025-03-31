@@ -138,6 +138,20 @@
           "target": [
             "manage_leads"
           ]
+        },
+        {
+          "name": "manage_projects",
+          "pattern": "manage_projects",
+          "target": [
+            "manage_projects"
+          ]
+        },
+        {
+          "name": "manage_tasks",
+          "pattern": "manage_tasks",
+          "target": [
+            "manage_tasks"
+          ]
         }
         
       ],
@@ -157,6 +171,14 @@
         "manage_leads": {
           "id": "manage_leads",
           "name": "ManageLeads"
+        },
+        "manage_projects": {
+          "id": "manage_projects",
+          "name": "ManageProjects"
+        },
+        "manage_tasks": {
+          "id": "manage_tasks",
+          "name": "ManageTasks"
         }
        
       }

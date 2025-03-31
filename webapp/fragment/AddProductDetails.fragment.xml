@@ -14,7 +14,7 @@
                     <m:Button id="saveClientDetails" text="Save" icon="sap-icon://save" type="Critical" press="onSaveProductDetails" />
 
                     <m:Button icon="sap-icon://decline" type="Critical" press="onCloseDetailPage" />
-                    <m:Button id="deleteProject" icon="sap-icon://delete" type="Critical" press="onDeleteProduct" />
+                    <m:Button id="deleteServices" icon="sap-icon://delete" type="Critical" press="onDeleteServices" />
                 </actions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
@@ -37,10 +37,10 @@
                                     <m:ComboBox
                                         selectedKey="{AppState>/oSelectedServiceObject/categoryid}"
                                         items="{
-                                            path: '/ServiceCategories',
+                                            path: 'AppState>/categories',
                                             sorter: { path: 'name' }
                                         }">
-                                        <core:Item key="{id}" text="{name}"/>
+                                        <core:Item key="{AppState>id}" text="{AppState>name}"/>
                                     </m:ComboBox>
                                     
                                     <m:Label text="Description"/>
@@ -75,11 +75,11 @@
                                             class="sapUiSmallMarginEnd"/>
                                         <m:ComboBox
                                             selectedKey="{AppState>/oSelectedServiceObject/currency}"
-                                            items="{
-                                                path: 'supportedCurrencies>/'
-                                            }"
+                                           
                                             width="8rem">
-                                            <core:Item key="{key}" text="{text}"/>
+                                            <core:Item key="USD" text="USD"/>
+                                             <core:Item key="INR" text="INR"/>
+                                              <core:Item key="EURO" text="EURO"/>
                                         </m:ComboBox>
                                     </m:HBox>
                                     

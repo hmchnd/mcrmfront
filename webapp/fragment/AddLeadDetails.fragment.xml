@@ -33,7 +33,7 @@
                                     <m:Label text="Team" required="true" />
                                     <m:Input id="idTeamLV" value="{AppState>/oSelectedLeadObject/team}" />
 
-                                    <m:Label text="Name" />
+                                    <m:Label text="Name" required="true" />
                                     <m:Input id="idNameLV" value="{AppState>/oSelectedLeadObject/name}" />
 
                                     <m:Label text="Email" required="true" />
@@ -42,11 +42,19 @@
                                     <m:Input id="idPhoneLV" value="{AppState>/oSelectedLeadObject/phone}" change="onChangeDate" />
                                     <m:Label text="Status" />
                                     <!-- <m:Input value="{AppState>/oSelectedProject/currency}" /> -->
-                                    <m:Input value="{AppState>/oSelectedLeadObject/status}" />
+                                    <!-- <m:Input value="{AppState>/oSelectedLeadObject/status}" /> -->
+                                     <m:ComboBox
+                                        selectedKey="{AppState>/oSelectedLeadObject/status}"
+                                        >
+                                        <core:Item key="New" text="New"/>
+                                         <core:Item key="Contacted" text="Contacted"/>
+                                          <core:Item key="Converted" text="Converted"/>
+                                          <core:Item key="Lost" text="Lost"/>
+                                    </m:ComboBox>
                                     <m:Label text="Source" />
-                                    <m:Input id="idSourceLV" value="{AppState>/oSelectedLeadObject/source}" editable="true" />
+                                    <m:TextArea id="idSourceLV" value="{AppState>/oSelectedLeadObject/source}" editable="true" />
                                     <m:Label text="Notes" />
-                                    <m:Input id="idNotesLV" value="{AppState>/oSelectedLeadObject/notes}"/>
+                                    <m:TextArea id="idNotesLV" value="{AppState>/oSelectedLeadObject/notes}"/>
 
                                 </form:content>
                             </form:SimpleForm>

@@ -51,6 +51,8 @@ sap.ui.define(
             oSelectedClientObject:{},
             oSelectedLeadObject: {},
             oSelectedServiceObject: {},
+            oSelectedProjectObject: {},
+            oSelectedTaskObject: {},
           };
 
           // Initialize base object.
@@ -186,6 +188,51 @@ sap.ui.define(
             this.updateModel();
           }.bind(this)).catch((error)=>{
               console.log('Error occured')
+          });
+        },
+        getServiceCategories:function(){
+          this.AppService.getServiceCategories().then(function(data){
+            this.data.categories = JSON.parse(data);
+            this.updateModel();
+          }.bind(this)).catch((error)=>{
+              console.log('Error occured')
+          });
+        },
+        getProjects:function(){
+          this.AppService.getProjects().then(function(data){
+            this.data.projects = JSON.parse(data);
+            this.updateModel();
+          }.bind(this)).catch((error)=>{
+              console.log('Error occured')
+          });
+        },
+        saveProjectDetails:function(oProject){
+          oProject.team = 'a5c2239e-c014-41dc-beac-6fc5130d1005'
+          oProject.status = 'Open'
+          if(oProject.id){
+            this.AppService.updateProjectDetails(oProject).then(function(data){
+              this.getProjects();
+              MessageToast.show("Project details updated successfully");
+            }.bind(this)).catch((Message)=>{
+            });
+          }else{
+            this.AppService.saveProjectDetails(oProject).then(function(data){
+              this.getProjects();
+              MessageToast.show("Project details saved successfully");
+            }.bind(this)).catch((Message)=>{
+              this.getProjects();
+              MessageToast.show("Project details saved successfully");
+            });
+
+          }
+        },
+        deleteProject:function(oProject){
+          this.AppService.deleteProject(oProject).then(function(data){
+            this.getProjects();
+            MessageToast.show("Project deleted successfully");
+          }.bind(this)).catch((Message)=>{
+            this.getProjects();
+            MessageToast.show("Project deleted successfully");
           });
         },
 

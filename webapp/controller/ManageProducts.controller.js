@@ -1,7 +1,8 @@
 sap.ui.define([
     "./BaseController",
 	"sap/f/LayoutType",
-], function(BaseController,LayoutType) {
+    "sap/m/MessageBox",
+], function(BaseController,LayoutType, MessageBox) {
     "use strict";
 
     return BaseController.extend("micro.crm.frontend.controller.ManageProducts", {
@@ -19,6 +20,7 @@ sap.ui.define([
 			this.AppState.getModel().setSizeLimit(999999);
 			this.AppState.currentPage = "manage_products";
 			this.AppState.getServices();
+            this.AppState.getServiceCategories();
 		},
         
         onSaveProductDetails: function() {
@@ -49,9 +51,17 @@ sap.ui.define([
             
             return true;
         },
+        onEditProduct:function(oEvent) {
+            let oSelectedServiceObject =
+            oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
+            {};
+			this.AppState.data.oSelectedServiceObject = oSelectedServiceObject;
+			var sLayout = LayoutType.TwoColumnsBeginExpanded;
+			this.getModel("productLayoutView").setProperty("/layout", sLayout);
+        },
         
-        onDeleteProduct: function(oEvent) {
-            var oSelectedItem = oEvent.getSource().getBindingContext().getObject();
+        onDeleteServices: function(oEvent) {
+            var oSelectedItem = this.AppState.data.oSelectedServiceObject;
             
             MessageBox.confirm(
                 `Are you sure you want to delete "${oSelectedItem.name}"?`,
@@ -59,14 +69,8 @@ sap.ui.define([
                     actions: [MessageBox.Action.YES, MessageBox.Action.NO],
                     onClose: function(oAction) {
                         if (oAction === MessageBox.Action.YES) {
-                            this.getOwnerComponent().getAppService().deleteProduct(oSelectedItem.id)
-                                .then(function() {
-                                    MessageToast.show("Product deleted successfully");
-                                    this._loadInitialData();
-                                }.bind(this))
-                                .catch(function(oError) {
-                                    MessageBox.error("Failed to delete product: " + oError.message);
-                                });
+                            this.AppState.deleteService(oSelectedItem);
+                                
                         }
                     }.bind(this)
                 }

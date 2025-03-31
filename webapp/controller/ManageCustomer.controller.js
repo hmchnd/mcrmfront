@@ -24,8 +24,8 @@ sap.ui.define([
 		},
 		onCloseDetailPage: function() {
 			let sLayout = sap.f.LayoutType.OneColumn;
-			this.getModel("projectLayoutView").setProperty("/layout", sLayout);
-			this.getModel("projectLayoutView").refresh(true);
+			this.getModel("customerLayoutView").setProperty("/layout", sLayout);
+			this.getModel("customerLayoutView").refresh(true);
 		},
         onPress: function (oEvent) {
 			let oSelectedClientObject =
@@ -33,7 +33,7 @@ sap.ui.define([
             {};
 			this.AppState.data.oSelectedClientObject = oSelectedClientObject;
 			var sLayout = LayoutType.TwoColumnsBeginExpanded;
-			this.getModel("projectLayoutView").setProperty("/layout", sLayout);
+			this.getModel("customerLayoutView").setProperty("/layout", sLayout);
 
 		},
 		onSaveClientDetails:function(){

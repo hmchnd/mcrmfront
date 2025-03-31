@@ -1,0 +1,75 @@
+<core:FragmentDefinition xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+    <ObjectPageLayout id="idProjectlayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:Title text="{AppState>/oSelectedProjectObject/id}" wrapping="true" visible="false" />
+                </expandedHeading>
+                <actions>
+                    <m:Button id="idSaveTask" text="Save" icon="sap-icon://save" type="Critical" press="onSaveProjectDetails" />
+
+                    <m:Button icon="sap-icon://decline" type="Critical" press="onCloseDetailPage" />
+                    <m:Button id="deleteTask" icon="sap-icon://delete" type="Critical" press="onDeleteTask" />
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch" />
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection title="Task Details">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm id="idTaskform" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                                <form:content>
+                                    <m:Label text="Task Name" required="true" />
+                                    <m:Input id="idTaskName" value="{AppState>/oSelectedTaskObject/project}" />
+
+                                    <m:Label text="Task description" />
+                                    <m:Input id="idDescription" value="{AppState>/oSelectedTaskObject/assignedto}" />
+
+                                    <m:Label text="Project" required="true" />
+                                       <m:ComboBox
+                                        selectedKey="{AppState>/oSelectedTaskObject/project}"
+                                        items="{
+                                            path: 'AppState>/projects',
+                                            sorter: { path: 'name' }
+                                        }">
+                                        <core:Item key="{AppState>id}" text="{AppState>name}"/>
+                                    </m:ComboBox>
+
+
+                                    <m:Label text="Assigned To" required="true" />
+                                      <m:Input id="idAssignedTo" value="{AppState>/oSelectedTaskObject/project}" />
+
+                                    <m:Label text="Due Date"  />
+                                    <m:DatePicker id="idDueDate" value="{AppState>/oSelectedTaskObject/startdate}" valueFormat="yyyyMMdd"/>
+                                    
+
+                                     <m:Label text="Task Status" />
+                                    <m:Input id="idStatus" value="{AppState>/oSelectedTaskObject/status}" editable="false" />
+                                   
+
+                                </form:content>
+                            </form:SimpleForm>
+
+                        </blocks>
+                    </ObjectPageSubSection>
+
+
+
+
+
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</core:FragmentDefinition>

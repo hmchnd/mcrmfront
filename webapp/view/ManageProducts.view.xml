@@ -34,30 +34,26 @@
                             press=".onProductPress">
                             <HBox justifyContent="SpaceBetween">
                                 <Title text="{AppState>name}" level="H3" class="sapUiTinyMarginBottom"/>
-                                <!-- <ObjectStatus
-                                    text="{= ${stockquantity} > 0 ? 'In Stock' : 'Out of Stock' }"
-                                    state="{= ${stockquantity} > 0 ? 'Success' : 'Error' }"/> -->
+                                <ObjectStatus
+                                    title="Rate Type"
+                                    text="{AppState>rate_type}"
+                                    state="Success"/>
                             </HBox>
-                            <Text text="{AppState>description}" class="sapUiTinyMarginBottom"/>
-                            <!-- <ProgressIndicator
-                                percentValue="{= Math.min(100, ${stockquantity} * 10) }"
-                                displayValue="{stockquantity} in stock"
-                                showValue="true"
-                                state="{= ${stockquantity} > 5 ? 'Success' : ${stockquantity} > 0 ? 'Warning' : 'Error' }"
-                                height="0.75rem"
-                                class="sapUiSmallMarginBottom"/> -->
+                            <Text text="Description: {AppState>description}" class="sapUiTinyMarginBottom"/>
+                           
                             <ObjectNumber
+                                
                                 number="{
                                     parts: [
-                                        {path: 'price'},
-                                        {path: 'currency'}
+                                        {path: 'AppState>rate'}
+                                       
                                     ],
                                     type: 'sap.ui.model.type.Currency',
                                     formatOptions: {
                                         showMeasure: true
                                     }
                                 }"
-                                unit="{currency}"
+                                unit="{AppState>currency}"
                                 state="Success"
                                 class="sapUiSmallMarginBottom"/>
                             <HBox justifyContent="End">
@@ -67,11 +63,7 @@
                                     press=".onEditProduct"
                                     type="Transparent"
                                     class="sapUiTinyMarginEnd"/>
-                                <Button
-                                    icon="sap-icon://delete"
-                                    tooltip="Delete"
-                                    press=".onDeleteProduct"
-                                    type="Transparent"/>
+                               
                             </HBox>
                         </VBox>
                     </l:Grid>      

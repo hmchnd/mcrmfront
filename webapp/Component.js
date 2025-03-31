@@ -38,7 +38,7 @@ sap.ui.define(
         this.setModel(models.createLocalJsonModel(), "sideContentModel");
         this.setModel(
           models.createViewLayoutModel(),
-          "projectLayoutView"
+          "customerLayoutView"
         );
         this.setModel(
           models.createViewLayoutModel(),
@@ -47,6 +47,16 @@ sap.ui.define(
         this.setModel(
           models.createLeadViewModel(),
           "productLayoutViewLeadView"
+        );
+
+        this.setModel(
+          models.createViewLayoutModel(),
+          "projectLayoutView"
+        );
+
+        this.setModel(
+          models.createViewLayoutModel(),
+          "TaskLayoutView"
         );
       
         this.setModel(models.createModel(), "oFiori");
