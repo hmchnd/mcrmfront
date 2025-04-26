@@ -30,8 +30,6 @@
                         <blocks>
                             <form:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
                                 <form:content>
-                                    <m:Label text="Team" required="true" />
-                                    <m:Input id="idTeamLV" value="{AppState>/oSelectedLeadObject/team}" />
 
                                     <m:Label text="Name" required="true" />
                                     <m:Input id="idNameLV" value="{AppState>/oSelectedLeadObject/name}" />
@@ -43,16 +41,45 @@
                                     <m:Label text="Status" />
                                     <!-- <m:Input value="{AppState>/oSelectedProject/currency}" /> -->
                                     <!-- <m:Input value="{AppState>/oSelectedLeadObject/status}" /> -->
-                                     <m:ComboBox
-                                        selectedKey="{AppState>/oSelectedLeadObject/status}"
-                                        >
+                                    <m:ComboBox selectedKey="{AppState>/oSelectedLeadObject/status}">
                                         <core:Item key="New" text="New"/>
-                                         <core:Item key="Contacted" text="Contacted"/>
-                                          <core:Item key="Converted" text="Converted"/>
-                                          <core:Item key="Lost" text="Lost"/>
+                                        <core:Item key="Contacted" text="Contacted"/>
+                                        <core:Item key="Qualified" text="Qualified"/>
+                                        <core:Item key="Proposal" text="Proposal"/>
+                                        <core:Item key="Closed-Won" text="Won"/>
+                                        <core:Item key="Closed-Lost" text="Lost"/>
+
                                     </m:ComboBox>
+                                    <m:Label text="Priority" />
+                                    <m:ComboBox selectedKey="{AppState>/oSelectedLeadObject/priority}">
+                                        <core:Item key="High" text="High"/>
+                                        <core:Item key="Medium" text="Medium"/>
+                                        <core:Item key="Low" text="Low"/>
+                                    </m:ComboBox>
+                                    <m:Label text="Budget" />
+                                    <m:Input id="idBudgetLV" value="{AppState>/oSelectedLeadObject/budget}" type="Number" placeholder="0.00" change="onChangeDate" />
+                                    <m:Label text="Currency" />
+                                    <m:Text text="INR" />
+                                    <m:Label text="Last Contacted" />
+                                    <m:DatePicker id="idLastContactedLV" value="{AppState>/oSelectedLeadObject/last_contacted}" displayFormat="dd/MM/yyyy" change="onChangeDate" />
+                                    <m:Label text="Next Follow Up" />
+                                    <m:DatePicker id="idNextFollowUpLV" value="{AppState>/oSelectedLeadObject/next_followup}" displayFormat="dd/MM/yyyy" change="onChangeDate" />
+
+
+                                  
+
+
+
                                     <m:Label text="Source" />
-                                    <m:TextArea id="idSourceLV" value="{AppState>/oSelectedLeadObject/source}" editable="true" />
+                                    <!-- <m:TextArea id="idSourceLV" value="{AppState>/oSelectedLeadObject/source}" editable="true" /> -->
+                                    <m:ComboBox selectedKey="{AppState>/oSelectedLeadObject/source}">
+                                        <core:Item key="Website" text="Website"/>
+                                        <core:Item key="Social Media" text="Social Media"/>
+                                        <core:Item key="Email" text="Email"/>
+                                        <core:Item key="Referral" text="Referral"/>
+                                        <core:Item key="Event" text="Event"/>
+                                        <core:Item key="Other" text="Other"/>
+                                    </m:ComboBox> 
                                     <m:Label text="Notes" />
                                     <m:TextArea id="idNotesLV" value="{AppState>/oSelectedLeadObject/notes}"/>
 

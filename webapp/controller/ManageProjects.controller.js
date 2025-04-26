@@ -22,6 +22,7 @@ sap.ui.define([
 			this.getView().setModel(this.AppState.getModel(), "AppState");
 			this.AppState.getModel().setSizeLimit(999999);
 			this.AppState.currentPage = "manage_projects";
+			this.AppState.data.globalCreateButtonVisibility = true;
 			this.AppState.getProjects();
 		},
 		onCloseDetailPage: function() {

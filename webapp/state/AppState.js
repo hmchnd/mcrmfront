@@ -5,7 +5,9 @@ sap.ui.define(
     "sap/m/MessageBox",
    
     "sap/m/MessageToast",
-	"sap/ui/commons/Message"
+	"sap/ui/commons/Message",
+  "../model/InvoiceItems",
+  "../model/Invoice",
 
 
   ],
@@ -13,7 +15,9 @@ sap.ui.define(
     BaseObject,
 	MessageBox,
 	MessageToast,
-	Message
+	Message,
+  InvoiceItems,
+  Invoice
   ) {
     "use strict";
     var AppState = BaseObject.extend(
@@ -38,21 +42,27 @@ sap.ui.define(
           that.ViewController = null; // View controller instance.
 
           this.data = {
-           user:{},
+            globalCreateButtonVisibility: false,
+            user:{},
             clients:[],
-            leads:[],
+            Leads:[],
             services:[],
             categories:[],
             projects:[],
             tasks:[],
             invoices:[],
+            invoice_items :[],
             payments:[],
+            teamMembers:[],
             currentPage:"",
             oSelectedClientObject:{},
             oSelectedLeadObject: {},
             oSelectedServiceObject: {},
             oSelectedProjectObject: {},
             oSelectedTaskObject: {},
+            oSelectedInvoiceObject: {},
+            oSelectedInvoiceItemObject: [],
+          
           };
 
           // Initialize base object.
@@ -90,7 +100,7 @@ sap.ui.define(
 
         getLeads:function(){
           this.AppService.getleads().then(function(data){
-            this.data.leads = JSON.parse(data);
+            this.data.Leads = JSON.parse(data);
             this.updateModel();
           }.bind(this)).catch((error)=>{
               console.log('Error occured')
@@ -235,6 +245,74 @@ sap.ui.define(
             MessageToast.show("Project deleted successfully");
           });
         },
+        getTasks:function(){
+          this.AppService.getTasks().then(function(data){
+            this.data.tasks = JSON.parse(data);
+            this.updateModel();
+          }.bind(this)).catch((error)=>{
+              console.log('Error occured')
+          });
+        },
+        saveTaskDetails:function(oTask){
+          oTask.assignedto = 'a5c2239e-c014-41dc-beac-6fc5130d1005'
+          oTask.status = 'To Do'
+          if(oTask.id){
+            this.AppService.updateTaskDetails(oTask).then(function(data){
+              this.getTasks();
+              MessageToast.show("Task details updated successfully");
+            }.bind(this)).catch((Message)=>{
+            });
+          }else{
+            this.AppService.saveTaskDetails(oTask).then(function(data){
+              this.getTasks();
+              MessageToast.show("Task details saved successfully");
+            }.bind(this)).catch((Message)=>{
+              this.getTasks();
+              MessageToast.show("Task details saved successfully");
+            });
+
+          }
+        },
+        deleteTask:function(oTask){
+          this.AppService.deleteTask(oTask).then(function(data){
+            this.getTasks();
+            MessageToast.show("Task deleted successfully");
+          }.bind(this)).catch((Message)=>{
+            this.getTasks();
+            MessageToast.show("Task deleted successfully");
+          });
+        },
+        getInvoices:function(){
+          this.AppService.getInvoices().then(function(data){
+            this.data.invoices = JSON.parse(data);
+            this.updateModel();
+          }.bind(this)).catch((error)=>{
+              console.log('Error occured')
+          });
+        },
+        saveInvoiceDetails:function(oInvoice){
+          //oInvoice.client_id = 'a5c2239e-c014-41dc-beac-6fc5130d1005'
+          //oInvoice.lead_id = 'a5c2239e-c014-41dc-beac-6fc5130d1005'
+          //oInvoice.status = 'Draft'
+          debugger;
+          if(oInvoice.id){
+            this.AppService.updateInvoiceDetails(oInvoice).then(function(data){
+              this.getInvoices();
+              MessageToast.show("Invoice details updated successfully");
+            }.bind(this)).catch((Message)=>{
+            });
+          }else{
+            this.AppService.saveInvoiceDetails(oInvoice).then(function(data){
+              this.getInvoices();
+              MessageToast.show("Invoice details saved successfully");
+            }.bind(this)).catch((Message)=>{
+              this.getInvoices();
+              MessageToast.show("Invoice details saved successfully");
+            });
+
+          }
+        },
+      
 
     
 

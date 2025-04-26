@@ -64,6 +64,25 @@ sap.ui.define(
       deleteProject:function(oProject){
         return this.http(`/backend/projects/${oProject.id}`).delete()
       },
+      getTasks:function(){
+        return this.http("/backend/tasks").get()
+      },
+      saveTaskDetails:function(oTask){
+        return this.http("/backend/tasks").post("",oTask)
+      },
+      updateTaskDetails:function(oTask){
+        return this.http(`/backend/tasks/${oTask.id}`).put("",oTask)
+      },
+      deleteTask:function(oTask){
+        return this.http(`/backend/tasks/${oTask.id}`).delete()
+      },
+      getInvoices:function(){
+        return this.http("/backend/invoices").get()
+      },
+      saveInvoiceDetails:function(oInvoice){
+        return this.http("/backend/invoices").post("",oInvoice)
+      },
+     
 
   });
     return AppService;

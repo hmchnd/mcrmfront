@@ -11,7 +11,7 @@
                     <m:Title text="{AppState>/oSelectedProjectObject/id}" wrapping="true" visible="false" />
                 </expandedHeading>
                 <actions>
-                    <m:Button id="idSaveTask" text="Save" icon="sap-icon://save" type="Critical" press="onSaveProjectDetails" />
+                    <m:Button id="idSaveTask" text="Save" icon="sap-icon://save" type="Critical" press="onSaveTaskDetails" />
 
                     <m:Button icon="sap-icon://decline" type="Critical" press="onCloseDetailPage" />
                     <m:Button id="deleteTask" icon="sap-icon://delete" type="Critical" press="onDeleteTask" />
@@ -31,10 +31,10 @@
                             <form:SimpleForm id="idTaskform" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
                                 <form:content>
                                     <m:Label text="Task Name" required="true" />
-                                    <m:Input id="idTaskName" value="{AppState>/oSelectedTaskObject/project}" />
+                                    <m:Input id="idTaskName" value="{AppState>/oSelectedTaskObject/name}" />
 
                                     <m:Label text="Task description" />
-                                    <m:Input id="idDescription" value="{AppState>/oSelectedTaskObject/assignedto}" />
+                                    <m:Input id="idDescription" value="{AppState>/oSelectedTaskObject/description}" />
 
                                     <m:Label text="Project" required="true" />
                                        <m:ComboBox
@@ -47,11 +47,11 @@
                                     </m:ComboBox>
 
 
-                                    <m:Label text="Assigned To" required="true" />
-                                      <m:Input id="idAssignedTo" value="{AppState>/oSelectedTaskObject/project}" />
+                                    <!-- <m:Label text="Assigned To" required="true" />
+                                      <m:Input id="idAssignedTo" value="{AppState>/oSelectedTaskObject/assignedto}" /> -->
 
                                     <m:Label text="Due Date"  />
-                                    <m:DatePicker id="idDueDate" value="{AppState>/oSelectedTaskObject/startdate}" valueFormat="yyyyMMdd"/>
+                                    <m:DatePicker id="idDueDate" value="{AppState>/oSelectedTaskObject/duedate}" valueFormat="yyyyMMdd"/>
                                     
 
                                      <m:Label text="Task Status" />

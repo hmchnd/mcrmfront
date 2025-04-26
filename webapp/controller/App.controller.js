@@ -7,6 +7,10 @@ sap.ui.define(
     "micro/crm/frontend/model/Leads",
     "micro/crm/frontend/model/Service",
     "micro/crm/frontend/model/Project",
+    "micro/crm/frontend/model/Task",
+    "micro/crm/frontend/model/Invoice",
+    "micro/crm/frontend/model/InvoiceItems",
+    
   ],
   (
     BaseController,
@@ -15,7 +19,10 @@ sap.ui.define(
     Client,
     Leads,
     Service,
-    Project
+    Project,
+    Task,
+    Invoice,
+    InvoiceItems
   ) => {
     "use strict";
 
@@ -88,13 +95,21 @@ sap.ui.define(
         }
 
         if(this.AppState.currentPage === "manage_tasks"){
-          this.AppState.data.oSelectedLeadObject = new Leads();
+          this.AppState.data.oSelectedLeadObject = new Task();
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("TaskLayoutView").setProperty("/layout", sLayout);
           this.getModel("TaskLayoutView").refresh(true);
 
         }
+       
+        if(this.AppState.currentPage === "manage_invoice"){
+          this.AppState.data.oSelectedInvoiceObject = new Invoice();
+          this.AppState.data.oSelectedInvoiceItemObject = [new InvoiceItems()];
+          let sLayout = LayoutType.TwoColumnsBeginExpanded;
+          this.getModel("InvoiceLayoutView").setProperty("/layout", sLayout);
+          this.getModel("InvoiceLayoutView").refresh(true);
 
+        }
 
       }
     

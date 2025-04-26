@@ -152,6 +152,13 @@
           "target": [
             "manage_tasks"
           ]
+        },
+        {
+          "name": "manage_invoice",
+          "pattern": "manage_invoice",
+          "target": [
+            "manage_invoice"
+          ]
         }
         
       ],
@@ -179,6 +186,10 @@
         "manage_tasks": {
           "id": "manage_tasks",
           "name": "ManageTasks"
+        },
+        "manage_invoice":{
+          "id": "manage_invoice",
+          "name": "ManageInvoices"
         }
        
       }

@@ -20,6 +20,7 @@ sap.ui.define([
 			this.getView().setModel(this.AppState.getModel(), "AppState");
 			this.AppState.getModel().setSizeLimit(999999);
 			this.AppState.currentPage = "manage_leads";
+			this.AppState.data.globalCreateButtonVisibility = true;
 			this.AppState.getLeads();
 		},
 		onCloseDetailPage: function() {
@@ -27,7 +28,7 @@ sap.ui.define([
 			this.getModel("productLayoutViewLeadView").setProperty("/layout", sLayout);
 			this.getModel("productLayoutViewLeadView").refresh(true);
 		},
-        onPress: function (oEvent) {
+        onLeadPress: function (oEvent) {
 			let oSelectedLeadObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
             {};

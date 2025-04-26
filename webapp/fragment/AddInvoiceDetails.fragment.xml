@@ -1,0 +1,204 @@
+<core:FragmentDefinition
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+>
+    <ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        isChildPage="true"
+        upperCaseAnchorBar="false"
+    >
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:Title
+                        text="{AppState>/oSelectedProject/ID}"
+                        wrapping="true"
+                        visible="false"
+                    />
+                </expandedHeading>
+                <actions>
+                    <m:Button
+                        id="SaveInvoice"
+                        text="Save"
+                        icon="sap-icon://save"
+                        type="Critical"
+                        press="onSaveInvoice"
+                    />
+                     <m:Button
+                            id="downloadInvoice"
+                            icon="sap-icon://download"
+                            type="Critical"
+                            text="Download Invoice"
+                            press="downloadInvovice"
+                          
+                           
+                        />
+                
+                    <m:Button
+                        icon="sap-icon://decline"
+                        type="Critical"
+                        press="onCloseDetailPage"
+                    />
+                    <m:Button
+                    id="deleteProject"
+                        icon="sap-icon://delete"
+                        type="Critical"
+                        visible="false"
+
+                        press="onDeleteProject"
+                    />
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <m:FlexBox
+                wrap="Wrap"
+                fitContainer="true"
+                alignItems="Stretch"
+            />
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection title="Invoice Details">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                           
+<form:SimpleForm id="idInvoice" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                                <form:content>
+                                    <m:Label text="Client Name" required="true" />
+                                     <m:ComboBox
+                                        selectedKey="{AppState>/oSelectedInvoiceObject/client_id}"
+                                        items="{
+                                            path: 'AppState>/clients'
+                                        }">
+                                        <core:Item key="{AppState>id}" text="{AppState>name}"/>
+                                    </m:ComboBox>
+                                    <m:Label text="Lead Name" />
+                                    <m:ComboBox
+                                        selectedKey="{AppState>/oSelectedInvoiceObject/lead_id}"
+                                        items="{
+                                            path: 'AppState>/Leads'
+                                        }">
+                                        <core:Item key="{AppState>id}" text="{AppState>name}"/>
+                                    </m:ComboBox>
+
+                                    
+
+                                    <m:Label text="Due Date"  />
+                                    <m:DatePicker id="idDueDate" value="{AppState>/oSelectedInvoiceObject/due_date}" valueFormat="yyyyMMdd"/>
+                                    
+
+                                     <m:Label text="Tax Rate" />
+                                    <m:Input id="idTax" value="{AppState>/oSelectedInvoiceObject/tax_rate}"  />
+
+                                    <m:Label text="Discount" />
+                                    <m:Input id="idDiscount" value="{AppState>/oSelectedInvoiceObject/discount}"  />
+
+                                      <m:Label text="Status" />
+                                    <m:Input id="idStatus" value="{AppState>/oSelectedInvoiceObject/status}" editable="false" />
+                                   
+
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+
+                   
+
+                    
+                    <ObjectPageSubSection
+                        id="invoiceDetailsSubSection"
+                        title="Invoice Items Details"
+                        mode="Collapsed"
+                        showTitleSelector="false"
+                        showEditHeaderButton="false"
+                        showNavButton="false"
+                        showPlaceholder="false"
+                    >
+                        <blocks>
+                            
+                            <m:Table
+                                id="invoiceItemsTable"
+                                items="{AppState>/oSelectedInvoiceItemObject}"
+                                inset="false"
+                                width="100%"
+                              
+                            >
+                            <m:headerToolbar>
+                    <m:OverflowToolbar id="_IDGenTooblbffar1">
+                       
+                       
+                        <m:Button
+                            id="_IDGffffsfenB3"
+                            icon="sap-icon://add"
+                            type="Emphasized"
+                            press="addInvoiceItem"
+                            class="sapUiTinyMarginBegin"
+                            enabled="{= ${supModel>/mode} === 'Editable' }"
+                        />
+                         
+                        <m:Button
+                            icon="sap-icon://delete"
+                            press="onDeleteInvoiceItem"
+                            enabled="{= ${supModel>/mode} === 'Editable' }"
+
+                        />
+                    </m:OverflowToolbar>
+                </m:headerToolbar>
+                                <m:columns>
+                                    <m:Column>
+                                        <m:Label text="Services" />
+                                    </m:Column>
+                                     <m:Column>
+                                        <m:Label text="Description" />
+                                    </m:Column>
+                                     <m:Column>
+                                        <m:Label text="Quantity" />
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Label text="Unit Price" />
+                                    </m:Column>
+                                     <m:Column>
+                                        <m:Label text="Tax Rate" />
+                                    </m:Column>
+                                     <m:Column>
+                                        <m:Label text="Amount" />
+                                    </m:Column>
+                                </m:columns>
+                                <!-- Bind the items -->
+                                <m:items>
+                                    <m:ColumnListItem>
+                                        <m:cells>
+                                           <m:ComboBox
+                                         selectedKey="{AppState>service_id}"
+                                        items="{
+                                            path: 'AppState>/services'
+                                        }">
+                                        <core:Item key="{AppState>id}" text="{AppState>name}"/>
+                                    </m:ComboBox>
+                                            <m:Input value="{AppState>description}"  />
+                                            <m:Input value="{AppState>quantity}"  />
+                                            <m:Input value="{AppState>unit_price}"  />
+                                            <m:Input value="{AppState>tax_rate}"  />
+                                            <m:Input value="{AppState>amount}"  />
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</core:FragmentDefinition>

@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:tnt="sap.tnt">
     <Page showHeader="false">
-        <tnt:ToolPage id="toolpage" class="sapUiDemoToolPage backgorund" sideExpanded="{AppState>/sidePanelOpen}">
+        <tnt:ToolPage id="toolpage" class="sapUiDemoToolPage backgorund" sideExpanded="false">
             <tnt:header>
                 <tnt:ToolHeader>
                     <Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress" tooltip="{i18n>collpaseMenuButtonText}" >
@@ -44,7 +44,7 @@
                     
                   <Label text="{AppState>/currentPageLabel}" class="sapUiLargeMarginBegin"/>
                     <ToolbarSpacer/>
-                      <Button icon="sap-icon://add" class="sapUiTinyMargin" text="Create" type="Critical" press="onAddNewItem" id="GlobalAddButton" visible="{AppState>/showGlobalAddButton}"/>
+                      <Button icon="sap-icon://add" class="sapUiTinyMargin" text="Create" type="Critical" press="onAddNewItem" id="GlobalAddButton" visible="{AppState>/globalCreateButtonVisibility}"/>
                     <!-- <Button text="Back to Roadmap" class="sapUiTinyMargin" type="Critical" press="onBackToRoadmap"  visible="{AppState>/showBackToRoadmapButton}"/>
                    -->
                     <!-- <Button type="Critical"  icon="sap-icon://add-filter" class="sapUiTinyMargin"/> -->

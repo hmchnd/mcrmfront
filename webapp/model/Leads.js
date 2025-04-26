@@ -7,17 +7,33 @@ sap.ui.define([
         constructor: function (data) {
             BaseObject.call(this, {});
             if (data) {
-                this.id = data?.id || "";
-                this.name = data?.team || "";
-                this.email = data?.name || "";
-                this.phone = data?.email || "";
-                this.address = data?.phone || "";
-
-                this.budgetrange = data?.status || "";
-                this.industry = data?.source || "";
-                this.profession = data?.notes || "";
-                this.tenantid = data?.tenantid || "b570c207-76fc-4dbb-b932-cbd4b1d12df5";
- 
+                // Core identifiers
+                this.id = data.id || "";
+             
+                // Contact information
+                this.name = data.name || "";
+                this.email = data.email || "";
+                this.phone = data.phone || "";
+                
+                // Lead tracking
+                this.status = data.status || "New";
+                this.source = data.source || "Other";
+                this.priority = data.priority || "Medium";
+                this.budget = data.budget || 0;
+                
+               
+        
+                // Timeline fields
+                this.last_contacted = data.last_contacted || null;
+                this.next_followup = data.next_followup || null;
+                this.createdat = data.createdat || new Date().toISOString();
+                this.modifiedat = data.modifiedat || new Date().toISOString();
+                
+                // Additional details
+                this.tags = data.tags || [];
+                this.notes = data.notes || "";
+                
+             
             }
         },
  

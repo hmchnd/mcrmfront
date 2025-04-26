@@ -20,7 +20,9 @@ sap.ui.define([
 			this.getView().setModel(this.AppState.getModel(), "AppState");
 			this.AppState.getModel().setSizeLimit(999999);
 			this.AppState.currentPage = "manage_customers";
+			this.AppState.data.globalCreateButtonVisibility = true;
 			this.AppState.getClients();
+			this.AppState.updateModel();
 		},
 		onCloseDetailPage: function() {
 			let sLayout = sap.f.LayoutType.OneColumn;

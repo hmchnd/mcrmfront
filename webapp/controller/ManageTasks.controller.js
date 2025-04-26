@@ -23,7 +23,26 @@ sap.ui.define([
 			this.getView().setModel(this.AppState.getModel(), "AppState");
 			this.AppState.getModel().setSizeLimit(999999);
 			this.AppState.currentPage = "manage_tasks";
-			this.AppState.getProjects();
+			this.AppState.data.globalCreateButtonVisibility = true;
+			this.AppState.getTasks();
+		},
+		onSaveTaskDetails: function(oEvent) {
+			let oTask = this.AppState.data.oSelectedTaskObject;
+			this.AppState.saveTaskDetails(oTask);
+		},
+		onCloseDetailPage: function(oEvent) {
+			let sLayout = sap.f.LayoutType.OneColumn;
+			this.getModel("TaskLayoutView").setProperty("/layout", sLayout);
+			this.getModel("TaskLayoutView").refresh(true);
+		},
+		onPress: function (oEvent) {
+			let oSelectedTaskObject =
+            oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
+            {};
+			this.AppState.data.oSelectedTaskObject = oSelectedTaskObject;
+			var sLayout = LayoutType.TwoColumnsBeginExpanded;
+			this.getModel("TaskLayoutView").setProperty("/layout", sLayout);
+
 		},
 	});
 });

@@ -2,9 +2,12 @@
 	height="100%"
 	controllerName="micro.crm.frontend.controller.ManageLeads"
 	xmlns:mvc="sap.ui.core.mvc"
-	 xmlns:f="sap.f"
-    xmlns:core="sap.ui.core"
-	xmlns="sap.m"   xmlns:l="sap.ui.layout"  xmlns:grid="sap.ui.layout.cssgrid">
+	 xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:card="sap.f.cards"
+    xmlns:l="sap.ui.layout"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:core="sap.ui.core">
 
 	<Page showHeader="false" enableScrolling="true" class="sapUiContentPadding"
 		showNavButton="false">
@@ -15,171 +18,245 @@
                     <Page showHeader="false">
                         <content>
                             
-                            <f:GridList
-                                id="gridList"
-                                mode="None"
-                                growingThreshold="10"
-                                growing="true"
-                                growingDirection="Downwards"
-                                growingScrollToLoad="true"
-                                items="{
-        path: 'AppState>/leads',
-        sorter: { path: 'createdat', descending: true }
-    }"
-                                selectionChange="onSelectionChange"
-                                delete="onDelete"
-                                class="sapUiResponsiveContentPadding"
-                            >
-                                <f:customLayout>
-                                    <grid:GridBasicLayout
-                                        gridAutoRows="repeat(auto-fit)"
-                                        gridGap="0.5rem"
-                                    />
-                                </f:customLayout>
+                        
+            <l:VerticalLayout class="sapUiContentPadding equalColumns" width="100%">
+                <FlexBox class="columns">
+                    
+                    <!-- New Leads Column -->
+                    <VBox class="sapUiSmallMargin">
+                        <ObjectStatus 
+                            state="Error" 
+                            text="New Leads" 
+                            class="sapUiSmallMarginBottom"/>
+                        <f:GridContainer
+                            id="newLeadsContainer"
+                            width="100%"
+                            snapToRow="true"
+                            items="{
+                                path: 'AppState>/Leads',
+                                filters: [{ path: 'status', operator: 'EQ', value1: 'New' }]
+                               
+                            }">
+                            <f:layout>
+                                <f:GridContainerSettings
+                                    rowSize="10px"
+                                    columnSize="400px"
+                                    gap="20px"
+                                    class="sapUiSmallMargin"/>
+                            </f:layout>
+                            <f:Card class="sapUiTinyMargin" press="onLeadPress">
+                                <f:header>
+                                    <card:Header
+                                        title="{AppState>name}"
+                                        subtitle="{AppState>source}"
+                                        statusText="{AppState>priority}"
+                                        iconSrc="sap-icon://leads"/>
+                                </f:header>
+                                <f:content>
+                                    <VBox width="20rem" class="sapUiTinyMargin">
+                                        <HBox justifyContent="SpaceBetween">
+                                            <Text text="Contact:"/>
+                                            <Text text="{AppState>phone} / {AppState>email}"/>
+                                        </HBox>
+                                        <HBox justifyContent="SpaceBetween">
+                                            <Text text="Budget:"/>
+                                            <ObjectNumber
+                                                number="{AppState>budget}"
+                                                unit="{AppState>currency}"/>
+                                        </HBox>
+                                        <HBox justifyContent="SpaceBetween">
+                                            <Text text="Last Contact:"/>
+                                            <Text text="{
+                                                path: 'AppState>last_contacted'
+                                            }"/>
+                                        </HBox>
+                                        
+                                    </VBox>
+                                </f:content>
+                            </f:Card>
+                        </f:GridContainer>
+                    </VBox>
+                    
+                    <!-- Contacted/Qualified Column -->
+                    <VBox class="sapUiSmallMargin">
+                        <ObjectStatus 
+                            state="Warning" 
+                            text="In Progress" 
+                            class="sapUiSmallMarginBottom"/>
+                        <f:GridContainer
+                            id="activeLeadsContainer"
+                            width="100%"
+                            snapToRow="true"
+                            items="{
+                                path: 'AppState>/Leads',
+                                filters: [
+                                    { path: 'status', operator: 'EQ', value1: 'Contacted' },
+                                    { path: 'status', operator: 'EQ', value1: 'Qualified' }
+                                ]
+                            }">
+                            <f:layout>
+                                <f:GridContainerSettings
+                                    rowSize="10px"
+                                    columnSize="400px"
+                                    gap="20px"
+                                    class="sapUiSmallMargin"/>
+                            </f:layout>
+                            <f:Card class="sapUiTinyMargin" press="onLeadPress">
+                                <f:header>
+                                    <card:Header
+                                        title="{AppState>name}"
+                                        subtitle="{AppState>source}"
+                                        statusText="{AppState>priority}"
+                                        iconSrc="sap-icon://opportunity"/>
+                                </f:header>
+                                <f:content>
+                                    <VBox width="20rem" class="sapUiTinyMargin">
+                                        <HBox justifyContent="SpaceBetween">
+                                            <Text text="Next Follow-up:"/>
+                                            <Text text="{
+                                                path: 'AppState>next_followup'
+                                            }"/>
+                                        </HBox>
+                                        <HBox justifyContent="SpaceBetween">
+                                            <Text text="Budget:"/>
+                                            <ObjectNumber
+                                                number="{AppState>budget}"
+                                                unit="{AppState>currency}"/>
+                                        </HBox>
+                                        <HBox>
+                                            <core:Icon src="sap-icon://tag" class="sapUiTinyMarginEnd"/>
+                                            <Text text="{= ${AppState>tags} ? ${AppState>tags}.join(', ') : 'No tags'}"/>
+                                        </HBox>
+                                        
+                                    </VBox>
+                                </f:content>
+                            </f:Card>
+                        </f:GridContainer>
+                    </VBox>
+                    
+                    <!-- Proposal/Negotiation Column -->
+                    <VBox class="sapUiSmallMargin">
+                        <ObjectStatus 
+                            state="Information" 
+                            text="Hot Leads" 
+                            class="sapUiSmallMarginBottom"/>
+                        <f:GridContainer
+                            id="hotLeadsContainer"
+                            width="100%"
+                            snapToRow="true"
+                            items="{
+                                path: 'AppState>/Leads',
+                                filters: [
+                                    { path: 'status', operator: 'EQ', value1: 'Proposal' },
+                                    { path: 'status', operator: 'EQ', value1: 'Negotiation' }
+                                ]
+                            }">
+                            <f:layout>
+                                <f:GridContainerSettings
+                                    rowSize="10px"
+                                    columnSize="400px"
+                                    gap="20px"
+                                    class="sapUiSmallMargin"/>
+                            </f:layout>
+                            <f:Card class="sapUiTinyMargin" press="onLeadPress">
+                                <f:header>
+                                    <card:Header
+                                        title="{AppState>name}"
+                                        subtitle="{AppState>source}"
+                                        statusText="{AppState>priority}"
+                                        iconSrc="sap-icon://money-bills"/>
+                                </f:header>
+                                <f:content>
+                                    <VBox width="20rem" class="sapUiTinyMargin">
+                                        <HBox justifyContent="SpaceBetween">
+                                            <Text text="Budget:"/>
+                                            <ObjectNumber
+                                                number="{AppState>budget}"
+                                                unit="{AppState>currency}"
+                                                state="Success"/>
+                                        </HBox>
+                                        <HBox justifyContent="SpaceBetween">
+                                            <Text text="Last Contact:"/>
+                                            <Text text="{
+                                                path: 'AppState>last_contacted'
+                                            }"/>
+                                        </HBox>
+                                        <Text text="Notes: {AppState>notes}" wrapping="true"/>
+                                      
+                                    </VBox>
+                                </f:content>
+                            </f:Card>
+                        </f:GridContainer>
+                    </VBox>
+                    
+                    <!-- Closed Column -->
+                    <VBox class="sapUiSmallMargin">
+                        <ObjectStatus 
+                            state="Success" 
+                            text="Closed" 
+                            class="sapUiSmallMarginBottom"/>
+                        <f:GridContainer
+                            id="closedLeadsContainer"
+                            width="100%"
+                            snapToRow="true"
+                            items="{
+                                path: 'AppState>/Leads',
+                                filters: [
+                                    { path: 'status', operator: 'EQ', value1: 'Closed-Won' },
+                                    { path: 'status', operator: 'EQ', value1: 'Closed-Lost' }
+                                ]
+                            }">
+                            <f:layout>
+                                <f:GridContainerSettings
+                                    rowSize="10px"
+                                    columnSize="400px"
+                                    gap="20px"
+                                    class="sapUiSmallMargin"/>
+                            </f:layout>
+                            <f:Card class="sapUiTinyMargin" press="onLeadPress">
+                                <f:header>
+                                    <card:Header
+                                        title="{AppState>name}"
+                                        subtitle="{AppState>source}"
+                                        statusText="{AppState>status}"
+                                        iconSrc="{
+                                            path: 'AppState>status'
+                                          
+                                        }"/>
+                                </f:header>
+                                <f:content>
+                                    <VBox width="20rem" class="sapUiTinyMargin">
+                                        <HBox justifyContent="SpaceBetween">
+                                            <Text text="Final Budget:"/>
+                                            <ObjectNumber
+                                                number="{AppState>budget}"
+                                                unit="{AppState>currency}"
+                                                state="{
+                                                    path: 'AppState>status'
+                                                  
+                                                }"/>
+                                        </HBox>
+                                        <HBox justifyContent="SpaceBetween">
+                                            <Text text="Closed Date:"/>
+                                            <Text text="{
+                                                path: 'AppState>modifiedat'
+                                            }"/>
+                                        </HBox>
+                                        <Text text="Notes: {AppState>notes}" wrapping="true"/>
+                                       
+                                    </VBox>
+                                </f:content>
+                            </f:Card>
+                        </f:GridContainer>
+                    </VBox>
+                    
+                </FlexBox>
+            </l:VerticalLayout>
+        </content>
+        
 
-                                <f:GridListItem
-                                    detailPress="onDetailPress"
-                                    press="onPress"
-                                    highlight="Success"
-                                    type="Active"
-                                >
-                                    <l:VerticalLayout
-                                        class="sapUiContentPadding equalColumns"
-                                        width="100%"
-                                    >
-                                        <FlexBox class="columns">
-                                            <Title
-                                                text="{AppState>name}"
-                                                wrapping="true"
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </Title>
-
-                                            <ObjectAttribute
-                                                title="Team"
-                                                text="{AppState>team}"
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectAttribute>
-
-                                            <ObjectAttribute
-                                                title="Name"
-                                                text="{AppState>name}"
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectAttribute>
-
-											<ObjectAttribute
-                                                title="Email"
-                                                text="{AppState>email}"
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectAttribute>
-
-                                            <ObjectStatus
-                                                title="Phone Number"
-                                                text="{AppState>phone}"
-                                                state="Warning"
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectStatus>
-
-                                            <VBox>
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                               <ObjectAttribute
-                                                title="Status"
-												text="{AppState>status}"
-                                               
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectAttribute>
-                                              
-											   <ObjectAttribute
-												title="Source"
-												text="{AppState>source}"
-											   >
-											    <layoutData>
-											   <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectAttribute>
-
-                                            <ObjectAttribute
-												title="Notes"
-												text="{AppState>notes}"
-											   >
-											    <layoutData>
-											   <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectAttribute>
-
-
-                                            </VBox>
-
-                                            
-                                        </FlexBox>
-                                    </l:VerticalLayout>
-                                </f:GridListItem>
-                            </f:GridList>
-                        </content>
+                           
+                      
                     </Page>
                 </f:beginColumnPages>
 

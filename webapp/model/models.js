@@ -67,12 +67,7 @@ function (JSONModel, Device) {
                         "icon":"sap-icon://my-sales-order",
                         "enabled":true
                     },
-                    {
-                        "title":"My Team",
-                        "key":"manage_team",
-                        "icon":"sap-icon://people-connected",
-                        "enabled":true
-                    },
+                   
                     {
                         "title":"Client Issues",
                         "key":"manage_ticket",
