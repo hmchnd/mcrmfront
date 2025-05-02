@@ -8,7 +8,7 @@
     "sapui5"
   ],
   "main": "webapp/index.html",
-  "devDependencies": {
+  "dependencies": {
     "@sap/ux-ui5-tooling": "^1.16.5",
     "@ui5/cli": "^3.11.6",
     "ui5-middleware-livereload": "^0.5.13",
