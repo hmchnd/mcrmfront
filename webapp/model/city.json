@@ -1,0 +1,662 @@
+[
+    {
+      "text": "Delhi",
+      "key": "IN-DL"
+    },
+    {
+      "text": "Mumbai",
+      "key": "IN-MH"
+    },
+    {
+      "text": "Kolkata",
+      "key": "IN-WB"
+    },
+    {
+      "text": "Chennai",
+      "key": "IN-TN"
+    },
+    {
+      "text": "Bengaluru",
+      "key": "IN-KA"
+    },
+    {
+      "text": "London",
+      "key": "GB-ENG"
+    },
+    {
+      "text": "New York City",
+      "key": "US-NY"
+    },
+    {
+      "text": "Los Angeles",
+      "key": "US-CA"
+    },
+    {
+      "text": "Chicago",
+      "key": "US-IL"
+    },
+    {
+      "text": "Tokyo",
+      "key": "JP-13"
+    },
+    {
+      "text": "Paris",
+      "key": "FR-IDF"
+    },
+    {
+      "text": "Berlin",
+      "key": "DE-BE"
+    },
+    {
+      "text": "Sydney",
+      "key": "AU-NSW"
+    },
+    {
+      "text": "Melbourne",
+      "key": "AU-VIC"
+    },
+    {
+      "text": "Toronto",
+      "key": "CA-ON"
+    },
+    {
+      "text": "Vancouver",
+      "key": "CA-BC"
+    },
+    {
+      "text": "Beijing",
+      "key": "CN-BJ"
+    },
+    {
+      "text": "Shanghai",
+      "key": "CN-SH"
+    },
+    {
+      "text": "Rio de Janeiro",
+      "key": "BR-RJ"
+    },
+    {
+      "text": "São Paulo",
+      "key": "BR-SP"
+    },
+    {
+      "text": "Moscow",
+      "key": "RU-MOW"
+    },
+    {
+      "text": "Saint Petersburg",
+      "key": "RU-SPE"
+    },
+    {
+      "text": "Cairo",
+      "key": "EG-C"
+    },
+    {
+      "text": "Johannesburg",
+      "key": "ZA-GT"
+    },
+    {
+      "text": "Cape Town",
+      "key": "ZA-WC"
+    },
+    {
+      "text": "Mexico City",
+      "key": "MX-CMX"
+    },
+    {
+      "text": "Buenos Aires",
+      "key": "AR-B"
+    },
+    {
+      "text": "Istanbul",
+      "key": "TR-34"
+    },
+    {
+      "text": "Rome",
+      "key": "IT-RM"
+    },
+    {
+      "text": "Madrid",
+      "key": "ES-M"
+    },
+    {
+      "text": "Amsterdam",
+      "key": "NL-NH"
+    },
+    {
+      "text": "Dubai",
+      "key": "AE-DU"
+    },
+    {
+      "text": "Singapore",
+      "key": "SG"
+    },
+    {
+      "text": "Hong Kong",
+      "key": "HK"
+    },
+    {
+      "text": "Seoul",
+      "key": "KR-11"
+    },
+    {
+      "text": "Bangkok",
+      "key": "TH-10"
+    },
+    {
+      "text": "Kuala Lumpur",
+      "key": "MY-14"
+    },
+    {
+      "text": "Jakarta",
+      "key": "ID-JK"
+    },
+    {
+      "text": "Manila",
+      "key": "PH-00"
+    },
+    {
+      "text": "Sydney",
+      "key": "AU-NSW"
+    },
+    {
+      "text": "Melbourne",
+      "key": "AU-VIC"
+    },
+    {
+      "text": "Toronto",
+      "key": "CA-ON"
+    },
+    {
+      "text": "Vancouver",
+      "key": "CA-BC"
+    },
+    {
+      "text": "Berlin",
+      "key": "DE-BE"
+    },
+    {
+      "text": "Munich",
+      "key": "DE-BY"
+    },
+    {
+      "text": "Rome",
+      "key": "IT-RM"
+    },
+    {
+      "text": "Milan",
+      "key": "IT-MI"
+    },
+    {
+      "text": "Madrid",
+      "key": "ES-M"
+    },
+    {
+      "text": "Barcelona",
+      "key": "ES-B"
+    },
+    {
+      "text": "Amsterdam",
+      "key": "NL-NH"
+    },
+    {
+      "text": "Rotterdam",
+      "key": "NL-ZH"
+    },
+    {
+      "text": "Stockholm",
+      "key": "SE-AB"
+    },
+    {
+      "text": "Oslo",
+      "key": "NO-03"
+    },
+    {
+      "text": "Copenhagen",
+      "key": "DK-84"
+    },
+    {
+      "text": "Helsinki",
+      "key": "FI-01"
+    },
+    {
+      "text": "Dublin",
+      "key": "IE-D"
+    },
+    {
+      "text": "Zurich",
+      "key": "CH-ZH"
+    },
+    {
+      "text": "Geneva",
+      "key": "CH-GE"
+    },
+    {
+      "text": "Vienna",
+      "key": "AT-9"
+    },
+    {
+      "text": "Prague",
+      "key": "CZ-A"
+    },
+    {
+      "text": "Budapest",
+      "key": "HU-BU"
+    },
+    {
+      "text": "Warsaw",
+      "key": "PL-MZ"
+    },
+    {
+      "text": "Kyiv",
+      "key": "UA-30"
+    },
+    {
+      "text": "Saint Petersburg",
+      "key": "RU-SPE"
+    },
+    {
+      "text": "Istanbul",
+      "key": "TR-34"
+    },
+    {
+      "text": "Ankara",
+      "key": "TR-06"
+    },
+    {
+      "text": "Tehran",
+      "key": "IR-12"
+    },
+    {
+      "text": "Riyadh",
+      "key": "SA-11"
+    },
+    {
+      "text": "Dubai",
+      "key": "AE-DU"
+    },
+    {
+      "text": "Singapore",
+      "key": "SG"
+    },
+    {
+      "text": "Kuala Lumpur",
+      "key": "MY-14"
+    },
+    {
+      "text": "Bangkok",
+      "key": "TH-10"
+    },
+    {
+      "text": "Jakarta",
+      "key": "ID-JK"
+    },
+    {
+      "text": "Manila",
+      "key": "PH-00"
+    },
+    {
+      "text": "Seoul",
+      "key": "KR-11"
+    },
+    {
+      "text": "Hong Kong",
+      "key": "HK"
+    },
+    {
+      "text": "Shanghai",
+      "key": "CN-SH"
+    },
+    {
+      "text": "Beijing",
+      "key": "CN-BJ"
+    },
+    {
+      "text": "Mumbai",
+      "key": "IN-MH"
+    },
+    {
+      "text": "Delhi",
+      "key": "IN-DL"
+    },
+    {
+      "text": "Kolkata",
+      "key": "IN-WB"
+    },
+    {
+      "text": "Chennai",
+      "key": "IN-TN"
+    },
+    {
+      "text": "Bengaluru",
+      "key": "IN-KA"
+    },
+    {
+      "text": "Karachi",
+      "key": "PK-SD"
+    },
+    {
+      "text": "Lahore",
+      "key": "PK-PB"
+    },
+    {
+      "text": "Dhaka",
+      "key": "BD-A"
+    },
+    {
+      "text": "Cairo",
+      "key": "EG-C"
+    },
+    {
+      "text": "Lagos",
+      "key": "NG-LA"
+    },
+    {
+      "text": "Johannesburg",
+      "key": "ZA-GT"
+    },
+    {
+      "text": "Cape Town",
+      "key": "ZA-WC"
+    },
+    {
+      "text": "Nairobi",
+      "key": "KE-30"
+    },
+    {
+      "text": "Addis Ababa",
+      "key": "ET-AA"
+    },
+    {
+      "text": "Casablanca",
+      "key": "MA-CM"
+    },
+    {
+      "text": "Algiers",
+      "key": "DZ-16"
+    },
+    {
+      "text": "Mexico City",
+      "key": "MX-CMX"
+    },
+    {
+      "text": "Guadalajara",
+      "key": "MX-JAL"
+    },
+    {
+      "text": "Buenos Aires",
+      "key": "AR-B"
+    },
+    {
+      "text": "Rio de Janeiro",
+      "key": "BR-RJ"
+    },
+    {
+      "text": "São Paulo",
+      "key": "BR-SP"
+    },
+    {
+      "text": "Bogotá",
+      "key": "CO-DC"
+    },
+    {
+      "text": "Lima",
+      "key": "PE-LIM"
+    },
+    {
+      "text": "Santiago",
+      "key": "CL-RM"
+    },
+    {
+      "text": "New York City",
+      "key": "US-NY"
+    },
+    {
+      "text": "Los Angeles",
+      "key": "US-CA"
+    },
+    {
+      "text": "Chicago",
+      "key": "US-IL"
+    },
+    {
+      "text": "Houston",
+      "key": "US-TX"
+    },
+    {
+      "text": "Phoenix",
+      "key": "US-AZ"
+    },
+    {
+      "text": "Philadelphia",
+      "key": "US-PA"
+    },
+    {
+      "text": "San Antonio",
+      "key": "US-TX"
+    },
+    {
+      "text": "San Diego",
+      "key": "US-CA"
+    },
+    {
+      "text": "Dallas",
+      "key": "US-TX"
+    },
+    {
+      "text": "San Jose",
+      "key": "US-CA"
+    },
+    {
+      "text": "London",
+      "key": "GB-ENG"
+    },
+    {
+      "text": "Birmingham",
+      "key": "GB-ENG"
+    },
+    {
+      "text": "Manchester",
+      "key": "GB-ENG"
+    },
+    {
+      "text": "Liverpool",
+      "key": "GB-ENG"
+    },
+    {
+      "text": "Edinburgh",
+      "key": "GB-SCT"
+    },
+    {
+      "text": "Glasgow",
+      "key": "GB-SCT"
+    },
+    {
+      "text": "Cardiff",
+      "key": "GB-WLS"
+    },
+    {
+      "text": "Belfast",
+      "key": "GB-NIR"
+    },
+    {
+      "text": "Sydney",
+      "key": "AU-NSW"
+    },
+    {
+      "text": "Melbourne",
+      "key": "AU-VIC"
+    },
+    {
+      "text": "Brisbane",
+      "key": "AU-QLD"
+    },
+    {
+      "text": "Perth",
+      "key": "AU-WA"
+    },
+    {
+      "text": "Adelaide",
+      "key": "AU-SA"
+    },
+    {
+      "text": "Auckland",
+      "key": "NZ-AUK"
+    },
+    {
+      "text": "Wellington",
+      "key": "NZ-WGN"
+    },
+    {
+      "text": "Toronto",
+      "key": "CA-ON"
+    },
+    {
+      "text": "Montreal",
+      "key": "CA-QC"
+    },
+    {
+      "text": "Calgary",
+      "key": "CA-AB"
+    },
+    {
+      "text": "Ottawa",
+      "key": "CA-ON"
+    },
+    {
+      "text": "Edmonton",
+      "key": "CA-AB"
+    },
+    {
+      "text": "Berlin",
+      "key": "DE-BE"
+    },
+    {
+      "text": "Hamburg",
+      "key": "DE-HH"
+    },
+    {
+      "text": "Munich",
+      "key": "DE-BY"
+    },
+    {
+      "text": "Cologne",
+      "key": "DE-NW"
+    },
+    {
+      "text": "Frankfurt",
+      "key": "DE-HE"
+    },
+    {
+      "text": "Paris",
+      "key": "FR-IDF"
+    },
+    {
+      "text": "Marseille",
+      "key": "FR-PAC"
+    },
+    {
+      "text": "Lyon",
+      "key": "FR-ARA"
+    },
+    {
+      "text": "Toulouse",
+      "key": "FR-OCC"
+    },
+    {
+      "text": "Nice",
+      "key": "FR-PAC"
+    },
+    {
+      "text": "Rome",
+      "key": "IT-RM"
+    },
+    {
+      "text": "Milan",
+      "key": "IT-MI"
+    },
+    {
+      "text": "Naples",
+      "key": "IT-NA"
+    },
+    {
+      "text": "Turin",
+      "key": "IT-TO"
+    },
+    {
+      "text": "Palermo",
+      "key": "IT-PA"
+    },
+    {
+      "text": "Madrid",
+      "key": "ES-M"
+    },
+    {
+      "text": "Barcelona",
+      "key": "ES-B"
+    },
+    {
+      "text": "Valencia",
+      "key": "ES-V"
+    },
+    {
+      "text": "Seville",
+      "key": "ES-SE"
+    },
+    {
+      "text": "Málaga",
+      "key": "ES-MA"
+    },
+    {
+      "text": "Amsterdam",
+      "key": "NL-NH"
+    },
+    {
+      "text": "Rotterdam",
+      "key": "NL-ZH"
+    },
+    {
+      "text": "The Hague",
+      "key": "NL-ZH"
+    },
+    {
+      "text": "Utrecht",
+      "key": "NL-UT"
+    },
+    {
+      "text": "Eindhoven",
+      "key": "NL-NB"
+    },
+    {
+      "text": "Stockholm",
+      "key": "SE-AB"
+    },
+    {
+      "text": "Gothenburg",
+      "key": "SE-O"
+    },
+    {
+      "text": "Malmö",
+      "key": "SE-M"
+    },
+    {
+      "text": "Uppsala",
+      "key": "SE-C"
+    },
+    {
+      "text": "Linköping",
+      "key": "SE-E"
+    },
+    {
+      "text": "Oslo",
+      "key": "NO-03"
+    },
+    {
+      "text": "Bergen",
+      "key": "NO-11"
+    },
+    {
+      "text": "Trondheim",
+      "key": "NO-50"
+    }
+]

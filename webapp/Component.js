@@ -76,7 +76,7 @@ sap.ui.define(
         this.openLoginDialog();
         // Enable routing
         this.getRouter().initialize();
-        this.getRouter().navTo("Dashboard");
+        this.getRouter().navTo("Login");
         setTimeout(() => {
           this.openLoginDialog();
         }, 2500);

@@ -1,0 +1,77 @@
+<mvc:View
+	controllerName="micro.crm.frontend.controller.ClientIssue"
+xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:grid="sap.ui.layout.cssgrid" displayBlock="true" height="100%" busyIndicatorDelay="0"
+>
+
+<Page
+    id="ClientIssuePage"
+    title="Client Issues"
+    class="sapUiSizeCompact"
+    enableScrolling="false"
+    footer="footerBar"
+    busy="{= ${clientIssueModel>/busy} }"
+    busyIndicatorDelay="0">
+     <content>
+            <f:FlexibleColumnLayout layout="{InvoiceLayoutView>/layout}">
+                <f:beginColumnPages>
+                    <Page showHeader="false">
+                        <content>
+                            
+                           <Table 
+                id="clientIssuesTable"
+                items="{path: 'AppState>/tickets'}">
+                <columns>
+                    <Column><Text text="Ticket Number"/></Column>
+                    <Column><Text text="Client Name"/></Column>
+                    <Column><Text text="Title"/></Column>
+                    <Column><Text text="Description"/></Column>
+                    <Column><Text text="Priority"/></Column>
+                    <Column><Text text="Status"/></Column>
+                </columns>
+                <items>
+                    <ColumnListItem 
+                        type="Navigation" 
+                        press="onPressTicket">
+                        <cells>
+                            <ObjectIdentifier title="{AppState>ticket_number}"/>
+                            <Text text="{AppState>client_name}"/>
+                            <Text text="{
+                                path: 'AppState>title'
+                            }"/>
+                            <Text text="{
+                                path: 'AppState>description'
+                            }"/>
+                            <Text text="{
+                                path: 'AppState>priority'
+                            }"/>
+                            <ObjectStatus 
+                                text="{AppState>status}"
+                                state="{
+                                    path: 'AppState>status',
+                                    formatter: '.formatStatusState'
+                                }"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+                        </content>
+                    </Page>
+                </f:beginColumnPages>
+
+                <f:midColumnPages>
+                    <!-- <core:Fragment
+                        fragmentName="micro.crm.frontend.fragment.AddInvoiceDetails"
+                        type="XML"
+                    /> -->
+                </f:midColumnPages>
+
+                <f:endColumnPages />
+            </f:FlexibleColumnLayout>
+        </content>
+</Page>
+</mvc:View>

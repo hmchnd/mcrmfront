@@ -34,33 +34,54 @@
                                     <m:Input id="idClientName" value="{AppState>/oSelectedClientObject/name}" />
 
                                     <m:Label text="Client Email" />
-                                    <m:Input id="idEmail" value="{AppState>/oSelectedClientObject/email}" />
+                                    <m:Input id="idPhoneEmailInput" value="{path:'AppState>/oSelectedClientObject/email', type: 'sap.ui.model.type.String', constraints: { 
+        format: 'email',
+        search: '^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$' 
+    }}" />
 
-                                    <m:Label text="Client Phone Number" required="true" />
-                                    <m:Input id="idPhoneNumber" value="{AppState>/oSelectedClientObject/phone}" />
-                                    <m:Label text="Client Profession" required="true" />
+                                    <m:Label text="Client Phone Number" />
+                                    <m:Input id="idPhoneNumber" liveChange="onMobileNumberLiveChange" value="{path:'AppState>/oSelectedClientObject/phone',
+        type: 'sap.ui.model.type.String',
+        constraints: {
+            minLength: 8, 
+            maxLength: 15, 
+           pattern: '^[+]?[0-9]+$'
+        
+        }}" />
+                                    <m:Label text="Client Profession" />
                                     <m:Input id="idClientProfession" value="{AppState>/oSelectedClientObject/profession}" change="onChangeDate" />
                                     <m:Label text="Client Budget" />
                                     <!-- <m:Input value="{AppState>/oSelectedProject/currency}" /> -->
-                                    <m:Input value="{AppState>/oSelectedClientObject/budgetrange}" />
+                                    <m:Input value="{AppState>/oSelectedClientObject/budgetrange}" type="Number"/>
                                     <m:Label text="Currency" />
-                                    <m:Input id="idCurrency" value="{AppState>/oSelectedClientObject/currency}" editable="true" />
+                                    <!-- <m:Input id="idCurrency" value="{AppState>/oSelectedClientObject/currency}" editable="true" /> -->
+                                    <m:ComboBox showSecondaryValues="true" id="idCurrency" selectedKey="{AppState>/oSelectedClientObject/currency}" items="{
+                                            path: 'currencymodel>/',
+    length: 10000
+                                        }">
+                                        <core:ListItem key="{currencymodel>key}" text="{currencymodel>text}" additionalText="{currencymodel>symbol}" />
+                                    </m:ComboBox>
                                     <m:Label text="Client Address" />
-                                    <m:Input id="idClientAddress" value="{AppState>/oSelectedClientObject/address}"/>
+                                    <m:TextArea id="idClientAddress" value="{AppState>/oSelectedClientObject/address}" cols="20" rows="4"/>
 
                                     <m:Label text="Service Required" />
                                     <m:Input id="idServiceRequired" value="{AppState>/oSelectedClientObject/servicerequired}"/>
 
                                     <m:Label text="Country" />
-                                    <m:Input id="idCountry" value="{AppState>/oSelectedClientObject/country}" />
+                                    <m:ComboBox showSecondaryValues="true" id="idCountry" selectedKey="{AppState>/oSelectedClientObject/country}" items="{
+                                            path: 'countrymodel>/',
+    length: 10000
+                                        }">
+                                        <core:ListItem key="{countrymodel>key}" text="{countrymodel>text}"  />
+                                    </m:ComboBox>
 
                                     <m:Label text="City" />
-                                    <m:Input id="idCity" value="{AppState>/oSelectedClientObject/city}" />
-
-
-
-
-
+<m:ComboBox showSecondaryValues="true" id="idCity" selectedKey="{AppState>/oSelectedClientObject/city}" items="{ 
+    path: 'citymodel>/',
+    length: 10000
+}">
+    <core:ListItem key="{citymodel>key}" text="{citymodel>text}"  />
+</m:ComboBox>
                                 </form:content>
                             </form:SimpleForm>
 

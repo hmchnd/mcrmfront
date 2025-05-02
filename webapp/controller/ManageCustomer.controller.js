@@ -47,7 +47,27 @@ sap.ui.define([
 			this.AppState.data.oSelectedClientObject ||
 			{};
 			this.AppState.deleteClient(oSelectedClientObject);
-		}
+		},
+		onMobileNumberLiveChange:function(oEvent){
+			const oInput = oEvent.getSource();
+            const sValue = oInput.getValue();
+            const oBinding = oInput.getBinding("value");
+			try {
+                oBinding.getType().validateValue(sValue);
+                
+                oInput.setValueState("Success");
+            } catch (oException) {
+               sap.m.MessageToast.show(oException.message, {
+					duration: 3000,
+					autoClose: true,
+					closeOnBrowserNavigation: false,
+				});
+				oInput.setValueState("Error");
+				
+				oInput.setValueStateText(oException.message);
+
+            }
+		},
 
 		
 

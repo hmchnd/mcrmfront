@@ -3,10 +3,10 @@
     xmlns="sap.m"
     xmlns:tnt="sap.tnt">
     <Page showHeader="false">
-        <tnt:ToolPage id="toolpage" class="sapUiDemoToolPage backgorund" sideExpanded="false">
-            <tnt:header>
+        <tnt:ToolPage id="toolpage" class="sapUiDemoToolPage backgorund" sideExpanded="false" >
+            <tnt:header  >
                 <tnt:ToolHeader>
-                    <Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress" tooltip="{i18n>collpaseMenuButtonText}" >
+                    <Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress" tooltip="{i18n>collpaseMenuButtonText}"  >
                         <layoutData>
                             <OverflowToolbarLayoutData priority="NeverOverflow"/>
                         </layoutData>
@@ -32,7 +32,7 @@
     <ToolbarSpacer/>
     <ToolbarSpacer/>
 
- <SearchField  placeholder="Search Anything" width="30%" id="idGlobalSearchField"  liveChange="onGlobalSearchFieldLiveChange">
+ <SearchField  placeholder="Search Anything" width="30%" id="idGlobalSearchField"  liveChange="onGlobalSearchFieldLiveChange" >
 
  <layoutData>
                             <OverflowToolbarLayoutData priority="NeverOverflow"/>
@@ -53,8 +53,8 @@
                 </tnt:ToolHeader>
             </tnt:subHeader>
 
-            <tnt:sideContent>
-                <tnt:SideNavigation expanded="true" selectedKey="{sideContentModel>/selectedKey}" itemSelect=".onSelect">
+            <tnt:sideContent >
+                <tnt:SideNavigation expanded="true" selectedKey="{sideContentModel>/selectedKey}" itemSelect=".onSelect" >
                     <tnt:NavigationList items="{path: 'sideContentModel>/navigation'}">
                         <tnt:NavigationListItem text="{sideContentModel>title}" icon="{sideContentModel>icon}" visible="{sideContentModel>visible}" enabled="{sideContentModel>enabled}" expanded="{sideContentModel>expanded}" items="{sideContentModel>items}" key="{sideContentModel>key}">
                             <tnt:NavigationListItem text="{sideContentModel>title}"  key="{sideContentModel>key}" icon="{sideContentModel>icon}" enabled="{sideContentModel>enabled}" />

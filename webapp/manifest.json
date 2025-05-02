@@ -85,6 +85,21 @@
             "useBatch": true
             
         }
+    },
+    "countrymodel": {
+      "type": "sap.ui.model.json.JSONModel",
+      "uri": "model/country.json",
+      "settings": {
+     
+      }
+    },
+    "currencymodel": {
+      "type": "sap.ui.model.json.JSONModel",
+      "uri": "model/currency.json"
+    },
+    "citymodel": {
+      "type": "sap.ui.model.json.JSONModel",
+      "uri": "model/city.json"
     }
     },
     "resources": {
@@ -114,8 +129,13 @@
       },
       "routes": [
         {
-          "name": "Dashboard",
+          "name": "Login",
           "pattern": "",
+          "target":"Login"
+        },
+        {
+          "name": "Dashboard",
+          "pattern": "/dashboard",
           "target":"Dashboard"
         },
         {
@@ -159,7 +179,15 @@
           "target": [
             "manage_invoice"
           ]
+        },
+        {
+          "name": "manage_ticket",
+          "pattern": "manage_ticket",
+          "target": [
+            "manage_ticket"
+          ]
         }
+        
         
       ],
       "targets": {
@@ -190,6 +218,14 @@
         "manage_invoice":{
           "id": "manage_invoice",
           "name": "ManageInvoices"
+        },
+        "Login": {
+          "id": "Login",
+          "name": "Login"
+        },
+        "manage_ticket": {
+          "id": "manage_ticket",
+          "name": "ClientIssue"
         }
        
       }

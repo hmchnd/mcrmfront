@@ -1,0 +1,42 @@
+<mvc:View
+    controllerName="micro.crm.frontend.controller.Login"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true">
+
+    <Page
+        backgroundDesign="Transparent"
+        class="loginPage"
+        showHeader="false">
+
+        <VBox class="loginContainer" alignItems="Center" justifyContent="Center">
+            <Panel
+                width="350px"
+                class="loginPanel"
+                headerText="Micro CRM - Login">
+
+                <VBox class="formContainer" alignItems="Stretch" justifyContent="Center" >
+
+                    <Label text="Email" />
+                    <Input id="emailInput" type="Email" placeholder="Enter your email" />
+
+                    <Label text="Password" class="sapUiSmallMarginTop" />
+                    <Input id="passwordInput" type="Password" placeholder="Enter your password" />
+
+                    <HBox justifyContent="End" class="sapUiTinyMarginTop">
+                        <Link text="Forgot Password?" press="onForgotPassword" />
+                    </HBox>
+
+                    <Button
+                        text="Login"
+                        type="Emphasized"
+                        press="onLoginPress"
+                        class="loginButton sapUiLargeMarginTop" />
+                </VBox>
+
+            </Panel>
+        </VBox>
+
+    </Page>
+
+</mvc:View>
