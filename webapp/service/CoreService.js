@@ -92,6 +92,15 @@
 							client.setRequestHeader("accept", "application/json");
 							client.setRequestHeader("content-type", "application/json");
 						}
+
+
+						// Default headers
+						client.setRequestHeader("accept", "application/json");
+						client.setRequestHeader("content-type", "application/json");
+				
+						// ✅ Inject tenant-id header globally here
+						client.setRequestHeader("tenant-id", "73e5a9f1-b923-4864-a74f-c9dcc1c210d5");
+
 						for (var keyh in headers) {
 							if (headers.hasOwnProperty(keyh)) {
 								client.setRequestHeader(keyh, headers[keyh]);
