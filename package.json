@@ -15,6 +15,6 @@
     "ui5-middleware-simpleproxy": "^0.7.6"
   },
   "scripts": {
-    "start": "ui5 serve -o index.html"
-  }
+    "start": "ui5 serve -o index.html",
+    "build":"npm install"  }
 }
