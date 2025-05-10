@@ -50,8 +50,8 @@
                                     <m:Label text="Project End Date" />
                                     <!-- <m:Input value="{AppState>/oSelectedProject/currency}" /> -->
                                     <m:DatePicker value="{AppState>/oSelectedProjectObject/enddate}" valueFormat="yyyyMMdd"/>
-                                    <m:Label text="Team Assigned" />
-                                    <m:Input id="idTeam" value="{AppState>/oSelectedProjectObject/team}" editable="true" />
+                                    <!-- <m:Label text="Team Assigned" />
+                                    <m:Input id="idTeam" value="{AppState>/oSelectedProjectObject/team}" editable="true" /> -->
 
                                      <m:Label text="Project Status" />
                                     <m:Input id="idStatus" value="{AppState>/oSelectedProjectObject/status}" editable="false" />

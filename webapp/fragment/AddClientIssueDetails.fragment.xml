@@ -1,0 +1,85 @@
+<core:FragmentDefinition xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form">
+    <ObjectPageLayout id="idClientIssuePanel" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:Title text="{AppState>/oSelectedClientIssuesObject/id}" wrapping="true" visible="true" />
+                </expandedHeading>
+                <actions>
+                    <m:Button id="idSaveTask" text="Save" icon="sap-icon://save" type="Critical" press="onSaveTicket" />
+
+                    <m:Button icon="sap-icon://decline" type="Critical" press="onCloseDetailPage" />
+                    <m:Button id="deleteTicket" icon="sap-icon://delete" type="Critical" press="onDeleteTicket" />
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch" />
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection title="Ticket Details">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm id="idTicketForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+                                <form:content>
+                                    <!-- <m:Label text="Ticket Number" required="true" />
+                                    <m:Input id="idTicketNumber" value="{AppState>/oSelectedTaskObject/name}" /> -->
+
+                                    <m:Label text="Client Name" />
+                                    <!-- <m:Input id="idClientName" value="{AppState>/oSelectedTaskObject/description}" /> -->
+                                     <m:ComboBox
+                                        selectedKey="{AppState>/oSelectedClientIssuesObject/client_id}"
+                                        items="{
+                                            path: 'AppState>/clients',
+                                            sorter: { path: 'name' }
+                                        }">
+                                        <core:Item key="{AppState>id}" text="{AppState>name}"/>
+                                    </m:ComboBox>
+
+                                     <m:Label text="Title" />
+                                    <m:Input id="idTitle" value="{AppState>/oSelectedClientIssuesObject/title}" />
+
+                                     <m:Label text="Description" />
+                                    <m:Input id="idDescription" value="{AppState>/oSelectedClientIssuesObject/description}" />
+
+                                    <m:Label text="Priority" required="true" />
+                                       <m:ComboBox
+                                        selectedKey="{AppState>/oSelectedClientIssuesObject/priority}"
+                                       >
+                                        <core:Item key="High" text="High"/>
+                                        <core:Item key="Medium" text="Medium"/>
+                                        <core:Item key="Low" text="Low"/>
+                                    </m:ComboBox>
+
+
+                                    <!-- <m:Label text="Assigned To" required="true" />
+                                      <m:Input id="idAssignedTo" value="{AppState>/oSelectedTaskObject/assignedto}" /> -->
+
+
+                                     <m:Label text="Ticket Status" />
+                                    <m:Input id="idStatus" value="{AppState>/oSelectedClientIssuesObject/status}" editable="false" />
+                                   
+
+                                </form:content>
+                            </form:SimpleForm>
+
+                        </blocks>
+                    </ObjectPageSubSection>
+
+
+
+
+
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</core:FragmentDefinition>

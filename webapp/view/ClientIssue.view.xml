@@ -17,14 +17,14 @@ xmlns:mvc="sap.ui.core.mvc"
     busy="{= ${clientIssueModel>/busy} }"
     busyIndicatorDelay="0">
      <content>
-            <f:FlexibleColumnLayout layout="{InvoiceLayoutView>/layout}">
+            <f:FlexibleColumnLayout layout="{TicketLayoutView>/layout}">
                 <f:beginColumnPages>
                     <Page showHeader="false">
                         <content>
                             
                            <Table 
                 id="clientIssuesTable"
-                items="{path: 'AppState>/tickets'}">
+                items="{path: 'AppState>/clientIssues'}">
                 <columns>
                     <Column><Text text="Ticket Number"/></Column>
                     <Column><Text text="Client Name"/></Column>
@@ -38,8 +38,8 @@ xmlns:mvc="sap.ui.core.mvc"
                         type="Navigation" 
                         press="onPressTicket">
                         <cells>
-                            <ObjectIdentifier title="{AppState>ticket_number}"/>
-                            <Text text="{AppState>client_name}"/>
+                            <ObjectIdentifier title="{AppState>id}"/>
+                            <Text text="{path:'AppState>client_id', formatter:'.ClientFormatter'}"/>
                             <Text text="{
                                 path: 'AppState>title'
                             }"/>
@@ -51,10 +51,7 @@ xmlns:mvc="sap.ui.core.mvc"
                             }"/>
                             <ObjectStatus 
                                 text="{AppState>status}"
-                                state="{
-                                    path: 'AppState>status',
-                                    formatter: '.formatStatusState'
-                                }"/>
+                               />
                         </cells>
                     </ColumnListItem>
                 </items>
@@ -64,10 +61,10 @@ xmlns:mvc="sap.ui.core.mvc"
                 </f:beginColumnPages>
 
                 <f:midColumnPages>
-                    <!-- <core:Fragment
-                        fragmentName="micro.crm.frontend.fragment.AddInvoiceDetails"
+                    <core:Fragment
+                        fragmentName="micro.crm.frontend.fragment.AddClientIssueDetails"
                         type="XML"
-                    /> -->
+                    />
                 </f:midColumnPages>
 
                 <f:endColumnPages />

@@ -53,7 +53,7 @@ sap.ui.define(
             invoices:[],
             invoice_items :[],
             payments:[],
-            teamMembers:[],
+            clientIssues:[],
             currentPage:"",
             oSelectedClientObject:{},
             oSelectedLeadObject: {},
@@ -62,6 +62,7 @@ sap.ui.define(
             oSelectedTaskObject: {},
             oSelectedInvoiceObject: {},
             oSelectedInvoiceItemObject: [],
+            oSelectedClientIssuesObject: {},
           
           };
 
@@ -138,8 +139,8 @@ sap.ui.define(
               this.getLeads();
               MessageToast.show("Lead details saved successfully");
             }.bind(this)).catch((Message)=>{
-              this.getClients();
-              MessageToast.show("Client details saved successfully");
+              this.getLeads();
+              MessageToast.show("Lead details saved successfully");
             });
 
           }
@@ -254,7 +255,7 @@ sap.ui.define(
           });
         },
         saveTaskDetails:function(oTask){
-          oTask.assignedto = 'a5c2239e-c014-41dc-beac-6fc5130d1005'
+  
           oTask.status = 'To Do'
           if(oTask.id){
             this.AppService.updateTaskDetails(oTask).then(function(data){
@@ -312,6 +313,49 @@ sap.ui.define(
 
           }
         },
+        saveClientIssueDetails:function(oClientIssue){
+
+          //oClientIssue.client_id = 'a5c2239e-c014-41dc-beac-6fc5130d1005'
+          //oClientIssue.lead_id = 'a5c2239e-c014-41dc-beac-6fc5130d1005'
+          oClientIssue.status = 'Draft'
+          debugger;
+          if(oClientIssue.id){
+            this.AppService.updateClientIssueDetails(oClientIssue).then(function(data){
+              this.getClientIssues();
+              MessageToast.show("Client Issue details updated successfully");
+            }.bind(this)).catch((Message)=>{
+            });
+          }else{
+            this.AppService.saveClientIssueDetails(oClientIssue).then(function(data){
+              this.getClientIssues();
+              MessageToast.show("Client Issue details saved successfully");
+            }.bind(this)).catch((Message)=>{
+              this.getClientIssues();
+              MessageToast.show("Client Issue details saved successfully");
+            });
+
+          }
+        },
+        getClientIssues:function(){
+          let that = this;
+          this.AppService.getClientIssues().then(function(data){
+            that.data.clientIssues = JSON.parse(data);
+        
+            that.updateModel();
+          }.bind(this)).catch((error)=>{
+         
+              console.log('Error occurred')
+          });
+        },
+        deleteClientIssue:function(oClientIssue){
+          this.AppService.deleteClientIssue(oClientIssue).then(function(data){
+            this.getClientIssues();
+            MessageToast.show("Client Issue deleted successfully");
+          }.bind(this)).catch((Message)=>{
+            this.getClientIssues();
+            MessageToast.show("Client Issue deleted successfully");
+          });
+        }
       
 
     

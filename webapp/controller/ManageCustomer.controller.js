@@ -22,6 +22,8 @@ sap.ui.define([
 			this.AppState.currentPage = "manage_customers";
 			this.AppState.data.globalCreateButtonVisibility = true;
 			this.AppState.getClients();
+			this.AppState.getServices();
+            this.AppState.getServiceCategories();
 			this.AppState.updateModel();
 		},
 		onCloseDetailPage: function() {
@@ -29,7 +31,7 @@ sap.ui.define([
 			this.getModel("customerLayoutView").setProperty("/layout", sLayout);
 			this.getModel("customerLayoutView").refresh(true);
 		},
-        onPress: function (oEvent) {
+        onDetailPress: function (oEvent) {
 			let oSelectedClientObject =
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
             {};

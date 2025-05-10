@@ -53,7 +53,7 @@
                                     >
                                         <FlexBox class="columns">
                                             <Title
-                                                text="{AppState>name}"
+                                                text="Title: {AppState>name}"
                                                 wrapping="true"
                                             >
                                                 <layoutData>
@@ -66,9 +66,9 @@
                                                 </layoutData>
                                             </Title>
 
-                                            <ObjectAttribute
-                                                title="Description"
-                                                text="{AppState>description}"
+                                            <Title
+                                                text="Descripton: {AppState>description}"
+                                                wrapping="true"
                                             >
                                                 <layoutData>
                                                     <FlexItemData
@@ -78,11 +78,11 @@
                                                         styleClass="sapUiTinyMargin"
                                                     />
                                                 </layoutData>
-                                            </ObjectAttribute>
+                                            </Title>
 
-                                            <ObjectAttribute
-                                                title="Project"
-                                                text="{AppState>project}"
+                                            <Title
+                                                text="Project: {path:'AppState>project', formatter: '.formatProject'}"
+                                              
                                             >
                                                 <layoutData>
                                                     <FlexItemData
@@ -92,11 +92,11 @@
                                                         styleClass="sapUiTinyMargin"
                                                     />
                                                 </layoutData>
-                                            </ObjectAttribute>
+                                            </Title>
 
-											<ObjectAttribute
-                                                title="Due Date"
-                                                text="{AppState>duedate}"
+											<Title
+                                                text="Due Date : {AppState>duedate}"
+                                              
                                             >
                                                 <layoutData>
                                                     <FlexItemData
@@ -106,12 +106,12 @@
                                                         styleClass="sapUiTinyMargin"
                                                     />
                                                 </layoutData>
-                                            </ObjectAttribute>
+                                            </Title>
 
                                             <ObjectStatus
                                                 title="Status"
-                                                text="{AppState>status}"
-                                                state="Warning"
+                                                text="{path:'AppState>status'}"
+                                                state="{path:'AppState>status',formatter:'.formatStatus'}"
                                             >
                                                 <layoutData>
                                                     <FlexItemData

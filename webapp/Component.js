@@ -63,6 +63,12 @@ sap.ui.define(
           models.createViewLayoutModel(),
           "InvoiceLayoutView"
         );
+
+        
+        this.setModel(
+          models.createViewLayoutModel(),
+          "TicketLayoutView"
+        );  
       
         this.setModel(models.createModel(), "oFiori");
         this.getModel("oFiori").setData(this._buildMomentsIcons());

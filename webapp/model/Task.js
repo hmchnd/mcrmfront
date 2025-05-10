@@ -14,9 +14,20 @@ sap.ui.define([
                 this.project = data?.project || "";
 
                 this.status = data?.status || "";
-                this.assignedto = data?.assignedto || "";
+           
              
  
+            }else{
+
+                this.id =  "";
+                this.name =  "";
+                this.description = "";
+                this.duedate = new Date().toISOString();
+                this.project = "";
+
+                this.status = "To Do";
+              
+
             }
         },
  

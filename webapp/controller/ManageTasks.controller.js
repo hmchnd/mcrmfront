@@ -25,6 +25,7 @@ sap.ui.define([
 			this.AppState.currentPage = "manage_tasks";
 			this.AppState.data.globalCreateButtonVisibility = true;
 			this.AppState.getTasks();
+			this.AppState.getProjects();
 		},
 		onSaveTaskDetails: function(oEvent) {
 			let oTask = this.AppState.data.oSelectedTaskObject;
@@ -44,5 +45,28 @@ sap.ui.define([
 			this.getModel("TaskLayoutView").setProperty("/layout", sLayout);
 
 		},
+		formatProject:function(sProjectId) {
+			let aProjects = this.AppState.data.projects || [];
+			
+			let oProject = aProjects.find((oProject) => oProject.id === sProjectId);
+			if (oProject) {
+				return oProject.name;
+			}
+			return sProjectId;
+		},
+		formatStatus:function(sStatus) {
+			if(sStatus === "Done") {
+				return "Success";
+			}
+			if(sStatus === "To Do") {
+				return "Error";
+				
+			}
+			if(sStatus === "In Progress") {
+				return "Warning";
+		
+			}
+			return sStatus;
+		}
 	});
 });

@@ -3,7 +3,7 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	 xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
-	xmlns="sap.m"   xmlns:l="sap.ui.layout"  xmlns:grid="sap.ui.layout.cssgrid"
+	xmlns="sap.m"   
 	displayBlock="true"
 	height="100%"
 	busyIndicatorDelay="0"
@@ -14,149 +14,56 @@
 		showNavButton="false">
 
 		 <content>
-            <f:FlexibleColumnLayout layout="{projectLayoutView>/layout}">
+          <f:FlexibleColumnLayout layout="{projectLayoutView>/layout}">
                 <f:beginColumnPages>
                     <Page showHeader="false">
                         <content>
-                            
-                            <f:GridList
-                                id="gridList"
-                                mode="None"
-                                growingThreshold="10"
-                                growing="true"
-                                growingDirection="Downwards"
-                                growingScrollToLoad="true"
-                                items="{
+  <Table 
+                id="idManageProjectsTable"
+                items="{
         path: 'AppState>/projects',
         sorter: { path: 'createdat', descending: true }
-    }"
-                                selectionChange="onSelectionChange"
-                                delete="onDelete"
-                                class="sapUiResponsiveContentPadding"
-                            >
-                                <f:customLayout>
-                                    <grid:GridBasicLayout
-                                        gridAutoRows="repeat(auto-fit)"
-                                        gridGap="0.5rem"
-                                    />
-                                </f:customLayout>
+    }">
+                <columns>
+                    <Column><Text text="Project Title"/></Column>
+                    <Column><Text text="Project Description"/></Column>
+                      <Column><Text text="Client Name"/></Column>
+                    <Column><Text text="Project Start Date"/></Column>
+                    <Column><Text text="Project End Date"/></Column>
+                    <Column><Text text="Project Status"/></Column>
+                  
+                </columns>
+                <items>
+                    <ColumnListItem 
+                        type="Navigation" 
+                        press="onDetailPress">
+                        <cells>
+                            <ObjectIdentifier title="{AppState>name}"/>
+                            <Text text="{AppState>description}"/>
+                            <Text text="{
+                                path: 'AppState>client',
+                                formatter: '.formatClientName'
+                            }"/>
+                            <Text text="{
+                                path: 'AppState>startdate',
+                                formatter: '.formatDate'
+                            }"/>
+                            <Text text="{
+                                path: 'AppState>enddate',
+                                formatter: '.formatDate'
+                            }"/>
+                            <ObjectStatus 
+                                text="{AppState>status}"
+                                state="{
+                                    path: 'AppState>status',
+                                    formatter: '.formatStatusState'
+                                }"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
 
-                                <f:GridListItem
-                                    detailPress="onDetailPress"
-                                    press="onPress"
-                                    highlight="Success"
-                                    type="Active"
-                                >
-                                    <l:VerticalLayout
-                                        class="sapUiContentPadding equalColumns"
-                                        width="100%"
-                                    >
-                                        <FlexBox class="columns">
-                                            <Title
-                                                text="{AppState>name}"
-                                                wrapping="true"
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </Title>
-
-                                            <ObjectAttribute
-                                                title="Description"
-                                                text="{AppState>description}"
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectAttribute>
-
-                                            <ObjectAttribute
-                                                title="Client"
-                                                text="{AppState>client}"
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectAttribute>
-
-											<ObjectAttribute
-                                                title="Start Date"
-                                                text="{AppState>startdate}"
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectAttribute>
-
-                                            <ObjectStatus
-                                                title="End Date"
-                                                text="{AppState>enddate}"
-                                                state="Warning"
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectStatus>
-
-                                            <VBox>
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                               <ObjectAttribute
-                                                title="Status"
-												text="{AppState>status}"
-                                               
-                                            >
-                                                <layoutData>
-                                                    <FlexItemData
-                                                        growFactor="1"
-                                                        baseSize="0"
-                                                        backgroundDesign="Transparent"
-                                                        styleClass="sapUiTinyMargin"
-                                                    />
-                                                </layoutData>
-                                            </ObjectAttribute>
-                                              
-											 
-
-
-                                            </VBox>
-
-                                            
-                                        </FlexBox>
-                                    </l:VerticalLayout>
-                                </f:GridListItem>
-                            </f:GridList>
+           
                         </content>
                     </Page>
                 </f:beginColumnPages>

@@ -10,6 +10,7 @@ sap.ui.define(
     "micro/crm/frontend/model/Task",
     "micro/crm/frontend/model/Invoice",
     "micro/crm/frontend/model/InvoiceItems",
+    "micro/crm/frontend/model/Ticket",
     
   ],
   (
@@ -22,7 +23,8 @@ sap.ui.define(
     Project,
     Task,
     Invoice,
-    InvoiceItems
+    InvoiceItems,
+    Ticket
   ) => {
     "use strict";
 
@@ -95,11 +97,10 @@ sap.ui.define(
         }
 
         if(this.AppState.currentPage === "manage_tasks"){
-          this.AppState.data.oSelectedLeadObject = new Task();
+          this.AppState.data.oSelectedTaskObject = new Task();
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("TaskLayoutView").setProperty("/layout", sLayout);
           this.getModel("TaskLayoutView").refresh(true);
-
         }
        
         if(this.AppState.currentPage === "manage_invoice"){
@@ -109,6 +110,14 @@ sap.ui.define(
           this.getModel("InvoiceLayoutView").setProperty("/layout", sLayout);
           this.getModel("InvoiceLayoutView").refresh(true);
 
+        }
+
+        if(this.AppState.currentPage === "manage_ticket"){
+          this.AppState.data.oSelectedInvoiceObject = new Ticket();
+          this.AppState.data.oSelectedInvoiceItemObject = [new Ticket()];
+          let sLayout = LayoutType.TwoColumnsBeginExpanded;
+          this.getModel("TicketLayoutView").setProperty("/layout", sLayout);
+          this.getModel("TicketLayoutView").refresh(true);
         }
 
       }

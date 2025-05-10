@@ -65,7 +65,13 @@
                                     <m:TextArea id="idClientAddress" value="{AppState>/oSelectedClientObject/address}" cols="20" rows="4"/>
 
                                     <m:Label text="Service Required" />
-                                    <m:Input id="idServiceRequired" value="{AppState>/oSelectedClientObject/servicerequired}"/>
+                                    <!-- <m:Input id="idServiceRequired" value="{AppState>/oSelectedClientObject/servicerequired}"/> -->
+                                     <m:ComboBox showSecondaryValues="true" id="idServiceRequired" selectedKey="{AppState>/oSelectedClientObject/servicerequired}" items="{
+                                            path: 'AppState>/services',
+    length: 10000
+                                        }">
+                                        <core:ListItem key="{AppState>id}" text="{AppState>name}"  />
+                                    </m:ComboBox>
 
                                     <m:Label text="Country" />
                                     <m:ComboBox showSecondaryValues="true" id="idCountry" selectedKey="{AppState>/oSelectedClientObject/country}" items="{
