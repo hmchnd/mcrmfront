@@ -94,6 +94,9 @@ sap.ui.define(
       getClientIssues:function(){
         return this.http("/backend/tickets").get()
       },
+      doLogin: function (oUser) {
+        return this.http("/backend/login").post("", oUser);
+      },
      
 
   });

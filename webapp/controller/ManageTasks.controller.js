@@ -22,7 +22,7 @@ sap.ui.define([
 			this.AppState = this.getOwnerComponent().getState("App");
 			this.getView().setModel(this.AppState.getModel(), "AppState");
 			this.AppState.getModel().setSizeLimit(999999);
-			this.AppState.currentPage = "manage_tasks";
+			this.AppState.data.currentPage = "manage_tasks";
 			this.AppState.data.globalCreateButtonVisibility = true;
 			this.AppState.getTasks();
 			this.AppState.getProjects();

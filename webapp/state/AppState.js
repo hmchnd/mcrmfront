@@ -355,7 +355,21 @@ sap.ui.define(
             this.getClientIssues();
             MessageToast.show("Client Issue deleted successfully");
           });
-        }
+        },
+        doUserLogin: function (oUser) {
+          this.AppService.doLogin(oUser).then(function (data) {
+            this.data.user = JSON.parse(data);
+            // store token securely (localStorage for now)
+            localStorage.setItem("auth_token",  this.data.user.token);
+            sap.m.MessageToast.show("Login successful");
+            // Navigate to dashboard
+            const oRouter = sap.ui.core.UIComponent.getRouterFor(this.ViewController);
+            oRouter.navTo("Dashboard");
+            this.updateModel();
+          }.bind(this)).catch((Message) => {
+            MessageBox.error("Invalid username or password");
+          });
+        },
       
 
     

@@ -19,7 +19,7 @@ sap.ui.define([
 			this.AppState = this.getOwnerComponent().getState("App");
 			this.getView().setModel(this.AppState.getModel(), "AppState");
 			this.AppState.getModel().setSizeLimit(999999);
-			this.AppState.currentPage = "manage_ticket";
+			this.AppState.data.currentPage = "manage_ticket";
 			this.AppState.data.globalCreateButtonVisibility = true;
 			this.AppState.getClients();
 			this.AppState.getServices();

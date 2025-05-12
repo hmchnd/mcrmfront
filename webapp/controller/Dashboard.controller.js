@@ -47,6 +47,7 @@ sap.ui.define([
       this.getView().setModel(this.AppState.getModel(), "AppState");
       this.AppState.getModel().setSizeLimit(999999);
       this.AppState.setViewController(this);
+      this.AppState.data.currentPage = "dashboard";
       this.AppState.data.globalCreateButtonVisibility = false;
     },
     onNavToProject: function(){

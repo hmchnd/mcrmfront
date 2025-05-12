@@ -56,7 +56,7 @@ sap.ui.define(
         this.AppState = this.getOwnerComponent().getState("App");
         this.getView().setModel(this.AppState.getModel(), "AppState");
         this.AppState.getModel().setSizeLimit(999999);
-        this.AppState.getUser()
+        this.AppState.getUser();
         this.getModel("sideContentModel").setProperty(
           "/selectedKey",
           oEvent.getParameter("name")
@@ -64,7 +64,7 @@ sap.ui.define(
       },
       onAddNewItem:function(){
 
-        if(this.AppState.currentPage === "manage_customers"){
+        if(this.AppState.data.currentPage === "manage_customers"){
           this.AppState.data.oSelectedClientObject = new Client();
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("customerLayoutView").setProperty("/layout", sLayout);
@@ -72,7 +72,7 @@ sap.ui.define(
 
         }
 
-        if(this.AppState.currentPage === "manage_products"){
+        if(this.AppState.data.currentPage === "manage_products"){
           this.AppState.data.oSelectedClientObject = new Service();
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("productLayoutView").setProperty("/layout", sLayout);
@@ -80,7 +80,7 @@ sap.ui.define(
 
         }
 
-        if(this.AppState.currentPage === "manage_leads"){
+        if(this.AppState.data.currentPage === "manage_leads"){
           this.AppState.data.oSelectedLeadObject = new Leads();
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("productLayoutViewLeadView").setProperty("/layout", sLayout);
@@ -88,7 +88,7 @@ sap.ui.define(
 
         }
 
-        if(this.AppState.currentPage === "manage_projects"){
+        if(this.AppState.data.currentPage === "manage_projects"){
           this.AppState.data.oSelectedLeadObject = new Project();
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("projectLayoutView").setProperty("/layout", sLayout);
@@ -96,14 +96,14 @@ sap.ui.define(
 
         }
 
-        if(this.AppState.currentPage === "manage_tasks"){
+        if(this.AppState.data.currentPage === "manage_tasks"){
           this.AppState.data.oSelectedTaskObject = new Task();
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
           this.getModel("TaskLayoutView").setProperty("/layout", sLayout);
           this.getModel("TaskLayoutView").refresh(true);
         }
        
-        if(this.AppState.currentPage === "manage_invoice"){
+        if(this.AppState.data.currentPage === "manage_invoice"){
           this.AppState.data.oSelectedInvoiceObject = new Invoice();
           this.AppState.data.oSelectedInvoiceItemObject = [new InvoiceItems()];
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
@@ -112,7 +112,7 @@ sap.ui.define(
 
         }
 
-        if(this.AppState.currentPage === "manage_ticket"){
+        if(this.AppState.data.currentPage === "manage_ticket"){
           this.AppState.data.oSelectedInvoiceObject = new Ticket();
           this.AppState.data.oSelectedInvoiceItemObject = [new Ticket()];
           let sLayout = LayoutType.TwoColumnsBeginExpanded;
