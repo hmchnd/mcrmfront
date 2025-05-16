@@ -40,14 +40,7 @@
                                 path: 'AppState>due_date'
                             }"/>
                             <ObjectNumber 
-                                number="{
-                                    parts: [
-                                        {path: 'AppState>subtotal'},
-                                        {path: 'AppState>tax_rate'},
-                                        {path: 'AppState>discount'}
-                                    ],
-                                    formatter: '.formatTotalAmount'
-                                }"
+                                number=" {path: 'AppState>subtotal'}"
                                 unit="USD"/>
                             <ObjectStatus 
                                 text="{AppState>status}"

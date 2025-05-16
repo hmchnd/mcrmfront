@@ -11,10 +11,12 @@
   "dependencies": {
     "@sap/ux-ui5-tooling": "^1.16.5",
     "@ui5/cli": "^3.11.6",
+    "chartjs": "^0.3.24",
     "ui5-middleware-livereload": "^0.5.13",
     "ui5-middleware-simpleproxy": "^0.7.6"
   },
   "scripts": {
     "start": "ui5 serve -o index.html",
-    "build":"npm install"  }
+    "build": "npm install"
+  }
 }

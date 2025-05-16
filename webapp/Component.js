@@ -79,14 +79,30 @@ sap.ui.define(
           this._oAppService,
           this.getModel("i18n").getResourceBundle()
         );
-        this.openLoginDialog();
+       
         // Enable routing
         this.getRouter().initialize();
-        this.getRouter().navTo("Login");
-        setTimeout(() => {
-          this.openLoginDialog();
-        }, 2500);
+        if (!this.isTokenValid()) {
+          this.getRouter().navTo("Login");
+        } else {
+          this.getRouter().navTo("Dashboard");
+        }
+      
       },
+      isTokenValid: function () {
+      
+        const token = localStorage.getItem("auth_token");
+        if (!token) return false;
+        try {
+          const payload = JSON.parse(atob(token.split(".")[1]));
+          const now = Math.floor(Date.now() / 1000);
+          return payload.exp > now;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      ,
 
       _buildMomentsIcons: function () {
         const tnt = "tnt";

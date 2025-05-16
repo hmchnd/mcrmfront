@@ -98,14 +98,17 @@
                                     <m:DatePicker id="idDueDate" value="{AppState>/oSelectedInvoiceObject/due_date}" valueFormat="yyyyMMdd"/>
                                     
 
-                                     <m:Label text="Tax Rate" />
-                                    <m:Input id="idTax" value="{AppState>/oSelectedInvoiceObject/tax_rate}"  />
+                                     <m:Label text="Tax Rate" visible="false"/>
+                                    <m:Input id="idTax" value="0"  editable="false" visible="false"/>
 
                                     <m:Label text="Discount" />
-                                    <m:Input id="idDiscount" value="{AppState>/oSelectedInvoiceObject/discount}"  />
+                                    <m:Input id="idDiscount" value="{AppState>/oSelectedInvoiceObject/discount}" liveChange="onDiscountChange" />
 
                                       <m:Label text="Status" />
                                     <m:Input id="idStatus" value="{AppState>/oSelectedInvoiceObject/status}" editable="false" />
+
+                                     <m:Label text="Grand Total" />
+                                    <m:ObjectStatus id="idGrandTotal" text="0.00" state="Warning" />
                                    
 
                                 </form:content>
@@ -187,10 +190,10 @@
                                         <core:Item key="{AppState>id}" text="{AppState>name}"/>
                                     </m:ComboBox>
                                             <m:Input value="{AppState>description}"  />
-                                            <m:Input value="{AppState>quantity}"  />
-                                            <m:Input value="{AppState>unit_price}"  />
-                                            <m:Input value="{AppState>tax_rate}"  />
-                                            <m:Input value="{AppState>amount}"  />
+                                            <m:Input value="{AppState>quantity}"  type="Number" liveChange="onInvoiceItemChange"/>
+                                            <m:Input value="{AppState>unit_price}"  type="Number" liveChange="onInvoiceItemChange"/>
+                                            <m:Input value="{AppState>tax_rate}"  type="Number" liveChange="onInvoiceItemChange"/>
+                                            <m:Text text="{AppState>amount}"   />
                                         </m:cells>
                                     </m:ColumnListItem>
                                 </m:items>

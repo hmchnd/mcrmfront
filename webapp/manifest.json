@@ -65,6 +65,7 @@
         "sap.m": {},
         "sap.ui.core": {},
         "sap.f":{}
+      
       }
     },
     "contentDensities": {
@@ -115,6 +116,7 @@
         }
       ]
     },
+       
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
