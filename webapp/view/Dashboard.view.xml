@@ -66,7 +66,7 @@ xmlns:grid="sap.ui.layout.cssgrid" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui
                                     <grid:ResponsiveColumnLayout />
                                 </f:customLayout>
                                
-                                <f:GridListItem id="project" class="special round" type="Active" press="navToTickets" visible="true">
+                                <f:GridListItem id="project" class="special round" type="Active" press="navToProjects" visible="true">
                                     <f:layoutData>
                                         <grid:ResponsiveColumnItemLayoutData columns="4" rows="1" />
                                     </f:layoutData>
@@ -81,8 +81,8 @@ xmlns:grid="sap.ui.layout.cssgrid" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui
                                         </VBox>
                                     </HBox>
                                 </f:GridListItem>
-                                
-                                 <f:GridListItem id="task" class="special round" type="Active" press="navToSolution" visible="true">
+
+                                 <f:GridListItem id="task" class="special round" type="Active" press="navToTasks" visible="true">
                                     <f:layoutData>
                                         <grid:ResponsiveColumnItemLayoutData columns="4" rows="1" />
                                     </f:layoutData>
@@ -90,7 +90,7 @@ xmlns:grid="sap.ui.layout.cssgrid" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui
                                         <core:HTML content='{oFiori>/miniTeams}' />
                                         <VBox width="100%" class="sapUiTinyMarginTop">
                                             <Title text="My Tasks" level="H4" titleStyle="H4" class="sapUiTinyMargin" wrapping="true" wrappingType="Normal" />
-                                            <Text text="Here you can search all Available Projects Details and other knowledge base article from entire system." class="sapUiTinyMarginBegin" />
+                                            <Text text="Here you can find all your tasks and their status." class="sapUiTinyMarginBegin" />
                                             <layoutData>
                                                 <FlexItemData growFactor="2" />
                                             </layoutData>
@@ -99,7 +99,7 @@ xmlns:grid="sap.ui.layout.cssgrid" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui
                                 </f:GridListItem>
                                 
 
-                                 <f:GridListItem id="leads" class="special round" type="Active" press=".navTo('manage_overview')" visible="true">
+                                 <f:GridListItem id="leads" class="special round" type="Active" press="navToLeads" visible="true">
                                     <f:layoutData>
                                         <grid:ResponsiveColumnItemLayoutData columns="4" rows="1" />
                                     </f:layoutData>
@@ -114,7 +114,7 @@ xmlns:grid="sap.ui.layout.cssgrid" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui
                                         </VBox>
                                     </HBox>
                                 </f:GridListItem>
-                                <f:GridListItem id="clientIssues" class="special round" type="Active" press=".navTo('manage_overview')" visible="true">
+                                <f:GridListItem id="clientIssues" class="special round" type="Active" press="navToClientIssues" visible="true">
                                     <f:layoutData>
                                         <grid:ResponsiveColumnItemLayoutData columns="4" rows="1" />
                                     </f:layoutData>
@@ -129,7 +129,7 @@ xmlns:grid="sap.ui.layout.cssgrid" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui
                                         </VBox>
                                     </HBox>
                                 </f:GridListItem>
-                                <f:GridListItem id="invoices" class="special round" type="Active" press="navToAnalytics">
+                                <f:GridListItem id="invoices" class="special round" type="Active" press="navToInvoices" visible="true">
                                     <f:layoutData>
                                         <grid:ResponsiveColumnItemLayoutData columns="4" rows="1" />
                                     </f:layoutData>
@@ -137,7 +137,7 @@ xmlns:grid="sap.ui.layout.cssgrid" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui
                                         <core:HTML content='{oFiori>/miniAnalytics}' />
                                         <VBox width="100%" class="sapUiTinyMarginTop">
                                             <Title text="Invoices" level="H4" titleStyle="H4" class="sapUiTinyMargin" wrapping="true" wrappingType="Normal" />
-                                            <Text text="Get an insight on your Projects  and with the help of charts and graph." class="sapUiTinyMarginBegin" />
+                                            <Text text="Get an insight on your Invoices" class="sapUiTinyMarginBegin" />
                                             <layoutData>
                                                 <FlexItemData growFactor="2" />
                                             </layoutData>
@@ -161,8 +161,8 @@ xmlns:grid="sap.ui.layout.cssgrid" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui
     
     <f:header>
       <card:Header
-        title="Sales Overview"
-        subtitle="Revenue by Product"/>
+        title="Coming Soon...."
+        subtitle=""/>
     </f:header>
 
     <f:content>

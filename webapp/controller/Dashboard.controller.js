@@ -32,14 +32,18 @@ sap.ui.define([
     onAfterRendering: function() {
    
     },
-    onNavToProject: function(){
+    navToProjects: function(){
       this.getOwnerComponent().getRouter().navTo("manage_projects")
     },
-    onNavToTask: function(){
-      this.getOwnerComponent().getRouter().navTo("ManageRoadmap")
+    navToInvoices: function(){
+      this.getOwnerComponent().getRouter().navTo("manage_invoice")
     },
-    onNavToActivity: function(){
-      this.getOwnerComponent().getRouter().navTo("ManageActivity")
+    navToClientIssues: function(){
+      this.getOwnerComponent().getRouter().navTo("manage_ticket")
+    },navToTasks: function(){
+      this.getOwnerComponent().getRouter().navTo("manage_tasks")
+    },navToLeads: function(){
+      this.getOwnerComponent().getRouter().navTo("manage_leads")
     },
   });
 });

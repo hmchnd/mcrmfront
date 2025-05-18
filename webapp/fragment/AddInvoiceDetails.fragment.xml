@@ -135,7 +135,8 @@
                                 items="{AppState>/oSelectedInvoiceItemObject}"
                                 inset="false"
                                 width="100%"
-                              
+                                mode="SingleSelectLeft"
+                                modeAnimationOn="true"
                             >
                             <m:headerToolbar>
                     <m:OverflowToolbar id="_IDGenTooblbffar1">

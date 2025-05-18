@@ -33,6 +33,9 @@ sap.ui.define(
         onSaveInvoice: function (oEvent) {
           let oInvoice =
             this.AppState.data.oSelectedInvoiceObject.mapPostData();
+            oInvoice.subtotal = parseInt(this.byId("idGrandTotal").getText());
+            oInvoice.tax_rate = '0';
+          oInvoice.discount = this.AppState.data.oSelectedInvoiceObject.discount;
           let oInvoiceItems = this.AppState.data.oSelectedInvoiceItemObject;
           oInvoice.items = oInvoiceItems;
           debugger;
@@ -48,6 +51,10 @@ sap.ui.define(
             oEvent.getSource()?.getBindingContext("AppState")?.getObject() ||
             {};
           this.AppState.data.oSelectedInvoiceObject = oSelectedInvoiceObject;
+          this.AppState.data.oSelectedInvoiceItemObject = this.AppState.data.oSelectedInvoiceObject.items;
+          this.byId("idGrandTotal").setText(
+            this.AppState.data.oSelectedInvoiceObject.subtotal
+          );
           var sLayout = LayoutType.MidColumnFullScreen;
           this.getModel("InvoiceLayoutView").setProperty("/layout", sLayout);
         },
@@ -145,22 +152,24 @@ if (isNaN(quantity) || isNaN(unitPrice) || isNaN(taxRate)) {
           return states[status] || "None";
         },
         downloadInvovice: function (oEvent) {
+          let oSelectedInvoiceObject =this.AppState.data.oSelectedInvoiceObject;
+          let that = this;
           const invoice = {
-            invoice_number: "INV-001",
-            client_name: "John Doe",
-            client_address: "123 Main St, Springfield, USA",
-            invoice_date: "2023-10-01",
-            due_date: "2023-10-15",
-            subtotal: 1000,
-            tax_rate: 10,
-            discount: 50,
+            invoice_number: oSelectedInvoiceObject.invoice_number,
+            client_name: this.AppState.data.clients.find((item)=> item.id==oSelectedInvoiceObject.client_id).name,
+            client_address: this.AppState.data.clients.find((item)=> item.id==oSelectedInvoiceObject.client_id).address,
+            invoice_date: oSelectedInvoiceObject.issue_date,
+            due_date: oSelectedInvoiceObject.due_date,
+            tax_rate: 0.00,
+            discount: oSelectedInvoiceObject.discount,
             total_amount: 1050,
-            subtotal: 1000,
-            items: [
-              { description: "Service 1", quantity: 2, unit_price: 200 },
-              { description: "Service 2", quantity: 1, unit_price: 300 },
-              { description: "Service 3", quantity: 3, unit_price: 150 },
-            ],
+            items: oSelectedInvoiceObject.items.map((item) => ({
+              description: item.description,
+              quantity: item.quantity,
+              unit_price: item.unit_price,
+              amount: item.quantity * item.unit_price,
+              serviceName: that.AppState.data.services.find((service) => service.id == item.service_id)?.name || "",  
+            })),
           };
 
           // 1. Generate PDF content
@@ -310,6 +319,44 @@ if (isNaN(quantity) || isNaN(unitPrice) || isNaN(taxRate)) {
             currency: "USD",
           }).format(amount);
         },
+        onDeleteInvoiceItem: function (oEvent) {
+         const oTable = this.byId("invoiceItemsTable");
+    const oModel = this.getView().getModel("AppState");
+    const aItems = oModel.getProperty("/oSelectedInvoiceItemObject");
+
+    // Get selected item
+    const oSelectedItem = oTable.getSelectedItem();
+    if (!oSelectedItem) {
+        sap.m.MessageToast.show("Please select an item to delete.");
+        return;
+    }
+
+    // Ask for confirmation before deleting
+    sap.m.MessageBox.confirm("Are you sure you want to delete this item?", {
+        title: "Confirm Deletion",
+        actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+        onClose: function (oAction) {
+            if (oAction === sap.m.MessageBox.Action.YES) {
+                const sPath = oSelectedItem.getBindingContext("AppState").getPath();
+                const iIndex = parseInt(sPath.split("/").pop(), 10);
+
+                // Remove item from array
+                aItems.splice(iIndex, 1);
+
+                // Update model
+                oModel.setProperty("/oSelectedInvoiceItemObject", aItems);
+                oModel.refresh();
+
+                // Clear table selection
+                oTable.removeSelections();
+            }
+        }
+    });
+        }
+
+
+
+
       }
     );
   }

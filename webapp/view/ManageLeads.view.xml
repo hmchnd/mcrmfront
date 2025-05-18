@@ -231,10 +231,7 @@
                                             <ObjectNumber
                                                 number="{AppState>budget}"
                                                 unit="{AppState>currency}"
-                                                state="{
-                                                    path: 'AppState>status'
-                                                  
-                                                }"/>
+                                               />
                                         </HBox>
                                         <HBox justifyContent="SpaceBetween">
                                             <Text text="Closed Date:"/>

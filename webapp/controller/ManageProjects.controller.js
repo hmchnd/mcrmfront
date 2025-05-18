@@ -70,8 +70,8 @@ sap.ui.define([
 			return oDate;
 		},
 		formatClientName: function(sClientID) {
-			let aClients = this.AppState.data.clients || [];
-			let oClient = aClients.find((oClient) => oClient.id === sClientID);
+			let aClients = this.AppState?.data?.clients || [];
+			let oClient = aClients?.find((oClient) => oClient.id === sClientID);
 			if (oClient) {
 				return oClient.name;
 			}
