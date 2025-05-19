@@ -112,16 +112,16 @@ sap.ui.define(
           if(oLead.id){
             this.AppService.updateClientDetails(oLead).then(function(data){
               this.getClients();
-              MessageToast.show("Lead details updated successfully");
+              MessageBox.success("Client details updated successfully");
             }.bind(this)).catch((Message)=>{
             });
           }else{
             this.AppService.saveClientDetails(oLead).then(function(data){
               this.getClients();
-              MessageToast.show("Lead details saved successfully");
+              MessageBox.success("Client details saved successfully");
             }.bind(this)).catch((Message)=>{
               this.getClients();
-              MessageToast.show("Lead details saved successfully");
+              MessageToast.show("Client details saved successfully");
             });
 
           }
@@ -131,13 +131,13 @@ sap.ui.define(
           if(oLead.id){
             this.AppService.updateLeadDetails(oLead).then(function(data){
               this.getLeads();
-              MessageToast.show("Lead details updated successfully");
+             MessageBox.success("Lead details updated successfully");
             }.bind(this)).catch((Message)=>{
             });
           }else{
             this.AppService.saveLeadDetails(oLead).then(function(data){
               this.getLeads();
-              MessageToast.show("Lead details saved successfully");
+              MessageBox.success("Lead details saved successfully");
             }.bind(this)).catch((Message)=>{
               this.getLeads();
               MessageToast.show("Lead details saved successfully");
@@ -149,19 +149,19 @@ sap.ui.define(
         deleteClient:function(oClient){
           this.AppService.deleteClient(oClient).then(function(data){
             this.getClients();
-            MessageToast.show("Client deleted successfully");
+           MessageBox.success("Client deleted successfully");
           }.bind(this)).catch((Message)=>{
             this.getClients();
-            MessageToast.show("Client deleted successfully");
+            MessageBox.error("Client deleted Error");
           });
         },
         deleteLeads:function(oLead){
           this.AppService.deleteLeads(oLead).then(function(data){
             this.getLeads();
-            MessageToast.show("Leads deleted successfully");
+            MessageBox.success("Leads deleted successfully");
           }.bind(this)).catch((Message)=>{
             this.getLeads();
-            MessageToast.show("Leads deleted successfully");
+            MessageBox.error("Leads deleted Error");
           });
         },
         saveServiceDetails:function(oService){
@@ -169,17 +169,17 @@ sap.ui.define(
               oService.userid = '1316dd7b-53b7-4e91-a1d4-8a171efc3481'
             this.AppService.updateServiceDetails(oService).then(function(data){
               this.getServices();
-              MessageToast.show("Service details updated successfully");
+              MessageBox.success("Service details updated successfully");
             }.bind(this)).catch((Message)=>{
             });
           }else{
             oService.userid = '1316dd7b-53b7-4e91-a1d4-8a171efc3481'
             this.AppService.saveServiceDetails(oService).then(function(data){
               this.getServices();
-              MessageToast.show("Service details saved successfully");
+              MessageBox.success("Service details saved successfully");
             }.bind(this)).catch((Message)=>{
               this.getServices();
-              MessageToast.show("Service details saved successfully");
+              MessageBox.error("Service details saved Error");
             });
 
           }
@@ -187,10 +187,10 @@ sap.ui.define(
         deleteService:function(oService){
           this.AppService.deleteService(oService).then(function(data){
             this.getServices();
-            MessageToast.show("Service deleted successfully");
+            MessageBox.success("Service deleted successfully");
           }.bind(this)).catch((Message)=>{
             this.getServices();
-            MessageToast.show("Service deleted successfully");
+            MessageBox.error("Service deleted Error");
           });
         },
         getServices:function(){
@@ -223,16 +223,16 @@ sap.ui.define(
           if(oProject.id){
             this.AppService.updateProjectDetails(oProject).then(function(data){
               this.getProjects();
-              MessageToast.show("Project details updated successfully");
+              MessageBox.success("Project details updated successfully");
             }.bind(this)).catch((Message)=>{
             });
           }else{
             this.AppService.saveProjectDetails(oProject).then(function(data){
               this.getProjects();
-              MessageToast.show("Project details saved successfully");
+              MessageBox.success("Project details saved successfully");
             }.bind(this)).catch((Message)=>{
               this.getProjects();
-              MessageToast.show("Project details saved successfully");
+              MessageBox.error("Project details saved Error");
             });
 
           }
@@ -240,10 +240,10 @@ sap.ui.define(
         deleteProject:function(oProject){
           this.AppService.deleteProject(oProject).then(function(data){
             this.getProjects();
-            MessageToast.show("Project deleted successfully");
+            MessageBox.success("Project deleted successfully");
           }.bind(this)).catch((Message)=>{
             this.getProjects();
-            MessageToast.show("Project deleted successfully");
+            MessageBox.error("Project deleted Error");
           });
         },
         getTasks:function(){
@@ -260,16 +260,16 @@ sap.ui.define(
           if(oTask.id){
             this.AppService.updateTaskDetails(oTask).then(function(data){
               this.getTasks();
-              MessageToast.show("Task details updated successfully");
+              MessageBox.success("Task details updated successfully");
             }.bind(this)).catch((Message)=>{
             });
           }else{
             this.AppService.saveTaskDetails(oTask).then(function(data){
               this.getTasks();
-              MessageToast.show("Task details saved successfully");
+              MessageBox.success("Task details saved successfully");
             }.bind(this)).catch((Message)=>{
               this.getTasks();
-              MessageToast.show("Task details saved successfully");
+              MessageBox.error("Task details saved Error");
             });
 
           }
@@ -277,10 +277,10 @@ sap.ui.define(
         deleteTask:function(oTask){
           this.AppService.deleteTask(oTask).then(function(data){
             this.getTasks();
-            MessageToast.show("Task deleted successfully");
+            MessageBox.success("Task deleted successfully");
           }.bind(this)).catch((Message)=>{
             this.getTasks();
-            MessageToast.show("Task deleted successfully");
+            MessageBox.error("Task deleted Error");
           });
         },
         getInvoices:function(){
@@ -299,16 +299,16 @@ sap.ui.define(
           if(oInvoice.id){
             this.AppService.updateInvoiceDetails(oInvoice).then(function(data){
               this.getInvoices();
-              MessageToast.show("Invoice details updated successfully");
+              MessageBox.success("Invoice details updated successfully");
             }.bind(this)).catch((Message)=>{
             });
           }else{
             this.AppService.saveInvoiceDetails(oInvoice).then(function(data){
               this.getInvoices();
-              MessageToast.show("Invoice details saved successfully");
+              MessageBox.success("Invoice details saved successfully");
             }.bind(this)).catch((Message)=>{
               this.getInvoices();
-              MessageToast.show("Invoice details saved successfully");
+              MessageBox.error("Invoice details saved Error");
             });
 
           }
@@ -322,16 +322,16 @@ sap.ui.define(
           if(oClientIssue.id){
             this.AppService.updateClientIssueDetails(oClientIssue).then(function(data){
               this.getClientIssues();
-              MessageToast.show("Client Issue details updated successfully");
+              MessageBox.success("Client Issue details updated successfully");
             }.bind(this)).catch((Message)=>{
             });
           }else{
             this.AppService.saveClientIssueDetails(oClientIssue).then(function(data){
               this.getClientIssues();
-              MessageToast.show("Client Issue details saved successfully");
+              MessageBox.success("Client Issue details saved successfully");
             }.bind(this)).catch((Message)=>{
               this.getClientIssues();
-              MessageToast.show("Client Issue details saved successfully");
+              MessageBox.error("Client Issue details saved Error");
             });
 
           }
@@ -350,10 +350,10 @@ sap.ui.define(
         deleteClientIssue:function(oClientIssue){
           this.AppService.deleteClientIssue(oClientIssue).then(function(data){
             this.getClientIssues();
-            MessageToast.show("Client Issue deleted successfully");
+            MessageBox.success("Client Issue deleted successfully");
           }.bind(this)).catch((Message)=>{
             this.getClientIssues();
-            MessageToast.show("Client Issue deleted successfully");
+            MessageBox.error("Client Issue deleted Error");
           });
         },
         doUserLogin: function (oUser) {
